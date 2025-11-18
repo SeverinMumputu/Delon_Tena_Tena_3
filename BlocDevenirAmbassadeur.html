@@ -1,0 +1,483 @@
+<!-- HTML + CSS + JS : Bloc "Devenir Ambassadeur" prêt à coller -->
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Bloc Ambassadeur — Fondation Delon Tena Tena</title>
+<style>
+  /* Socle de design (obligatoire) */
+  :root{
+    --green-soft:  #3EB489;
+    --green-deep: #5A9E78;
+    --deep-green: #2E6B4F;
+    --beige: #F8F5F0;
+    --white: #FFFFFF;
+    --footer-beige: #E6D8B9;
+    --accent-brown: #C2A88C;
+    --text-dark: #4A4A4A;
+    --muted-shadow: rgba(90,158,120,0.15);
+    --trans: all 0.3s ease;
+    --radius: 16px;
+    --max-width: 1200px;
+    --break-sm: 480px;
+    --break-md: 768px;
+    --title:#5A9E78;
+    --shadow-green: rgba(90,158,120,0.15);
+    --shadow-deep: rgba(90,158,120,0.1);
+    --transition: all 0.3s ease;
+  }
+
+  /* Reset minimal et typographie */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:var(--beige);
+    color:var(--text-dark);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+    padding:24px;
+  }
+
+  /* Toggle button (must exist in page) */
+  #amb-toggle{
+    appearance:none;
+    -webkit-appearance:none;
+    border:0;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 16px;
+    background:linear-gradient(90deg,var(--green-soft),var(--green-deep));
+    color:var(--white);
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+    box-shadow: 0 6px 18px var(--shadow-green);
+    transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+  }
+  #amb-toggle:active{ transform: translateY(1px) scale(.995) }
+  #amb-toggle .dot{
+    width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.95);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  }
+
+  /* Wrapper pour le bloc */
+  .amb-wrapper{
+    max-width:var(--max-width);
+    margin:20px auto 0;
+    position:relative;
+    z-index:30;
+  }
+
+  /* Bloc principal - caché par défaut */
+  .amb-card{
+    width:100%;
+    border-radius:var(--radius);
+    overflow:hidden;
+    display:block;
+    transform-origin:50% 0%;
+    will-change:transform,opacity;
+    transition: var(--transition);
+    /* initial hidden state — offscreen, scaled down, transparent */
+    opacity:0;
+    transform: translateY(-24px) scale(.98);
+    pointer-events:none;
+    box-shadow: 0 18px 40px var(--shadow-deep);
+    margin-top:18px;
+  }
+
+  /* When open */
+  .amb-card.open{
+    opacity:1;
+    transform: translateY(0) scale(1);
+    pointer-events:auto;
+    transition: transform .45s cubic-bezier(.2,.9,.25,1), opacity .35s ease;
+  }
+
+  /* Internal layout */
+  .amb-inner{
+    display:grid;
+    grid-template-columns: 1fr 420px;
+    gap:24px;
+    padding:28px;
+    background: linear-gradient(160deg, rgba(255,255,255,0.98), rgba(248,245,240,0.95));
+  }
+
+  /* Left main column */
+  .amb-left{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+
+  /* Section common card styles */
+  .amb-section{
+    background:linear-gradient(180deg, var(--white), var(--beige));
+    border-radius:12px;
+    padding:18px;
+    box-shadow: 0 8px 20px var(--muted-shadow);
+    border: 1px solid rgba(46,107,79,0.06);
+    transition: transform .45s var(--transition), opacity .35s var(--transition);
+  }
+
+  /* Header / Hero (Section 1) */
+  .amb-hero{
+    display:flex;
+    gap:18px;
+    align-items:center;
+    padding:20px;
+    border-radius:14px;
+    background: linear-gradient(120deg, rgba(62,180,137,0.12), rgba(90,158,120,0.06));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 10px 30px rgba(46,107,79,0.06);
+    border: 1px solid rgba(90,158,120,0.06);
+    transform: translateY(6px);
+  }
+  .amb-hero .badge{
+    min-width:84px;
+    height:84px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: linear-gradient(180deg,var(--white), rgba(255,255,255,0.88));
+    box-shadow: 0 8px 18px var(--shadow-green);
+    border: 1px solid rgba(90,158,120,0.08);
+    flex-shrink:0;
+  }
+  .amb-hero .badge img{ width:56px;height:56px; object-fit:contain; display:block; }
+
+  .amb-hero h2{
+    margin:0;
+    font-size:20px;
+    color:var(--title);
+    letter-spacing:.2px;
+    line-height:1.1;
+  }
+  .amb-hero p{
+    margin:6px 0 0 0;
+    color:var(--text-dark);
+    opacity:.95;
+    font-size:14.5px;
+  }
+
+  /* Section 2 style */
+  .amb-why{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+  }
+  .amb-why img.icon{
+    width:64px;height:64px;border-radius:10px;border:1px solid rgba(0,0,0,0.03); background:linear-gradient(180deg,var(--white),var(--footer-beige)); padding:8px; flex-shrink:0;
+  }
+  .amb-why .why-text h3{
+    margin:0;font-size:16px;color:var(--deep-green);
+  }
+  .amb-why .why-text p{ margin:6px 0 0 0; font-size:14px; color:var(--text-dark); opacity:.95; }
+
+  /* Right column: cartoon / steps (Section 3) */
+  .amb-right{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    align-items:stretch;
+  }
+  .amb-steps{
+    background: linear-gradient(180deg, rgba(90,158,120,0.06), rgba(62,180,137,0.03));
+    border-radius:12px;
+    padding:14px;
+    border:1px dashed rgba(90,158,120,0.08);
+  }
+  .step{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    padding:12px;
+    border-radius:12px;
+    transition: transform .35s cubic-bezier(.2,.9,.25,1), box-shadow .35s ease;
+    background: linear-gradient(160deg, rgba(255,255,255,0.98), rgba(248,245,240,0.98));
+    border:1px solid rgba(0,0,0,0.02);
+    box-shadow: 0 6px 18px rgba(46,107,79,0.04);
+  }
+  .step + .step{ margin-top:10px }
+  .step .illustration{
+    width:84px;height:84px;border-radius:12px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    background: linear-gradient(120deg, rgba(194,168,140,0.06), rgba(230,216,185,0.03));
+    border:1px solid rgba(0,0,0,0.03);
+  }
+  .step .illustration img{ width:72px;height:72px;object-fit:contain; display:block; }
+
+  .step .meta{ flex:1; }
+  .step .meta h4{ margin:0;font-size:15px;color:var(--deep-green); }
+  .step .meta p{ margin:6px 0 0 0;font-size:13.5px;color:var(--text-dark); opacity:.95; }
+
+  /* Cartoon decorative footer for right column */
+  .cartoon-footer{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px;
+    border-radius:12px;
+    background: linear-gradient(90deg, rgba(62,180,137,0.06), rgba(90,158,120,0.03));
+    border:1px solid rgba(90,158,120,0.04);
+    box-shadow: 0 8px 22px rgba(46,107,79,0.04);
+  }
+  .cartoon-footer img{ width:56px;height:56px; object-fit:contain; transform:translateY(2px) rotate(-6deg); }
+
+  /* Small helpers */
+  .muted{ color: rgba(74,74,74,0.75); font-size:13px }
+  .cta-row{ display:flex;gap:10px; margin-top:8px; align-items:center }
+  .primary-btn{
+    padding:10px 14px;background:linear-gradient(90deg,var(--green-deep),var(--deep-green));
+    color:var(--white);border-radius:12px;border:0;font-weight:600;cursor:pointer; box-shadow: 0 10px 30px rgba(46,107,79,0.08);
+  }
+  .secondary-btn{
+    padding:8px 12px;background:transparent;border-radius:10px;border:1px solid rgba(46,107,79,0.09); color:var(--deep-green); cursor:pointer;
+  }
+
+  /* Appear on scroll reveal for internal children */
+  .amb-card.open .amb-section{ transform: translateY(0); opacity:1; }
+  .amb-section{ transform: translateY(8px); opacity:0.98; }
+
+  /* Responsive */
+  @media (max-width: 1000px){
+    .amb-inner{ grid-template-columns: 1fr 360px; padding:20px; gap:18px }
+  }
+  @media (max-width: 820px){
+    .amb-inner{ grid-template-columns: 1fr; padding:18px; gap:14px }
+    .amb-right{ order:2 }
+    .amb-left{ order:1 }
+    .amb-card{ margin-top:12px }
+  }
+  @media (max-width: var(--break-md)){
+    .amb-hero h2{ font-size:18px }
+    .amb-hero .badge{ min-width:72px;height:72px }
+  }
+  @media (max-width: var(--break-sm)){
+    body{ padding:14px }
+    #amb-toggle{ width:100%; justify-content:center }
+    .amb-inner{ padding:14px }
+    .amb-hero{ padding:14px; gap:12px }
+    .amb-hero h2{ font-size:16px }
+    .step{ padding:10px }
+    .step .illustration{ width:64px;height:64px }
+    .amb-right{ gap:12px }
+  }
+
+  /* Micro animations for nicer feel */
+  .amb-card.open .step{ transform: translateX(0); }
+  .step{ transform: translateX(8px); opacity:0.98; }
+  .amb-card.open .step:nth-child(1){ transition-delay: 0.06s }
+  .amb-card.open .step:nth-child(2){ transition-delay: 0.12s }
+  .amb-card.open .step:nth-child(3){ transition-delay: 0.18s }
+
+</style>
+</head>
+<body>
+
+  <!-- Bouton (doit être présent sur la page) -->
+  <div class="amb-wrapper">
+    <button id="amb-toggle" aria-expanded="false" aria-controls="amb-card">
+      <span class="dot" aria-hidden="true"></span>
+      Oui, je veux devenir ambassadeur
+    </button>
+
+    <!-- Bloc caché par défaut -->
+    <div id="amb-card" class="amb-card" role="region" aria-hidden="true" aria-labelledby="amb-hero-title">
+      <div class="amb-inner">
+
+        <!-- LEFT: Sections 1 & 2 -->
+        <div class="amb-left">
+          <!-- Section 1 -->
+          <section class="amb-section amb-hero" id="section-1">
+            <div class="badge" aria-hidden="true">
+              <!-- image simple (replace src with your image) -->
+              <img src="DevenirAmabassadeurIllustration.jpg" alt="Badge Ambassadeur">
+            </div>
+            <div>
+              <h2 id="amb-hero-title">Devenir Ambassadeur de la Fondation Delon Tena Tena</h2>
+              <p>Envie de faire partie de notre mission et de contribuer activement à impacter des vies ? Rejoignez notre réseau d’ambassadeurs et devenez un acteur du changement au sein de votre communauté !</p>
+
+              <!-- image simple (replace src with your image) 
+              <div class="cta-row" style="margin-top:12px;">
+                <button class="primary-btn" id="join-now">Je m'engage</button>
+                <button class="secondary-btn" id="learn-more">En savoir plus</button>
+              </div> -->
+
+            </div>
+          </section>
+
+          <!-- Section 2 -->
+          <section class="amb-section" id="section-2" style="margin-top:12px;">
+            <div class="amb-why">
+              <img class="icon" src="PourquoiDevenirAmabassadeur.jpg" alt="Pourquoi" />
+              <div class="why-text">
+                <h3>Pourquoi devenir ambassadeur ?</h3>
+                <p>En tant qu’ambassadeur, vous représentez la Fondation Delon Tena Tena dans votre cercle d’influence, vous sensibilisez, mobilisez et encouragez les autres à soutenir nos actions via des dons.</p>
+                <p class="muted" style="margin-top:8px;">Partagez, inspirez, transformez — ensemble nous allons plus loin.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- RIGHT: Section 3 (cartoon illustrations required) -->
+        <aside class="amb-right" aria-labelledby="section-3-title">
+          <section class="amb-section amb-steps" id="section-3">
+            <h3 id="section-3-title" style="margin:0 0 10px 0; color:var(--title);">Comment devenir ambassadeur ?</h3>
+            <p style="margin:0 0 12px 0; color:var(--text-dark); font-size:14px;">
+              Voici les 3 étapes simples pour rejoindre notre réseau :
+            </p>
+
+            <!-- Step 1 -->
+            <div class="step" aria-labelledby="step1-title">
+              <div class="illustration">
+                <img src="PublierVideo.jpg" alt="Illustration étape 1">
+              </div>
+              <div class="meta">
+                <h4 id="step1-title">1. Publiez une vidéo</h4>
+                <p>Faites une courte vidéo adressée à votre public pour leur présenter notre fondation, notre vision, et pourquoi vous soutenez notre cause.</p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step" aria-labelledby="step2-title">
+              <div class="illustration">
+                <img src="FaireDon.jpg" alt="Illustration étape 2">
+              </div>
+              <div class="meta">
+                <h4 id="step2-title">2. Effectuez un don numérique</h4>
+                <p>Faites un don à partir de votre compte personnel (même symbolique) pour marquer votre engagement.</p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step" aria-labelledby="step3-title">
+              <div class="illustration">
+                <img src="RecevoirLien.jpg" alt="Illustration étape 3">
+              </div>
+              <div class="meta">
+                <h4 id="step3-title">3. Recevez votre lien personnalisé</h4>
+                <p>Une fois votre vidéo et don validés, vous recevrez un lien ambassadeur unique. Ce lien vous permettra de toucher une commission symbolique sur chaque don réalisé via votre lien.</p>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- Cartoon decorative box -->
+          <div class="cartoon-footer" aria-hidden="true">
+            <img src="RejoindreFamille.jpg" alt="Mascotte">
+            <div>
+              <div style="font-weight:700;color:var(--deep-green)">Rejoignez la famille</div>
+              <div class="muted">Partagez votre histoire — Inspirez votre communauté</div>
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+
+  </div>
+
+<script>
+  (function(){
+    // Elements
+    var toggle = document.getElementById('amb-toggle');
+    var card = document.getElementById('amb-card');
+
+    // Safety: ensure they exist
+    if(!toggle || !card) return;
+
+    // Utility: show/hide
+    function openCard(){
+      card.classList.add('open');
+      card.setAttribute('aria-hidden','false');
+      toggle.setAttribute('aria-expanded','true');
+      // move focus to join button for accessibility
+      var join = document.getElementById('join-now');
+      if(join) join.focus();
+      // subtle focus ring for visible keyboard users
+      document.documentElement.style.scrollBehavior = 'smooth';
+      // Prevent layout shift jump by ensuring top visible
+      setTimeout(function(){ card.scrollIntoView({behavior:'smooth', block:'center'}); }, 120);
+    }
+    function closeCard(){
+      card.classList.remove('open');
+      card.setAttribute('aria-hidden','true');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.focus();
+    }
+    function toggleCard(){
+      if(card.classList.contains('open')) closeCard();
+      else openCard();
+    }
+
+    // Click toggle
+    toggle.addEventListener('click', function(e){
+      e.preventDefault();
+      toggleCard();
+      // micro interaction: scale on click
+      toggle.animate([
+        { transform: 'scale(1)' },
+        { transform: 'scale(.99)' },
+        { transform: 'scale(1)' }
+      ], { duration: 220, easing: 'ease-out' });
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && card.classList.contains('open')){
+        closeCard();
+      }
+    });
+
+    // Click outside closes card
+    document.addEventListener('click', function(e){
+      if(!card.classList.contains('open')) return;
+      var inside = card.contains(e.target) || toggle.contains(e.target);
+      if(!inside) closeCard();
+    });
+
+    // Progressive reveal on resizing (ensures layout niceness)
+    var resizeTimer;
+    window.addEventListener('resize', function(){
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function(){
+        if(card.classList.contains('open')){
+          card.classList.remove('open');
+          void card.offsetWidth;
+          card.classList.add('open');
+        }
+      }, 180);
+    });
+
+    // Small accessibility: if user navigates to #amb-card anchor, open card
+    if(location.hash === '#amb-card'){
+      setTimeout(openCard, 160);
+    }
+
+    // Optional: bind join-now to a demo action (no remote)
+    var joinBtn = document.getElementById('join-now');
+    if(joinBtn){
+      joinBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        // micro confirmation feedback
+        joinBtn.animate([{ transform:'translateY(0)' }, { transform:'translateY(-4px)' }, { transform:'translateY(0)'}], { duration:250 });
+        joinBtn.innerText = 'Engagement enregistré';
+        joinBtn.disabled = true;
+        setTimeout(function(){
+          joinBtn.innerText = 'Je m\'engage';
+          joinBtn.disabled = false;
+        }, 2200);
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

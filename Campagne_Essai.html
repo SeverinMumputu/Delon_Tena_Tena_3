@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title data-fr="Campagne — Fondation Delon Tena Tena" data-en="Campaign - Delon Tena Tena Foundation">Campagne — Fondation Delon Tena Tena</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Campagne_Essai.css">
+</head>
+<body>
+
+      <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <!-- Top announcement with countdown -->
+    <div class="top-announcement" id="topAnnouncement" role="region" aria-live="polite">
+      <div class="announcement-inner">
+        <div class="announce-text" data-fr="Prochain grand événement :" data-en="Next major event:">Prochain grand événement :</div>
+        <div class="countdown" id="countdown" aria-label="Compte à rebours">
+          <span class="cd-item"><strong id="cd-days">00</strong><small data-fr="Jours" data-en="Days">Jours</small></span>
+          <span class="cd-sep">:</span>
+          <span class="cd-item"><strong id="cd-hours">00</strong><small data-fr="Heures" data-en="Hours">Heures</small></span>
+          <span class="cd-sep">:</span>
+          <span class="cd-item"><strong id="cd-mins">00</strong><small data-fr="Minutes" data-en="Minutes">Minutes</small></span>
+          <span class="cd-sep">:</span>
+          <span class="cd-item"><strong id="cd-secs">00</strong><small data-fr="Secondes" data-en="Seconds">Secondes</small></span>
+        </div>
+         <div class="announce">
+        <span class="badge" data-fr="Annonce" data-en="Announcement">Annonce</span>
+        <span class="announce-text"  data-fr="Cérémonie de la jeunesse" data-en="Youth Ceremony">Cérémonie de la jeunesse</span>
+      </div>
+      </div>
+    </div>
+
+    <!-- Main nav -->
+    <div class="nav-row">
+      <div class="nav-inner">
+        <div class="brand" aria-hidden="false">
+        <div class="logo-mark">DTT</div>
+        <div class="taille_nom">
+          <div style="font-size:.86rem;color:var(--accent-brown)">Fondation</div>
+          <div style="font-weight:900;font-size:1rem;color:var(--deep-green)">Delon Tena Tena</div>
+        </div>
+      </div>
+
+        <nav class="main-nav" id="mainNav" role="navigation" aria-label="Menu principal">
+          <ul class="menu">
+            <li><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a></li>
+           <li><a href="index.html#about" data-fr="À propos" data-en="About">À propos</a></li>
+            <li><a href="index.html#partners" data-fr="Partenaires" data-en="Partners">Partenaires</a></li>
+            <li><a href="index.html#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="controls">
+           <div class="lang-row" aria-hidden="false">
+        <button class="flag-btn active" data-lang="fr" aria-pressed="true">🇫🇷 FR</button>
+        <button class="flag-btn" data-lang="en" aria-pressed="false">🇬🇧 EN</button>
+      </div>
+
+          <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu mobile" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile slide-in menu -->
+    <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-menu-inner">
+        <button class="mobile-close" id="mobileClose" aria-label="Fermer le menu">X</button>
+        <ul class="mobile-list">
+          <li><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a></li>
+           <li><a href="#about" data-fr="À propos" data-en="About">À propos</a></li>
+            <li><a href="#partners" data-fr="Partenaires" data-en="Partners">Partenaires</a></li>
+            <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+        </ul>
+
+         <div class="lang-row" aria-hidden="false">
+        <button class="flag-btn active" data-lang="fr" aria-pressed="true">🇫🇷 FR</button>
+        <button class="flag-btn" data-lang="en" aria-pressed="false">🇬🇧 EN</button>
+      </div>
+      </div>
+    </aside>
+  </header>
+
+
+  <main class="container" role="main">
+    <div class="page-top" aria-hidden="false">
+      <div>
+        <div class="page-title" data-fr="Campagne" data-en="Campaign">Campagne</div>
+        <div class="small-muted" data-fr="Participez et soutenez la jeunesse" data-en="Participate and support youth">Participez et soutenez la jeunesse</div>
+      </div>
+    </div>
+
+    <section class="stepper-shell" aria-label="Stepper Campagne">
+      <!-- Left column: step pills -->
+      <aside class="steps-list" aria-hidden="false">
+        <div class="steps-header">
+          <div style="font-weight:900">Étapes</div>
+          <div style="font-size:13px;color:rgba(46,70,49,0.6)" data-fr="Progression" data-en="Progress">Progression</div>
+        </div>
+
+        <div class="steps-pills" role="tablist">
+          <div class="pill" data-step="1" role="tab" aria-selected="true">
+            <div class="num">1</div>
+            <div class="meta">
+              <div data-fr="Enregistrement" data-en="Registration">Enregistrement</div>
+              <div style="font-size:12px;opacity:.7" data-fr="Confirmez votre identité" data-en="Confirm your identity">Confirmez votre identité</div>
+            </div>
+          </div>
+
+          <div class="pill" data-step="2" role="tab" aria-selected="false">
+            <div class="num">2</div>
+            <div class="meta">
+              <div data-fr="Invitation" data-en="Invite">Invitation des proches</div>
+              <div style="font-size:12px;opacity:.7" data-fr="Invitez 3 personnes" data-en="Invite 3 people">Invitez 3 personnes</div>
+            </div>
+          </div>
+
+          <div class="pill" data-step="3" role="tab" aria-selected="false">
+            <div class="num">3</div>
+            <div class="meta">
+              <div data-fr="Vote" data-en="Vote">Vote des influenceurs</div>
+              <div style="font-size:12px;opacity:.7" data-fr="Choisissez 3 influenceurs" data-en="Choose 3 influencers">Choisissez 3 influenceurs</div>
+            </div>
+          </div>
+
+          <div class="pill" data-step="4" role="tab" aria-selected="false">
+            <div class="num">4</div>
+            <div class="meta">
+              <div data-fr="Don" data-en="Donate">Faire un don</div>
+              <div style="font-size:12px;opacity:.7" data-fr="Soutenez la campagne" data-en="Support the campaign">Soutenez la campagne</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;font-size:13px;color:rgba(46,70,49,0.7)"><strong data-fr="Barre de progression" data-en="Progress bar">Barre de progression</strong></div>
+        <div style="margin-top:8px">
+          <div style="height:8px;border-radius:999px;background:linear-gradient(90deg, rgba(46,70,49,0.06), rgba(46,70,49,0.02))">
+            <div id="sideProgress" style="height:8px;width:0%;border-radius:999px;background:linear-gradient(90deg,var(--green-soft),var(--green-light));transition:width .6s cubic-bezier(.2,.9,.25,1)"></div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right column: cards -->
+      <div class="card-wrap" aria-live="polite">
+        <div class="card-inner" id="cardInner">
+
+          <!-- Step 1 — Registration -->
+          <form class="step-card active" data-step="1" id="step1" aria-labelledby="step1title" novalidate>
+            <div class="step-head">
+              <div class="icon" aria-hidden="true">
+                <!-- SVG user circle -->
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.2" fill="url(#g1)"/><path d="M4 20a8 8 0 0116 0" fill="url(#g1)"/></svg>
+                <svg style="display:none"><linearGradient id="g1"><stop offset="0" stop-color="#3EB489"/><stop offset="1" stop-color="#B6E2B9"/></linearGradient></svg>
+              </div>
+              <div>
+                <h2 id="step1title" data-fr="Enregistrement" data-en="Registration">Enregistrement</h2>
+                <div class="step-desc" data-fr="Confirmez votre identité pour participer" data-en="Confirm your identity to participate">Confirmez votre identité pour participer</div>
+              </div>
+            </div>
+
+            <div class="form-grid" aria-hidden="false">
+              <label class="input-row" for="firstName">
+                <!-- SVG name -->
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 20s1.5-4 8-4 8 4 8 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <input id="firstName" name="firstName" placeholder="Nom / Last name" data-fr-placeholder="Nom" data-en-placeholder="Last name" required />
+              </label>
+
+              <label class="input-row" for="lastName">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 20s1.5-4 8-4 8 4 8 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <input id="lastName" name="lastName" placeholder="Prénom / First name" data-fr-placeholder="Prénom" data-en-placeholder="First name" required />
+              </label>
+
+              <label class="input-row" for="email">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <input id="email" name="email" placeholder="Email" data-fr-placeholder="Email" data-en-placeholder="Email" type="email" required />
+              </label>
+
+              <label class="input-row" for="phone">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.86 19.86 0 013 5.18 2 2 0 015 3h3a2 2 0 012 1.72 12.09 12.09 0 00.7 3.16 2 2 0 01-.45 2.11L9.91 11.09a16 16 0 006 6l1.1-1.1a2 2 0 012.11-.45 12.09 12.09 0 003.16.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <input id="phone" name="phone" placeholder="Téléphone / Phone" data-fr-placeholder="Téléphone" data-en-placeholder="Phone" required />
+              </label>
+
+              <label class="input-row" for="whatsapp">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.5a5 5 0 01-9.9 1.7L9 18l.8-1.9A5 5 0 0114.5 8.1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <input id="whatsapp" name="whatsapp" placeholder="WhatsApp (obligatoire)" data-fr-placeholder="WhatsApp (obligatoire)" data-en-placeholder="WhatsApp (required)" required />
+              </label>
+
+              <label class="input-row" for="instagram">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.2"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" stroke="currentColor" stroke-width="1.2"/></svg>
+                <input id="instagram" name="instagram" placeholder="Instagram (facultatif)" data-fr-placeholder="Instagram (facultatif)" data-en-placeholder="Instagram (optional)" />
+              </label>
+
+              <label class="input-row" for="facebook">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 2h-3a4 4 0 00-4 4v3H8v4h3v8h4v-8h3l1-4h-4V6a1 1 0 011-1h3z" stroke="currentColor" stroke-width="1.2"/></svg>
+                <input id="facebook" name="facebook" placeholder="Facebook (facultatif)" data-fr-placeholder="Facebook (facultatif)" data-en-placeholder="Facebook (optional)" />
+              </label>
+            </div>
+
+            <div class="actions" style="grid-column:1/-1">
+              <div style="display:flex;gap:8px;align-items:center">
+                <button type="button" class="btn ghost" id="saveDraft1" title="Enregistrer localement" data-fr="Enregistrer" data-en="Save">Enregistrer</button>
+                <div id="step1Status" class="small-muted" style="padding-left:8px">—</div>
+              </div>
+
+              <div>
+                <button type="button" class="btn ghost" id="prevBtn1" disabled data-fr="Précédent" data-en="Previous">Précédent</button>
+                <button type="button" class="btn primary" id="nextBtn1" disabled data-fr="Suivant" data-en="Next">Suivant</button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Step 2 — Invite 3 people -->
+          <form class="step-card next-in" data-step="2" id="step2" aria-labelledby="step2title" novalidate>
+            <div class="step-head">
+              <div class="icon" aria-hidden="true">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zM6 11c1.66 0 3-1.34 3-3S7.66 5 6 5 3 6.34 3 8s1.34 3 3 3zM6 13c-2.33 0-7 1.17-7 3.5V20h14v-3.5C13 14.17 8.33 13 6 13zM16 13c-.29 0-.62.02-.97.05 1.16.84 1.97 1.96 1.97 3.45V20h8v-3.5C25 14.17 20.33 13 18 13h-2z" stroke="currentColor" stroke-width="1.2"/></svg>
+              </div>
+              <div>
+                <h2 id="step2title" data-fr="Invitation des proches" data-en="Invite your close ones">Invitation des proches</h2>
+                <div class="step-desc" data-fr="Invitez 3 personnes à participer" data-en="Invite 3 people to participate">Invitez 3 personnes à participer</div>
+              </div>
+            </div>
+
+            <!-- Three guest forms -->
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
+              <!-- Guest template 1 -->
+              <div class="guest" data-guest="1">
+                <h4 data-fr="Invité 1" data-en="Guest 1">Invité 1 <span class="validated" style="display:none">✔ Validé</span></h4>
+                <div class="form-grid">
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 20s1.5-4 8-4 8 4 8 4" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g1_first" placeholder="Nom" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 20s1.5-4 8-4 8 4 8 4" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g1_last" placeholder="Prénom" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.86 19.86 0 013 5.18 2 2 0 015 3h3a2 2 0 012 1.72 12.09 12.09 0 00.7 3.16 2 2 0 01-.45 2.11L9.91 11.09a16 16 0 006 6l1.1-1.1a2 2 0 012.11-.45 12.09 12.09 0 003.16.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g1_phone" placeholder="Téléphone" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M20 14.5a5 5 0 01-9.9 1.7L9 18l.8-1.9A5 5 0 0114.5 8.1" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g1_whatsapp" placeholder="WhatsApp" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g1_email" placeholder="Email" type="email" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g1_ig" placeholder="Instagram (facultatif)"></label>
+                </div>
+              </div>
+
+              <!-- Guest 2 -->
+              <div class="guest" data-guest="2">
+                <h4 data-fr="Invité 2" data-en="Guest 2">Invité 2 <span class="validated" style="display:none">✔ Validé</span></h4>
+                <div class="form-grid">
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 20s1.5-4 8-4 8 4 8 4" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g2_first" placeholder="Nom" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 20s1.5-4 8-4 8 4 8 4" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g2_last" placeholder="Prénom" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.86 19.86 0 013 5.18 2 2 0 015 3h3a2 2 0 012 1.72 12.09 12.09 0 00.7 3.16 2 2 0 01-.45 2.11L9.91 11.09a16 16 0 006 6l1.1-1.1a2 2 0 012.11-.45 12.09 12.09 0 003.16.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g2_phone" placeholder="Téléphone" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M20 14.5a5 5 0 01-9.9 1.7L9 18l.8-1.9A5 5 0 0114.5 8.1" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g2_whatsapp" placeholder="WhatsApp" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g2_email" placeholder="Email" type="email" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g2_ig" placeholder="Instagram (facultatif)"></label>
+                </div>
+              </div>
+
+              <!-- Guest 3 -->
+              <div class="guest" data-guest="3">
+                <h4 data-fr="Invité 3" data-en="Guest 3">Invité 3 <span class="validated" style="display:none">✔ Validé</span></h4>
+                <div class="form-grid">
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 20s1.5-4 8-4 8 4 8 4" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g3_first" placeholder="Nom" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 20s1.5-4 8-4 8 4 8 4" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g3_last" placeholder="Prénom" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.86 19.86 0 013 5.18 2 2 0 015 3h3a2 2 0 012 1.72 12.09 12.09 0 00.7 3.16 2 2 0 01-.45 2.11L9.91 11.09a16 16 0 006 6l1.1-1.1a2 2 0 012.11-.45 12.09 12.09 0 003.16.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g3_phone" placeholder="Téléphone" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M20 14.5a5 5 0 01-9.9 1.7L9 18l.8-1.9A5 5 0 0114.5 8.1" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g3_whatsapp" placeholder="WhatsApp" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g3_email" placeholder="Email" type="email" required></label>
+                  <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.2"/></svg><input data-guest-field="g3_ig" placeholder="Instagram (facultatif)"></label>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="actions">
+              <div id="invitationStatus" class="small-muted">—</div>
+              <div>
+                <button type="button" class="btn ghost" id="prevBtn2" data-fr="Précédent" data-en="Previous">Précédent</button>
+                <button type="button" class="btn primary" id="nextBtn2" disabled data-fr="Étape suivante" data-en="Next step">Étape suivante</button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Step 3 — Influencers vote -->
+          <section class="step-card next-in" data-step="3" id="step3" aria-labelledby="step3title">
+            <div class="step-head">
+              <div class="icon" aria-hidden="true">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none"><path d="M12 12l8-5-8-5-8 5 8 5zM12 12v8" stroke="currentColor" stroke-width="1.2"/></svg>
+              </div>
+              <div>
+                <h2 id="step3title" data-fr="Vote des influenceurs" data-en="Influencer votes">Vote des influenceurs</h2>
+                <div class="step-desc" data-fr="Choisissez 3 influenceurs" data-en="Pick 3 influencers">Choisissez 3 influenceurs</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
+              <input id="inflSearch" placeholder="Rechercher un influenceur..." data-fr-placeholder="Rechercher un influenceur..." data-en-placeholder="Search an influencer..." style="flex:1;padding:10px;border-radius:10px;border:1px solid rgba(46,70,49,0.06)" />
+              <div id="chosenCount" class="small-muted">0 / 3</div>
+            </div>
+
+            <div class="influencers" id="inflList" aria-live="polite">
+              <!-- influencer cards will be generated by JS (placeholders below) -->
+              <div class="infl-card" data-name="Amina Dupont" tabindex="0">
+                <img src="Aigle.jpeg" alt="Amina Dupont" />
+                <div class="name">Fally Ipupa</div>
+                <div class="tick">✓</div>
+              </div>
+              <div class="infl-card" data-name="Samir Touré" tabindex="0">
+                <img src="Drake.jpg" alt="Samir Touré" />
+                <div class="name">Drake</div>
+                <div class="tick">✓</div>
+              </div>
+              <div class="infl-card" data-name="Lina K." tabindex="0">
+                <img src="Dadju.jpeg" alt="Lina K." />
+                <div class="name">Dadju</div>
+                <div class="tick">✓</div>
+              </div>
+              <div class="infl-card" data-name="Marc L." tabindex="0">
+                <img src="Davido.jpeg" alt="Marc L." />
+                <div class="name">Davido</div>
+                <div class="tick">✓</div>
+              </div>
+              <div class="infl-card" data-name="Sofia B." tabindex="0">
+                <img src="Rihana.jpeg" alt="Sofia B." />
+                <div class="name">Rihana</div>
+                <div class="tick">✓</div>
+              </div>
+              <div class="infl-card" data-name="Thomas R." tabindex="0">
+                <img src="Adele.jpeg" alt="Thomas R." />
+                <div class="name">Adele</div>
+                <div class="tick">✓</div>
+              </div>
+            </div>
+
+            <div class="actions">
+              <div id="inflFeedback" class="small-muted">—</div>
+              <div>
+                <button type="button" class="btn ghost" id="prevBtn3" data-fr="Précédent" data-en="Previous">Précédent</button>
+                <button type="button" class="btn primary" id="nextBtn3" disabled data-fr="Suivant" data-en="Next">Suivant</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step 4 — Donate -->
+          <section class="step-card next-in" data-step="4" id="step4" aria-labelledby="step4title">
+            <div class="step-head">
+              <div class="icon" aria-hidden="true">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none"><path d="M12 21s-6-4-9-7a7 7 0 1114 0c-3 3-9 7-9 7z" stroke="currentColor" stroke-width="1.2"/></svg>
+              </div>
+              <div>
+                <h2 id="step4title" data-fr="Faire un don" data-en="Make a donation">Faire un don</h2>
+                <div class="step-desc" data-fr="Choisissez une méthode de don" data-en="Choose a donation method">Choisissez une méthode de don</div>
+              </div>
+            </div>
+
+            <div class="payments" role="list" aria-label="Méthodes de paiement">
+              <div class="pay-logo" data-pay="donorbox" tabindex="0"><img src="https://dummyimage.com/120x28/3EB489/fff&text=DonorBox" alt="DonorBox" /> <div>DonorBox</div></div>
+              <div class="pay-logo" data-pay="mastercard" tabindex="0"><img src="https://dummyimage.com/120x28/222/fff&text=Mastercard" alt="Mastercard" /> <div>Mastercard</div></div>
+              <div class="pay-logo" data-pay="visa" tabindex="0"><img src="https://dummyimage.com/120x28/1a73e8/fff&text=Visa" alt="Visa" /> <div>Visa</div></div>
+              <div class="pay-logo" data-pay="paypal" tabindex="0"><img src="https://dummyimage.com/120x28/003087/fff&text=PayPal" alt="PayPal" /> <div>PayPal</div></div>
+            </div>
+
+            <form id="paymentForm" style="margin-top:12px;display:none">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.2"/></svg><input id="iban" placeholder="IBAN" required></label>
+                <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 12a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="1.2"/></svg><input id="beneficiary" placeholder="Nom du bénéficiaire" required></label>
+                <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="1.2"/></svg><input id="amount" placeholder="Montant" type="number" required></label>
+                <label class="input-row"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.2"/></svg><input id="reference" placeholder="Référence" required></label>
+              </div>
+
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+                <div class="small-muted" data-fr="Après validation, envoyez le reçu par mail." data-en="After validation, send the receipt by email.">Après validation, envoyez le reçu par mail.</div>
+                <div>
+                  <button type="button" class="btn ghost" id="prevBtn4" data-fr="Précédent" data-en="Previous">Précédent</button>
+                  <button type="button" class="btn primary" id="finishBtn" disabled data-fr="Valider le don" data-en="Confirm donation">Valider le don</button>
+                </div>
+              </div>
+            </form>
+
+            <div id="finalThank" style="display:none;margin-top:18px" aria-live="polite">
+              <div class="thank-you">
+                <div class="logo-anim" aria-hidden="true">DT</div>
+                <div style="text-align:center">
+                  <div style="font-weight:900;font-size:1.1rem" data-fr="Merci d’avoir participé !" data-en="Thank you for participating!">Merci d’avoir participé !</div>
+                  <div class="small-muted" data-fr="Vous avez soutenu la jeunesse, la solidarité et l'innovation." data-en="You have supported youth, solidarity and innovation.">Vous avez soutenu la jeunesse, la solidarité et l'innovation.</div>
+                </div>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- Progress bar (inside card) -->
+          <div class="progress-shell" aria-hidden="true">
+            <div class="progress-fill" id="mainProgress"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Simple toast container -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  
+
+  <script src="Campagne_Essai.js"></script>
+</body>
+</html>

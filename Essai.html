@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fondation Delon Tena Tena — Accueil</title>
+  <link rel="stylesheet" href="essai.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header" id="siteHeader" role="banner">
+    <div class="container header-inner">
+      <!-- Left: logo / name -->
+      <div class="brand" id="brand">
+        <!-- Could be an <img> if you have a logo image -->
+        <a href="#" class="brand-link" aria-label="Fondation Delon Tena Tena">Fondation <strong>Delon Tena Tena</strong></a>
+      </div>
+
+      <!-- Center: navigation -->
+      <nav class="main-nav" id="mainNav" role="navigation" aria-label="Navigation principale">
+        <ul class="nav-list" id="navList">
+          <li><a href="#" class="nav-link">Qui sommes-nous</a></li>
+          <li><a href="#" class="nav-link">Campagne pour ceux qu'on aime</a></li>
+          <li><a href="#" class="nav-link">Communautés</a></li>
+          <li><a href="#" class="nav-link">Contactez-nous</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right: actions (donate + language) -->
+      <div class="header-actions">
+        <!-- Donate button + dropdown -->
+        <div class="donate-wrapper" id="donateWrapper">
+          <button class="btn btn-donate" id="donateBtn" aria-haspopup="true" aria-expanded="false">
+            Faire un don <span class="caret" aria-hidden="true">▾</span>
+          </button>
+          <div class="donate-dropdown" id="donateDropdown" role="menu" aria-hidden="true">
+            <a href="#" role="menuitem" class="dropdown-link">Faire un don à la campagne</a>
+            <a href="#" role="menuitem" class="dropdown-link">Faire un don à la fondation</a>
+          </div>
+        </div>
+
+        <!-- Language toggles -->
+        <div class="lang-switch" role="region" aria-label="Choix de la langue">
+          <button class="lang-btn" data-lang="fr" aria-pressed="true" title="Français">🇫🇷</button>
+          <button class="lang-btn" data-lang="en" aria-pressed="false" title="English">🇬🇧</button>
+        </div>
+
+        <!-- Hamburger for mobile -->
+        <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-controls="mobileNav" aria-expanded="false">
+          <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile nav (accordéon style) -->
+    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+      <ul class="mobile-list">
+        <li><a href="#" class="mobile-link">Qui sommes-nous</a></li>
+        <li><a href="#" class="mobile-link">Campagne pour ceux qu'on aime</a></li>
+        <li><a href="#" class="mobile-link">Communautés</a></li>
+        <li><a href="#" class="mobile-link">Contactez-nous</a></li>
+        <li>
+          <button class="mobile-accordion" aria-expanded="false">Faire un don ▾</button>
+          <div class="mobile-accordion-panel" hidden>
+            <a href="#" class="mobile-sublink">Faire un don à la campagne</a>
+            <a href="#" class="mobile-sublink">Faire un don à la fondation</a>
+          </div>
+        </li>
+        <li class="mobile-langs">
+          <button class="lang-btn" data-lang="fr" aria-pressed="true">🇫🇷 Français</button>
+          <button class="lang-btn" data-lang="en" aria-pressed="false">🇬🇧 English</button>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero" id="hero" aria-label="Héros principal">
+      <div class="hero-slides" id="heroSlides">
+        <!-- Slide 1 -->
+        <article class="slide active" role="group" aria-roledescription="slide" aria-label="Slide 1: Protéger les générations futures" data-index="0">
+          <div class="slide-media" aria-hidden="true">
+            <!-- Background image via CSS; include <img> or <video> if desired -->
+          </div>
+          <div class="slide-content">
+            <h1 class="hero-title">Protéger les générations futures</h1>
+            <p class="hero-lead">Agir aujourd’hui pour un avenir durable et solidaire.</p>
+            <div class="hero-ctas">
+              <a href="#" class="btn btn-primary">Découvrir</a>
+              <a href="#" class="btn btn-outline">En savoir plus</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 2 -->
+        <article class="slide" role="group" aria-roledescription="slide" aria-label="Slide 2: Soutenir les communautés locales" data-index="1">
+          <div class="slide-media" aria-hidden="true"></div>
+          <div class="slide-content">
+            <h2 class="hero-title">Soutenir les communautés locales</h2>
+            <p class="hero-lead">Programmes concrets pour la santé, l’éducation et l’environnement.</p>
+            <div class="hero-ctas">
+              <a href="#" class="btn btn-primary">Nos actions</a>
+              <a href="#" class="btn btn-outline">Participer</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 3 -->
+        <article class="slide" role="group" aria-roledescription="slide" aria-label="Slide 3: Rejoignez le mouvement" data-index="2">
+          <div class="slide-media" aria-hidden="true"></div>
+          <div class="slide-content">
+            <h2 class="hero-title">Rejoignez le mouvement</h2>
+            <p class="hero-lead">Bénévoles, donateurs, partenaires — votre place est parmi nous.</p>
+            <div class="hero-ctas">
+              <a href="#" class="btn btn-primary">Je participe</a>
+              <a href="#" class="btn btn-outline">Devenir bénévole</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Controls: dots + pause/play -->
+      <div class="hero-controls" aria-hidden="false">
+        <div class="dots" id="heroDots" role="tablist" aria-label="Navigation des slides">
+          <!-- JS generates dots -->
+        </div>
+        <button class="btn btn-icon" id="heroPlayPause" aria-pressed="false" aria-label="Pause le carrousel">⏸</button>
+      </div>
+    </section>
+
+    <!-- Placeholder for next sections to ensure header overlays correctly -->
+    <section class="content-placeholder" aria-hidden="true">
+      <div class="container">
+        <h2>Contenu de la page</h2>
+        <p>Sections additionnelles ici...</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="Essai.js" defer></script>
+</body>
+</html>

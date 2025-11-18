@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAISONS FONDATION</title>
+</head>
+<body>
+    <!-- SECTION: Campagne pour Ceux Qu'on Aime
+     - Remplace les src des <img> par tes images libres de droit locales.
+     - Utilise max-width via --max-width pour cadrer le contenu.
+-->
+<section class="campaign-section" aria-labelledby="campagne-heading">
+  <div class="container">
+    <header class="campaign-header">
+      <h2 id="campagne-heading">Campagne pour <span class="accent">Ceux Qu’on Aime</span></h2>
+      <p class="lead">
+        Une initiative humaine, sociale et spirituelle pour restaurer la dignité, soutenir les familles et semer l’espérance dans nos communautés.
+      </p>
+    </header>
+
+    <div class="blocks">
+      <!-- Block 1: Compassion -->
+      <article class="camp-block reveal" data-theme="compassion">
+        <div class="bg">
+          <img src="images/compassion.jpg" alt="Visage bienveillant et main tendue" />
+          <div class="overlay"></div>
+        </div>
+        <div class="content">
+          <div class="badge">Compassion</div>
+          <h3>Parce que chaque personne mérite d’être vue</h3>
+          <p>
+            Nous agissons parce que la compassion transforme le regard : reconnaître la souffrance, tendre la main et offrir un accompagnement concret. La Fondation se lève pour ceux qui trop souvent restent dans l’ombre, pour rétablir la confiance et rendre visible la valeur humaine de chacun.
+          </p>
+          <a class="cta" href="#compassion">En savoir plus →</a>
+        </div>
+      </article>
+
+      <!-- Block 2: Solidarité -->
+      <article class="camp-block reveal" data-theme="solidarite">
+        <div class="bg">
+          <img src="images/solidarite.jpg" alt="Groupe de personnes se soutenant" />
+          <div class="overlay"></div>
+        </div>
+        <div class="content">
+          <div class="badge">Solidarité</div>
+          <h3>Parce que nous sommes plus forts ensemble</h3>
+          <p>
+            La solidarité renouvelle les vies : initiatives locales, réseaux de soutien familial et actions collectives qui créent des réponses durables. Nous construisons des ponts entre ressources et besoins, parce qu’aucune famille ne doit faire face seule.
+          </p>
+          <a class="cta" href="#solidarite">Découvrir nos programmes →</a>
+        </div>
+      </article>
+
+      <!-- Block 3: Espoir -->
+      <article class="camp-block reveal" data-theme="espoir">
+        <div class="bg">
+          <img src="images/espoir.jpg" alt="Lever de soleil sur une communauté" />
+          <div class="overlay"></div>
+        </div>
+        <div class="content">
+          <div class="badge">Espoir</div>
+          <h3>Parce que l’espérance donne sens et énergie</h3>
+          <p>
+            Semer l’espoir, c’est investir dans le potentiel humain : formation, accompagnement psychologique et opportunités éducatives pour que chaque personne retrouve goût à l’avenir et puisse contribuer à sa communauté.
+          </p>
+          <a class="cta" href="#espoir">Comment nous inspirons →</a>
+        </div>
+      </article>
+
+      <!-- Block 4: Action durable -->
+      <article class="camp-block reveal" data-theme="action">
+        <div class="bg">
+          <img src="images/action.jpg" alt="Projet communautaire durable" />
+          <div class="overlay"></div>
+        </div>
+        <div class="content">
+          <div class="badge">Action durable</div>
+          <h3>Parce que l’aide doit devenir autonomie</h3>
+          <p>
+            Nos actions visent l’autonomie : projets agricoles, micro-entrepreneuriat et accès aux ressources essentielles. Nous privilégions des solutions qui perdurent et qui permettent aux bénéficiaires de reprendre leur destin en main.
+          </p>
+          <a class="cta" href="#action">Soutenir une action →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* --------------------------------------------------------
+     Socle de design (strict) - variables fournies par l'utilisateur
+     -------------------------------------------------------- */
+  :root{
+    /*Socle Design Bloc Pourquoi la campagne Pour ceux qu'on aime ? Les raisons*/
+    --green-soft:  #3EB489;
+    --green-deep: #5A9E78;
+    --deep-green: #2E6B4F;
+    --beige: #F8F5F0;
+    --white: #FFFFFF;
+    --footer-beige: #E6D8B9;
+    --accent-brown: #C2A88C;
+    --text-dark: #4A4A4A;
+    --muted-shadow: rgba(90,158,120,0.15);
+    --trans: all 0.3s ease;
+    --radius: 16px;
+    --max-width: 1200px;
+    --break-sm: 480px;
+    --break-md: 768px;
+    --title:#5A9E78;
+    --shadow-green: rgba(90,158,120,0.15);
+    --shadow-deep: rgba(90,158,120,0.1);
+    --transition: all 0.3s ease;
+  }
+
+  /* --------------------------------------------------------
+     Base & layout POURQUOI LA CAMPAGNE POUR CEUX QU'ON AIME ?
+     -------------------------------------------------------- */
+  *{box-sizing:border-box}
+  body{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:var(--text-dark); line-height:1.5}
+  .campaign-section{
+    background: linear-gradient(180deg, var(--beige) 0%, #FFFFFF 100%);
+    padding: 56px 20px;
+  }
+  .container{max-width:var(--max-width); margin:0 auto;}
+
+  .campaign-header{
+    text-align:center;
+    margin-bottom:36px;
+    padding:0 12px;
+  }
+  .campaign-header h2{
+    font-size:28px;
+    margin:0;
+    color:var(--deep-green);
+    letter-spacing:0.2px;
+  }
+  .campaign-header .accent{
+    color:var(--title);
+    font-weight:700;
+  }
+  .campaign-header .lead{
+    margin-top:8px;
+    color:var(--text-dark);
+    opacity:0.9;
+    max-width:880px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  /* --------------------------------------------------------
+     Blocks grid
+     -------------------------------------------------------- */
+  .blocks{display:grid; grid-template-columns: 1fr; gap:24px;}
+
+  /* Card / Block */
+  .camp-block{
+    position:relative;
+    overflow:hidden;
+    border-radius:var(--radius);
+    min-height:220px;
+    display:flex;
+    align-items:center;
+    box-shadow: 0 8px 30px var(--shadow-deep);
+    transition: var(--transition);
+    background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.5));
+  }
+
+  /* Background image (img tag as required) */
+  .camp-block .bg{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    overflow:hidden;
+  }
+  .camp-block .bg img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter: blur(8px) saturate(1.05);
+    transform: scale(1.06);
+    will-change: filter, transform;
+  }
+  .camp-block .bg .overlay{
+    position:absolute;
+    inset:0;
+    /* subtle gradient overlay using foundation colors */
+    background: linear-gradient(180deg, rgba(62,180,137,0.18) 0%, rgba(255,255,255,0.02) 55%, rgba(46,107,79,0.06) 100%);
+    mix-blend-mode: multiply;
+  }
+
+  /* Content above bg */
+  .camp-block .content{
+    position:relative;
+    z-index:2;
+    padding:28px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    max-width:900px;
+  }
+
+  .camp-block .badge{
+    align-self:flex-start;
+    padding:8px 14px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:13px;
+    color:var(--white);
+    background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
+    box-shadow: 0 6px 18px var(--muted-shadow), inset 0 1px 0 rgba(255,255,255,0.07);
+    backdrop-filter: blur(4px);
+    /* glossy effect */
+    position:relative;
+    overflow:hidden;
+  }
+  .camp-block .badge::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:999px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0));
+    mix-blend-mode: overlay;
+    pointer-events:none;
+  }
+
+  .camp-block h3{
+    margin:0;
+    font-size:20px;
+    color:var(--deep-green);
+  }
+  .camp-block p{
+    margin:0;
+    color:var(--text-dark);
+    opacity:0.95;
+    max-width:68ch;
+  }
+  .camp-block .cta{
+    margin-top:6px;
+    display:inline-block;
+    text-decoration:none;
+    font-weight:600;
+    padding:8px 12px;
+    border-radius:12px;
+    background: linear-gradient(90deg, var(--green-soft), var(--green-deep));
+    color:var(--white);
+    box-shadow: 0 6px 18px rgba(46,107,79,0.14);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+  }
+  .camp-block .cta:hover{ transform: translateY(-3px); box-shadow: 0 12px 30px rgba(46,107,79,0.18); }
+
+  /* Theme-specific accent (subtle) */
+  .camp-block[data-theme="compassion"] .badge{ background: linear-gradient(180deg, var(--green-soft), var(--green-deep)); }
+  .camp-block[data-theme="solidarite"] .badge{ background: linear-gradient(180deg, #66b495, #4a8f6e); }
+  .camp-block[data-theme="espoir"] .badge{ background: linear-gradient(180deg, #7fc9a8, var(--green-deep)); }
+  .camp-block[data-theme="action"] .badge{ background: linear-gradient(180deg, #59b08a, #3E8b6f); }
+
+  /* Hover lift (desktop) */
+  @media (hover:hover) and (min-width: 769px){
+    .camp-block:hover{ transform: translateY(-6px); box-shadow: 0 18px 50px var(--shadow-deep); }
+  }
+
+  /* --------------------------------------------------------
+     Responsive
+     -------------------------------------------------------- */
+  @media (min-width: 769px){
+    .blocks{ grid-template-columns: 1fr 1fr; gap:28px; }
+    .camp-block{ min-height:280px; }
+  }
+
+  @media (min-width: 1100px){
+    .blocks{ grid-template-columns: 1fr 1fr; gap:34px; }
+    .camp-block{ min-height:320px; }
+    .camp-block .content{ padding:36px; }
+    .campaign-header h2{ font-size:32px; }
+  }
+
+  @media (max-width: 767px){
+    .campaign-header h2{ font-size:22px; }
+    .campaign-header .lead{ font-size:14px; }
+    .camp-block{ border-radius:14px; padding:0; min-height:220px; }
+    .camp-block .content{ padding:18px; }
+  }
+
+  @media (max-width: 480px){
+    .blocks{ gap:18px; }
+    .camp-block h3{ font-size:18px; }
+    .camp-block p{ font-size:14px; }
+    .camp-block .cta{ padding:8px 10px; font-size:14px; }
+  }
+
+  /* --------------------------------------------------------
+     Reveal animation (fade + slide)
+     - Prepared for IntersectionObserver; defaults to hidden until revealed
+     -------------------------------------------------------- */
+  .reveal{ opacity:0; transform: translateY(18px); transition: opacity 600ms cubic-bezier(.2,.9,.2,1), transform 600ms cubic-bezier(.2,.9,.2,1); will-change:transform,opacity; }
+  .reveal.is-visible{ opacity:1; transform: translateY(0); }
+
+  /* Accessibility: reduce motion */
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ transition:none; opacity:1; transform:none; }
+    .camp-block, .camp-block:hover{ transform:none; transition:none; }
+  }
+</style>
+
+<script>
+  // IntersectionObserver: reveal blocks with fade+slide when entering viewport.
+  (function(){
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
+
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    } else {
+      // Fallback: show all
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+    }
+  })();
+</script>
+</body>
+</html>

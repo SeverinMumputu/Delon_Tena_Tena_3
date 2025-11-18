@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Depot</title>
+  <link rel="stylesheet" href="Depot.css">
+</head>
+<body>
+  
+  <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <!-- Top announcement with countdown avant et dans header  -->
+    <div class="top-announcement" id="topAnnouncement" role="region" aria-live="polite">
+      <div class="announcement-inner">
+        <div class="announce-text" data-fr="Prochain grand événement :" data-en="Next major event:">Prochain grand événement :</div>
+        <div class="countdown" id="countdown" aria-label="Compte à rebours">
+          <span class="cd-item"><strong id="cd-days">00</strong><small data-fr="Jours" data-en="Days">Jours</small></span>
+          <span class="cd-sep">:</span>
+          <span class="cd-item"><strong id="cd-hours">00</strong><small data-fr="Heures" data-en="Hours">Heures</small></span>
+          <span class="cd-sep">:</span>
+          <span class="cd-item"><strong id="cd-mins">00</strong><small data-fr="Minutes" data-en="Minutes">Minutes</small></span>
+          <span class="cd-sep">:</span>
+          <span class="cd-item"><strong id="cd-secs">00</strong><small data-fr="Secondes" data-en="Seconds">Secondes</small></span>
+        </div>
+         <div class="announce">
+        <span class="badge" data-fr="Annonce" data-en="Announcement">Annonce</span>
+        <span class="announce-text"  data-fr="Cérémonie de la jeunesse" data-en="Youth Ceremony">Cérémonie de la jeunesse</span>
+      </div>
+      </div>
+    </div>
+
+    <!-- Main nav -->
+    <div class="nav-row">
+      <div class="nav-inner">
+        <div class="brand" aria-hidden="false">
+        <div class="logo-mark">DTT</div>
+        <div>
+          <div style="font-size:.86rem;color:var(--accent-brown)">Fondation</div>
+          <div style="font-weight:900;font-size:1rem;color:var(--deep-green)" >Delon Tena Tena</div>
+        </div>
+      </div>
+
+        <nav class="main-nav" id="mainNav" role="navigation" aria-label="Menu principal">
+          <ul class="menu">
+            <li><a href="#about" data-fr="À propos" data-en="About">À propos</a></li>
+            <li><a href="Campagne_Essai.html" data-fr="Agir maintenant" data-en="Act Now">Agir maintenant</a></li>
+            <li><a href="#campaigns" data-fr="Campagnes" data-en="Campaigns">Campagnes</a></li>
+            <li><a href="#partners" data-fr="Partenaires" data-en="Partners">Partenaires</a></li>
+            <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="controls">
+          <div class="lang-switch" id="langSwitch" role="tablist" aria-label="Sélecteur de langue">
+            <button class="lang-btn active" data-lang="fr" aria-pressed="true">🇫🇷 FR</button>
+            <button class="lang-btn" data-lang="en" aria-pressed="false">🇬🇧 EN</button>
+          </div>
+
+          <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu mobile" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile slide-in menu -->
+    <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-menu-inner">
+        <button class="mobile-close" id="mobileClose" aria-label="Fermer le menu">X</button>
+        <ul class="mobile-list">
+            <li><a href="#about" data-fr="À propos" data-en="About">À propos</a></li>
+            <li><a href="Campagne_Essai.html" data-fr="Agir maintenant" data-en="Act Now">Agir maintenant</a></li>
+            <li><a href="#campaigns" data-fr="Campagnes" data-en="Campaigns">Campagnes</a></li>
+            <li><a href="#partners" data-fr="Partenaires" data-en="Partners">Partenaires</a></li>
+            <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+        </ul>
+
+        <div class="mobile-lang">
+          <button class="lang-btn" data-lang="fr">🇫🇷 FR</button>
+          <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+        </div>
+      </div>
+    </aside>
+  </header>
+
+  
+  <!-- Hero -->
+  <section class="hero" id="hero" role="banner">
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <h1 class="hero-title" data-fr="Fondation Delon Tena Tena" data-en="Delon Tena Tena Foundation">Fondation Delon Tena Tena</h1>
+      <p class="hero-sub" data-fr="Nous croyons qu’un avenir meilleur se construit par la connaissance, la solidarité et l’action." data-en="We believe a better future is built by knowledge, solidarity and action.">
+        Nous croyons qu’un avenir meilleur se construit par la connaissance, la solidarité et l’action.
+      </p>
+      <div class="hero-cta">
+        <a href="Campagne_Essai.html" class="btn btn-primary" data-fr="Agir maintenant" data-en="Act Now">Agir maintenant</a>
+        <a href="#about" class="btn btn-outline" data-fr="En savoir plus" data-en="Learn more">En savoir plus</a>
+      </div>
+    </div>
+
+    <!-- Wave SVG bottom -->
+    <div class="hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path d="M0,32 C240,120 480,0 720,48 C960,96 1200,8 1440,64 L1440 120 L0 120 Z" fill="#F8F5F0"></path>
+      </svg>
+    </div>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>

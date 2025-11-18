@@ -1,0 +1,307 @@
+<!--
+  Section "Actualités" pour la Fondation Delon Tena Tena
+  Inspirée par la section "Histoires du monde entier" (Greenpeace)
+  - HTML sémantique, CSS moderne (variables, grid, responsive)
+  - Animations d'apparition via IntersectionObserver (stagger)
+  - Accesibilité: tabindex, focus styles, prefers-reduced-motion
+  - 6 cartes d'exemple. Remplacez les images et liens par vos ressources.
+--><!doctype html>
+
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Actualités — Fondation Delon Tena Tena</title>
+  <style>
+    /* ==========================
+       Variables globales
+       ========================== */
+    :root{
+      --bg: #ffffff;
+      --muted-bg: #f7f6f4; /* léger beige */
+      --primary: #165a3d;   /* vert foncé institutionnel */
+      --accent: #f3c24b;    /* jaune / accent */
+      --card-shadow: 0 10px 24px rgba(16,24,32,0.06);
+      --radius: 14px;
+      --max-width: 1200px;
+      --gap: 24px;
+      --transition-fast: 280ms cubic-bezier(.2,.8,.2,1);
+      --reveal-duration: 420ms cubic-bezier(.22,.9,.3,1);
+    }/* Reset léger */
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--muted-bg);font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+img{display:block;max-width:100%;height:auto}
+
+/* ==========================
+   Section wrapper
+   ========================== */
+.news-section{
+  padding:48px 20px;
+  background:var(--bg);
+}
+.news-inner{
+  max-width:var(--max-width);
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
+
+/* Header */
+.news-header{
+  display:flex;flex-direction:column;gap:8px
+}
+.news-subtitle{
+  color:var(--primary);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;font-size:12px
+}
+.news-title{
+  font-size:28px;margin:0;color:#0b1a16;line-height:1.05;font-weight:700
+}
+.news-lead{color:#334033;max-width:900px}
+
+/* Grid */
+.news-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:var(--gap);
+}
+
+/* Card */
+.news-card{
+  background:linear-gradient(180deg, #fff 0%, #fff 100%);
+  border-radius:var(--radius);
+  box-shadow:var(--card-shadow);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  will-change:transform,opacity;
+  transform-origin:center bottom;
+  transition:transform var(--transition-fast),box-shadow var(--transition-fast);
+}
+
+.news-card:focus-within{outline:3px solid rgba(22,90,61,0.12)}
+
+.news-media{
+  position:relative;overflow:hidden;aspect-ratio:16/9;background:#e9ebe6
+}
+.news-media img{width:100%;height:100%;object-fit:cover;transition:transform var(--transition-fast),filter var(--transition-fast)}
+
+.news-tag{
+  display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;margin:12px 16px 0 16px;background:rgba(22,90,61,0.06);color:var(--primary);text-transform:uppercase;font-weight:700;letter-spacing:0.06em
+}
+
+.news-body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.news-title-article{font-size:18px;margin:0;color:#0b1a16;font-weight:700}
+.news-excerpt{color:#46544a;font-size:14px;margin:0;flex:1}
+
+.news-meta{
+  display:flex;align-items:center;justify-content:space-between;padding-top:6px;border-top:1px solid rgba(6,8,6,0.04);margin-top:8px
+}
+.news-meta time{font-size:13px;color:#6b756d}
+.news-cta{
+  font-weight:700;text-decoration:none;font-size:13px;color:var(--primary);display:inline-flex;align-items:center;gap:8px;transition:color var(--transition-fast),transform var(--transition-fast)
+}
+.news-cta:focus{outline:2px dashed rgba(243,194,75,0.35);outline-offset:3px}
+.news-cta:hover{ text-decoration:underline }
+
+/* Hover interactions */
+.news-card:hover{transform:translateY(-6px);box-shadow:0 18px 34px rgba(16,24,32,0.12)}
+.news-card:hover .news-media img{transform:scale(1.03);filter:brightness(0.92)}
+
+/* Overlay on media for better contrast (hidden by default)
+   We'll reveal on hover for desktop */
+.news-media .media-overlay{
+  position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.0),rgba(0,0,0,0.18));opacity:0;transition:opacity var(--transition-fast)
+}
+.news-card:hover .media-overlay{opacity:1}
+
+/* Reveal animation class applied by JS */
+.reveal{
+  opacity:0;transform:translateY(16px);transition:opacity var(--reveal-duration),transform var(--reveal-duration)
+}
+.reveal.revealed{opacity:1;transform:none}
+
+/* Responsive rules */
+@media (max-width:1024px){
+  .news-grid{grid-template-columns:repeat(2,1fr)}
+  .news-title{font-size:24px}
+}
+@media (max-width:640px){
+  .news-grid{grid-template-columns:1fr}
+  .news-inner{gap:18px}
+  .news-title{font-size:20px}
+  .news-card{border-radius:10px}
+
+  /* replace hover interactions with focus-friendly behavior */
+  .news-card:hover{transform:none;box-shadow:var(--card-shadow)}
+  .news-media img{transition:none}
+  .news-cta{padding:10px 14px;border-radius:10px;background:transparent;text-align:center}
+}
+
+/* prefers-reduced-motion support */
+@media (prefers-reduced-motion: reduce){
+  .news-card, .news-media img, .reveal{transition:none !important;animation:none !important;transform:none !important;}
+}
+
+/* utility */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  </style>
+</head>
+<body>
+  
+  <section class="news-section" aria-labelledby="news-title">
+  <div class="news-inner">
+    <header class="news-header">
+      <span class="news-subtitle">Actualités</span>
+      <h2 id="news-title" class="news-title">Actualités du monde et de la Fondation</h2>
+      <p class="news-lead">Des actions qui changent des vies, des histoires qui inspirent le monde. Découvrez comment la Fondation Delon Tena Tena agit localement et globalement pour le bien-être des communautés.</p>
+    </header><div class="news-grid" id="newsGrid">
+
+  <!-- Article 1 -->
+  <article class="news-card reveal" tabindex="0" aria-labelledby="n1-title">
+    <div class="news-media">
+      <img src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?q=80&w=1600&auto=format&fit=crop&s=placeholder" alt="Jeunes installant panneaux solaires" loading="lazy">
+      <div class="media-overlay" aria-hidden="true"></div>
+    </div>
+    <span class="news-tag">Éducation</span>
+    <div class="news-body">
+      <h3 id="n1-title" class="news-title-article">Des jeunes formés à l'énergie solaire au Congo</h3>
+      <p class="news-excerpt">Grâce à notre programme de formation, 120 jeunes ont reçu des compétences techniques pour installer et maintenir des systèmes solaires dans des écoles rurales.</p>
+      <div class="news-meta">
+        <time datetime="2025-09-21">21 septembre 2025</time>
+        <a href="#" class="news-cta" aria-label="Lire l'histoire : Des jeunes formés à l'énergie solaire au Congo">Lire l'histoire →</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article 2 -->
+  <article class="news-card reveal" tabindex="0" aria-labelledby="n2-title">
+    <div class="news-media">
+      <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=1600&auto=format&fit=crop&s=placeholder" alt="Distribution d'eau potable" loading="lazy">
+      <div class="media-overlay" aria-hidden="true"></div>
+    </div>
+    <span class="news-tag">Santé</span>
+    <div class="news-body">
+      <h3 id="n2-title" class="news-title-article">Une communauté sauvée par l'accès à l'eau potable</h3>
+      <p class="news-excerpt">Un point d'eau nouveau a réduit les maladies d'origine hydrique et permis aux enfants de retourner à l'école plus souvent.</p>
+      <div class="news-meta">
+        <time datetime="2025-08-11">11 août 2025</time>
+        <a href="#" class="news-cta" aria-label="Lire l'histoire : Une communauté sauvée par l'accès à l'eau potable">Découvrir →</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article 3 -->
+  <article class="news-card reveal" tabindex="0" aria-labelledby="n3-title">
+    <div class="news-media">
+      <img src="https://images.unsplash.com/photo-1520975911444-8f9cbeeb4b8d?q=80&w=1600&auto=format&fit=crop&s=placeholder" alt="Bénévoles équipes en action" loading="lazy">
+      <div class="media-overlay" aria-hidden="true"></div>
+    </div>
+    <span class="news-tag">Communauté</span>
+    <div class="news-body">
+      <h3 id="n3-title" class="news-title-article">Nos bénévoles à l'œuvre dans les villages isolés</h3>
+      <p class="news-excerpt">Des équipes de volontaires ont appuyé la rénovation d'un centre communautaire, créant un espace d'apprentissage et de santé pour tous.</p>
+      <div class="news-meta">
+        <time datetime="2025-07-02">2 juillet 2025</time>
+        <a href="#" class="news-cta" aria-label="Lire l'histoire : Nos bénévoles à l'œuvre dans les villages isolés">Lire l'histoire →</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article 4 -->
+  <article class="news-card reveal" tabindex="0" aria-labelledby="n4-title">
+    <div class="news-media">
+      <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600&auto=format&fit=crop&s=placeholder" alt="Jardin potager communautaire" loading="lazy">
+      <div class="media-overlay" aria-hidden="true"></div>
+    </div>
+    <span class="news-tag">Agriculture</span>
+    <div class="news-body">
+      <h3 id="n4-title" class="news-title-article">Cultiver l'autonomie : jardins potagers pour familles</h3>
+      <p class="news-excerpt">Un projet pilote a permis à 40 familles d'assurer une autonomie alimentaire grâce à des techniques adaptées au climat local.</p>
+      <div class="news-meta">
+        <time datetime="2025-06-15">15 juin 2025</time>
+        <a href="#" class="news-cta" aria-label="Lire l'histoire : Cultiver l'autonomie : jardins potagers">Découvrir →</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article 5 -->
+  <article class="news-card reveal" tabindex="0" aria-labelledby="n5-title">
+    <div class="news-media">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop&s=placeholder" alt="Formation médicale locale" loading="lazy">
+      <div class="media-overlay" aria-hidden="true"></div>
+    </div>
+    <span class="news-tag">Santé</span>
+    <div class="news-body">
+      <h3 id="n5-title" class="news-title-article">Ateliers de santé : prévention et formation</h3>
+      <p class="news-excerpt">Nos ateliers permettent aux agents de santé locaux d'améliorer leurs pratiques et d'offrir de meilleurs soins sur place.</p>
+      <div class="news-meta">
+        <time datetime="2025-05-05">5 mai 2025</time>
+        <a href="#" class="news-cta" aria-label="Lire l'histoire : Ateliers de santé">Lire l'histoire →</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article 6 -->
+  <article class="news-card reveal" tabindex="0" aria-labelledby="n6-title">
+    <div class="news-media">
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop&s=placeholder" alt="Projet éco-responsable" loading="lazy">
+      <div class="media-overlay" aria-hidden="true"></div>
+    </div>
+    <span class="news-tag">Environnement</span>
+    <div class="news-body">
+      <h3 id="n6-title" class="news-title-article">Initiative éco-responsable pour les écoles</h3>
+      <p class="news-excerpt">Réduction des déchets et programmes de recyclage mis en place dans 12 écoles partenaires.</p>
+      <div class="news-meta">
+        <time datetime="2025-04-10">10 avril 2025</time>
+        <a href="#" class="news-cta" aria-label="Lire l'histoire : Initiative éco-responsable pour les écoles">Découvrir →</a>
+      </div>
+    </div>
+  </article>
+
+</div> <!-- end grid -->
+
+  </div> <!-- end inner -->
+</section>
+
+<script>
+  // ==========================
+  // IntersectionObserver reveal with stagger
+  // ==========================
+  (function(){
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(prefersReduced){
+      // If user prefers reduced motion, simply show all
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('revealed'));
+      return;
+    }
+
+    const items = Array.from(document.querySelectorAll('.reveal'));
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const el = entry.target;
+          const index = items.indexOf(el) || 0;
+          // stagger delay: index * 80ms
+          const delay = Math.min(index * 80, 400);
+          setTimeout(() => el.classList.add('revealed'), delay);
+          obs.unobserve(el);
+        }
+      });
+    },{threshold:0.12});
+
+    items.forEach(it => observer.observe(it));
+  })();
+
+  // Accessibility: allow Enter key on article to open first link
+  document.querySelectorAll('.news-card').forEach(card =>{
+    card.addEventListener('keydown', e =>{
+      if(e.key === 'Enter' || e.key === ' '){
+        const firstLink = card.querySelector('.news-cta');
+        if(firstLink){ firstLink.focus(); }
+      }
+    });
+  });
+
+</script></body>
+</html>

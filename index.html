@@ -1,0 +1,693 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title data-fr="Fondation Delon Tena Tena" data-en="Delon Tena Tena Foundation">Fondation Delon Tena Tena</title>
+
+  <!-- Google Font Nunito -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="accueil.css">
+
+  <!-- Favicon placeholder -->
+  <link rel="icon" href="data:;base64,=">
+</head>
+<body class="fr">
+
+
+  <!-- HEADER -->
+  <header class="site-header" id="siteHeader" role="banner">
+    <div class="container header-inner">
+   <!-- Left: logo / name -->
+      <div class="brand" id="brand">
+        <!-- Could be an <img> if you have a logo image -->
+        <a href="#" class="brand-link" aria-label="Fondation Delon Tena Tena"  data-fr="Fondation Delon Tena Tena" 
+        data-en="Delon Tena Tena Foundation"><strong>Fondation Delon Tena Tena</strong></a>
+      </div>
+
+      <!-- Center: navigation -->
+      <nav class="main-nav" id="mainNav" role="navigation" aria-label="Navigation principale">
+        <ul class="nav-list" id="navList">
+          <li><a href="About.html" class="nav-link" data-fr="Qui sommes-nous" data-en="Who are we">Qui sommes-nous</a></li>
+          <li><a href="New_Campagne.html" class="nav-link" data-fr="Campagne pour ceux qu'on aime" data-en="Campaign for those we love">Campagne pour ceux qu'on aime</a></li>
+          <li><a href="About.html#communaute" class="nav-link" data-fr="Communautés" data-en="Communities">Communautés</a></li>
+          <li><a href="contact.html" class="nav-link" data-fr="Contactez-nous" data-en="Contact us">Contactez-nous</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right: actions (donate + language) -->
+      <div class="header-actions">
+        <!-- Donate button + dropdown -->
+        <div class="donate-wrapper" id="donateWrapper">
+          <button class="btn btn-donate" id="donateBtn" aria-haspopup="true" aria-expanded="false" data-fr="Faire un don ▾" data-en="Make a donation ▾">
+            Faire un don <span class="caret" aria-hidden="true">▾</span>
+          </button>
+          <div class="donate-dropdown" id="donateDropdown" role="menu" aria-hidden="true">
+            <a href="Don.html" role="menuitem" class="dropdown-link" 
+            data-fr="Faire un don à la campagne" data-en="Donate to the campaign">Faire un don à la campagne</a>
+            <a href="Don.html" role="menuitem" class="dropdown-link" data-fr="Faire un don à la fondation" 
+            data-en="Make a donation to the foundation">Faire un don à la fondation</a>
+          </div>
+        </div>
+
+        <!-- Language toggles -->
+        <div class="lang-switch" role="region" aria-label="Choix de la langue">
+          <button class="lang-btn" data-lang="fr" aria-pressed="true" title="Français">🇫🇷</button>
+          <button class="lang-btn" data-lang="en" aria-pressed="false" title="English">🇬🇧</button>
+        </div>
+
+        <!-- Hamburger for mobile -->
+        <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-controls="mobileNav" aria-expanded="false">
+          <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile nav (accordéon style) -->
+    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+      <ul class="mobile-list">
+       <li><a href="About.html" class="nav-link" data-fr="Qui sommes-nous" data-en="Who are we">Qui sommes-nous</a></li>
+          <li><a href="New_Campagne.html" class="nav-link" data-fr="Campagne pour ceux qu'on aime" data-en="Campaign for those we love">Campagne pour ceux qu'on aime</a></li>
+          <li><a href="About.html#communaute" class="nav-link" data-fr="Communautés" data-en="Communities">Communautés</a></li>
+          <li><a href="contact.html" class="nav-link" data-fr="Contactez-nous" data-en="Contact us">Contactez-nous</a></li>
+        <li>
+          <button class="mobile-accordion" aria-expanded="false" data-fr="Faire un don ▾" data-en="Make a donation ▾">Faire un don ▾</button>
+          <div class="mobile-accordion-panel" hidden>
+            <a href="Don.html" class="mobile-sublink" data-fr="Faire un don à la campagne" data-en="Donate to the campaign">Faire un don à la campagne</a>
+            <a href="Don.html" class="mobile-sublink" data-fr="Faire un don à la fondation" data-en="Make a donation to the foundation">Faire un don à la fondation</a>
+          </div>
+        </li>
+        <li class="mobile-langs">
+          <button class="lang-btn" data-lang="fr" aria-pressed="true">🇫🇷 Français</button>
+          <button class="lang-btn" data-lang="en" aria-pressed="false">🇬🇧 English</button>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero" id="hero" aria-label="Héros principal">
+      <div class="hero-slides" id="heroSlides">
+        <!-- Slide 1 -->
+        <article class="slide active" role="group" aria-roledescription="slide" aria-label="Slide 1: Protéger les générations futures" data-index="0">
+          <div class="slide-media" aria-hidden="true">
+            <!-- Background image via CSS; include <img> or <video> if desired -->
+          </div>
+          <div class="slide-content">
+            <h1 class="hero-title" data-fr="Campagne : pour ceux qu'on aime." data-en="Campaign: for those we love.">Campagne : pour ceux qu'on aime.</h1>
+            <p class="hero-lead" data-fr="Agir aujourd’hui pour un avenir durable et solidaire." data-en="Acting today for a sustainable and inclusive future.">Agir aujourd’hui pour un avenir durable et solidaire.</p>
+            <div class="hero-ctas">
+              <a href="New_Campagne.html#participation" class="btn btn-primary" data-fr="Participer" data-en="Participate">Participer</a>
+              <a href="New_Campagne.html#participation" class="btn btn-outline" data-fr="En savoir plus" data-en="Learn more">En savoir plus</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 2 -->
+        <article class="slide" role="group" aria-roledescription="slide" aria-label="Slide 2: Soutenir les communautés locales" data-index="1">
+          <div class="slide-media" aria-hidden="true"></div>
+          <div class="slide-content">
+            <h2 class="hero-title" data-fr="Rejoignez une communauté engagée et solidaire !" data-en="Join a committed and supportive community!">Rejoignez une communauté engagée et solidair!</e h2>
+            <p class="hero-lead" data-fr="Pour agir concrètement au sein de projets à impact." data-en="To take concrete action within impactful projects.">Pour agir concrètement au sein de projets à impact.</p>
+            <div class="hero-ctas">
+              <a href="About.html#communaute" class="btn btn-primary" data-fr="Rejoindre la communauté" data-en="Join the community">Rejoindre la communauté</a>
+              <a href="About.html#communaute" class="btn btn-outline" data-fr="En savoir plus" data-en="Learn more">En savoir plus</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 3 -->
+        <article class="slide" role="group" aria-roledescription="slide" aria-label="Slide 3: Rejoignez le mouvement" data-index="2">
+          <div class="slide-media" aria-hidden="true"></div>
+          <div class="slide-content">
+            <h2 class="hero-title" data-fr="Envie de faire entendre ta voix ?" data-en="Want to make your voice heard?">Envie de faire entendre ta voix ?</h2>
+            <p class="hero-lead" data-fr="Deviens Ambassadeur de la Fondation !" data-en="Become a Foundation Ambassador!">Deviens Ambassadeur de la Fondation !</p>
+            <div class="hero-ctas">
+              <a href="New_Campagne.html#ambassadeur" class="btn btn-primary" data-fr="Devenir ambassadeur" data-en="Becoming an ambassador">Devenir ambassadeur</a>
+              <a href="New_Campagne.html#ambassadeur" class="btn btn-outline" data-fr="En savoir plus" data-en="Learn more">En savoir plus</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Controls: dots + pause/play -->
+      <div class="hero-controls" aria-hidden="false">
+        <div class="dots" id="heroDots" role="tablist" aria-label="Navigation des slides">
+          <!-- JS generates dots -->
+        </div>
+        <button class="btn btn-icon" id="heroPlayPause" aria-pressed="false" aria-label="Pause le carrousel">⏸</button>
+      </div>
+    </section>
+
+
+  <!-- WHO WE ARE -->
+
+  <section id="Nous" class="join-section" aria-labelledby="join-title">
+    <div class="join-inner">
+      <div class="join-header">
+        <div>
+          <h2 id="join-title" data-fr="Qui sommes-nous ?" data-en="Who are we ?">Qui sommes-nous ?</h2>
+          <p data-fr="Fondation Delon Tena Tena — Agir aujourd’hui pour transformer demain." 
+          data-en="Delon Tena Tena Foundation — Acting today to transform tomorrow.">Fondation Delon Tena Tena — 
+            Agir aujourd’hui pour transformer demain.</p>
+        </div>
+      </div>
+
+      <div class="join-grid" id="joinGrid">
+
+        <!-- CARD 1 : Présentation -->
+        <a href="About.html#presentation" class="join-card" role="link" aria-controls="popup-1" aria-expanded="false" data-index="0" tabindex="0">
+          <!-- Simple image declaration: remplace le src ci-dessous par ton image réelle -->
+          <div class="join-card__media" aria-hidden="true">
+            <img src="don.jpg" alt="Fondation Delon Tena Tena" loading="lazy" decoding="async">
+          </div>
+
+          <div class="join-card__overlay" aria-hidden="true"></div>
+
+          <div class="join-card__content">
+            <div class="meta-row"><span class="badge" data-fr="Fondation" data-en="Foundation">Fondation</span></div>
+            <h3>Delon Tena Tena</h3>
+            <p data-fr="La Fondation Delon Tena Tena est une organisation à but non lucratif engagée dans la promotion du bien-être social, de l'éducation, de la santé et de l'autonomisation des communautés vulnérables, en particulier des femmes et des jeunes. Créée avec un profond désir de changement, la fondation agit au cœur des réalités africaines pour bâtir un avenir plus solidaire, inclusif et durable."
+             data-en="The Delon Tena Tena Foundation is a non-profit organization committed to promoting social well-being, education, health, and the empowerment of vulnerable communities, particularly women and youth.
+Founded with a deep desire for change, the foundation works at the heart of African realities to build a more united, inclusive, and sustainable future.">La Fondation Delon Tena Tena est une organisation à but non lucratif engagée 
+              dans la promotion du bien-être social, de l'éducation, de la santé et de 
+              l'autonomisation des communautés vulnérables, en particulier des femmes et des jeunes. 
+              Créée avec un profond désir de changement, la fondation agit au cœur des réalités africaines pour bâtir un avenir plus solidaire, inclusif et durable.</p>
+            <div><span class="join-cta" aria-hidden="true" data-fr="En savoir plus" data-en="Learn more">En savoir plus</span></div>
+
+            <div id="popup-1" class="join-popup" role="dialog" aria-hidden="true" data-open="false" data-fr="Mission : Contribuer à l’amélioration des conditions de vie des populations vulnérables à travers des actions concrètes dans les domaines de la santé, de l’éducation, de l’égalité des chances et de l’autonomisation."
+             data-en="Mission: To contribute to improving the living conditions of vulnerable populations through concrete actions in the areas of health, education, equal opportunities and empowerment.">
+              <strong class="strong">Mission :</strong> Contribuer à l’amélioration des conditions de vie des populations vulnérables à travers des actions concrètes dans les domaines de la santé, de l’éducation, de l’égalité des chances et de l’autonomisation.
+            </div>
+          </div>
+        </a>
+
+        <!-- CARD 2 : Nos valeurs -->
+        <a href="About.html#valeurs" class="join-card" role="link" aria-controls="popup-2" aria-expanded="false" data-index="1" tabindex="0">
+          <div class="join-card__media" aria-hidden="true">
+            <img src="Us.jpg" alt="Nos valeurs" loading="lazy" decoding="async">
+          </div>
+
+          <div class="join-card__overlay" aria-hidden="true"></div>
+
+          <div class="join-card__content">
+            <div class="meta-row"><span class="badge" data-fr="Valeurs" data-en="Who are we ?">Valeurs</span></div>
+            <h3 data-fr="Nos valeurs" data-en="our values">Nos valeurs</h3>
+            <p data-fr="Intégrité, Compassion, Engagement, Équité, Excellence." data-en="Integrity, Compassion, Commitment, Fairness, Excellence.">
+              
+              Intégrité, Compassion, Engagement, Équité, Excellence.</p>
+            <div><span class="join-cta" aria-hidden="true" data-fr="Découvrir" data-en="discover">Découvrir</span></div>
+
+            <div id="popup-2" class="join-popup" role="dialog" aria-hidden="true" data-open="false" data-fr="Valeurs: Intégrité, Compassion, Engagement, Équité, Excellence." 
+            data-en="Values: Integrity, Compassion, Commitment, Fairness, Excellence.">
+              <strong>Valeurs:</strong>Intégrité, Compassion, Engagement, Équité, Excellence.
+            </div>
+          </div>
+        </a>
+
+        <!-- CARD 3 : Vision -->
+        <a href="About.html#vision" class="join-card" role="link" aria-controls="popup-3" aria-expanded="false" data-index="2" tabindex="0">
+          <div class="join-card__media" aria-hidden="true">
+            <img src="Vision.jpg" alt="Notre vision" loading="lazy" decoding="async">
+          </div>
+
+          <div class="join-card__overlay" aria-hidden="true"></div>
+
+          <div class="join-card__content">
+            <div class="meta-row"><span class="badge" data-fr="Vision" data-en="Vision">Vision</span></div>
+            <h3 data-fr="Notre vision" data-en="Our vision">Notre vision</h3>
+            <p data-fr="Bâtir une société juste et solidaire où chaque individu, en particulier les jeunes et les femmes, peut s’épanouir pleinement et devenir acteur du changement." 
+            data-en="Building a just and inclusive society where every individual, especially young people and women, can fully develop and become an agent of change.">Bâtir une société juste et solidaire où chaque individu, en particulier les jeunes et les femmes, peut s’épanouir pleinement et devenir acteur du changement.</p>
+            <div><span class="join-cta" aria-hidden="true" data-fr="Nos objectifs" data-en="Our objectives">Nos objectifs</span></div>
+
+            <div id="popup-3" class="join-popup" role="dialog" aria-hidden="true" data-open="false"
+             data-fr="Vision : Bâtir une société juste et solidaire où chaque individu, en particulier les jeunes et les femmes, peut s’épanouir pleinement et devenir acteur du changement." 
+             data-en="Vision: To build a just and inclusive society where every individual, especially young people and women, can fully develop and become an agent of change.">
+              <strong>Vision :</strong> Bâtir une société juste et solidaire où chaque individu, en particulier les jeunes et les femmes, peut s’épanouir pleinement et devenir acteur du changement.
+            </div>
+          </div>
+        </a>
+
+      </div> <!-- .join-grid -->
+    </div> <!-- .join-inner -->
+  </section>
+
+  <!-- DRAWER (mobile) -->
+  <div id="joinDrawer" class="join-drawer" role="dialog" aria-hidden="true" aria-modal="true">
+    <div class="drawer-close">
+      <button id="drawerCloseBtn" aria-label="Fermer" class="join-cta" style="background:#f1f1f1;color:#081016">Fermer</button>
+    </div>
+    <div id="drawerContent" tabindex="0"></div>
+  </div>
+
+    
+
+  <!-- CAMPAIGNS -->
+  <section id="campaigns" class="campaigns container">
+    <h3 class="section-title"  data-fr="Campagne : Pour ceux qu'on aime." data-en="Campaign: For those we love.">Campagne : Pour ceux qu'on aime.</h3>
+    <div class="campaign-grid">
+      <div class="campaign-card">
+        <div class="card-media" style="background-image:url('campagne.jpg');"></div>
+        <div class="card-body">
+          <h4 data-fr="Présentation du projet— 'Pour ceux qu'on aime'" data-en="Project presentation — 'For those we love'"> 
+            Présentation du projet— 'Pour ceux qu'on aime'</h4>
+          <p data-fr="Notre campagne vise à venir en aide aux familles en situation de précarité,
+           à soutenir l'éducation des enfants et à mener des actions de protection de l'environnement 
+           dans les quartiers oubliés. Face à des besoins grandissants, il est urgent d'agir : votre engagement permet de financer des programmes de nutrition,
+           d'accès à l'eau potable, de soutien scolaire et de projets écologiques communautaires."
+           data-en="Our campaign aims to help families in precarious situations, 
+           support children's education, and carry out environmental protection initiatives 
+           in neglected neighborhoods. Faced with growing needs, urgent action is required: your commitment helps
+            fund nutrition programs, access to clean water, educational support, and community-based environmental projects.">
+           Notre campagne vise à venir en aide aux familles en situation de précarité, à soutenir 
+           l'éducation des enfants et à mener des actions de protection de l'environnement dans les quartiers oubliés. 
+           Face à des besoins grandissants, il est urgent d'agir : 
+           votre engagement permet de financer des programmes de nutrition, d'accès à l'eau potable,
+            de soutien scolaire et de projets écologiques communautaires.</p>
+          <a class="btn btn-primary" href="New_Campagne.html#projet" data-fr="Voir plus" data-en="see more">Voir plus</a>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <div class="card-media" style="background-image:url('femmes.jpg');"></div>
+        <div class="card-body">
+          <h4 data-fr="Pourquoi participer à la campagne « Pour ceux qu'on aime » ?" 
+          data-en="Why participate in the 'For those we love' campaign?">
+            Pourquoi participer à la campagne « Pour ceux qu'on aime » ?</h4>
+          <p data-fr="En soutenant la campagne, vous contribuez directement à des projets concrets 
+          : distribution alimentaire, kits scolaires, ateliers de sensibilisation et actions de reboisement. 
+          Au-delà du don, participer, c'est affirmer des valeurs : la solidarité, la dignité et l'espoir. 
+          Ensemble, nous pouvons redonner des opportunités à ceux qui en ont le plus besoin" 
+          data-en="By supporting the campaign, you're directly contributing to concrete projects: 
+          food distribution, school kits, awareness workshops, and reforestation initiatives. Beyond donating, participating means affirming values: 
+          solidarity, dignity, and hope. Together, we can restore opportunities to those who need them most.">
+            En soutenant la campagne, vous contribuez directement à des 
+            projets concrets : distribution alimentaire, kits scolaires, 
+            ateliers de sensibilisation et actions de reboisement. Au-delà du don, 
+            participer, c'est affirmer des valeurs : la solidarité, la dignité et l'espoir. 
+            Ensemble, nous pouvons redonner des opportunités à ceux qui en ont le plus besoin.</p>
+          <a class="btn btn-primary" href="New_Campagne.html#participation" data-fr="Participer" data-en="Participate">Participer</a>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <div class="card-media" style="background-image:url('ambassadeur.jpg');"></div>
+        <div class="card-body">
+          <h4 data-fr="Devenir ambassadeur" data-en="Becoming an ambassador">Devenir ambassadeur</h4>
+          <p data-fr="En tant qu'ambassadeur de la Fondation Delon Tena Tena, vous portez nos messages,
+           organisez des actions locales et mobilisez votre réseau pour amplifier l'impact de la campagne Pour ceux qu'on aime.
+            Nous cherchons des personnes engagées, empathiques et prêtes à agir." 
+          data-en="As an ambassador for the Delon Tena Tena Foundation, you will carry our messages, 
+          organize local actions and mobilize your network to amplify the impact of the 
+          For those we love campaign. We are looking for committed, empathetic people ready to take action.">
+          En tant qu'ambassadeur de la Fondation Delon Tena Tena, vous portez nos messages,
+           organisez des actions locales et mobilisez votre réseau pour amplifier l'impact de la campagne "Pour ceux qu'on aime".
+            Nous cherchons des personnes engagées, empathiques et prêtes à agir.</p>
+          <a class="btn btn-primary" href="New_Campagne.html#ambassadeur" data-fr="Voir plus" data-en="see more">Voir plus</a>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <div class="card-media" style="background-image:url('Rihana.jpeg');"></div>
+        <div class="card-body">
+          <h4 data-fr="Partenaires de la campagne" data-en="Campaign Partners">Partenaires de la campagne</h4>
+          <p data-fr="Nous travaillons avec des organisations locales et internationales pour maximiser l'impact." 
+          data-en="We work with local and international organizations to maximize impact.">
+          Nous travaillons avec des organisations locales et internationales pour maximiser l'impact.</p>
+          <a class="btn btn-primary" href="New_Campagne.html#partenaires" data-fr="Voir plus" data-en="see more">Voir plus</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section class="news-section" aria-labelledby="news-title">
+  <div class="news-inner">
+    <header class="news-header">
+      <span class="news-subtitle" data-fr="Actualités" data-en="News">Actualités</span>
+      <h2 id="news-title" class="news-title" data-fr="Actualités du monde et de la Fondation"
+       data-en="World and Foundation News">Actualités du monde et de la Fondation</h2>
+      <p class="news-lead" data-fr="Des actions qui changent des vies, des histoires qui inspirent le monde. Découvrez comment la Fondation Delon Tena Tena agit localement et globalement pour le bien-être des communautés."
+      data-en="Actions that change lives, stories that inspire the world. 
+      Discover how the Delon Tena Tena Foundation works 
+      locally and globally for the well-being of communities.">
+      Des actions qui changent des vies, des histoires qui inspirent le monde. 
+      Découvrez comment la Fondation Delon Tena Tena agit localement et globalement pour le bien-être des communautés.</p>
+    </header><div class="news-grid" id="newsGrid">
+
+  <!-- Article 1 -->
+  <article class="news-card reveal" tabindex="0" aria-labelledby="n1-title">
+    <div class="news-media">
+      <img src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?q=80&w=1600&auto=format&fit=crop&s=placeholder" alt="Jeunes installant panneaux solaires" loading="lazy">
+      <div class="media-overlay" aria-hidden="true"></div>
+    </div>
+    <span class="news-tag" data-fr="Éducation" data-en="Education">Éducation</span>
+    <div class="news-body">
+      <h3 id="n1-title" class="news-title-article" data-fr="Des jeunes formés à l'énergie solaire au Congo" 
+      data-en="Young people trained in solar energy in Congo">
+      Des jeunes formés à l'énergie solaire au Congo</h3>
+      <p class="news-excerpt" data-fr="Grâce à notre programme de formation, 
+      120 jeunes ont reçu des compétences techniques pour installer et maintenir des systèmes solaires dans des écoles rurales." 
+      data-en="Thanks to our training program, 120 young people have received technical skills to install and maintain solar systems in rural schools.">
+      Grâce à notre programme de formation,
+         120 jeunes ont reçu des compétences techniques pour installer et maintenir des systèmes solaires dans des écoles rurales.</p>
+      <div class="news-meta">
+        <time datetime="2025-09-21" data-fr="21 septembre 2025" data-en="September 21, 2025">21 septembre 2025</time>
+        <a href="Page_Actu_Complete.html" class="news-cta" aria-label="Lire l'histoire : Des jeunes formés à l'énergie solaire au Congo" data-fr="Lire l'histoire →" data-en="Read the story →">
+          Lire l'histoire →</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article 2 -->
+  <article class="news-card reveal" tabindex="0" aria-labelledby="n2-title">
+    <div class="news-media">
+      <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=1600&auto=format&fit=crop&s=placeholder" alt="Distribution d'eau potable" loading="lazy">
+      <div class="media-overlay" aria-hidden="true"></div>
+    </div>
+    <span class="news-tag" data-fr="Santé" data-en="Health">Santé</span>
+    <div class="news-body">
+      <h3 id="n2-title" class="news-title-article" data-fr="Une communauté sauvée par l'accès à l'eau potable"
+       data-en="A community saved by access to clean water"> Une communauté sauvée par l'accès à l'eau potable</h3>
+      <p class="news-excerpt" data-fr="Un point d'eau nouveau a réduit les maladies d'origine hydrique et permis aux enfants de retourner à l'école plus souvent."
+       data-en="A new water point has reduced waterborne diseases and allowed children to return to school more often.">
+       Un point d'eau nouveau a réduit les maladies d'origine hydrique et permis aux enfants de retourner à l'école plus souvent.</p>
+      <div class="news-meta">
+        <time datetime="2025-08-11" data-fr="11 août 2025" data-en="August 11, 2025">11 août 2025</time>
+        <a href="Page_Actu_Complete.html" class="news-cta" aria-label="Lire l'histoire : Une communauté sauvée par l'accès à l'eau potable" data-fr="Découvrir →" data-en="Discover →">Découvrir →</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article 3 -->
+  <article class="news-card reveal" tabindex="0" aria-labelledby="n3-title">
+    <div class="news-media">
+      <img src="communaute.jpg" alt="Bénévoles équipes en action" loading="lazy">
+      <div class="media-overlay" aria-hidden="true"></div>
+    </div>
+    <span class="news-tag" data-fr="Communauté" data-en="Community">Communauté</span>
+    <div class="news-body">
+      <h3 id="n3-title" class="news-title-article" data-fr="Nos bénévoles à l'œuvre dans les villages isolés" 
+      data-en="Our volunteers at work in isolated villages">
+      Nos bénévoles à l'œuvre dans les villages isolés</h3>
+      <p class="news-excerpt" data-fr="Des équipes de volontaires ont appuyé la rénovation d'un centre communautaire, créant un espace d'apprentissage et de santé pour tous." 
+      data-en="Teams of volunteers supported the renovation of a community center, creating a learning and health space for all.">
+        Des équipes de volontaires ont appuyé la rénovation d'un centre communautaire, créant un espace d'apprentissage et de santé pour tous.</p>
+      <div class="news-meta">
+        <time datetime="2025-07-02" data-fr="2 juillet 2025" data-en="July 2, 2025">2 juillet 2025</time>
+        <a href="Page_Actu_Complete.html" class="news-cta" aria-label="Lire l'histoire : Nos bénévoles à l'œuvre dans les villages isolés" data-fr="Lire l'histoire →"
+         data-en="Read the story →">Lire l'histoire →</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article 4 -->
+  <article class="news-card reveal" tabindex="0" aria-labelledby="n4-title">
+    <div class="news-media">
+      <img src="agriculture.jpg" alt="Jardin potager communautaire" loading="lazy">
+      <div class="media-overlay" aria-hidden="true"></div>
+    </div>
+    <span class="news-tag" data-fr="Agriculture" data-en="Agriculture">Agriculture</span>
+    <div class="news-body">
+      <h3 id="n4-title" class="news-title-article" data-fr="Cultiver l'autonomie : jardins potagers pour familles" 
+      data-en="Cultivating self-sufficiency: vegetable gardens for families">
+      Cultiver l'autonomie : jardins potagers pour familles</h3>
+      <p class="news-excerpt" data-fr=" Un projet pilote a permis à 40 familles d'assurer une autonomie alimentaire grâce à des techniques adaptées au climat local."
+       data-en="A pilot project enabled 40 families to achieve food self-sufficiency through techniques adapted to the local climate.">
+        Un projet pilote a permis à 40 familles d'assurer une autonomie alimentaire grâce à des techniques adaptées au climat local.</p>
+      <div class="news-meta">
+        <time datetime="2025-06-15" data-fr="15 juin 2025" data-en="June 15, 2025">15 juin 2025</time>
+        <a href="Page_Actu_Complete.html" class="news-cta" aria-label="Lire l'histoire : Cultiver l'autonomie : jardins potagers"data-fr="Découvrir →" 
+        data-en="Discover →">Découvrir →</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article 5 -->
+  <article class="news-card reveal" tabindex="0" aria-labelledby="n5-title">
+    <div class="news-media">
+      <img src="sante.jpg" alt="Formation médicale locale" loading="lazy">
+      <div class="media-overlay" aria-hidden="true"></div>
+    </div>
+    <span class="news-tag" data-fr="Santé" data-en="Health">Santé</span>
+    <div class="news-body">
+      <h3 id="n5-title" class="news-title-article" data-fr="Ateliers de santé : prévention et formation"
+       data-en="Health workshops: prevention and training">Ateliers de santé : prévention et formation</h3>
+      <p class="news-excerpt" data-fr="Nos ateliers permettent aux agents de santé locaux d'améliorer leurs pratiques et d'offrir de meilleurs soins sur place."
+       data-en="Our workshops enable local health workers to improve their practices and provide better care on the ground.">
+        Nos ateliers permettent aux agents de santé locaux d'améliorer leurs pratiques et d'offrir de meilleurs soins sur place.</p>
+      <div class="news-meta">
+        <time datetime="2025-05-05" data-fr="5 mai 2025" data-en="May 5, 2025">5 mai 2025</time>
+        <a href="Page_Actu_Complete.html" class="news-cta" aria-label="Lire l'histoire : Ateliers de santé" data-fr="Lire l'histoire →" data-en="Read the story →">Lire l'histoire →</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- Article 6 -->
+  <article class="news-card reveal" tabindex="0" aria-labelledby="n6-title">
+    <div class="news-media">
+      <img src="environnement (1).jpg" alt="Projet éco-responsable" loading="lazy">
+      <div class="media-overlay" aria-hidden="true"></div>
+    </div>
+    <span class="news-tag" data-fr="Environnement" data-en="Environment">Environnement</span>
+    <div class="news-body">
+      <h3 id="n6-title" class="news-title-article" data-fr="Initiative éco-responsable pour les écoles" 
+      data-en="Eco-friendly initiative for schools">Initiative éco-responsable pour les écoles</h3>
+      <p class="news-excerpt" data-fr="Réduction des déchets et programmes de recyclage mis en place dans 12 écoles partenaires." 
+      data-en="Waste reduction and recycling programs implemented in 12 partner schools.">
+      Réduction des déchets et programmes de recyclage mis en place dans 12 écoles partenaires.</p>
+      <div class="news-meta">
+        <time datetime="2025-04-10" data-fr="10 avril 2025" data-en="April 10, 2025">10 avril 2025</time>
+        <a href="Page_Actu_Complete.html" class="news-cta" aria-label="Lire l'histoire : Initiative éco-responsable pour les écoles" 
+        data-fr="Découvrir →" data-en="Discover →">Découvrir →</a>
+      </div>
+    </div>
+  </article>
+
+</div> <!-- end grid -->
+
+  </div> <!-- end inner -->
+</section>
+
+  <!-- PARTNERS -->
+  <section id="partners" class="partners container">
+    <h3 class="section-title" data-fr="Nos partenaires" data-en="Our partners">Nos partenaires</h3>
+    <div class="partners-grid">
+      <!-- Example partner items -->
+      <div class="partner-card"><img src="USAID.png" alt="Partenaire 1"><span>USAID</span></div>
+      <div class="partner-card"><img src="New-Vodacom-Logo-Horizontal-RGB-Red.png" alt="Partenaire 2"><span>Vodacom</span></div>
+      <div class="partner-card"><img src="equity-bank-logo.png" alt="Partenaire 3"><span>Equity</span></div>
+      <div class="partner-card"><img src="logo-pam.jpg" alt="Partenaire 4"><span>PAM</span></div>
+      <div class="partner-card"><img src="R.jpeg" alt="Partenaire 5"><span>Airtel</span></div>
+      <div class="partner-card"><img src="EdSheran.png" alt="Partenaire 6"><span>ED Sheran</span></div>
+    </div>
+  </section>
+
+  <!-- NewsLetter -->
+
+  <section id="newsletter" class="newsletter-section" aria-labelledby="newsletter-title">
+    <div class="newsletter-header reveal">
+      <h2 id="newsletter-title" data-fr="Abonnez-vous à nos actualités" data-en="Subscribe to our news">Abonnez-vous à nos actualités</h2>
+      <p data-fr="Restez connectés à nos actions humanitaires et projets communautaires.  
+      Rejoignez notre communauté d'acteurs du changement — recevez des nouvelles, invitations et opportunités directement dans votre boîte mail." 
+      data-en="Stay connected to our humanitarian work and community projects. Join our community of changemakers — receive news, invitations, and opportunities directly in your inbox.">
+      Restez connectés à nos actions humanitaires et projets communautaires.  
+      Rejoignez notre communauté d'acteurs du changement — recevez des nouvelles, invitations et opportunités directement dans votre boîte mail.</p>
+    </div>
+
+    <form class="newsletter-form reveal" novalidate id="newsletterForm">
+      <div class="field">
+        <label for="prenom" data-fr="Prénom" data-en="First name">Prénom</label>
+        <input id="prenom" name="prenom" type="text" class="input" placeholder="Prénom/First name" aria-label="Prénom" required />
+      </div>
+      <div class="field">
+        <label for="nom" data-fr="Nom" data-en="Name">Nom</label>
+        <input id="nom" name="nom" type="text" class="input" placeholder="Nom/Name" aria-label="Nom"  required />
+      </div>
+      <div class="field">
+        <label for="email" data-fr="Email" data-en="E-mail">Email</label>
+        <input id="email" name="email" type="email" class="input" placeholder="Email/E-mail" aria-label="Email" required />
+      </div>
+
+      <!-- Champ Pays / Région transformé en liste déroulante -->
+      <div class="field">
+        <label for="pays" data-fr="Pays / Région" data-en="Country / Region">Pays / Région</label>
+        <select id="pays" name="pays" class="select" aria-label="Pays ou région" required>
+          <option value="" data-fr="Choisissez votre pays / région" data-en="Choose your country/region">
+            Choisissez votre pays / région</option>
+          <!-- Afrique -->
+          <option value="Congo">Congo</option>
+          <option value="RDC" data-fr="République Démocratique du Congo" data-en="Democratic Republic of the Congo">République Démocratique du Congo</option>
+          <option value="Sénégal" data-fr="Sénégal" data-en="Senegal">Sénégal</option>
+          <option value="Côte d'Ivoire" data-fr="Côte d'Ivoire" data-en="Ivory Coast">Côte d'Ivoire</option>
+          <option value="Cameroun" data-fr="Cameroun" data-en="Cameroon">Cameroun</option>
+          <option value="Nigeria" data-fr="Nigeria" data-en="Nigeria">Nigeria</option>
+          <option value="Kenya" data-fr="Kenya" data-en="Kenya">Kenya</option>
+          <option value="Afrique du Sud" data-fr="Afrique du Sud" data-en="South Africa">Afrique du Sud</option>
+          <option value="Maroc" data-fr="Maroc" data-en="Morocco">Maroc</option>
+          <option value="Tunisie" data-fr="Tunisie" data-en="Tunisia">Tunisie</option>
+          <!-- Amériques -->
+          <option value="États-Unis" data-fr="États-Unis" data-en="UNITED STATES">États-Unis</option>
+          <option value="Canada" data-fr="Canada" data-en="Canada">Canada</option>
+          <option value="Brésil" data-fr="Brésil" data-en="Brazil">Brésil</option>
+          <option value="Argentine" data-fr="Argentine" data-en="Argentina">Argentine</option>
+          <option value="Mexique" data-fr="Mexique" data-en="Mexico">Mexique</option>
+          <option value="Chili" data-fr="Chili" data-en="Chile">Chili</option>
+          <!-- Europe -->
+          <option value="France" data-fr="France" data-en="France">France</option>
+          <option value="Belgique" data-fr="Belgique" data-en="Belgium">Belgique</option>
+          <option value="Suisse" data-fr="Suisse" data-en="Swiss">Suisse</option>
+          <option value="Royaume-Uni" data-fr="Royaume-Uni" data-en="United Kingdom">Royaume-Uni</option>
+          <option value="Allemagne" data-fr="Allemagne" data-en="Germany">Allemagne</option>
+          <option value="Espagne" data-fr="Espagne" data-en="Spain">Espagne</option>
+          <option value="Italie" data-fr="Italie" data-en="Italy">Italie</option>
+          <option value="Portugal" data-fr="Portugal" data-en="Portugal">Portugal</option>
+          <!-- Asie -->
+          <option value="Chine" data-fr="Chine" data-en="China">Chine</option>
+          <option value="Inde" data-fr="Inde" data-en="India">Inde</option>
+          <option value="Japon" data-fr="Japon" data-en="Japan">Japon</option>
+          <option value="Corée du Sud" data-fr="Corée du Sud" data-en="South Korea">Corée du Sud</option>
+          <option value="Indonésie" data-fr="Indonésie" data-en="Indonesia">Indonésie</option>
+          <option value="Philippines" data-fr="Philippines" data-en="Philippines">Philippines</option>
+          <option value="Émirats Arabes Unis" data-fr="Émirats Arabes Unis" data-en="United Arab Emirates">Émirats Arabes Unis</option>
+          <option value="Turquie" data-fr="Turquie" data-en="Turkey">Turquie</option>
+        </select>
+      </div>
+
+      <div style="display:flex;align-items:center;">
+        <button type="submit" class="btn" aria-label="S'abonner maintenant" data-fr="S’abonner maintenant" data-en="Subscribe now">S’abonner maintenant</button>
+      </div>
+    </form>
+
+    <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+  </section>
+
+  
+  <!-- Footer -->
+   <section id="contact">
+<footer class="fdn-footer" role="contentinfo" aria-label="Pied de page Fondation Espoir & Nature">
+  <div class="fdn-container">
+    <div class="fdn-top">
+      <div class="fdn-brand">
+        <!-- Logo simple SVG — remplace si tu as un vrai logo -->
+
+        <div class="fdn-brand-text">
+          <strong data-fr="Fondation Delon Tena Tena" data-en="Delon Foundation Tena Tena">Fondation Delon Tena Tena</strong>
+          <p class="fdn-tag" data-fr="Agir aujourd’hui pour transformer demain." data-en="Act today to transform tomorrow.">Agir aujourd’hui pour transformer demain.</p>
+        </div>
+      </div>
+
+      <nav class="fdn-links" aria-label="Liens rapides">
+        <div class="fdn-col">
+          <h4 data-fr="À propos" data-en="About">À propos</h4>
+          <ul>
+          <li><a href="About.html" class="nav-link" data-fr="Qui sommes-nous" data-en="Who are we">Qui sommes-nous</a></li>
+          <li><a href="New_Campagne.html" class="nav-link" data-fr="Campagne pour ceux qu'on aime" data-en="Campaign for those we love">Campagne pour ceux qu'on aime</a></li>
+          <li><a href="About.html#communaute" class="nav-link" data-fr="Communautés" data-en="Communities">Communautés</a></li>
+          <li><a href="contact.html" class="nav-link" data-fr="Contactez-nous" data-en="Contact us">Contactez-nous</a></li>
+          </ul>
+        </div>
+
+        <div class="fdn-col">
+          <h4 data-fr="Nos actions" data-en="Our actions">Nos actions</h4>
+          <ul>
+            <li><a href="About.html#vision" data-fr="Projets" data-en="Projects">Projets</a></li>
+            <li><a href="New_Campagne.html" data-fr="campagnes" data-en="Campaigns">Campagnes</a></li>
+          </ul>
+        </div>
+
+        <div class="fdn-col">
+          <h4 data-fr="Ressources" data-en="Resources">Ressources</h4>
+          <ul>
+            <li><a href="Page_Actu_Complete.html" data-fr="Actualités" data-en="News">Actualités</a></li>
+            <li><a href="Don.html#actions" data-fr="Publications" data-en="Publications">Publications</a></li>
+          </ul>
+        </div>
+
+        <div class="fdn-col">
+          <h4 data-fr="Nous joindre" data-en="Join us">Nous joindre</h4>
+          <ul>
+            <li><a href="Don.html" data-fr="Faire un don" data-en="Make a donation">Faire un don</a></li>
+            <li><a href="contact.html" data-fr="Nous contacter" data-en="Contact us">Nous contacter</a></li>
+            <li><a href="index.html#newsletter" data-fr="Devenir membre" data-en="Become a member">Devenir membre</a></li>
+            <li><a href="index.html#newsletter" data-fr="S'abonner à la newsletter" data-en="Subscribe to the newsletter">S'abonner à la newsletter</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="fdn-bottom">
+      <div class="fdn-legal">
+        <p data-fr="Fondation Delon Tena Tena — une organisation à but non lucratif engagée dans la promotion du bien-être social, de l'éducation, de la santé et de l'autonomisation des communautés vulnérables, en particulier des femmes et des jeunes." data-en="Delon Tena Tena Foundation — a non-profit organization committed to promoting social welfare, education, health, and the empowerment of vulnerable communities, particularly women and youth.">Fondation Delon Tena Tena — une organisation à but non lucratif engagée dans la promotion du bien-être social, de l'éducation, de la santé et de l'autonomisation des communautés vulnérables, en particulier des femmes et des jeunes.</p>
+        <p class="small" data-fr="Mentions légales • Politique de confidentialité" data-en="Legal notices • Privacy policy">Mentions légales • Politique de confidentialité</p>
+      </div>
+
+      <div class="fdn-social" aria-label="Réseaux sociaux">
+        <a class="social-link" href="#" aria-label="Facebook" title="Facebook">
+          <!-- Facebook SVG -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 12.07C22 6.49 17.52 2 12 2S2 6.49 2 12.07C2 17.12 5.66 21.23 10.44 22v-7.02H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.23.2 2.23.2v2.46h-1.25c-1.23 0-1.61.77-1.61 1.56v1.88h2.74l-.44 2.9h-2.3V22C18.34 21.23 22 17.12 22 12.07z"/></svg>
+        </a>
+
+        <a class="social-link x" href="#" aria-label="X (Twitter)" title="X (Twitter)">
+          <!-- X / Twitter SVG -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 5.92c-.63.28-1.3.46-2.01.55.72-.43 1.27-1.12 1.53-1.94-.67.4-1.41.69-2.2.85C18.86 4.48 17.76 4 16.53 4c-1.56 0-2.82 1.26-2.82 2.82 0 .22.02.44.07.65C10.78 7.33 8.03 5.79 6.13 3.36c-.24.41-.38.9-.38 1.42 0 .98.5 1.84 1.26 2.35-.56-.02-1.09-.17-1.55-.43v.04c0 1.36.97 2.5 2.25 2.76-.23.06-.47.09-.72.09-.18 0-.35-.02-.52-.05.35 1.1 1.36 1.9 2.56 1.92-1 .79-2.27 1.26-3.64 1.26-.24 0-.48-.01-.71-.04 1.3.83 2.85 1.32 4.51 1.32 5.41 0 8.37-4.48 8.37-8.37v-.38c.58-.41 1.08-.92 1.48-1.51-.53.24-1.1.41-1.7.49z"/></svg>
+        </a>
+
+        <a class="social-link" href="#" aria-label="Instagram" title="Instagram">
+          <!-- Instagram SVG -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm5.2-.8a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2zM12 9.6a2.4 2.4 0 1 1 0 4.8 2.4 2.4 0 0 1 0-4.8z"/></svg>
+        </a>
+
+        <a class="social-link" href="#" aria-label="YouTube" title="YouTube">
+          <!-- YouTube SVG -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23 7.5a3 3 0 0 0-2.12-2.12C18.92 5 12 5 12 5s-6.92 0-8.88.38A3 3 0 0 0 .99 7.5 31 31 0 0 0 0 12a31 31 0 0 0 .99 4.5 3 3 0 0 0 2.13 2.12C5.08 19 12 19 12 19s6.92 0 8.88-.38A3 3 0 0 0 23 16.5 31 31 0 0 0 24 12a31 31 0 0 0-1-4.5zM10 15.2V8.8l5.2 3.2L10 15.2z"/></svg>
+        </a>
+
+        <a class="social-link" href="#" aria-label="TikTok" title="TikTok">
+          <!-- TikTok SVG simplified -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17 3v7.1a4 4 0 1 1-4-4V3a7 7 0 1 0 4 0z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="fdn-copy">
+      <small  data-fr="© Fondation Delon Tena Tena 2025 — Tous droits réservés." data-en="© Delon Tena Tena Foundation 2025 — All rights reserved.">© Fondation Delon Tena Tena 2025 — Tous droits réservés.</small>
+    </div>
+  </div>
+</footer>
+</section>
+
+
+  <script>    
+// Vérifie si une ancre est dans l'URL
+window.addEventListener("load", () => {
+  const hash = window.location.hash;
+  if (hash) {
+    const target = document.querySelector(hash);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+});
+  </script>
+  <script>
+    //pour les sections possedant une animation reveal
+    document.querySelectorAll('.smooth-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    
+    // Attendre un peu avant de scroller (laisser le reveal s’amorcer)
+    setTimeout(() => {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }, 400); // 400 ms à ajuster selon ton animation
+  });
+});
+  </script>
+  <!-- Scripts -->
+  <script src="Essai.js"></script>
+</body>
+</html>

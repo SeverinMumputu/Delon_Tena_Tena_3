@@ -1,0 +1,878 @@
+<!doctype html>
+
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title data-fr="Campagne — Pour ceux qu'on aime - Fondation Delon Tena Tena" data-en="Campaign — For those we love - Delon Tena Tena Foundation">Campagne — Pour ceux qu'on aime - Fondation Delon Tena Tena</title>
+  <!-- Google Font Nunito -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <meta name="description" content="Pour ceux qu'on aime — Campagne de la Fondation Delon Tena Tena: mobilisation humaine et solidaire.">
+   <link rel="stylesheet" href="New_Campagne.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <!-- Top announcement with countdown avant et dans header 
+    <div class="top-announcement" id="topAnnouncement" role="region" aria-live="polite">
+      <div class="announcement-inner">
+        <div class="announce-text" data-fr="Prochain grand événement :" data-en="Next major event:">Prochain grand événement :</div>
+        <div class="countdown" id="countdown" aria-label="Compte à rebours">
+          <span class="cd-item"><strong id="cd-days">00</strong><small data-fr="Jours" data-en="Days">Jours</small></span>
+          <span class="cd-sep">:</span>
+          <span class="cd-item"><strong id="cd-hours">00</strong><small data-fr="Heures" data-en="Hours">Heures</small></span>
+          <span class="cd-sep">:</span>
+          <span class="cd-item"><strong id="cd-mins">00</strong><small data-fr="Minutes" data-en="Minutes">Minutes</small></span>
+          <span class="cd-sep">:</span>
+          <span class="cd-item"><strong id="cd-secs">00</strong><small data-fr="Secondes" data-en="Seconds">Secondes</small></span>
+        </div>
+         <div class="announce">
+        <span class="badge" data-fr="Annonce" data-en="Announcement">Annonce</span>
+        <span class="announce-text"  data-fr="Campagne : Pour ceux  qu'on aime." data-en="Campaign: For those we love.">Campagne : Pour ceux  qu'on aime.</span>
+      </div>
+      </div>
+    </div>  -->
+
+    <!-- Main nav -->
+    <div class="nav-row">
+      <div class="nav-inner">
+        <div class="brand" aria-hidden="false">
+        <div class="logo-mark"><a href="index.html">DTT</a></div>
+        <div>
+          <div style="font-size:.86rem;color:var(--accent-brown)"data-fr="Fondation" data-en="Foundation">Fondation</div>
+          <div style="font-weight:900;font-size:1rem;color:var(--deep-green)" >Delon Tena Tena</div>
+        </div>
+      </div>
+
+        <nav class="main-nav" id="mainNav" role="navigation" aria-label="Menu principal">
+          <ul class="menu">
+          <li><a href="New_Campagne.html#projet" class="nav-link" data-fr="Présentation du projet" data-en="Project presentation">Présentation du projet</a></li>
+          <li><a href="New_Campagne.html#participation" class="nav-link" data-fr="Participer à la campagne" data-en="Participate in the campaign">Participer à la campagne</a></li>
+          <li><a href="New_Campagne.html#Timing" class="nav-link" data-fr="Timing de la campagne" data-en="Campaign timing">Timing de la campagne</a></li>
+          <li><a href="New_Campagne.html#partenaires" class="nav-link" data-fr="Partenaires" data-en="Partners">Partenaires</a></li>
+          </ul>
+        </nav>
+
+        <div class="controls">
+          <div class="lang-switch" id="langSwitch" role="tablist" aria-label="Sélecteur de langue">
+            <button class="lang-btn active" data-lang="fr" aria-pressed="true">🇫🇷 FR</button>
+            <button class="lang-btn" data-lang="en" aria-pressed="false">🇬🇧 EN</button>
+          </div>
+
+          <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu mobile" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile slide-in menu -->
+    <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-menu-inner">
+        <button class="mobile-close" id="mobileClose" aria-label="Fermer le menu">X</button>
+        <ul class="mobile-list">
+          <li><a href="New_Campagne.html#projet" class="nav-link" data-fr="Présentation du projet" data-en="Project presentation">Présentation du projet</a></li>
+          <li><a href="New_Campagne.html#participation" class="nav-link" data-fr="Participer à la campagne" data-en="Participate in the campaign">Participer à la campagne</a></li>
+          <li><a href="New_Campagne.html#Timing" class="nav-link" data-fr="Timing de la campagne" data-en="Campaign timing">Timing de la campagne</a></li>
+          <li><a href="New_Campagne.html#partenaires" class="nav-link" data-fr="Partenaires" data-en="Partners">Partenaires</a></li>
+        </ul>
+
+        <div class="mobile-lang">
+          <button class="lang-btn" data-lang="fr">🇫🇷 FR</button>
+          <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+        </div>
+      </div>
+    </aside>
+  </header>
+
+
+  <main class="container"><!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker"data-fr="Campagne" data-en="Campaign">Campagne</div>
+    <h1 data-fr="Pour ceux qu'on aime — une campagne humaine pour bâtir un avenir meilleur" data-en="For those we love — a human campaign to build a better future">Pour ceux qu'on aime — une campagne humaine pour bâtir un avenir meilleur</h1>
+    <p class="lead" data-fr="La Fondation Delon Tena Tena lance Pour ceux qu'on aime : un appel à la solidarité pour soutenir les familles vulnérables, protéger l'environnement local et renforcer les liens communautaires. Rejoignez-nous pour transformer la compassion en actions concrètes."  data-en="The Delon Tena Tena Foundation launches For Those We Love : a call for solidarity to support vulnerable families, protect the local environment, and strengthen community ties. Join us in transforming compassion into concrete action.">La Fondation Delon Tena Tena lance "Pour ceux qu'on aime" : un appel à la solidarité pour soutenir les familles vulnérables, protéger l'environnement local et renforcer les liens communautaires. Rejoignez-nous pour transformer la compassion en actions concrètes.</p>
+    <div class="hero-cta">
+       <a href="Campagne_2.html" data-fr="Participer à la campagne" data-en="Participate in the campaign" style="color: aliceblue;
+        background-color: var(--deep-green); padding: 10px; border-radius: 20%; font-weight: bold;">
+        Participer à la campagne</a>
+     <!-- <button class="btn btn-ghost" id="btn-ambassador"data-fr="Devenir ambassadeur" data-en="Become an ambassador">Devenir ambassadeur</button>  -->
+    </div>
+  </div>
+</header>
+
+<!-- Section 1: Presentation -->
+<section  id="projet"  class="card reveal">
+  <div class="intro">
+    <div>
+      <h2 data-fr="Présentation du projet — Pour ceux qu'on aime" data-en="Project Presentation — “For Those We Love”">Présentation du projet — "Pour ceux qu'on aime"</h2>
+      <p class="muted" data-fr="Objectifs : aide humanitaire, soutien social, initiatives environnementales à impact local." data-en="Objectives: humanitarian aid, social support, environmental initiatives with local impact.">Objectifs : aide humanitaire, soutien social, initiatives environnementales à impact local.</p>
+      <p data-fr="Notre campagne vise à venir en aide aux familles en situation de précarité, à soutenir l'éducation des enfants et à mener des actions de protection de l'environnement dans les quartiers oubliés. Face à des besoins grandissants, il est urgent d'agir : votre engagement permet de financer des programmes de nutrition, d'accès à l'eau potable, de soutien scolaire et de projets écologiques communautaires." data-en="Our campaign aims to help families in precarious situations, support children's education, and carry out environmental protection actions in neglected neighborhoods. Faced with growing needs, urgent action is needed: your commitment helps fund programs for nutrition, access to drinking water, educational support, and community ecological projects.">Notre campagne vise à venir en aide aux familles en situation de précarité, à soutenir l'éducation des enfants et à mener des actions de protection de l'environnement dans les quartiers oubliés. Face à des besoins grandissants, il est urgent d'agir : votre engagement permet de financer des programmes de nutrition, d'accès à l'eau potable, de soutien scolaire et de projets écologiques communautaires.</p>
+      <p data-fr="Nous plaçons l'humain au cœur de chaque projet. Chaque action, aussi petite soit-elle, aide à bâtir une communauté plus forte et plus résiliente — pour ceux qu'on aime." data-en="We put people at the heart of every project. Every action, no matter how small, helps build a stronger, more resilient community—for those we love.">Nous plaçons l'humain au cœur de chaque projet. Chaque action, aussi petite soit-elle, aide à bâtir une communauté plus forte et plus résiliente — pour ceux qu'on aime.</p>
+    </div>
+    <div>
+      <img src="femmes.jpg" alt="Bénévoles en action">
+    </div>
+  </div>
+</section>
+
+<!-- Section 2 : Pourquoi la campagne ? Les raisons -->
+<section class="campaign-section" aria-labelledby="campagne-heading">
+  <div class="container">
+    <header class="campaign-header">
+      <h2 id="campagne-heading"> <div data-fr="4 Raisons" data-en="4 Reasons"> 4 Raisons </div> <span class="accent" data-fr="qui expliquent pourquoi la campagne Pour ceux qu'on aime."
+         data-en="which explains why the For those we love campaign.">qui expliquent pourquoi la campagne Pour ceux qu'on aime.</span></h2>
+      <p class="leadRaisonsCampagne" data-fr="Découvrez les 4 raisons fortes qui nous animent et qui donnent sens à nos combats."
+       data-en="Discover the 4 strong reasons that drive us and give meaning to our struggles.">
+        Découvrez les 4 raisons fortes qui nous animent et qui donnent sens à nos combats.
+      </p>
+    </header>
+
+    <div class="blocks">
+      <!-- Block 1: Compassion -->
+      <article class="camp-block reveal" data-theme="compassion">
+        <div class="bg">
+          <img src="images/compassion.jpg" alt="Visage bienveillant et main tendue" />
+          <div class="overlay"></div>
+        </div>
+        <div class="content">
+          <div class="badge" data-fr="Compassion" data-en="Compassion">Compassion</div>
+          <h3 data-fr="Parce que chaque personne mérite d’être vue" data-en="Because every person deserves to be seen">
+            Parce que chaque personne mérite d’être vue</h3>
+          <p data-fr="Nous agissons parce que la compassion transforme le regard : reconnaître la souffrance, tendre la main et offrir un accompagnement concret. La Fondation se lève pour ceux qui trop souvent restent dans l’ombre, pour rétablir la confiance et rendre visible la valeur humaine de chacun."
+           data-en="We act because compassion transforms perspectives: recognizing suffering, reaching out, and offering concrete support. The Foundation stands up for those who too often remain in the shadows, to restore trust and make visible the human value of each individual.">
+            Nous agissons parce que la compassion transforme le regard : reconnaître la souffrance, tendre la main et offrir un accompagnement concret. La Fondation se lève pour ceux qui trop souvent restent dans l’ombre, pour rétablir la confiance et rendre visible la valeur humaine de chacun.
+          </p>
+          <a class="cta" href="Page_Actu_Complete.html" data-fr="En savoir plus →" data-en="Learn more →">En savoir plus →</a>
+        </div>
+      </article>
+
+      <!-- Block 2: Solidarité -->
+      <article class="camp-block reveal" data-theme="solidarite">
+        <div class="bg">
+          <img src="images/solidarite.jpg" alt="Groupe de personnes se soutenant" />
+          <div class="overlay"></div>
+        </div>
+        <div class="content">
+          <div class="badge" data-fr="Solidarité" data-en="Solidarity">Solidarité</div>
+          <h3 data-fr="Parce que nous sommes plus forts ensemble"
+           data-en="Because we are stronger together">Parce que nous sommes plus forts ensemble</h3>
+          <p data-fr=" La solidarité renouvelle les vies : initiatives locales, réseaux de soutien familial et actions collectives qui créent des réponses durables. Nous construisons des ponts entre ressources et besoins, parce qu’aucune famille ne doit faire face seule."
+           data-en="Solidarity renews lives: local initiatives, family support networks, and collective actions create lasting solutions. We build bridges between resources and needs, because no family should have to face challenges alone.">
+            La solidarité renouvelle les vies : initiatives locales, réseaux de soutien familial et actions collectives qui créent des réponses durables. Nous construisons des ponts entre ressources et besoins, parce qu’aucune famille ne doit faire face seule.
+          </p> 
+          <a class="cta" href="About.html#valeurs" data-fr="Découvrir nos programmes →" data-en="Discover our programs →">Découvrir nos programmes →</a>
+        </div>
+      </article>
+
+      <!-- Block 3: Espoir -->
+      <article class="camp-block reveal" data-theme="espoir">
+        <div class="bg">
+          <img src="images/espoir.jpg" alt="Lever de soleil sur une communauté" />
+          <div class="overlay"></div>
+        </div>
+        <div class="content">
+          <div class="badge" data-fr="Espoir" data-en="Hope">Espoir</div>
+          <h3 data-fr="Parce que l’espérance donne sens et énergie"
+           data-en="Because hope gives meaning and energy">Parce que l’espérance donne sens et énergie</h3>
+          <p data-fr="Semer l’espoir, c’est investir dans le potentiel humain : formation, accompagnement psychologique et opportunités éducatives pour que chaque personne retrouve goût à l’avenir et puisse contribuer à sa communauté."
+           data-en="Sowing hope means investing in human potential: training, psychological support and educational opportunities so that each person can rediscover a taste for the future and contribute to their community.">
+            Semer l’espoir, c’est investir dans le potentiel humain : formation, accompagnement psychologique et opportunités éducatives pour que chaque personne retrouve goût à l’avenir et puisse contribuer à sa communauté.
+          </p>
+          <a class="cta" href="About.html#vision" data-fr="Comment nous inspirons →" data-en="How we inspire →">Comment nous inspirons →</a>
+        </div>
+      </article>
+
+      <!-- Block 4: Action durable -->
+      <article class="camp-block reveal" data-theme="action">
+        <div class="bg">
+          <img src="images/action.jpg" alt="Projet communautaire durable" />
+          <div class="overlay"></div>
+        </div>
+        <div class="content">
+          <div class="badge" data-fr="Action durable" data-en="Sustainable action">Action durable</div>
+          <h3 data-fr="Parce que l’aide doit devenir autonomie" data-en="Because assistance must become autonomy">Parce que l’aide doit devenir autonomie</h3>
+          <p data-fr=" Nos actions visent l’autonomie : projets agricoles, micro-entrepreneuriat et accès aux ressources essentielles. Nous privilégions des solutions qui perdurent et qui permettent aux bénéficiaires de reprendre leur destin en main."
+           data-en="Our actions aim for self-reliance: agricultural projects, micro-entrepreneurship, and access to essential resources. We prioritize sustainable solutions that allow beneficiaries to take control of their own destiny.">
+            Nos actions visent l’autonomie : projets agricoles, micro-entrepreneuriat et accès aux ressources essentielles. Nous privilégions des solutions qui perdurent et qui permettent aux bénéficiaires de reprendre leur destin en main.
+          </p>
+          <a class="cta" href="Don.html" data-fr="Soutenir une action →" data-en="Support an action →">Soutenir une action →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Section 3 : Durée de la campagne -->
+<section  id="Timing" class="ftt-campaign-block" aria-labelledby="ftt-campaign-title">
+  <div class="ftt-bg" role="img" aria-hidden="true"></div>
+
+  <div class="ftt-overlay"></div>
+
+  <div class="ftt-content">
+    <div class="ftt-left">
+      <div class="ftt-badge" data-fr="6 mois" data-en="6 months">6 mois</div>
+      <h1 id="ftt-campaign-title" data-fr="Campagne Pour ceux qu'on aime — 6 mois pour agir" 
+      data-en="Campaign For those we love — 6 months to act">Campagne Pour ceux qu'on aime — 6 mois pour agir</h1>
+      <h2 class="ftt-sub" data-fr="Se rassembler aujourd’hui pour transformer demain" data-en="Let's come together today to transform tomorrow">Se rassembler aujourd’hui pour transformer demain</h2>
+      <p class="ftt-text" data-fr=" Pendant ces six mois, la Fondation Delon Tena Tena intensifie ses actions pour l’éducation, la santé
+        et l’autonomisation des femmes et des jeunes. Ensemble, nous bâtissons des solutions locales, durables
+        et humaines pour des communautés plus résilientes et inclusives." 
+        data-en="During these six months, the Delon Tena Tena Foundation is intensifying its efforts in education, health, and the empowerment of women and youth. Together, we are building local, sustainable, and humane solutions for more resilient and inclusive communities.">
+        Pendant ces six mois, la Fondation Delon Tena Tena intensifie ses actions pour l’éducation, la santé
+        et l’autonomisation des femmes et des jeunes. Ensemble, nous bâtissons des solutions locales, durables
+        et humaines pour des communautés plus résilientes et inclusives.
+      </p>
+    </div>
+
+    <div class="ftt-right" aria-hidden="true">
+      <!-- Élément décoratif délicat (forme simple respectant la palette) -->
+      <div class="ftt-deco"></div>
+    </div>
+  </div>
+</section>
+
+  <div class="wrap">
+    <div class="cardCompteARebours" role="region" aria-label="Sablier - compte à rebours">
+      <h1 class="titre_compteARebours" data-fr="Compte à rebours" data-en="Countdown">Compte à rebours</h1>
+      <p class="leadCompteARebours" data-fr="Le sablier représente le temps restant (jours, heures, minutes, secondes)"
+       data-en="The hourglass represents the remaining time (days, hours, minutes, seconds)">Le sablier représente le temps restant (jours, heures, minutes, secondes)</p>
+
+      <!-- SVG sablier - viewBox coordinate system chosen for good control -->
+      <div class="sablier-wrap" id="sablierContainer" aria-hidden="false">
+        <!-- SVG START -->
+        <svg id="hourglass" viewBox="0 0 200 340" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sablier animé">
+          <defs>
+            <!-- GLASS GRADIENTS -->
+            <linearGradient id="glassGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.88"/>
+              <stop offset="45%" stop-color="#EAF2EF" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#CFECE1" stop-opacity="0.16"/>
+            </linearGradient>
+
+            <radialGradient id="glassSpec" cx="30%" cy="20%" r="70%">
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+            </radialGradient>
+
+            <!-- SAND GRADIENT (uses palette) -->
+            <linearGradient id="sandTopGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="var(--accent-brown)" stop-opacity="1"/>
+              <stop offset="60%" stop-color="var(--beige)" stop-opacity="1"/>
+              <stop offset="100%" stop-color="var(--footer-beige)" stop-opacity="1"/>
+            </linearGradient>
+
+            <linearGradient id="sandBottomGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="var(--green-soft)" stop-opacity="0.06"/>
+              <stop offset="20%" stop-color="var(--accent-brown)" stop-opacity="1"/>
+              <stop offset="100%" stop-color="var(--beige)" stop-opacity="1"/>
+            </linearGradient>
+
+            <!-- subtle shadow for base -->
+            <radialGradient id="baseShadow" cx="50%" cy="40%" r="50%">
+              <stop offset="0%" stop-color="rgba(46,107,79,0.12)"/>
+              <stop offset="100%" stop-color="rgba(46,107,79,0.02)"/>
+            </radialGradient>
+
+            <!-- texture: tiny grain circles repeated (pattern) -->
+            <pattern id="grainPattern" patternUnits="userSpaceOnUse" width="6" height="6" class="sand-grain-pattern" patternTransform="translate(0,0)">
+              <circle cx="1" cy="1.5" r="0.7" fill="rgba(0,0,0,0.06)"/>
+              <circle cx="4" cy="3.5" r="0.5" fill="rgba(0,0,0,0.04)"/>
+            </pattern>
+
+            <!-- tiny inner shadow for glass -->
+            <filter id="innerGlass" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2" result="bl"/>
+              <feComposite in="bl" in2="SourceAlpha" operator="out" result="inner"/>
+              <feColorMatrix in="inner" type="matrix" values="0 0 0 0 0.05  0 0 0 0 0.09  0 0 0 0 0.07  0 0 0 0.12" />
+              <feBlend in2="SourceGraphic" mode="normal"/>
+            </filter>
+
+            <!-- clip path shapes for top & bottom sand area -->
+            <clipPath id="topSandClip">
+              <path d="M40,40
+                       C40,40 160,40 160,40
+                       C155,95 120,130 100,140
+                       C80,130 45,95 40,40 z"/>
+            </clipPath>
+
+            <clipPath id="bottomSandClip">
+              <path d="M40,300
+                       C40,300 160,300 160,300
+                       C155,245 120,210 100,200
+                       C80,210 45,245 40,300 z"/>
+            </clipPath>
+
+            <!-- define the hourglass shape path to stroke glass rim -->
+            <path id="hourglassShape" d="M40,40
+                       C40,40 160,40 160,40
+                       C160,40 160,120 100,170
+                       C40,120 40,40 40,40
+                       M40,300
+                       C40,300 160,300 160,300
+                       C160,300 160,220 100,170
+                       C40,220 40,300 40,300 z" />
+          </defs>
+
+          <!-- BACK SHADOW under whole hourglass -->
+          <ellipse cx="100" cy="322" rx="48" ry="10" fill="url(#baseShadow)" opacity="0.9" />
+
+          <!-- Frame / supporting planks (minimal, elegant) -->
+          <g transform="translate(0,0)">
+            <rect x="90" y="8" width="20" height="16" rx="4" fill="var(--green-deep)" opacity="0.08"/>
+            <rect x="90" y="316" width="20" height="16" rx="4" fill="var(--green-deep)" opacity="0.06"/>
+          </g>
+
+          <!-- GLASS BODY group -->
+          <g filter="url(#innerGlass)">
+            <!-- Outer rim stroke to give volume -->
+            <use href="#hourglassShape" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" class="glass-lip" />
+
+            <!-- translucent glass fill -->
+            <path d="M40,40
+                       C40,40 160,40 160,40
+                       C160,40 160,120 100,170
+                       C40,120 40,40 40,40
+                       M40,300
+                       C40,300 160,300 160,300
+                       C160,300 160,220 100,170
+                       C40,220 40,300 40,300 z"
+                  fill="url(#glassGrad)" opacity="0.85"/>
+            <!-- specular -->
+            <path d="M52,48 C76,36 124,36 148,48 L142,60 C120,52 80,52 58,60z"
+                  fill="url(#glassSpec)" opacity="0.9" />
+          </g>
+
+          <!-- SAND GROUPS (we use rect masks to animate heights) -->
+          <!-- TOP SAND: contained in clipPath topSandClip -->
+          <g id="topSandGroup" clip-path="url(#topSandClip)">
+            <g id="topSandVisual">
+              <!-- the fill rectangle will be adjusted by JS -->
+              <rect id="maskTopRect" x="40" y="40" width="120" height="100" fill="url(#sandTopGrad)" />
+              <rect x="40" y="40" width="120" height="100" fill="url(#grainPattern)" opacity="0.72" />
+            </g>
+            <path d="M80,130 C92,140 108,140 120,130" stroke="rgba(0,0,0,0.06)" stroke-width="2" fill="none" />
+          </g>
+
+          <!-- FALLING PARTICLES GROUP (dynamic, filled by JS) -->
+          <g id="fallingParticles" />
+
+          <!-- SAND STREAM (decorative; we also render particles) -->
+          <g id="streamGroup" class="sand-stream" transform="translate(0,0)">
+            <path id="sandStreamPath" d="M100,148
+                                         C100,148 98,162 100,176
+                                         C102,162 100,148 100,148 z"
+                  fill="url(#sandBottomGrad)" opacity="0.95" />
+            <g id="streamParticles" opacity="0.95">
+              <circle cx="100" cy="156" r="1.8" fill="var(--accent-brown)" />
+              <circle cx="99" cy="164" r="1.2" fill="var(--accent-brown)" />
+              <circle cx="101" cy="170" r="1.0" fill="var(--accent-brown)" />
+            </g>
+          </g>
+
+          <!-- BOTTOM SAND: grows upward. We will adjust maskBottomRect by JS -->
+          <g id="bottomSandGroup" clip-path="url(#bottomSandClip)">
+            <rect id="maskBottomRect" x="40" y="200" width="120" height="120" fill="url(#sandBottomGrad)" />
+            <rect x="40" y="200" width="120" height="120" fill="url(#grainPattern)" opacity="0.9" />
+            <path d="M70,260 C88,245 112,245 130,260 C120,270 80,270 70,260 z" fill="rgba(255,255,255,0.08)" />
+          </g>
+
+          <!-- Frame / gold rim effects -->
+          <g>
+            <ellipse cx="100" cy="26" rx="56" ry="8" fill="none" stroke="rgba(46,107,79,0.06)" stroke-width="3" />
+            <ellipse cx="100" cy="314" rx="56" ry="8" fill="none" stroke="rgba(46,107,79,0.06)" stroke-width="3" />
+          </g>
+
+          <!-- OUTER stroke for clarity -->
+          <use href="#hourglassShape" fill="none" stroke="rgba(46,107,79,0.12)" stroke-width="2" />
+
+          <!-- TOP + BOTTOM GLASS HIGHLIGHTS (subtle) -->
+          <path d="M48,48 C72,36 128,36 152,48" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none" stroke-linecap="round" />
+        </svg>
+        <!-- SVG END -->
+      </div>
+
+      <div style="display:flex;gap:10px;align-items:center;flex-direction:column;">
+        <div class="countdown" id="countdownText" aria-live="polite">-- : -- : -- : --</div>
+        <div class="muted" data-fr="Jours -- Heures -- Minutes -- Secondes" data-en="Days -- Hours -- Minutes -- Seconds">Jours -- Heures -- Minutes -- Secondes</div>
+      </div>
+
+      <p class="muted" style="margin-top:6px;" data-fr="Sablier calculé en temps réel." data-en="Hourglass calculated in real time.">Sablier calculé en temps réel.</p>
+    </div>
+  </div>
+      <!-- ================================
+     POPUP : TEMPS ÉCOULÉ
+================================ -->
+<div id="time-finished-popup">
+  <div id="popup-close">&times;</div>
+
+  <div id="popup-title" data-fr="C'est le jour J" data-en="This is D-Day">C'est le jour J</div>
+
+  <div id="popup-message" data-fr="Bravo pour avoir suivi le compte à rebours !
+  Nous sommes enfin arrivés au jour de notre campagne Pour ceux qu'on aime.
+    La Fondation Deloon Tena Tena vous remercie !"
+   data-en="Well done for following the countdown!
+We've finally reached the day of our For Those We Love campaign.
+The Delon Tena Tena Foundation thanks you.">
+    Bravo pour avoir suivi le compte à rebours&nbsp;!  
+    Nous sommes enfin arrivés au jour de notre campagne Pour ceux qu'on aime.
+    La Fondation Delon Tena Tena vous remercie !
+  </div>
+</div>
+
+ <!-- Section 4 : Nombre des participants -->
+    <!-- HTML: Floating Action Button + Reveal Menu -->
+<div class="dtt-fab-wrapper" aria-live="polite">
+  <!-- Backdrop to capture clicks and for subtle dim -->
+  <div class="dtt-fab-backdrop" data-state="closed" tabindex="-1"></div>
+
+  <!-- Reveal Menu (hidden by default) -->
+  <div class="dtt-fab-reveal" data-open="false" aria-hidden="true">
+    <!-- Card containing title + animated number -->
+    <div class="dtt-reveal-card" role="status" aria-atomic="true">
+      <div class="dtt-reveal-title" data-fr="Participants confirmés pour la campagne"
+       data-en="Confirmed participants for the campaign">Participants confirmés pour la campagne</div>
+      <div class="dtt-fab-counter" data-target="12878" data-duration="1700" aria-label="compteur participants">
+        <span class="dtt-counter-value">0</span>
+        <span class="dtt-counter-suffix"></span>
+      </div>
+    </div>
+
+    <!-- Extra small micro-actions (optional placeholders if needed) -->
+    <div class="dtt-reveal-actions" aria-hidden="true">
+      <button class="dtt-action-btn" title="Voir la liste" aria-label="Voir la liste">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating Action Button -->
+  <button class="dtt-fab" aria-expanded="false" aria-controls="fab-reveal" title="Ouvrir menu campagne">
+    <span class="dtt-fab-halo" aria-hidden="true"></span>
+    <span class="dtt-fab-inner" aria-hidden="true">
+      <!-- Icon: simple plus -->
+      <svg class="dtt-fab-icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </span>
+  </button>
+</div>
+
+<!-- Section 5: Participer -->
+<section id="participation" class="card participer reveal">
+  <h2 data-fr="Pourquoi participer à la campagne « Pour ceux qu'on aime » ?" data-en="Why participate in the “For those we love” campaign?">Pourquoi participer à la campagne « Pour ceux qu'on aime » ?</h2>
+  <p class="muted" data-fr="Votre participation crée un effet multiplicateur — social, moral et tangible." data-en="Your participation creates a multiplier effect — social, moral and tangible.">Votre participation crée un effet multiplicateur — social, moral et tangible.</p>
+  <p data-fr="En soutenant la campagne, vous contribuez directement à des projets concrets : distribution alimentaire, kits scolaires, ateliers de sensibilisation et actions de reboisement. Au-delà du don, participer, c'est affirmer des valeurs : la solidarité, la dignité et l'espoir. Ensemble, nous pouvons redonner des opportunités à ceux qui en ont le plus besoin." data-en="By supporting the campaign, you're directly contributing to concrete projects: food distribution, school kits, awareness workshops, and reforestation initiatives. Beyond donating, participating means affirming values: solidarity, dignity, and hope. Together, we can restore opportunities to those who need them most.">En soutenant la campagne, vous contribuez directement à des projets concrets : distribution alimentaire, kits scolaires, ateliers de sensibilisation et actions de reboisement. Au-delà du don, participer, c'est affirmer des valeurs : la solidarité, la dignité et l'espoir. Ensemble, nous pouvons redonner des opportunités à ceux qui en ont le plus besoin.</p>
+  <div style="margin-top:12px">
+    
+    <a href="Campagne_2.html" data-fr="Participer à la campagne" data-en="Participate in the campaign">Participer à la campagne</a>
+  </div>
+</section>
+
+<!-- Section 6: Devenir Ambassadeur -->
+<section  id="ambassadeur" class="card reveal">
+  <div class="ambassador">
+    <div class="amb-right">
+      <h2 data-fr="Devenez la voix du changement." data-en="Become the voice of change.">Devenez la voix du changement.</h2>
+      <p data-fr="Nos ambassadeurs sont les visages et les voix de la Fondation dans leurs quartiers, écoles, universités ou réseaux. Ils sensibilisent, mobilisent
+         et inspirent autour des valeurs que nous défendons." data-en="Our ambassadors are the faces and voices of the Foundation in their neighborhoods, schools, universities, and networks. They raise awareness, mobilize
+and inspire others around the values ​​we uphold."> Nos ambassadeurs sont les visages et les voix de la Fondation dans leurs quartiers, écoles, universités ou réseaux. Ils sensibilisent, mobilisent
+         et inspirent autour des valeurs que nous défendons.</p>
+         <strong data-fr="Être ambassadeur, c’est :" data-en="Being an ambassador means:">Être ambassadeur, c’est : </strong>
+        <p data-fr="- Représenter la Fondation lors d’événements ou sur les réseaux  
+- Organiser ou soutenir des activités locales  
+- Mobiliser d’autres jeunes autour de nos causes  
+- Recevoir un accompagnement, des outils et formations" data-en="- Represent the Foundation at events or on social media
+- Organize or support local activities
+- Mobilize other young people around our causes
+- Receive support, tools, and training"> <strong data-fr="Être ambassadeur, c’est :" data-en="Being an ambassador means:">Être ambassadeur, c’est : </strong> 
+- Représenter la Fondation lors d’événements ou sur les réseaux  
+- Organiser ou soutenir des activités locales  
+- Mobiliser d’autres jeunes autour de nos causes  
+- Recevoir un accompagnement, des outils et formations</p>
+      <p data-fr="En tant qu'ambassadeur de la Fondation Delon Tena Tena, vous portez nos messages, organisez des actions locales et mobilisez votre réseau pour amplifier l'impact de la campagne Pour ceux qu'on aime. Nous cherchons des personnes engagées, empathiques et prêtes à agir." data-en="As an ambassador for the Delon Tena Tena Foundation, you will spread our messages, organize local actions, and mobilize your network to amplify the impact of the For Those We Love campaign. We are looking for committed, empathetic individuals who are ready to take action.">En tant qu'ambassadeur de la Fondation Delon Tena Tena, vous portez nos messages, organisez des actions locales et mobilisez votre réseau pour amplifier l'impact de la campagne "Pour ceux qu'on aime". Nous cherchons des personnes engagées, empathiques et prêtes à agir.</p>
+      <p class="small" data-fr="Souhaitez-vous devenir ambassadeur ?" data-en="Would you like to become an ambassador?">Souhaitez-vous devenir ambassadeur ?</p>
+      <button class="btn btn-primary switch-cta" id="amb-toggle" data-fr="Oui, je veux devenir ambassadeur" data-en="Yes, I want to become an ambassador">Oui, je veux devenir ambassadeur</button>
+       <!-- Bloc caché par défaut devenir amabassadeur -->
+<div class="amb-block-wrap" id="amb-block" role="dialog" aria-modal="true" aria-labelledby="amb-main-title" aria-hidden="true">
+  <div class="amb-block" id="amb-inner">
+    <div class="amb-head">
+      <div class="amb-badge" aria-hidden="true">DTT</div>
+      <div style="flex:1">
+        <h3 class="amb-title" id="amb-main-title" data-fr="Devenir Ambassadeur de la Fondation Delon Tena Tena"
+         data-en="Becoming an Ambassador for the Delon Tena Tena Foundation">
+          Devenir Ambassadeur de la Fondation Delon Tena Tena</h3>
+        <p class="amb-sub" data-fr="          Envie de faire partie de notre mission et de contribuer activement à impacter des vies ? 
+          Rejoignez notre réseau d’ambassadeurs et devenez un acteur du changement au sein de votre communauté !" 
+          data-en="Want to be part of our mission and actively contribute to impacting lives?
+Join our network of ambassadors and become a change agent in your community!">
+          Envie de faire partie de notre mission et de contribuer activement à impacter des vies ? 
+          Rejoignez notre réseau d’ambassadeurs et devenez un acteur du changement au sein de votre communauté !</p>
+      </div>
+      <div style="margin-left:12px">
+        <button class="btn amb-close" id="amb-close" aria-label="Fermer" data-fr="Fermer" data-en="Close">Fermer</button>
+      </div>
+    </div>
+
+    <div class="amb-sections">
+      <!-- Section 1 (hero) -->
+      <div class="amb-card amb-hero" role="region" aria-labelledby="sec1-title">
+        <div class="left">
+          <h3 id="sec1-title" data-fr="Devenir Ambassadeur de la Fondation Delon Tena Tena" 
+          data-en="Becoming an Ambassador for the Delon Tena Tena Foundation">
+          Devenir Ambassadeur de la Fondation Delon Tena Tena</h3>
+          <p data-fr="Envie de faire partie de notre mission et de contribuer activement à impacter des vies ?
+             Rejoignez notre réseau d’ambassadeurs et devenez un acteur du changement au sein de votre communauté !"
+           data-en="Want to be part of our mission and actively contribute to impacting lives?
+Join our network of ambassadors and become a change agent in your community!">
+            Envie de faire partie de notre mission et de contribuer activement à impacter des vies ?
+             Rejoignez notre réseau d’ambassadeurs et devenez un acteur du changement au sein de votre communauté !</p>
+        </div>
+        <div class="icon" aria-hidden="true">
+          <!-- Simple inline SVG icon (decorative, not text) -->
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="6" fill="white" opacity="0.06"/>
+            <path d="M12 7.5C10.6193 7.5 9.5 8.61929 9.5 10C9.5 11.3807 10.6193 12.5 12 12.5C13.3807 12.5 14.5 11.3807 14.5 10C14.5 8.61929 13.3807 7.5 12 7.5Z" fill="#2E6B4F"/>
+            <path d="M5 18.5C5 15.4624 8.13401 13 12 13C15.866 13 19 15.4624 19 18.5" stroke="#3EB489" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Section 2 (why) -->
+      <div class="amb-card why-card" role="region" aria-labelledby="sec2-title">
+        <h4 id="sec2-title" style="margin:0 0 8px 0;color:var(--deep-green);font-weight:800;" data-fr="Pourquoi devenir ambassadeur ?"
+         data-en="Why become an ambassador?">Pourquoi devenir ambassadeur ?</h4>
+        <p data-fr="En tant qu’ambassadeur, vous représentez la Fondation Delon Tena Tena dans votre cercle d’influence,
+           vous sensibilisez, mobilisez et encouragez les autres à soutenir nos actions via des dons."
+         data-en="As an ambassador, you represent the Delon Tena Tena Foundation in your circle of influence,
+          you raise awareness, mobilize and encourage others to support our actions through donations.">
+          En tant qu’ambassadeur, vous représentez la Fondation Delon Tena Tena dans votre cercle d’influence,
+           vous sensibilisez, mobilisez et encouragez les autres à soutenir nos actions via des dons.</p>
+      </div>
+
+      <!-- Section 3 (how) — cartoon style required -->
+      <div class="amb-card" role="region" aria-labelledby="sec3-title">
+        <h4 id="sec3-title" style="margin:0 0 10px 0;color:var(--deep-green);font-weight:800;" data-fr="Comment devenir ambassadeur ?" 
+        data-en="How to become an ambassador?">Comment devenir ambassadeur ?</h4>
+
+        <!-- Exact structured steps text — DO NOT MODIFY -->
+        <div class="steps" aria-label="Étapes">
+          <div style="font-weight:700;color:var(--text-dark);margin-bottom:6px;" data-fr="Voici les 3 étapes simples pour rejoindre notre réseau :" 
+          data-en="Here are the 3 simple steps to join our network:">Voici les 3 étapes simples pour rejoindre notre réseau :</div>
+
+          <div class="step" id="step-1">
+            <img src="PublierVideo.jpg" alt="Publiez une vidéo">
+            <div class="meta">
+              <h4 data-fr="1. Publiez une vidéo" data-en="1. Publish a video">1. Publiez une vidéo&nbsp;</h4>
+              <p data-fr="Faites une courte vidéo adressée à votre public pour leur présenter notre fondation, notre vision, et pourquoi vous soutenez notre cause." 
+              data-en="Create a short video addressed to your audience to introduce them to our foundation, our vision, and why you support our cause.">
+                Faites une courte vidéo adressée à votre public pour leur présenter notre fondation, notre vision, et pourquoi vous soutenez notre cause.</p>
+            </div>
+          </div>
+
+          <div class="step" id="step-2">
+            <img src="FaireDon.jpg" alt="Effectuez un don numérique">
+            <div class="meta">
+              <h4 data-fr="2. Effectuez un don numérique" data-en="2. Make a digital donation">2. Effectuez un don numérique&nbsp;</h4>
+              <p data-fr="Faites un don à partir de votre compte personnel (même symbolique) pour marquer votre engagement."
+               data-en="Make a donation from your personal account (even a symbolic one) to show your commitment.">
+                Faites un don à partir de votre compte personnel (même symbolique) pour marquer votre engagement.</p>
+            </div>
+          </div>
+
+          <div class="step" id="step-3">
+            <img src="RecevoirLien.jpg" alt="Recevez votre lien personnalisé">
+            <div class="meta">
+              <h4 data-fr="3. Recevez votre lien personnalisé" data-en="3. Receive your personalized link">3. Recevez votre lien personnalisé&nbsp;</h4>
+              <p data-fr="  Une fois votre vidéo et don validés, vous recevrez un lien ambassadeur unique. 
+                Ce lien vous permettra de toucher une commission symbolique sur chaque don réalisé via votre lien." 
+              data-en="Once your video and donation are approved, you will receive a unique ambassador link.
+              This link will allow you to earn a small commission on each donation made through your link.">
+                Une fois votre vidéo et don validés, vous recevrez un lien ambassadeur unique. 
+                Ce lien vous permettra de toucher une commission symbolique sur chaque don réalisé via votre lien.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cartoon illustrative area (img only) -->
+        <div class="cartoon-illustration" aria-hidden="true">
+          <img src="DevenirAmabassadeurIllustration.jpg" alt="Illustration cartoon ambassadeur">
+        </div>
+      </div>
+    </div>
+    <!-- Cartoon illustrative area (img only) 
+    <div class="amb-actions">
+      <button class="btn amb-close" id="amb-cta-close">Pas maintenant</button>
+      <button class="btn btn-primary" id="amb-cta-join">Je m'engage</button>
+    </div>-->
+
+  </div>
+</div>
+
+    </div>
+    <div class="amb-action">
+      <!-- compact card with quick facts -->
+      <div class="card small reveal">
+        <strong data-fr="Rôle clé" data-en="Key role">Rôle clé</strong>
+        <p class="small" data-fr="Mobiliser, représenter, organiser. Soutien et formation fournis par la Fondation." data-en="Mobilize, represent, organize. Support and training provided by the Foundation.">Mobiliser, représenter, organiser. Soutien et formation fournis par la Fondation.</p>
+        <img src="ambassadeur.jpg" alt="Ambassadeur" style="width:100%;border-radius:8px;margin-top:10px;object-fit:cover;max-height:120px">
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- Ambassador Form (hidden by default) 
+  <div class="amb-form" id="amb-form">
+    <form id="ambassadorForm" class="card" novalidate>
+      <h3 data-fr="Formulaire — Devenir Ambassadeur" data-en="Form — Become an Ambassador">Formulaire — Devenir Ambassadeur</h3>
+
+      <div class="row">
+        <div class="field" style="flex:1">
+          <label for="fullname" data-fr="Nom complet *" data-en="Full name *">Nom complet *</label>
+          <input type="text" id="fullname" name="fullname" placeholder="Jean Dupont" required>
+        </div>
+        <div class="field" style="width:120px">
+          <label for="age" data-fr="Âge *" data-en="Age *">Âge *</label>
+          <input type="number" id="age" name="age" min="13" max="120" placeholder="28" required>
+        </div>
+      </div>
+
+       <div class="field" style="flex:1">
+          <label for="city" data-fr="Ville / Pays *" data-en="City / Country *">Ville / Pays *</label>
+          <input type="text" id="city" name="city" placeholder="Kinshasa, RD Congo" required>
+        </div>
+
+      <div class="row">
+        <div class="field" style="width:750px">
+          <label for="profession" data-fr="Profession / Statut" data-en="Profession / Status">Profession / Statut</label>
+         <input type="text" id="city" name="profession" placeholder="" required>
+        </div>
+      </div>
+
+       <div class="field">
+          <label for="email" data-fr="Adresse e-mail *" data-en="E-mail address *">Adresse e-mail *</label>
+          <input type="email" id="email" name="email" placeholder="vous@exemple.com" required>
+        </div>
+
+      <div class="row">
+      
+        <div class="field" style="width:220px">
+          <label for="phone" data-fr="Numéro de téléphone *" data-en="Phone number *">Numéro de téléphone *</label>
+          <input type="tel" id="phone" name="phone" placeholder="+242 0 123 456" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="why" data-fr="Pourquoi souhaitez-vous devenir ambassadeur ? *" data-en="Why do you want to become an ambassador? *">Pourquoi souhaitez-vous devenir ambassadeur ? *</label>
+        <textarea id="why" name="why" required placeholder="Racontez-nous vos motivations" data-fr="Racontez-nous vos motivations" data-en="Tell us your motivations"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="skills" data-fr="Quelles compétences / expériences peuvent aider la Fondation ?" data-en="What skills/experiences can help the Foundation?">Quelles compétences / expériences peuvent aider la Fondation ?</label>
+        <textarea id="skills" name="skills" placeholder="Ex : gestion de projet, communication, collecte de fonds" data-fr="Ex : gestion de projet, communication, collecte de fonds" data-en="Ex: project management, communication, fundraising"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="experience" data-fr="Avez-vous déjà participé à des activités communautaires ? Si oui, lesquelles ?" data-en="Have you ever participated in any community activities? If so, which ones?">Avez-vous déjà participé à des activités communautaires ? Si oui, lesquelles ?</label>
+        <textarea id="experience" name="experience"></textarea>
+      </div>
+
+         <div class="field" >
+          <label for="represent" data-fr="Comment comptez-vous représenter la Fondation ?" data-en="How do you intend to represent the Foundation?">Comment comptez-vous représenter la Fondation ?</label>
+          <textarea id="represent" name="represent"></textarea>
+        </div>
+
+      <div class="row">
+        <div class="field" >
+          <label for="cv" data-fr="Joindre votre CV (facultatif)" data-en="Attach your CV (optional)">Joindre votre CV (facultatif)</label>
+          <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx">
+        </div>
+      </div>
+
+       <div class="field" >
+          <label for="socials" data-fr="Lien vers vos réseaux sociaux" data-en="Link to your social networks">Lien vers vos réseaux sociaux</label>
+          <input type="text" id="socials" name="socials" placeholder="Facebook / Instagram / LinkedIn">
+        </div>
+
+      <div class="row">
+        <div class="field" style="width:220px">
+          <label data-fr="Acceptez-vous de recevoir des informations de la Fondation ?" data-en="Do you agree to receive information from the Foundation?">Acceptez-vous de recevoir des informations de la Fondation ?</label>
+          <div style="display:flex;gap:8px;align-items:center">
+            <label class="small"><input type="radio" name="consent" value="yes" checked> Oui</label>
+            <label class="small"><input type="radio" name="consent" value="no"> Non</label>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;align-items:center;margin-top:8px">
+        <button type="submit" class="btn btn-primary" data-fr="Envoyer la candidature" data-en="Submit application">Envoyer la candidature</button>
+        <button type="button" id="amb-cancel" class="btn btn-ghost" data-fr="Annuler" data-en="Cancel">Annuler</button>
+      </div>
+    </form>
+  </div>-->
+
+</section>
+
+<!-- Section 7: Partenaires -->
+<section id="partenaires"  class="card reveal">
+  <h2 data-fr="Nos partenaires et alliés de la campagne" data-en="Our campaign partners and allies">Nos partenaires et alliés de la campagne</h2>
+  <p class="small muted" data-fr="Nous travaillons avec des organisations locales et internationales pour maximiser l'impact." data-en="We work with local and international organizations to maximize impact.">Nous travaillons avec des organisations locales et internationales pour maximiser l'impact.</p>
+  <div style="margin-top:16px" class="partners-grid">
+    <!-- Placeholder logos - remplacez par les logos réels -->
+    <div class="partner">
+      <div style="text-align:center">
+        <img src="New-Vodacom-Logo-Horizontal-RGB-Red.png" alt="Partenaire 1">
+        <div class="legend" data-fr="Partenaire officiel" data-en="Official Partner">Partenaire officiel</div>
+      </div>
+    </div>
+    <div class="partner">
+      <div style="text-align:center">
+        <img src="USAID.png" alt="Soutien 2">
+        <div class="legend" data-fr="Soutien humanitaire" data-en="Humanitarian support">Soutien humanitaire</div>
+      </div>
+    </div>
+    <div class="partner">
+      <div style="text-align:center">
+        <img src="ford-logo.png" alt="Allié 3">
+        <div class="legend" data-fr="Soutien logistique" data-en="Logistics support">Soutien logistique</div>
+      </div>
+    </div>
+    <div class="partner">
+      <div style="text-align:center">
+        <img src="Aigle.jpeg" alt="Community 4">
+        <div class="legend" data-fr="Partenaire local" data-en="Local partner">Partenaire local</div>
+      </div>
+    </div>
+  </div>
+</section>
+  </main>  
+  
+  <!-- Toast container (hidden by default) -->
+    <div id="toast" class="toast hide" role="status" aria-live="polite"></div> 
+
+  <!-- Footer -->
+   <section id="contact">
+<footer class="fdn-footer" role="contentinfo" aria-label="Pied de page Fondation Espoir & Nature">
+  <div class="fdn-container">
+    <div class="fdn-top">
+      <div class="fdn-brand">
+        <!-- Logo simple SVG — remplace si tu as un vrai logo -->
+
+        <div class="fdn-brand-text">
+          <strong data-fr="Fondation Delon Tena Tena" data-en="Delon Foundation Tena Tena">Fondation Delon Tena Tena</strong>
+          <p class="fdn-tag" data-fr="Agir aujourd’hui pour transformer demain." data-en="Act today to transform tomorrow.">Agir aujourd’hui pour transformer demain.</p>
+        </div>
+      </div>
+
+      <nav class="fdn-links" aria-label="Liens rapides">
+        <div class="fdn-col">
+          <h4 data-fr="À propos" data-en="About">À propos</h4>
+          <ul>
+          <li><a href="About.html" class="nav-link" data-fr="Qui sommes-nous" data-en="Who are we">Qui sommes-nous</a></li>
+          <li><a href="New_Campagne.html" class="nav-link" data-fr="Campagne pour ceux qu'on aime" data-en="Campaign for those we love">Campagne pour ceux qu'on aime</a></li>
+          <li><a href="About.html#communaute" class="nav-link" data-fr="Communautés" data-en="Communities">Communautés</a></li>
+          <li><a href="contact.html" class="nav-link" data-fr="Contactez-nous" data-en="Contact us">Contactez-nous</a></li>
+          </ul>
+        </div>
+
+        <div class="fdn-col">
+          <h4 data-fr="Nos actions" data-en="Our actions">Nos actions</h4>
+          <ul>
+            <li><a href="About.html#vision" data-fr="Projets" data-en="Projects">Projets</a></li>
+            <li><a href="New_Campagne.html" data-fr="campagnes" data-en="Campaigns">Campagnes</a></li>
+          </ul>
+        </div>
+
+        <div class="fdn-col">
+          <h4 data-fr="Ressources" data-en="Resources">Ressources</h4>
+          <ul>
+            <li><a href="Page_Actu_Complete.html" data-fr="Actualités" data-en="News">Actualités</a></li>
+            <li><a href="Don.html#actions" data-fr="Publications" data-en="Publications">Publications</a></li>
+          </ul>
+        </div>
+
+        <div class="fdn-col">
+          <h4 data-fr="Nous joindre" data-en="Join us">Nous joindre</h4>
+          <ul>
+            <li><a href="Don.html" data-fr="Faire un don" data-en="Make a donation">Faire un don</a></li>
+            <li><a href="contact.html" data-fr="Nous contacter" data-en="Contact us">Nous contacter</a></li>
+            <li><a href="index.html#newsletter" data-fr="Devenir membre" data-en="Become a member">Devenir membre</a></li>
+            <li><a href="index.html#newsletter" data-fr="S'abonner à la newsletter" data-en="Subscribe to the newsletter">S'abonner à la newsletter</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="fdn-bottom">
+      <div class="fdn-legal">
+        <p data-fr="Fondation Delon Tena Tena — une organisation à but non lucratif engagée dans la promotion du bien-être social, de l'éducation, de la santé et de l'autonomisation des communautés vulnérables, en particulier des femmes et des jeunes." data-en="Delon Tena Tena Foundation — a non-profit organization committed to promoting social welfare, education, health, and the empowerment of vulnerable communities, particularly women and youth.">Fondation Delon Tena Tena — une organisation à but non lucratif engagée dans la promotion du bien-être social, de l'éducation, de la santé et de l'autonomisation des communautés vulnérables, en particulier des femmes et des jeunes.</p>
+        <p class="small" data-fr="Mentions légales • Politique de confidentialité" data-en="Legal notices • Privacy policy">Mentions légales • Politique de confidentialité</p>
+      </div>
+
+      <div class="fdn-social" aria-label="Réseaux sociaux">
+        <a class="social-link" href="#" aria-label="Facebook" title="Facebook">
+          <!-- Facebook SVG -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 12.07C22 6.49 17.52 2 12 2S2 6.49 2 12.07C2 17.12 5.66 21.23 10.44 22v-7.02H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.23.2 2.23.2v2.46h-1.25c-1.23 0-1.61.77-1.61 1.56v1.88h2.74l-.44 2.9h-2.3V22C18.34 21.23 22 17.12 22 12.07z"/></svg>
+        </a>
+
+        <a class="social-link x" href="#" aria-label="X (Twitter)" title="X (Twitter)">
+          <!-- X / Twitter SVG -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 5.92c-.63.28-1.3.46-2.01.55.72-.43 1.27-1.12 1.53-1.94-.67.4-1.41.69-2.2.85C18.86 4.48 17.76 4 16.53 4c-1.56 0-2.82 1.26-2.82 2.82 0 .22.02.44.07.65C10.78 7.33 8.03 5.79 6.13 3.36c-.24.41-.38.9-.38 1.42 0 .98.5 1.84 1.26 2.35-.56-.02-1.09-.17-1.55-.43v.04c0 1.36.97 2.5 2.25 2.76-.23.06-.47.09-.72.09-.18 0-.35-.02-.52-.05.35 1.1 1.36 1.9 2.56 1.92-1 .79-2.27 1.26-3.64 1.26-.24 0-.48-.01-.71-.04 1.3.83 2.85 1.32 4.51 1.32 5.41 0 8.37-4.48 8.37-8.37v-.38c.58-.41 1.08-.92 1.48-1.51-.53.24-1.1.41-1.7.49z"/></svg>
+        </a>
+
+        <a class="social-link" href="#" aria-label="Instagram" title="Instagram">
+          <!-- Instagram SVG -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm5.2-.8a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2zM12 9.6a2.4 2.4 0 1 1 0 4.8 2.4 2.4 0 0 1 0-4.8z"/></svg>
+        </a>
+
+        <a class="social-link" href="#" aria-label="YouTube" title="YouTube">
+          <!-- YouTube SVG -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23 7.5a3 3 0 0 0-2.12-2.12C18.92 5 12 5 12 5s-6.92 0-8.88.38A3 3 0 0 0 .99 7.5 31 31 0 0 0 0 12a31 31 0 0 0 .99 4.5 3 3 0 0 0 2.13 2.12C5.08 19 12 19 12 19s6.92 0 8.88-.38A3 3 0 0 0 23 16.5 31 31 0 0 0 24 12a31 31 0 0 0-1-4.5zM10 15.2V8.8l5.2 3.2L10 15.2z"/></svg>
+        </a>
+
+        <a class="social-link" href="#" aria-label="TikTok" title="TikTok">
+          <!-- TikTok SVG simplified -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17 3v7.1a4 4 0 1 1-4-4V3a7 7 0 1 0 4 0z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="fdn-copy">
+      <small  data-fr="© Fondation Delon Tena Tena 2025 — Tous droits réservés." data-en="© Delon Tena Tena Foundation 2025 — All rights reserved.">
+        © Fondation Delon Tena Tena 2025 — Tous droits réservés.</small>
+    </div>
+  </div>
+</footer>
+<script>
+  const openBtn = document.getElementById("amb-toggle");
+  const closeBtn = document.getElementById("amb-close");
+  const block = document.getElementById("amb-block");
+
+  openBtn.addEventListener("click", () => {
+    block.classList.add("show");
+  });
+
+  closeBtn.addEventListener("click", () => {
+    block.classList.remove("show");
+    block.scrollTop = 0; // reset scroll interne si besoin
+  });
+</script>
+
+    <script>    
+// Vérifie si une ancre est dans l'URL
+window.addEventListener("load", () => {
+  const hash = window.location.hash;
+  if (hash) {
+    const target = document.querySelector(hash);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+});
+  </script>
+   <script src="New_Campagne.js"></script>
+  </body>
+</html>

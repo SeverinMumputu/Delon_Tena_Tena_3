@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title data-fr="Campagne — Fondation Delon Tena Tena" data-en="Campaign — Delon Tena Tena Foundation">Campagne — Fondation Delon Tena Tena</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Campagne.css">
+  
+</head>
+<body class="fr">
+
+  <!-- ========== HEADER PLACEHOLDER (ne pas modifier) ==========
+       L'espace suivant doit rester pour intégrer le header existant fourni.
+       (Le header complet fourni par le projet sera intégré à cet emplacement.)
+  =========================================================== -->
+
+  <div id="headerPlaceholder" aria-hidden="false">
+    <!-- Header will be injected here / already exists above in the site template -->
+  </div>
+
+  <!-- Main section -->
+  <main class="page-campaign" id="pageCampaign" role="main">
+
+    <section class="campaign-hero" aria-labelledby="campaignTitle">
+      <div class="hero-inner">
+        <h1 id="campaignTitle" class="hero-title" data-fr="Campagne — Agir Ensemble" data-en="Campaign — Acting Together">Campagne — Agir Ensemble</h1>
+        <p class="hero-sub" data-fr="Rejoignez-nous étape par étape pour soutenir la jeunesse et l'innovation." data-en="Join us step by step to support youth and innovation.">
+          Rejoignez-nous étape par étape pour soutenir la jeunesse et l'innovation.
+        </p>
+
+        <!-- Language quick toggles (reuse header lang switch if present) -->
+        <div class="quick-lang" aria-hidden="false">
+          <button class="lang-quick" data-lang="fr" aria-label="Français">🇫🇷🇫🇷</button>
+          <button class="lang-quick" data-lang="en" aria-label="English">🇬🇧</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="stepper-wrap" aria-labelledby="stepperTitle">
+      <h2 id="stepperTitle" class="section-title" data-fr="Formulaire de Campagne" data-en="Campaign Form">Formulaire de Campagne</h2>
+
+      <!-- Top step indicators -->
+      <div class="step-indicators" role="tablist" aria-label="Progression des étapes">
+        <div class="step-pill" data-step="1" aria-selected="true">
+          <div class="num"><span class="num-inner">1</span><svg class="check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 6.7L9 18 3.7 12.7" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="label" data-fr="Enregistrement" data-en="Registration">Enregistrement</div>
+        </div>
+        <div class="step-pill" data-step="2" aria-selected="false">
+          <div class="num"><span class="num-inner">2</span><svg class="check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 6.7L9 18 3.7 12.7" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="label" data-fr="Inviter" data-en="Invite">Inviter</div>
+        </div>
+        <div class="step-pill" data-step="3" aria-selected="false">
+          <div class="num"><span class="num-inner">3</span><svg class="check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 6.7L9 18 3.7 12.7" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="label" data-fr="Vote" data-en="Vote">Vote</div>
+        </div>
+        <div class="step-pill" data-step="4" aria-selected="false">
+          <div class="num"><span class="num-inner">4</span><svg class="check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 6.7L9 18 3.7 12.7" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="label" data-fr="Don" data-en="Donate">Don</div>
+        </div>
+      </div>
+
+      <!-- Cards container (slides) -->
+      <div class="cards-container" id="cardsContainer">
+
+        <!-- STEP 1: ENREGISTREMENT -->
+        <article class="step-card active" data-step="1" aria-labelledby="step1Title" role="tabpanel">
+          <header class="card-header">
+            <h3 id="step1Title" class="card-title" data-fr="1 — Enregistrement" data-en="1 — Registration">1 — Enregistrement</h3>
+            <p class="card-desc" data-fr="Confirmez votre identité pour participer." data-en="Confirm your identity to participate.">Confirmez votre identité pour participer.</p>
+          </header>
+
+          <form id="formStep1" class="card-form" novalidate>
+            <!-- Each input has an inline SVG icon on the left. Comments explain roles. -->
+            <!-- Nom -->
+            <label class="field">
+              <span class="icon" aria-hidden="true">
+                <!-- person icon -->
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zM4 20.1c0-3.3 3.7-5.9 8-5.9s8 2.6 8 5.9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <input type="text" name="lastName" id="lastName" placeholder="Nom" data-fr="Nom" data-en="Last name" required autocomplete="family-name" />
+            </label>
+
+            <!-- Prénom -->
+            <label class="field">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 12c1.8 0 3.2-1.4 3.2-3.2S13.8 5.6 12 5.6 8.8 7 8.8 8.8 10.2 12 12 12zM5 20.4c0-2.6 2.9-4.6 7-4.6s7 2 7 4.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+              </span>
+              <input type="text" name="firstName" id="firstName" placeholder="Prénom" data-fr="Prénom" data-en="First name" required autocomplete="given-name" />
+            </label>
+
+            <!-- Email -->
+            <label class="field">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M3 6.5l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="2" y="4" width="20" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+              </span>
+              <input type="email" name="email" id="email" placeholder="Email" data-fr="Email" data-en="Email" required autocomplete="email" />
+            </label>
+
+            <!-- Téléphone -->
+            <label class="field">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M22 16.9a18 18 0 0 1-8-8L18 2l4 4zM2 2l6 6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+              </span>
+              <input type="tel" name="phone" id="phone" placeholder="Téléphone" data-fr="Téléphone" data-en="Phone" required autocomplete="tel" />
+            </label>
+
+            <!-- WhatsApp (obligatoire) -->
+            <label class="field">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M21 15a8 8 0 1 0-2.3 5.6L21 21l-1.4-2.9A8 8 0 0 0 21 15z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+              </span>
+              <input type="tel" name="whatsapp" id="whatsapp" placeholder="WhatsApp" data-fr="WhatsApp (obligatoire)" data-en="WhatsApp (required)" required />
+            </label>
+
+            <!-- Instagram (optionnel) -->
+            <label class="field optional">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+              </span>
+              <input type="text" name="instagram" id="instagram" placeholder="Instagram (facultatif)" data-fr="Instagram (facultatif)" data-en="Instagram (optional)"/>
+            </label>
+
+            <!-- Facebook (optionnel) -->
+            <label class="field optional">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M18 2h-3.6C11.2 2 10 3.6 10 6.6V9H7v4h3v8h4v-8h3.1l.9-4H14V6.2C14 5.6 14 5 15 5H18z" fill="currentColor" opacity="0.9"/></svg>
+              </span>
+              <input type="text" name="facebook" id="facebook" placeholder="Facebook (facultatif)" data-fr="Facebook (facultatif)" data-en="Facebook (optional)"/>
+            </label>
+
+            <!-- Form actions -->
+            <div class="card-actions">
+              <button type="button" class="btn btn-ghost prev-btn" data-fr="Précédent" data-en="Previous" disabled>Précédent</button>
+              <button type="button" class="btn btn-primary next-btn" id="nextFrom1" disabled data-fr="Suivant" data-en="Next">Suivant</button>
+            </div>
+          </form>
+        </article>
+
+        <!-- STEP 2: INVITER 3 PROCHES -->
+        <article class="step-card" data-step="2" aria-labelledby="step2Title" role="tabpanel" hidden>
+          <header class="card-header">
+            <h3 id="step2Title" class="card-title" data-fr="2 — Invitation des proches" data-en="2 — Invite your contacts">2 — Invitation des proches</h3>
+            <p class="card-desc" data-fr="Invitez 3 personnes proches à participer." data-en="Invite 3 close people to join.">Invitez 3 personnes proches à participer.</p>
+          </header>
+
+          <div class="card-form invites-wrap" id="invitesWrap">
+            <!-- We render three invite blocks -->
+            <template id="inviteTpl">
+              <div class="invite-block">
+                <h4 class="invite-title" data-fr="Invité" data-en="Guest">Invité</h4>
+
+                <label class="field">
+                  <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span>
+                  <input type="text" name="gLast" placeholder="Nom" required />
+                </label>
+
+                <label class="field">
+                  <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12c1.8 0 3.2-1.4 3.2-3.2S13.8 5.6 12 5.6 8.8 7 8.8 8.8 10.2 12 12 12z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span>
+                  <input type="text" name="gFirst" placeholder="Prénom" required />
+                </label>
+
+                <label class="field">
+                  <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.9a18 18 0 0 1-8-8L18 2l4 4z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span>
+                  <input type="tel" name="gPhone" placeholder="Téléphone" required />
+                </label>
+
+                <label class="field">
+                  <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 15a8 8 0 1 0-2.3 5.6L21 21l-1.4-2.9A8 8 0 0 0 21 15z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span>
+                  <input type="tel" name="gWhats" placeholder="WhatsApp" required />
+                </label>
+
+                <label class="field">
+                  <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6.5l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span>
+                  <input type="email" name="gEmail" placeholder="Email" required />
+                </label>
+
+                <label class="field optional">
+                  <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span>
+                  <input type="text" name="gInsta" placeholder="Instagram (facultatif)" />
+                </label>
+
+                <label class="field optional">
+                  <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 2h-3.6C11.2 2 10 3.6 10 6.6V9H7v4h3v8h4v-8h3.1l.9-4H14V6.2C14 5.6 14 5 15 5H18z" fill="currentColor" opacity="0.9"/></svg></span>
+                  <input type="text" name="gFace" placeholder="Facebook (facultatif)" />
+                </label>
+
+                <div class="invite-valid">
+                  <svg class="small-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 6.7L9 18 3.7 12.7" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+            </template>
+          </div>
+
+          <div class="card-actions">
+            <button type="button" class="btn btn-ghost prev-btn" data-fr="Précédent" data-en="Previous">Précédent</button>
+            <button type="button" class="btn btn-primary next-btn" id="nextFrom2" disabled data-fr="Étape suivante" data-en="Next step">Étape suivante</button>
+          </div>
+        </article>
+
+        <!-- STEP 3: VOTE DES INFLUENCEURS -->
+        <article class="step-card" data-step="3" aria-labelledby="step3Title" role="tabpanel" hidden>
+          <header class="card-header">
+            <h3 id="step3Title" class="card-title" data-fr="3 — Vote des influenceurs" data-en="3 — Vote influencers">3 — Vote des influenceurs</h3>
+            <p class="card-desc" data-fr="Choisissez 3 influenceurs que vous soutenez." data-en="Choose 3 influencers you support.">Choisissez 3 influenceurs que vous soutenez.</p>
+          </header>
+
+          <div class="influencer-controls">
+            <input type="search" id="influSearch" placeholder="Rechercher un influenceur..." data-fr="Rechercher un influenceur..." data-en="Search an influencer..." />
+            <div class="votes-count" id="votesCount" aria-live="polite" data-fr="Votes sélectionnés : 0" data-en="Selected votes: 0">Votes sélectionnés : 0</div>
+          </div>
+
+          <div class="influ-grid" id="influGrid" role="list">
+            <!-- Influencer cards are generated by JS -->
+          </div>
+
+          <div class="card-actions">
+            <button type="button" class="btn btn-ghost prev-btn" data-fr="Précédent" data-en="Previous">Précédent</button>
+            <button type="button" class="btn btn-primary next-btn" id="nextFrom3" disabled data-fr="Suivant" data-en="Next">Suivant</button>
+          </div>
+        </article>
+
+        <!-- STEP 4: DON -->
+        <article class="step-card" data-step="4" aria-labelledby="step4Title" role="tabpanel" hidden>
+          <header class="card-header">
+            <h3 id="step4Title" class="card-title" data-fr="4 — Faire un don" data-en="4 — Make a donation">4 — Faire un don</h3>
+            <p class="card-desc" data-fr="Choisissez une méthode de don et confirmez." data-en="Choose a donation method and confirm.">Choisissez une méthode de don et confirmez.</p>
+          </header>
+
+          <div class="payments-wrap" id="paymentsWrap" role="region" aria-label="Options de paiement">
+            <div class="payment-logos">
+              <button class="pay-logo" data-method="donorbox" aria-pressed="false" aria-label="DonorBox">
+                <img src="" alt="DonorBox" data-placeholder="DonorBox" />
+                <span class="logo-label">DonorBox</span>
+              </button>
+              <button class="pay-logo" data-method="mastercard" aria-pressed="false" aria-label="Mastercard">
+                <img src="" alt="Mastercard" data-placeholder="Mastercard" />
+                <span class="logo-label">Mastercard</span>
+              </button>
+              <button class="pay-logo" data-method="visa" aria-pressed="false" aria-label="Visa">
+                <img src="" alt="Visa" data-placeholder="Visa" />
+                <span class="logo-label">Visa</span>
+              </button>
+              <button class="pay-logo" data-method="paypal" aria-pressed="false" aria-label="PayPal">
+                <img src="" alt="PayPal" data-placeholder="PayPal" />
+                <span class="logo-label">PayPal</span>
+              </button>
+            </div>
+
+            <!-- Payment form (hidden until logo clicked) -->
+            <form id="paymentForm" class="payment-form" hidden>
+              <label class="field">
+                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 7h20v10H2z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span>
+                <input type="text" id="benefName" placeholder="Nom du bénéficiaire / Beneficiary" data-fr="Nom du bénéficiaire" data-en="Beneficiary name" required />
+              </label>
+
+              <label class="field">
+                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 11h18" stroke="currentColor" stroke-width="1.2"/></svg></span>
+                <input type="text" id="iban" placeholder="IBAN" required />
+              </label>
+
+              <label class="field">
+                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2v20" stroke="currentColor" stroke-width="1.2"/></svg></span>
+                <input type="number" id="amount" placeholder="Montant (EUR)" min="1" required />
+              </label>
+
+              <label class="field optional">
+                <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h18" stroke="currentColor" stroke-width="1.2"/></svg></span>
+                <input type="text" id="ref" placeholder="Référence (facultatif)" />
+              </label>
+
+              <div class="card-actions">
+                <button type="button" class="btn btn-ghost prev-btn" data-fr="Précédent" data-en="Previous">Précédent</button>
+                <button type="submit" class="btn btn-primary" id="donateBtn" data-fr="Valider le don" data-en="Confirm donation">Valider le don</button>
+              </div>
+            </form>
+          </div>
+        </article>
+
+        <!-- FINAL THANK YOU (overlay simulation) -->
+        <div class="thankyou-overlay" id="thankyouOverlay" hidden role="dialog" aria-modal="true" aria-label="Remerciements">
+          <div class="thankyou-card" role="document">
+            <div class="thank-anim">
+              <div class="logo-anim" aria-hidden="true">DT</div>
+              <h3 data-fr="Merci d’avoir participé !" data-en="Thank you for participating!">Merci d’avoir participé !</h3>
+              <p data-fr="Vous avez soutenu la jeunesse, la solidarité et l'innovation." data-en="You supported youth, solidarity and innovation.">Vous avez soutenu la jeunesse, la solidarité et l'innovation.</p>
+              <p class="receipt-note" data-fr="Veuillez envoyer votre reçu par mail à contact@delontenatena.org" data-en="Please send your receipt by email to contact@delontenatena.org">Veuillez envoyer votre reçu par mail à contact@delontenatena.org</p>
+
+              <button type="button" class="btn btn-primary" id="finishBtn" data-fr="Fermer" data-en="Close">Fermer</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Progress bar bottom -->
+      <div class="progress-wrap" aria-hidden="false">
+        <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+
+    </section>
+
+    <!-- Toast notification (for warnings like >3 votes) -->
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  </main>
+
+ <script src="Campagne.js"></script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Durée de la campagne.</title>
+</head>
+<body>
+  <!-- Bloc campagne — Fondation Delon Tena Tena -->
+<section class="ftt-campaign-block" aria-labelledby="ftt-campaign-title">
+  <div class="ftt-bg" role="img" aria-hidden="true"></div>
+
+  <div class="ftt-overlay"></div>
+
+  <div class="ftt-content">
+    <div class="ftt-left">
+      <div class="ftt-badge">6 mois</div>
+      <h1 id="ftt-campaign-title">Campagne Pour ceux qu'on aime — 6 mois pour agir</h1>
+      <h2 class="ftt-sub">Se rassembler aujourd’hui pour transformer demain</h2>
+      <p class="ftt-text">
+        Pendant ces six mois, la Fondation Delon Tena Tena intensifie ses actions pour l’éducation, la santé
+        et l’autonomisation des femmes et des jeunes. Ensemble, nous bâtissons des solutions locales, durables
+        et humaines pour des communautés plus résilientes et inclusives.
+      </p>
+    </div>
+
+    <div class="ftt-right" aria-hidden="true">
+      <!-- Élément décoratif délicat (forme simple respectant la palette) -->
+      <div class="ftt-deco"></div>
+    </div>
+  </div>
+</section>
+
+
+
+<style>
+  /* === NE PAS MODIFIER : palette du socle (utilisée telle quelle) === */
+  :root{
+    /* == SOCLE DE DESIGN BLOC DUREE CAMPAGNE === */
+    --green-soft:  #3EB489;
+    --green-deep: #5A9E78;
+    --deep-green: #2E6B4F;
+    --beige: #F8F5F0;
+    --white: #FFFFFF;
+    --footer-beige: #E6D8B9;
+    --accent-brown: #C2A88C;
+    --text-dark: #4A4A4A;
+    --muted-shadow: rgba(90,158,120,0.15);
+    --radius: 16px;
+    --transition: all 0.3s ease;
+  }
+
+  /* === Bloc Durée Campagne === */
+  .ftt-campaign-block{
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: 0 12px 30px var(--muted-shadow);
+    background-color: var(--beige);
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    margin: 24px auto;
+    max-width: 1200px;
+    transition: var(--transition);
+    /* apparition légère : fade-in + slide-up */
+    animation: ftt-entrance 700ms ease forwards;
+    transform: translateY(10px);
+  }
+
+  /* Background image (remplacer l'URL par votre image) */
+  .ftt-bg{
+    position: absolute;
+    inset: 0;
+    background-image: url('Us.jpg'); /* image générique — remplacer si souhaité */
+    background-size: cover;
+    background-position: center;
+    filter: saturate(0.95) contrast(0.95);
+    z-index: 0;
+  }
+
+  /* Overlay doux pour lisibilité (utilise uniquement les couleurs du socle) */
+  .ftt-overlay{
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(62,180,137,0.65) 0%, rgba(248,245,240,0.5) 60%);
+    /* le gradient combine --green-soft et --beige sans ajouter d'autres couleurs */
+    z-index: 1;
+  }
+
+  /* Contenu interne */
+  .ftt-content{
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 160px;
+    gap: 24px;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Partie gauche : texte */
+  .ftt-left{
+    color: var(--text-dark);
+    padding: 18px 24px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.0), rgba(255,255,255,0.0));
+    border-radius: calc(var(--radius) - 6px);
+  }
+
+  .ftt-badge{
+    display: inline-block;
+    background: var(--white);
+    color: var(--deep-green);
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 8px 16px;
+    box-shadow: 0 6px 18px rgba(46,107,79,0.08);
+    letter-spacing: 0.02em;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  h1#ftt-campaign-title{
+    margin: 0 0 8px 0;
+    font-size: 28px;
+    line-height: 1.05;
+    color: var(--white);
+    text-shadow: 0 4px 18px rgba(46,107,79,0.2);
+    font-weight: 700;
+  }
+
+  .ftt-sub{
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    color: var(--white);
+    opacity: 0.95;
+    font-weight: 600;
+  }
+
+  .ftt-text{
+    margin: 0;
+    color: black;
+    font-weight: 600;
+    max-width: 68ch;
+    font-size: 15px;
+    line-height: 1.5;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02));
+    padding: 12px 14px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(46,107,79,0.06) inset;
+  }
+
+  /* Partie droite : élément décoratif */
+  .ftt-right{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .ftt-deco{
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(194,168,140,0.12), rgba(90,158,120,0.10));
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 10px 26px rgba(46,107,79,0.08);
+    transform: translateY(0);
+    transition: var(--transition);
+  }
+
+  /* Hover subtil (si intégré sur une page desktop) */
+  .ftt-campaign-block:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 22px 44px var(--muted-shadow);
+  }
+
+  .ftt-campaign-block:hover .ftt-deco{
+    transform: translateY(-6px) rotate(-4deg);
+  }
+
+  /* Animation keyframes */
+  @keyframes ftt-entrance{
+    from { opacity: 0; transform: translateY(12px) scale(0.995); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* ===== Responsivité ===== */
+
+  /* Large screens (desktop): comfortable spacing */
+  @media (min-width: 1001px){
+    .ftt-campaign-block { padding: 36px; min-height: 360px; }
+    h1#ftt-campaign-title { font-size: 32px; }
+    .ftt-sub { font-size: 20px; }
+    .ftt-text { font-size: 18px; padding: 14px; }
+    .ftt-content { grid-template-columns: 1fr 220px; gap: 28px; }
+    .ftt-deco { width: 180px; height: 180px; border-radius: 22px; }
+  }
+
+  /* Tablet: 768px and below adjustments */
+  @media (max-width: 1000px) and (min-width: 481px){
+    .ftt-campaign-block { padding: 28px; min-height: 320px; border-radius: calc(var(--radius) - 4px); }
+    .ftt-content { grid-template-columns: 1fr 140px; gap: 18px; }
+    h1#ftt-campaign-title { font-size: 26px; }
+    .ftt-sub { font-size: 18px; }
+    .ftt-text { font-size: 17px;
+    font-weight: 600; }
+    .ftt-deco { width: 140px; height: 140px; }
+  }
+
+  /* Mobile small screens: single column, readable sizes */
+  @media (max-width: 480px){
+    .ftt-campaign-block{
+      padding: 18px;
+      border-radius: 12px;
+      min-height: 280px;
+    }
+    .ftt-content{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .ftt-right{ order: -1; display:flex; justify-content:flex-end; }
+    .ftt-deco{ width: 84px; height: 84px; border-radius: 14px; }
+    .ftt-badge{ padding: 6px 12px; font-size: 13px; }
+    h1#ftt-campaign-title{ font-size: 20px; }
+    .ftt-sub{ font-size: 17px; }
+    .ftt-text{ font-size: 16px; padding: 10px; max-width: 100%;
+    font-weight: 600; }
+  }
+
+  /* Accessibilité : contraste amélioré pour très petits écrans */
+  @media (max-width: 360px){
+    .ftt-overlay{ background: linear-gradient(135deg, rgba(62,180,137,0.72) 0%, rgba(248,245,240,0.6) 60%); }
+  }
+</style>
+</body>
+</html>

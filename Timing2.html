@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sablier animé — Countdown SVG</title>
+<style>
+  /* -----------------------------
+     Socle de design - VARIABLES
+     ----------------------------- */
+  :root{
+    /* Socle Design COMPTE A REBOURS */
+    --green-soft:  #3EB489;
+    --green-deep: #5A9E78;
+    --deep-green: #2E6B4F;
+    --beige: #F8F5F0;
+    --white: #FFFFFF;
+    --footer-beige: #E6D8B9;
+    --accent-brown: #C2A88C;
+    --text-dark: #4A4A4A;
+    --muted-shadow: rgba(90,158,120,0.15);
+    --trans: all 0.3s ease;
+    --radius: 16px;
+    --max-width: 1200px;
+    --break-sm: 480px;
+    --break-md: 768px;
+    --title:#5A9E78;
+    --shadow-green: rgba(90,158,120,0.15);
+    --shadow-deep: rgba(90,158,120,0.1);
+    --transition: all 0.3s ease;
+  }
+
+  /* -----------------------------
+     Layout minimal
+     ----------------------------- */
+  html,body{
+    height:100%;
+    margin:0;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg, var(--beige) 0%, #FBFAF8 100%);
+    color: var(--text-dark);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  .wrap{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:48px;
+  }
+
+  .card{
+    width:340px;
+    max-width: calc(var(--max-width) - 40px);
+    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.98));
+    border-radius: calc(var(--radius) + 8px);
+    padding:20px;
+    box-shadow: 0 12px 36px var(--muted-shadow);
+    border: 1px solid rgba(46,107,79,0.06);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+  }
+
+  h1{
+    font-size:18px;
+    color: var(--title);
+    margin:0;
+    font-weight:600;
+    letter-spacing:0.2px;
+  }
+  p.lead {
+    margin:0;
+    font-size:13px;
+    color:var(--text-dark);
+    opacity:0.9;
+  }
+
+  /* -----------------------------
+     SVG container sizing
+     ----------------------------- */
+  .sablier-wrap{
+    width:240px;
+    height:380px;
+    display:block;
+    touch-action:none;
+  }
+
+  /* countdown text */
+  .countdown {
+    font-weight:700;
+    font-size:13px;
+    color:var(--deep-green);
+    background: linear-gradient(90deg, rgba(62,180,137,0.08), rgba(90,158,120,0.04));
+    padding:8px 12px;
+    border-radius:10px;
+    border:1px solid rgba(90,158,120,0.06);
+    min-width:170px;
+    text-align:center;
+  }
+
+  /* -----------------------------
+     SVG specific styles
+     ----------------------------- */
+
+  /* Glass rim and highlights transitions */
+  .glass-lip { transition: var(--transition); }
+
+  /* Flowing class toggles animation */
+  .flowing .sand-stream { opacity:1; animation: sandPulse 0.8s linear infinite; }
+  .sand-stream { opacity:0; transition: opacity 0.3s ease; transform-origin:center; }
+
+  @keyframes sandPulse{
+    0% { transform: translateY(0px) scaleY(1); opacity:1; }
+    50% { transform: translateY(2px) scaleY(0.95); opacity:0.9; }
+    100% { transform: translateY(0px) scaleY(1); opacity:1; }
+  }
+
+  /* fine particle animation (CSS rotates pattern subtly) */
+  .sand-grain-pattern { animation: grainMove 8s linear infinite; }
+  @keyframes grainMove {
+    from { transform: translateY(0px); }
+    to   { transform: translateY(-20px); }
+  }
+
+  /* small responsive */
+  @media (max-width:420px){
+    .card{ width:92%; padding:14px; }
+    .sablier-wrap{ width:200px; height:320px; }
+  }
+
+  /* Utility tiny label under countdown */
+  .muted { font-size:12px; color: rgba(74,74,74,0.7); }
+
+  /* ============================
+   BLOC : TIMER TERMINÉ (POPUP)
+   ============================ */
+#time-finished-popup {
+  position: fixed;
+  top: 30%;
+  left: 35%;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 90%;
+  max-width: 420px;
+  background: var(--beige);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px var(--shadow-deep);
+  padding: 24px 28px;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  z-index: 9999;
+}
+
+#time-finished-popup.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Croix de fermeture */
+#popup-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--deep-green);
+  transition: var(--transition);
+}
+
+#popup-close:hover {
+  transform: scale(1.15);
+}
+
+/* Titre */
+#popup-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  margin-bottom: 12px;
+}
+
+/* Texte */
+#popup-message {
+  font-size: 1rem;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+/* Animation pulse premium */
+@keyframes popupPulse {
+  0%   { transform: scale(1); opacity: 1; }
+  50%  { transform: scale(1.03); opacity: 0.92; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+#time-finished-popup.active {
+  animation: popupPulse 2.4s ease-in-out infinite;
+}
+/* ======================================
+   RESPONSIVE DESIGN — POPUP TIMER FINI
+   ====================================== */
+
+/* Tablettes et écrans moyens (≤ 768px) */
+@media (max-width: 768px) {
+
+  #time-finished-popup {
+    max-width: 360px;
+    padding: 22px 24px;
+    border-radius: calc(var(--radius) - 4px);
+    top: 40%;
+    left: 15%;
+  }
+
+  #popup-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+
+  #popup-message {
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  #popup-close {
+    font-size: 18px;
+    top: 12px;
+    right: 12px;
+  }
+}
+
+/* Mobiles petits et moyens (≤ 480px) */
+@media (max-width: 480px) {
+
+  #time-finished-popup {
+    width: 92%;
+    max-width: 300px;
+    padding: 18px 20px;
+    border-radius: calc(var(--radius) - 6px);
+
+  }
+
+  #popup-title {
+    font-size: 1.15rem;
+  }
+
+  #popup-message {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  #popup-close {
+    font-size: 17px;
+    top: 10px;
+    right: 10px;
+  }
+}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="region" aria-label="Sablier - compte à rebours">
+      <h1>Compte à rebours</h1>
+      <p class="lead">Le sablier représente le temps restant (jours, heures, minutes, secondes)</p>
+
+      <!-- SVG sablier - viewBox coordinate system chosen for good control -->
+      <div class="sablier-wrap" id="sablierContainer" aria-hidden="false">
+        <!-- SVG START -->
+        <svg id="hourglass" viewBox="0 0 200 340" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sablier animé">
+          <defs>
+            <!-- GLASS GRADIENTS -->
+            <linearGradient id="glassGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.88"/>
+              <stop offset="45%" stop-color="#EAF2EF" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#CFECE1" stop-opacity="0.16"/>
+            </linearGradient>
+
+            <radialGradient id="glassSpec" cx="30%" cy="20%" r="70%">
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+            </radialGradient>
+
+            <!-- SAND GRADIENT (uses palette) -->
+            <linearGradient id="sandTopGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="var(--accent-brown)" stop-opacity="1"/>
+              <stop offset="60%" stop-color="var(--beige)" stop-opacity="1"/>
+              <stop offset="100%" stop-color="var(--footer-beige)" stop-opacity="1"/>
+            </linearGradient>
+
+            <linearGradient id="sandBottomGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="var(--green-soft)" stop-opacity="0.06"/>
+              <stop offset="20%" stop-color="var(--accent-brown)" stop-opacity="1"/>
+              <stop offset="100%" stop-color="var(--beige)" stop-opacity="1"/>
+            </linearGradient>
+
+            <!-- subtle shadow for base -->
+            <radialGradient id="baseShadow" cx="50%" cy="40%" r="50%">
+              <stop offset="0%" stop-color="rgba(46,107,79,0.12)"/>
+              <stop offset="100%" stop-color="rgba(46,107,79,0.02)"/>
+            </radialGradient>
+
+            <!-- texture: tiny grain circles repeated (pattern) -->
+            <pattern id="grainPattern" patternUnits="userSpaceOnUse" width="6" height="6" class="sand-grain-pattern" patternTransform="translate(0,0)">
+              <circle cx="1" cy="1.5" r="0.7" fill="rgba(0,0,0,0.06)"/>
+              <circle cx="4" cy="3.5" r="0.5" fill="rgba(0,0,0,0.04)"/>
+            </pattern>
+
+            <!-- tiny inner shadow for glass -->
+            <filter id="innerGlass" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2" result="bl"/>
+              <feComposite in="bl" in2="SourceAlpha" operator="out" result="inner"/>
+              <feColorMatrix in="inner" type="matrix" values="0 0 0 0 0.05  0 0 0 0 0.09  0 0 0 0 0.07  0 0 0 0.12" />
+              <feBlend in2="SourceGraphic" mode="normal"/>
+            </filter>
+
+            <!-- clip path shapes for top & bottom sand area -->
+            <clipPath id="topSandClip">
+              <path d="M40,40
+                       C40,40 160,40 160,40
+                       C155,95 120,130 100,140
+                       C80,130 45,95 40,40 z"/>
+            </clipPath>
+
+            <clipPath id="bottomSandClip">
+              <path d="M40,300
+                       C40,300 160,300 160,300
+                       C155,245 120,210 100,200
+                       C80,210 45,245 40,300 z"/>
+            </clipPath>
+
+            <!-- define the hourglass shape path to stroke glass rim -->
+            <path id="hourglassShape" d="M40,40
+                       C40,40 160,40 160,40
+                       C160,40 160,120 100,170
+                       C40,120 40,40 40,40
+                       M40,300
+                       C40,300 160,300 160,300
+                       C160,300 160,220 100,170
+                       C40,220 40,300 40,300 z" />
+          </defs>
+
+          <!-- BACK SHADOW under whole hourglass -->
+          <ellipse cx="100" cy="322" rx="48" ry="10" fill="url(#baseShadow)" opacity="0.9" />
+
+          <!-- Frame / supporting planks (minimal, elegant) -->
+          <g transform="translate(0,0)">
+            <rect x="90" y="8" width="20" height="16" rx="4" fill="var(--green-deep)" opacity="0.08"/>
+            <rect x="90" y="316" width="20" height="16" rx="4" fill="var(--green-deep)" opacity="0.06"/>
+          </g>
+
+          <!-- GLASS BODY group -->
+          <g filter="url(#innerGlass)">
+            <!-- Outer rim stroke to give volume -->
+            <use href="#hourglassShape" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" class="glass-lip" />
+
+            <!-- translucent glass fill -->
+            <path d="M40,40
+                       C40,40 160,40 160,40
+                       C160,40 160,120 100,170
+                       C40,120 40,40 40,40
+                       M40,300
+                       C40,300 160,300 160,300
+                       C160,300 160,220 100,170
+                       C40,220 40,300 40,300 z"
+                  fill="url(#glassGrad)" opacity="0.85"/>
+            <!-- specular -->
+            <path d="M52,48 C76,36 124,36 148,48 L142,60 C120,52 80,52 58,60z"
+                  fill="url(#glassSpec)" opacity="0.9" />
+          </g>
+
+          <!-- SAND GROUPS (we use rect masks to animate heights) -->
+          <!-- TOP SAND: contained in clipPath topSandClip -->
+          <g id="topSandGroup" clip-path="url(#topSandClip)">
+            <g id="topSandVisual">
+              <!-- the fill rectangle will be adjusted by JS -->
+              <rect id="maskTopRect" x="40" y="40" width="120" height="100" fill="url(#sandTopGrad)" />
+              <rect x="40" y="40" width="120" height="100" fill="url(#grainPattern)" opacity="0.72" />
+            </g>
+            <path d="M80,130 C92,140 108,140 120,130" stroke="rgba(0,0,0,0.06)" stroke-width="2" fill="none" />
+          </g>
+
+          <!-- FALLING PARTICLES GROUP (dynamic, filled by JS) -->
+          <g id="fallingParticles" />
+
+          <!-- SAND STREAM (decorative; we also render particles) -->
+          <g id="streamGroup" class="sand-stream" transform="translate(0,0)">
+            <path id="sandStreamPath" d="M100,148
+                                         C100,148 98,162 100,176
+                                         C102,162 100,148 100,148 z"
+                  fill="url(#sandBottomGrad)" opacity="0.95" />
+            <g id="streamParticles" opacity="0.95">
+              <circle cx="100" cy="156" r="1.8" fill="var(--accent-brown)" />
+              <circle cx="99" cy="164" r="1.2" fill="var(--accent-brown)" />
+              <circle cx="101" cy="170" r="1.0" fill="var(--accent-brown)" />
+            </g>
+          </g>
+
+          <!-- BOTTOM SAND: grows upward. We will adjust maskBottomRect by JS -->
+          <g id="bottomSandGroup" clip-path="url(#bottomSandClip)">
+            <rect id="maskBottomRect" x="40" y="200" width="120" height="120" fill="url(#sandBottomGrad)" />
+            <rect x="40" y="200" width="120" height="120" fill="url(#grainPattern)" opacity="0.9" />
+            <path d="M70,260 C88,245 112,245 130,260 C120,270 80,270 70,260 z" fill="rgba(255,255,255,0.08)" />
+          </g>
+
+          <!-- Frame / gold rim effects -->
+          <g>
+            <ellipse cx="100" cy="26" rx="56" ry="8" fill="none" stroke="rgba(46,107,79,0.06)" stroke-width="3" />
+            <ellipse cx="100" cy="314" rx="56" ry="8" fill="none" stroke="rgba(46,107,79,0.06)" stroke-width="3" />
+          </g>
+
+          <!-- OUTER stroke for clarity -->
+          <use href="#hourglassShape" fill="none" stroke="rgba(46,107,79,0.12)" stroke-width="2" />
+
+          <!-- TOP + BOTTOM GLASS HIGHLIGHTS (subtle) -->
+          <path d="M48,48 C72,36 128,36 152,48" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none" stroke-linecap="round" />
+        </svg>
+        <!-- SVG END -->
+      </div>
+
+      <div style="display:flex;gap:10px;align-items:center;flex-direction:column;">
+        <div class="countdown" id="countdownText" aria-live="polite">-- : -- : -- : --</div>
+        <div class="muted">Jours -- Heures -- Minutes -- Secondes</div>
+      </div>
+
+      <p class="muted" style="margin-top:6px;">Sablier calculé en temps réel</p>
+    </div>
+  </div>
+      <!-- ================================
+     POPUP : TEMPS ÉCOULÉ
+================================ -->
+<div id="time-finished-popup">
+  <div id="popup-close">&times;</div>
+
+  <div id="popup-title">Le temps est écoulé</div>
+
+  <div id="popup-message">
+    Bravo pour avoir suivi le compte à rebours&nbsp;!  
+    Prenez un instant pour analyser vos progrès,  
+    noter vos impressions, et vous préparer pour la suite.
+  </div>
+</div>
+<script>
+/*
+  Hourglass controller v2
+  - Fixed duration (object OR constants)
+  - Particle system (12-20 particles/s default dynamic)
+  - Masks update top & bottom sand
+  - No external libs
+*/
+
+/* ===========================
+   USER CONFIG - change here
+   =========================== */
+/* Option A: simple constants */
+const DURATION_DAYS = 0;
+const DURATION_HOURS = 0;
+const DURATION_MINUTES = 0;
+const DURATION_SECONDS = 20;
+
+/* Option B: or use object (keeps both)
+   const duration = { days:2, hours:5, minutes:30, seconds:20 };
+*/
+const duration = {
+  days: DURATION_DAYS,
+  hours: DURATION_HOURS,
+  minutes: DURATION_MINUTES,
+  seconds: DURATION_SECONDS
+};
+
+/* Particle intensity mode (you chose B: dynamique) */
+const PARTICLES_PER_SECOND = 16; // between 12..20 - dynamic visual
+const MAX_PARTICLES = 500;       // safety cap for perf
+
+/* ===========================
+   Internal geometry config
+   (SVG units, tuned to the viewBox)
+   =========================== */
+const TOP_CLIP_Y = 40;
+const TOP_CLIP_MAX_HEIGHT = 100;   // when full
+const BOTTOM_BASE_Y = 200;
+const BOTTOM_MAX_HEIGHT = 120;     // maximum visible bottom sand height
+
+/* neck position where particles spawn (approx) */
+const NECK_X = 100;
+const NECK_Y = 156; // just above the neck to look natural
+
+/* horizontal spawn spread around neck (px) */
+const SPAWN_SPREAD = 8;
+
+/* gravity & physics (units px / s^2) scaled for pleasant look */
+const GRAVITY = 1400; // px per second^2 (strong to look snappy at screen refresh)
+const WIND = 20;      // small horizontal acceleration randomness
+const FPS_TARGET = 60;
+
+/* ===========================
+   DOM references
+   =========================== */
+const svg = document.getElementById('hourglass');
+const maskTopRect = document.getElementById('maskTopRect');
+const maskBottomRect = document.getElementById('maskBottomRect');
+const streamGroup = document.getElementById('streamGroup');
+const streamParticlesDecor = document.getElementById('streamParticles');
+const fallingParticlesGroup = document.getElementById('fallingParticles');
+const countdownText = document.getElementById('countdownText');
+
+/* ===========================
+   Timer setup - fixed duration
+   =========================== */
+function durationToSeconds(d){
+  return ( (d.days||0)*86400 + (d.hours||0)*3600 + (d.minutes||0)*60 + (d.seconds||0) );
+}
+let totalSeconds = Math.max(1, durationToSeconds(duration));
+let remainingSeconds = totalSeconds; // will decrement
+let startTimestamp = null; // set at start of simulation
+
+/* percentage helper: 1 => just started, 0 => finished */
+function percentFromRemaining(){
+  return Math.max(0, Math.min(1, remainingSeconds / totalSeconds));
+}
+
+/* format text */
+function formatTimeParts(sec){
+  sec = Math.max(0, Math.floor(sec));
+  const days = Math.floor(sec / 86400); sec -= days * 86400;
+  const hours = Math.floor(sec / 3600); sec -= hours * 3600;
+  const minutes = Math.floor(sec / 60); sec -= minutes * 60;
+  const seconds = sec;
+  return {days,hours,minutes,seconds};
+}
+
+/* initial render of masks */
+function renderMasksByPercent(p){
+  // Top: visible height = TOP_CLIP_MAX_HEIGHT * p
+  const topVisible = TOP_CLIP_MAX_HEIGHT * p;
+  const topY = TOP_CLIP_Y + (TOP_CLIP_MAX_HEIGHT - topVisible);
+  maskTopRect.setAttribute('y', topY.toFixed(2));
+  maskTopRect.setAttribute('height', Math.max(0.2, topVisible).toFixed(2));
+
+  // bottom visible = BOTTOM_MAX_HEIGHT * (1 - p)
+  const bottomVisible = BOTTOM_MAX_HEIGHT * (1 - p);
+  const bottomY = BOTTOM_BASE_Y + (BOTTOM_MAX_HEIGHT - bottomVisible);
+  maskBottomRect.setAttribute('y', bottomY.toFixed(2));
+  maskBottomRect.setAttribute('height', Math.max(0.2, bottomVisible).toFixed(2));
+
+  // toggle stream visibility
+  if (p > 0.001 && p < 0.999) {
+    svg.classList.add('flowing');
+  } else {
+    svg.classList.remove('flowing');
+  }
+}
+
+/* update countdown text */
+function updateCountdownText(){
+  const parts = formatTimeParts(remainingSeconds);
+  const pad = n => String(n).padStart(2,'0');
+  countdownText.textContent = `${String(parts.days).padStart(2,'0')} : ${pad(parts.hours)} : ${pad(parts.minutes)} : ${pad(parts.seconds)}`;
+}
+
+/* ===========================
+   Particle system (SVG circles)
+   Real physics with requestAnimationFrame
+   =========================== */
+
+class Particle {
+  constructor(x,y,r, color){
+    this.x = x;
+    this.y = y;
+    this.r = r;
+    // velocities px/s
+    this.vx = (Math.random()*2 - 1) * 30; // initial tiny horizontal drift
+    this.vy = 30 + Math.random()*60; // initial downwards push
+    this.ax = (Math.random()*2 - 1) * 20; // small horizontal acceleration variation
+    this.ay = GRAVITY; // gravity constant px/s^2
+    this.life = 0;
+    this.maxLife = 3.5; // seconds safety
+    this.eliminated = false;
+
+    // create SVG element
+    this.el = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    this.el.setAttribute('cx', this.x);
+    this.el.setAttribute('cy', this.y);
+    this.el.setAttribute('r', this.r);
+    this.el.setAttribute('fill', color);
+    this.el.setAttribute('opacity', '0.98');
+    // small blur to mimic tiny shape - use slight opacity
+    fallingParticlesGroup.appendChild(this.el);
+  }
+
+  step(dt, bottomSurfaceY){
+    if (this.eliminated) return;
+    this.life += dt;
+    // integrate velocities
+    this.vx += this.ax * dt;
+    this.vy += this.ay * dt;
+
+    // small wind jiggle
+    this.vx += (Math.random()*2 - 1) * 6 * dt;
+
+    // update position
+    this.x += this.vx * dt;
+    this.y += this.vy * dt;
+
+    // update DOM pos
+    this.el.setAttribute('cx', this.x.toFixed(2));
+    this.el.setAttribute('cy', this.y.toFixed(2));
+
+    // rotation/scale subtle via transform (optional) - using opacity for simplicity
+    // collision with bottom surface: when y crosses bottomSurfaceY - small margin
+    if (this.y >= bottomSurfaceY - (this.r * 0.8) ) {
+      // create small splash and remove
+      this.splash();
+      this.remove();
+      return;
+    }
+
+    // lifetime cap
+    if (this.life > this.maxLife) {
+      this.remove();
+    }
+  }
+
+  splash(){
+    // small expanding circle to simulate deposit (created & faded quickly)
+    const s = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    s.setAttribute('cx', this.x);
+    s.setAttribute('cy', this.y);
+    s.setAttribute('r', Math.max(0.6, this.r));
+    s.setAttribute('fill', 'rgba(255,255,255,0.0)');
+    s.setAttribute('stroke', 'rgba(0,0,0,0.06)');
+    s.setAttribute('stroke-width','0.6');
+    fallingParticlesGroup.appendChild(s);
+    // animate with CSS-like JS (expand + fade)
+    const duration = 380 + Math.random()*120;
+    const t0 = performance.now();
+    function animateSplash(time){
+      const p = Math.min(1,(time - t0)/duration);
+      const rr = Math.max(0.6,  this.r) + p * 5;
+      const opacity = Math.max(0, 0.35 * (1 - p));
+      s.setAttribute('r', rr.toFixed(2));
+      s.setAttribute('stroke-opacity', opacity.toFixed(2));
+      if (p < 1) requestAnimationFrame(animateSplash);
+      else {
+        if (s && s.parentNode) s.parentNode.removeChild(s);
+      }
+    }
+    requestAnimationFrame(animateSplash.bind(this));
+  }
+
+  remove(){
+    if (this.el && this.el.parentNode) this.el.parentNode.removeChild(this.el);
+    this.eliminated = true;
+  }
+}
+
+/* system state */
+let particles = [];
+let lastFrameTime = null;
+let spawnAccumulator = 0;
+
+/* compute dynamic spawn rate (we keep simple constant here) */
+const spawnRate = PARTICLES_PER_SECOND;
+
+/* compute bottom surface Y from maskBottomRect dynamically */
+function getBottomSurfaceY(){
+  // The top y of the bottom sand rect is maskBottomRect.y attribute
+  const yAttr = parseFloat(maskBottomRect.getAttribute('y')) || BOTTOM_BASE_Y;
+  // We'll consider the surface a little above (for nicer look)
+  return yAttr + 4; // tiny offset
+}
+
+/* spawn one particle at neck with random size & color */
+function spawnParticle(){
+  if (particles.length >= MAX_PARTICLES) return;
+  // spawn near NECK_X +- spread, NECK_Y +- small vertical jitter
+  const x = NECK_X + (Math.random()*2 - 1) * SPAWN_SPREAD;
+  const y = NECK_Y + (Math.random()*2 - 1) * 4;
+  const r = 0.8 + Math.random() * 1.6; // radius between ~0.8 and 2.4
+  const color = getComputedStyle(document.documentElement).getPropertyValue('--accent-brown') || '#C2A88C';
+  const p = new Particle(x,y,r,color.trim());
+  particles.push(p);
+}
+
+/* frame loop: update particles physics & cleanup */
+function particleFrame(now){
+  if (!lastFrameTime) lastFrameTime = now;
+  const dt = Math.min(0.05, (now - lastFrameTime) / 1000); // cap dt for stability
+  lastFrameTime = now;
+
+  // spawn particles based on spawnRate and dt
+  spawnAccumulator += spawnRate * dt;
+  while (spawnAccumulator >= 1) {
+    // spawn only when there is still time > 0 (so stream stops when done)
+    if (remainingSeconds > 0) spawnParticle();
+    spawnAccumulator -= 1;
+  }
+
+  // bottom surface for collision
+  const bottomSurfaceY = getBottomSurfaceY();
+
+  // update existing particles
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+    if (!p.eliminated) {
+      p.step(dt, bottomSurfaceY);
+    }
+    if (p.eliminated) {
+      particles.splice(i,1);
+    }
+  }
+
+  // schedule next frame if any particles OR time still running (we keep loop active)
+  requestAnimationFrame(particleFrame);
+}
+/* ================================
+   POPUP : Apparition quand timer = 0
+================================ */
+
+// Récupération des éléments
+const popup = document.getElementById('time-finished-popup');
+const popupClose = document.getElementById('popup-close');
+
+// Fonction pour afficher le popup
+function showTimeFinishedPopup() {
+  popup.classList.add("active");
+}
+
+// Fonction pour fermer le popup
+popupClose.addEventListener("click", () => {
+  popup.classList.remove("active");
+});
+
+/* ===========================
+   Timer / main loop
+   =========================== */
+
+function startSablier(){
+  startTimestamp = performance.now();
+  remainingSeconds = totalSeconds;
+  lastSecondTick = performance.now(); // for per-second decrement
+  // initial masks/text
+  renderMasksByPercent(percentFromRemaining());
+  updateCountdownText();
+
+  // start particle RAF
+  requestAnimationFrame(particleFrame);
+
+  // main interval: update each 200ms for smoother percent changes, but textual every second
+  let lastUpdate = performance.now();
+  function mainLoop(now){
+    const dtMs = now - lastUpdate;
+    if (dtMs >= 80) {
+      lastUpdate = now;
+      // compute elapsed from startTimestamp
+      const elapsed = (now - startTimestamp) / 1000;
+      // compute remaining sec as integer seconds
+      remainingSeconds = Math.max(0, Math.round(totalSeconds - elapsed));
+      // smoothly compute percent for visuals using precise elapsed float
+      const exactRemaining = Math.max(0, totalSeconds - elapsed);
+      const exactPercent = exactRemaining / totalSeconds;
+      renderMasksByPercent(exactPercent);
+      updateCountdownText();
+      // stop when finished
+      if (remainingSeconds <= 0) {
+        // ensure final state
+        renderMasksByPercent(0);
+        updateCountdownText();
+        // stop stream (particles may still fall until depleted)
+        showTimeFinishedPopup();
+        svg.classList.remove('flowing');
+        // do not start new particles by enforcing remainingSeconds==0
+      }
+    }
+    // continue loop while still time or particles exist (particles frame loop continues separately)
+    if (remainingSeconds > 0) requestAnimationFrame(mainLoop);
+    else {
+      // We still keep mainLoop running a couple seconds to let particles finish
+      // schedule a short tail to stop
+      setTimeout(()=>{ /* nothing to do; animation naturally quiets */ }, 800);
+    }
+  }
+  requestAnimationFrame(mainLoop);
+}
+
+/* start */
+startSablier();
+
+/* expose methods to control externally */
+window.hourglass = {
+  pause: function(){ /* for future: pause logic */ console.warn('pause not implemented'); },
+  restartWithDuration: function(d){
+    // accept object with days/hours/minutes/seconds
+    const secs = durationToSeconds(d);
+    if (secs > 0) {
+      totalSeconds = secs;
+      remainingSeconds = totalSeconds;
+      startTimestamp = performance.now();
+      // reset masks immediately
+      renderMasksByPercent(1);
+      updateCountdownText();
+    }
+  }
+};
+</script>
+</body>
+</html>
