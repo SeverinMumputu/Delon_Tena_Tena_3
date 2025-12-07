@@ -1,0 +1,685 @@
+<!--
+Block HTML/CSS/JS complet — copier/coller → fonctionne.
+Respecte strictement le socle de design demandé et toutes les fonctionnalités.
+-->
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Bloc Participants — Pour ceux qu'on aime</title>
+<style>
+  /* ==== Socle Design (OBLIGATOIRE) ==== */
+  :root{
+    --green-soft:  #3EB489;
+    --green-deep: #5A9E78;
+    --deep-green: #2E6B4F;
+    --beige: #F8F5F0;
+    --white: #FFFFFF;
+    --footer-beige: #E6D8B9;
+    --accent-brown: #C2A88C;
+    --text-dark: #4A4A4A;
+    --muted-shadow: rgba(90,158,120,0.15);
+    --trans: all 0.3s ease;
+    --radius: 16px;
+    --max-width: 1200px;
+    --break-sm: 480px;
+    --break-md: 768px;
+    --title:#5A9E78;
+    --shadow-green: rgba(90,158,120,0.15);
+    --shadow-deep: rgba(90,158,120,0.1);
+    --transition: all 0.3s ease;
+  }
+
+  /* ==== Reset minimal ====
+     Keep it small and predictable for embedding
+  */
+  * {box-sizing: border-box; margin:0; padding:0}
+  html,body {height:100%}
+  body{
+    font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg,var(--beige),#ffffff 30%);
+    color:var(--text-dark);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:28px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:20px;
+  }
+
+  /* ==== Container (centred block) ==== */
+  .participants-card {
+    width:100%;
+    max-width:420px;
+    background:var(--white);
+    border-radius:var(--radius);
+    box-shadow: 0 8px 30px var(--muted-shadow), 0 2px 8px var(--shadow-deep);
+    padding:20px;
+    transition:var(--transition);
+    border:1px solid rgba(46,107,79,0.05);
+  }
+
+  /* Header row with badge */
+  .pc-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:12px;
+  }
+  .pc-badge {
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background: linear-gradient(90deg,var(--green-soft),var(--green-deep));
+    color:var(--white);
+    padding:6px 10px;
+    border-radius:12px;
+    font-weight:600;
+    font-size:0.95rem;
+    box-shadow: 0 4px 14px rgba(46,107,79,0.08);
+  }
+  .pc-badge small {
+    opacity:0.95;
+    font-weight:700;
+    letter-spacing:0.2px;
+  }
+
+  /* Counter block */
+  .pc-counter-wrap{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:10px;
+    padding:12px 8px 18px;
+  }
+  .pc-counter {
+    font-size:48px;
+    line-height:1;
+    font-weight:800;
+    color:var(--deep-green);
+    letter-spacing:-1px;
+    transition:var(--transition);
+  }
+  .pc-caption {
+    font-size:0.95rem;
+    color:var(--text-dark);
+    text-align:center;
+    max-width:90%;
+  }
+
+  /* Subtle decorative footer area containing the button */
+  .pc-footer {
+    margin-top:18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .pc-cta {
+    appearance:none;
+    border:0;
+    background:linear-gradient(180deg,var(--green-soft),var(--green-deep));
+    color:var(--white);
+    padding:10px 14px;
+    border-radius:12px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow: 0 8px 20px var(--muted-shadow);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .pc-cta:active{ transform:translateY(1px); }
+  .pc-cta:focus{ outline:3px solid rgba(62,180,137,0.15); outline-offset:3px; }
+
+  /* small meta on the right */
+  .pc-meta {
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    align-items:flex-end;
+  }
+  .pc-meta .last-upd { font-size:0.82rem; color:var(--deep-green); font-weight:600 }
+  .pc-meta .sub { font-size:0.78rem; color:rgba(74,74,74,0.6) }
+
+  /* Responsive tweaks */
+  @media (max-width: var(--break-md)) {
+    .participants-card{ max-width:360px; padding:16px; }
+    .pc-counter{ font-size:40px; }
+  }
+  @media (max-width: var(--break-sm)) {
+    body { padding:18px; }
+    .participants-card{ width:100%; max-width:100%; border-radius:12px; padding:14px; }
+    .pc-header { flex-direction:column; align-items:flex-start; gap:10px; }
+    .pc-meta { align-items:flex-start; }
+    .pc-counter { font-size:36px; }
+    .pc-caption { font-size:0.9rem; }
+  }
+
+  /* ==== Popup overlay & panel (fixed so header unaffected) ==== */
+  .overlay {
+    position:fixed;
+    inset:0;
+    background: rgba(10,10,10,0.35);
+    display:none; /* toggled via JS */
+    align-items:center;
+    justify-content:center;
+    z-index:10000; /* above site header */
+    padding:24px;
+  }
+  .overlay.show { display:flex; }
+
+  .modal {
+    width:100%;
+    max-width:720px;
+    max-height:86vh;
+    background:var(--white);
+    border-radius:14px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    transition:var(--transition);
+    border:1px solid rgba(46,107,79,0.06);
+  }
+
+  .modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 18px;
+    background: linear-gradient(90deg,var(--footer-beige), #fff);
+    border-bottom:1px solid rgba(0,0,0,0.04);
+  }
+  .modal-title {
+    font-weight:800;
+    color:var(--title);
+    font-size:1.05rem;
+  }
+  .modal-close {
+    background:transparent;
+    border:0;
+    font-size:18px;
+    cursor:pointer;
+    padding:6px 8px;
+    border-radius:8px;
+    transition:var(--trans);
+  }
+  .modal-close:hover { background:rgba(0,0,0,0.04); }
+
+  .modal-body {
+    padding:14px 18px 18px;
+    overflow:auto;
+  }
+
+  /* Search input */
+  .search-row {
+    display:flex;
+    gap:10px;
+    align-items:center;
+    margin-bottom:12px;
+  }
+  .search-input {
+    flex:1;
+    padding:10px 12px;
+    border-radius:10px;
+    border:1px solid rgba(74,74,74,0.08);
+    font-size:0.95rem;
+    transition:var(--trans);
+  }
+  .search-input:focus { outline:3px solid rgba(90,158,120,0.08); border-color:var(--green-deep); }
+
+  /* Participants list */
+  .participants-list {
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    padding-bottom:6px;
+  }
+  .participant-item {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px 12px;
+    border-radius:10px;
+    background: linear-gradient(180deg, rgba(232,229,224,0.6), rgba(255,255,255,0.6));
+    box-shadow: 0 4px 10px var(--shadow-deep);
+  }
+  .participant-avatar {
+    width:44px;
+    height:44px;
+    min-width:44px;
+    border-radius:50%;
+    display:inline-grid;
+    place-items:center;
+    font-weight:700;
+    color:var(--white);
+    background:linear-gradient(180deg,var(--green-deep),var(--deep-green));
+    font-size:0.95rem;
+    flex-shrink:0;
+  }
+  .participant-meta {
+    display:flex;
+    flex-direction:column;
+  }
+  .participant-name {
+    font-weight:700;
+    color:var(--text-dark);
+  }
+  .participant-sub {
+    font-size:0.82rem;
+    color:rgba(74,74,74,0.6);
+  }
+
+  /* Empty state */
+  .empty-note {
+    padding:18px;
+    text-align:center;
+    color:rgba(74,74,74,0.6);
+    border-radius:10px;
+    background:linear-gradient(90deg, rgba(246,244,241,0.6), rgba(255,255,255,0.6));
+    margin-top:6px;
+  }
+
+  /* Minor scrollbar style for modal body */
+  .modal-body::-webkit-scrollbar { height:8px; width:8px; }
+  .modal-body::-webkit-scrollbar-thumb { background:rgba(0,0,0,0.08); border-radius:8px; }
+</style>
+</head>
+<body>
+
+  <!-- ==== Bloc principal: Participants card ==== -->
+  <article class="participants-card" aria-label="Bloc participants Pour ceux qu'on aime">
+    <div class="pc-header">
+      <div class="pc-badge" aria-hidden="true">
+        <small>Participants</small>
+      </div>
+      <div class="pc-meta" aria-hidden="true">
+        <div class="last-upd">Campagne “Pour ceux qu’on aime”</div>
+        <div class="sub">Mobilisons-nous ensemble</div>
+      </div>
+    </div>
+
+    <div class="pc-counter-wrap">
+      <!-- Counter element -->
+      <div id="counter" class="pc-counter" aria-live="polite" aria-atomic="true">0</div>
+      <!-- Short paragraph accrocheur -->
+      <p class="pc-caption">Chaque voix compte. Retrouvez la communauté qui soutient nos proches et participez au mouvement.</p>
+    </div>
+
+    <div class="pc-footer">
+      <!-- CTA ouvre la popup -->
+      <button id="openListBtn" class="pc-cta" type="button" aria-haspopup="dialog" aria-controls="participantsModal">Voir liste</button>
+
+      <!-- Petite info statique (peut être dynamique si besoin) -->
+      <div style="font-size:0.86rem; color:rgba(74,74,74,0.7)">Total officiel</div>
+    </div>
+  </article>
+
+  <!-- ==== Popup overlay & modal (hidden by default) ==== -->
+  <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
+    <div class="modal" role="document" id="participantsModal">
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle">Liste des participants</div>
+        <button id="closeModal" class="modal-close" aria-label="Fermer la liste">❌</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Search bar -->
+        <div class="search-row">
+          <input id="searchInput" class="search-input" type="search" placeholder="Rechercher par nom (ex: Nom Prénom)" aria-label="Rechercher un participant" />
+          <div style="min-width:86px; text-align:right; font-weight:700; color:var(--deep-green);">Tri: A → Z</div>
+        </div>
+
+        <!-- Participants list (data-name attribute used for filtering & sorting) -->
+        <div id="listContainer" class="participants-list" aria-live="polite">
+          <!-- Sample participants — le tri sera appliqué par JS -->
+          <div class="participant-item" data-name="Abdoulaye Fall">
+            <div class="participant-avatar" aria-hidden="true">AF</div>
+            <div class="participant-meta">
+              <div class="participant-name">Abdoulaye Fall</div>
+              <div class="participant-sub">Soutien local</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Binta Diop">
+            <div class="participant-avatar">BD</div>
+            <div class="participant-meta">
+              <div class="participant-name">Binta Diop</div>
+              <div class="participant-sub">Bénévole</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Cheikh N'Dour">
+            <div class="participant-avatar">CN</div>
+            <div class="participant-meta">
+              <div class="participant-name">Cheikh N'Dour</div>
+              <div class="participant-sub">Donateur</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Doriane Kouyaté">
+            <div class="participant-avatar">DK</div>
+            <div class="participant-meta">
+              <div class="participant-name">Doriane Kouyaté</div>
+              <div class="participant-sub">Soutien</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Emmanuel Traoré">
+            <div class="participant-avatar">ET</div>
+            <div class="participant-meta">
+              <div class="participant-name">Emmanuel Traoré</div>
+              <div class="participant-sub">Partenaire</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Fatoumata Sidibé">
+            <div class="participant-avatar">FS</div>
+            <div class="participant-meta">
+              <div class="participant-name">Fatoumata Sidibé</div>
+              <div class="participant-sub">Volunteer</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Gérard Kouame">
+            <div class="participant-avatar">GK</div>
+            <div class="participant-meta">
+              <div class="participant-name">Gérard Kouame</div>
+              <div class="participant-sub">Supporter</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Hawa Cissé">
+            <div class="participant-avatar">HC</div>
+            <div class="participant-meta">
+              <div class="participant-name">Hawa Cissé</div>
+              <div class="participant-sub">Coordination</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Ibrahima Ba">
+            <div class="participant-avatar">IB</div>
+            <div class="participant-meta">
+              <div class="participant-name">Ibrahima Ba</div>
+              <div class="participant-sub">Donateur</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Joséphine Kone">
+            <div class="participant-avatar">JK</div>
+            <div class="participant-meta">
+              <div class="participant-name">Joséphine Kone</div>
+              <div class="participant-sub">Soutien local</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Kadiatou Diallo">
+            <div class="participant-avatar">KD</div>
+            <div class="participant-meta">
+              <div class="participant-name">Kadiatou Diallo</div>
+              <div class="participant-sub">Bénévole</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Lamine Sy">
+            <div class="participant-avatar">LS</div>
+            <div class="participant-meta">
+              <div class="participant-name">Lamine Sy</div>
+              <div class="participant-sub">Coordinateur</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Mariama Touré">
+            <div class="participant-avatar">MT</div>
+            <div class="participant-meta">
+              <div class="participant-name">Mariama Touré</div>
+              <div class="participant-sub">Soutien</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Nafissatou Camara">
+            <div class="participant-avatar">NC</div>
+            <div class="participant-meta">
+              <div class="participant-name">Nafissatou Camara</div>
+              <div class="participant-sub">Supporter</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Ousmane Diarra">
+            <div class="participant-avatar">OD</div>
+            <div class="participant-meta">
+              <div class="participant-name">Ousmane Diarra</div>
+              <div class="participant-sub">Donateur</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Penda Sarr">
+            <div class="participant-avatar">PS</div>
+            <div class="participant-meta">
+              <div class="participant-name">Penda Sarr</div>
+              <div class="participant-sub">Bénévole</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Quincy N'Diaye">
+            <div class="participant-avatar">QN</div>
+            <div class="participant-meta">
+              <div class="participant-name">Quincy N'Diaye</div>
+              <div class="participant-sub">Supporter</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Rokia Baldé">
+            <div class="participant-avatar">RB</div>
+            <div class="participant-meta">
+              <div class="participant-name">Rokia Baldé</div>
+              <div class="participant-sub">Soutien</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Seynabou Faye">
+            <div class="participant-avatar">SF</div>
+            <div class="participant-meta">
+              <div class="participant-name">Seynabou Faye</div>
+              <div class="participant-sub">Bénévole</div>
+            </div>
+          </div>
+
+          <div class="participant-item" data-name="Thierno Camara">
+            <div class="participant-avatar">TC</div>
+            <div class="participant-meta">
+              <div class="participant-name">Thierno Camara</div>
+              <div class="participant-sub">Partenaire</div>
+            </div>
+          </div>
+
+          <!-- End of list -->
+        </div>
+
+        <!-- Empty note shown when no matches -->
+        <div id="emptyNote" class="empty-note" style="display:none">Aucun participant trouvé.</div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* ============================
+   JavaScript: Compteur, Popup,
+   Tri alphabétique et Recherche
+   ============================ */
+
+/* ===== Parameters =====
+   - TARGET_COUNT: nombre final (modifiable si besoin)
+   - DURATION_MS: durée de l'animation du compteur (~1000ms demandé)
+*/
+(function(){
+  // Config (change target only here if needed)
+  const TARGET_COUNT = 487; // nombre final demandé dans l'exemple
+  const DURATION_MS = 1000; // ~1 seconde
+
+  /* ---------- Counter animation (smooth, requestAnimationFrame) ---------- */
+  const counterEl = document.getElementById('counter');
+
+  // animate number from 0 to TARGET_COUNT over DURATION_MS
+  function animateCounter(target, duration) {
+    const start = performance.now();
+    const initial = 0;
+    const diff = target - initial;
+
+    // easeOutCubic for a pleasing effect
+    function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+
+    function step(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOutCubic(progress);
+      const value = Math.round(initial + diff * eased);
+      counterEl.textContent = value.toLocaleString('fr-FR'); // localized formatting
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        // ensure final exact value
+        counterEl.textContent = target.toLocaleString('fr-FR');
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Start counter on load (can be triggered elsewhere if needed)
+  window.addEventListener('load', () => {
+    // Slight delay so UI feels intentional
+    setTimeout(()=> animateCounter(TARGET_COUNT, DURATION_MS), 120);
+  });
+
+  /* ---------- Popup open/close logic ---------- */
+  const openBtn = document.getElementById('openListBtn');
+  const overlay = document.getElementById('overlay');
+  const closeBtn = document.getElementById('closeModal');
+  const searchInput = document.getElementById('searchInput');
+  const listContainer = document.getElementById('listContainer');
+  const emptyNote = document.getElementById('emptyNote');
+
+  // Accessibility: remember previously focused element
+  let lastFocused = null;
+
+  function openModal(){
+    lastFocused = document.activeElement;
+    overlay.classList.add('show');
+    overlay.setAttribute('aria-hidden','false');
+    // Ensure modal content visible; focus search input
+    setTimeout(()=> searchInput.focus(), 120);
+    // prevent background scroll (but keep header visible on top due to overlay fixed)
+    document.documentElement.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    overlay.classList.remove('show');
+    overlay.setAttribute('aria-hidden','true');
+    document.documentElement.style.overflow = '';
+    // restore focus
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    // reset search
+    searchInput.value = '';
+    filterList('');
+  }
+
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+
+  // Close when clicking backdrop (but not when clicking inside modal)
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('show')) closeModal();
+  });
+
+  /* ---------- Utility: gather participant items, sort alphabetically by data-name ---------- */
+  function getParticipantItems(){
+    return Array.from(listContainer.querySelectorAll('.participant-item'));
+  }
+
+  function sortParticipantsAlpha(){
+    const items = getParticipantItems();
+    // sort by data-name (case-insensitive, diacritics considered by localeCompare)
+    items.sort((a,b) => {
+      const na = (a.getAttribute('data-name') || '').trim();
+      const nb = (b.getAttribute('data-name') || '').trim();
+      return na.localeCompare(nb, 'fr', {sensitivity:'base'});
+    });
+    // re-append in sorted order
+    items.forEach(it => listContainer.appendChild(it));
+  }
+
+  // Initial sort on script load
+  sortParticipantsAlpha();
+
+  /* ---------- Search / Filter logic (instant, case-insensitive) ---------- */
+  function filterList(query){
+    const q = (query || '').trim().toLowerCase();
+    const items = getParticipantItems();
+    let visibleCount = 0;
+    if (q === ''){
+      // show all
+      items.forEach(it => {
+        it.style.display = '';
+        visibleCount++;
+      });
+    } else {
+      items.forEach(it => {
+        const name = (it.getAttribute('data-name') || '').toLowerCase();
+        if (name.indexOf(q) !== -1){
+          it.style.display = '';
+          visibleCount++;
+        } else {
+          it.style.display = 'none';
+        }
+      });
+    }
+    // Show empty note when none visible
+    emptyNote.style.display = visibleCount === 0 ? 'block' : 'none';
+  }
+
+  // Input event with immediate filtering; debounce not necessary (instant request)
+  searchInput.addEventListener('input', (e) => {
+    const q = e.target.value;
+    filterList(q);
+  });
+
+  /* ---------- Ensure participants are re-sorted if dynamic items added later
+       This makes the component robust: call sortParticipantsAlpha() after modifications
+  ---------- */
+  // Expose utilities on element for possible external use (non-intrusive)
+  window.ParticipantsUI = {
+    sortAlphabetically: sortParticipantsAlpha,
+    filter: filterList,
+    open: openModal,
+    close: closeModal,
+    animateCounterTo: (newTarget, duration = DURATION_MS) => {
+      // allow dynamic change of total
+      animateCounter(newTarget, duration);
+    }
+  };
+
+  /* ---------- Small enhancement: generate avatars from initials (already in markup),
+       but make sure if someone adds items the avatar gets initials automatically. ---------- */
+  (function ensureAvatars(){
+    getParticipantItems().forEach(it => {
+      const avatar = it.querySelector('.participant-avatar');
+      const name = (it.getAttribute('data-name') || '').trim();
+      if (avatar && name){
+        const initials = name.split(/\s+/).map(s => s.charAt(0)).slice(0,2).join('').toUpperCase();
+        if (!avatar.textContent.trim()) avatar.textContent = initials;
+      }
+    });
+  })();
+
+})();
+</script>
+</body>
+</html>
