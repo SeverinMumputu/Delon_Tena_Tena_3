@@ -95,7 +95,7 @@ body{
    inset:0;
     z-index: 999;
     width:100%;
-    height: 70vh;
+    height: 95vh;
     transform:translateX(120%);
     transition:transform .35s cubic-bezier(.2,.9,.3,1);
     background:var(--green-soft);
@@ -127,8 +127,177 @@ body{
 
 /* Fin  Header Index */
 
+/* HEADER 2 */
+.sub-header{
+  position: absolute;        /* n'impacte pas le flow / le sticky du header principal */
+  left: 0;
+  top: 100%;                 /* placé juste en dessous du contenu du header principal */
+  width: 100%;
+  z-index: 79;               /* juste en dessous du header (header z-index:80), évite d'empiéter sur sticky */
+  pointer-events: none;      /* fermé par défaut */
+  /* On utilise transform + opacity pour la transition (GPU-accelerated) */
+  transform: translateY(-8px) translateZ(0);
+  opacity: 0;
+  transition: transform .28s cubic-bezier(.2,.9,.3,1), opacity .22s ease;
+  will-change: transform, opacity;
+  /* Reuse look: background & border similar to header but slightly lighter — only via existing variables */
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.92));
+  border-bottom: 1px solid rgba(194,168,140,0.04);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+  /* overflow hidden to avoid visual jump during reveal */
+  overflow: hidden;
+}
+
+/* === Ajustement demandé : centrer les liens dans le sous-header === */
+
+/* Container interne : on remplace justify-content: space-between 
+   par justify-content: center pour que tout soit CENTRÉ */
+.sub-inner{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 10px 16px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* ← CENTRAGE parfait */
+}
+
+/* La liste des liens doit être centrée elle aussi */
+.sub-menu{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;   /* ← liens parfaitement centrés */
+}
+
+/* Version mobile également centrée */
+@media (max-width: 860px){
+  .sub-menu{
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;     /* ← centrage en colonne */
+    justify-content: center;
+  }
+}
+
+/* Links reuse typography and interaction patterns from main nav */
+.sub-link{
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition: var(--trans);
+}
+.sub-link:hover{
+  background: rgba(90,158,120,0.04);
+  color: var(--green-deep);
+}
+
+/* OPEN STATE (appliquée par JS en ajoutant la classe .is-open sur .sub-header) */
+.sub-header.is-open{
+  transform: translateY(0) translateZ(0);
+  opacity: 1;
+  pointer-events: auto;   /* interactive lorsque ouvert */
+}
+
+/* small visual tweak: when open, slightly push header shadow so it reads as stacked */
+.sub-header.is-open + * { /* no-op placeholder to emphasize we don't change layout; left intentionally empty */ }
+
+/* RESPONSIVE: on mobile, stack in column (menu hamburger not affected) */
+@media (max-width: 860px){
+  .sub-inner{ padding: 12px 16px; }
+  .sub-menu{
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  .sub-link{
+    display: block;
+    padding: 12px 14px;
+    font-size: 0.98rem;
+  }
+}
+
+/* Accessibility: visually hide when aria-hidden true (defensive) */
+.sub-header[aria-hidden="true"]{
+  /* already handled by transform/opacity, but keep for assistive tech */
+}
+
+/* Small defensive rule: ensure sub-header never covers hamburger or controls */
+@media (max-width: 860px){
+  /* If the mobile hamburger/control area has fixed sizing, ensure sub-header content doesn't overlap controls visually.
+     We keep it simple and rely on pointer-events and z-index choices to avoid conflicts with existing scripts. */
+}
+
+/* === CSS ADDITIONNEL pour mode mobile (placer avec les autres règles du sub-header) === */
+
+/* Quand le subHeader est inséré dans le mobile menu, on passe en mobile-mode :
+   - position dans le flow du menu (relative/static) — il n'est plus absolute sous le header principal
+   - caché par défaut (display none) pour s'ouvrir uniquement via .is-open
+   - styles en colonne pour s'aligner avec mobile-list
+*/
+.sub-header.mobile-mode {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  z-index: auto !important;
+  transform: none !important;
+  opacity: 1 !important;           /* l'affichage est géré par display */
+  pointer-events: auto !important;
+  background: transparent;         /* hérite visuel du menu mobile */
+  border-bottom: none;
+  box-shadow: none;
+  display: none;                   /* caché par défaut en mobile-mode */
+  padding: 0;
+  margin: 8px 0 0 0;
+}
+
+/* Affiche le subHeader dans le mobile menu quand ouvert */
+.sub-header.mobile-mode.is-open{
+  display: block;
+}
+
+/* Ajustement de l'intérieur pour ressembler aux éléments du mobile menu */
+.sub-header.mobile-mode .sub-inner{
+  max-width: 100%;
+  margin: 0;
+  padding: 0 0 0 0;
+  display: block;
+}
+
+.sub-header.mobile-mode .sub-menu{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px 0;
+  margin: 0;
+  align-items: stretch;
+}
+
+/* Les liens prennent le style mobile existant (harmonisation) */
+.sub-header.mobile-mode .sub-link{
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  color: var(--beige);     /* cohérence avec .mobile-list a */
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 20px;
+}
+
+/* Hover/active : on peut garder cohérence mobile */
+.sub-header.mobile-mode .sub-link:hover{
+  background: rgba(255,255,255,0.04);
+  color: var(--beige);
+}
+
 /* Hero */
-.hero{padding:28px 16px 6px;display:flex;justify-content:center}
+.hero{padding:28px 16px 6px;display:flex;justify-content:center; margin-top: 30px;}
 .hero-inner{max-width:var(--max-width);width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .hero-title{font-size:1.5rem;margin:0;color:var(--deep-green);font-weight:900}
 .hero-sub{margin:0;color:rgba(46,70,49,.85)}
@@ -170,6 +339,12 @@ body{
 .step-card[hidden]{display:none}
 .step-card:not(.active){opacity:.4;transform:translateY(8px)}
 
+.local-lang .lang-btn {
+  background-color: var(--deep-green);
+  border-radius: 10px;
+  justify-content: space-between;
+}
+
 /* Card header */
 .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
 .card-title{margin:0;font-size:1.05rem;color:var(--deep-green);font-weight:800}
@@ -192,7 +367,7 @@ body{
 
 /* influencer grid */
 .influencer-controls{display:flex;gap:12px;align-items:center;margin-bottom:12px}
-.influencer-controls input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(46,70,49,0.08)}
+.influencer-controls input{flex:1;padding:10px;border-radius:10px;border:3px solid var(--deep-green); }
 .influencer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
 .influencer{background:linear-gradient(180deg,#fff,#fff);padding:8px;border-radius:12px;text-align:center;cursor:pointer;position:relative;border:1px solid rgba(46,70,49,0.04);transition:transform .2s,var(--trans)}
 .influencer:focus{outline:2px solid rgba(62,180,137,0.15)}
@@ -203,7 +378,7 @@ body{
 .influencer.selected .influencer-flag{opacity:1;transform:translateY(0)}
 
 /* donation */
-.donation-grid{display:flex;gap:12px;flex-wrap:wrap}
+.donation-grid{display:flex;gap:12px;flex-wrap:wrap; font-family:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,"Helvetica Neue",Arial;}
 .donor-logo{flex:1 1 160px;display:flex;flex-direction:column;align-items:center;
     gap:8px;padding:12px;
     border-radius:12px;
@@ -214,12 +389,24 @@ body{
 .donor-logo img{height:36px;object-fit:contain; }
 .donor-logo.selected{box-shadow:0 18px 36px rgba(62,180,137,0.08);transform:translateY(-6px); background-color: #2E6B48;}
 .donation-output{margin-top:12px;padding:12px;border-radius:10px;
-    background:linear-gradient(180deg,rgba(62,180,137,0.06),rgba(178,230,185,0.06));color:var(--deep-green)}
+    background:linear-gradient(180deg,rgba(26, 36, 32, 0.06),rgba(178,230,185,0.06));color:var(--deep-green)}
+
+    .donor-label{
+        color: var(--green-deep);
+  font-weight: bold;
+  font-family:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,"Helvetica Neue",Arial;
+  font-size: 1.3rem;
+    }
 
     .btn btn-success{
       display: flex;
     }
-
+.color_texte_step_4{
+  color: var(--green-deep);
+  font-weight: bold;
+  font-family:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,"Helvetica Neue",Arial;
+  font-size: 1.1 rem;
+}
 /* actions & buttons */
 .card-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:12px}
 .btn{padding:10px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:800;letter-spacing:.2px}
@@ -238,6 +425,97 @@ body{
 .thanks-logo{width:82px;height:82px;margin:0 auto 12px;display:block;animation:logoPop .8s cubic-bezier(.2,.9,.3,1)}
 @keyframes logoPop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08);opacity:1}100%{transform:scale(1)}}
 
+
+/* step3-analytics.css */
+/* Modal base */
+.analytics-modal { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 9997; pointer-events: none; }
+.analytics-modal[aria-hidden="false"] { pointer-events: auto; }
+
+/* overlay */
+.analytics-overlay {
+  position: absolute; inset: 0; background: rgba(8,12,6,0.45); backdrop-filter: blur(3px);
+  transition: opacity .25s ease; opacity: 0;
+}
+.analytics-modal[aria-hidden="false"] .analytics-overlay { opacity: 1; }
+
+/* core panel */
+.analytics-core {
+  position: relative;
+  width: min(980px, 94vw);
+  max-height: 86vh;
+  background: linear-gradient(180deg, #fff, #F9F6F1);
+  border-radius: var(--radius, 14px);
+  box-shadow: 0 28px 60px var(--shadow-green, rgba(46,70,49,0.12));
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  transform: scale(.98);
+  opacity: 0;
+  transition: transform .28s cubic-bezier(.2,.9,.3,1), opacity .28s;
+  overflow: hidden;
+}
+.analytics-modal[aria-hidden="false"] .analytics-core {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* header */
+.analytics-header { display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 2px 12px;border-bottom:1px solid rgba(46,70,49,0.04); }
+.analytics-title{ margin:0;font-size:1.05rem;color:var(--deep-green);font-weight:900; }
+.analytics-close {
+  border: none; background: transparent; font-size:1.6rem; line-height:1; padding:8px 10px; cursor:pointer;
+  border-radius:10px; color:var(--deep-green);
+}
+.analytics-close:focus{ outline:3px solid rgba(46,70,49,0.12); }
+
+/* body layout */
+.analytics-body { display:flex; gap:16px; padding-top:12px; overflow:auto; }
+.analytics-personal, .analytics-stats { flex:1 1 320px; min-width:260px; }
+
+/* personal grid */
+.personal-grid { display:flex; gap:12px; align-items:flex-start; }
+.personal-photo-wrap { flex:0 0 120px; display:flex; align-items:center; justify-content:center; }
+.analytics-photo {
+  width:110px; height:110px; border-radius:12px; background-size:cover; background-position:center;
+  border:1px solid rgba(46,70,49,0.06); box-shadow:0 12px 30px rgba(46,70,49,0.06);
+}
+.personal-meta { flex:1; display:flex; flex-direction:column; gap:8px; }
+.meta-row { display:flex; flex-direction:column; gap:6px; }
+.meta-label { font-size:0.78rem; color:rgba(46,70,49,0.72); font-weight:800; }
+.meta-value { font-size:0.98rem; color:var(--deep-green); font-weight:800; }
+
+/* vote button */
+.meta-actions { margin-top:8px; display:flex; gap:8px; }
+#analyticsVoteBtn { padding:10px 14px; border-radius:10px; font-weight:800; cursor:pointer; }
+
+/* analytics stats */
+.stats-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin-top:10px; }
+.stat-item { background:linear-gradient(180deg,#fff,#fff); border-radius:10px; padding:10px; border:1px solid rgba(46,70,49,0.04); box-shadow:0 8px 18px rgba(46,70,49,0.04); }
+.stat-label { font-size:0.78rem; color:rgba(46,70,49,0.65); font-weight:700; }
+.stat-value { font-size:1.1rem; font-weight:900; color:var(--deep-green); margin-top:6px; }
+
+/* charts */
+.analytics-charts { display:flex; flex-direction:column; gap:12px; margin-top:12px; }
+.chart-wrap { background:linear-gradient(180deg,#fff,#fff); padding:10px; border-radius:10px; border:1px solid rgba(46,70,49,0.04); box-shadow:0 10px 26px rgba(46,70,49,0.03); }
+.chart-title { font-size:0.9rem; font-weight:800; color:var(--deep-green); margin-bottom:8px; }
+.analytics-canvas { display:block; width:100%; height:auto; border-radius:6px; background:transparent; }
+
+/* responsive */
+@media (min-width: 900px) {
+  .analytics-body { flex-direction: row; }
+  .analytics-charts { flex-direction: row; }
+  .chart-wrap { flex:1; }
+}
+@media (max-width: 899px) {
+  .analytics-body { flex-direction: column; padding:8px 4px; }
+  .personal-grid { flex-direction: row; gap:10px; }
+  .analytics-core { width: 96vw; max-height: 92vh; }
+}
+
+/* subtle entry animation (prefers-reduced-motion respects) */
+@media (prefers-reduced-motion:no-preference) {
+  .analytics-core { transition: transform .28s cubic-bezier(.2,.9,.3,1), opacity .28s; }
+}
 
 /* Footer*/
 .fdn-footer {

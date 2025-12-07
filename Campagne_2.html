@@ -9,6 +9,7 @@
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+  
     <link rel="stylesheet" href="Campagne_2.css">
 </head>
 <body class="fr"> 
@@ -50,6 +51,7 @@
         <nav class="main-nav" id="mainNav" role="navigation" aria-label="Menu principal">
           <ul class="menu">
           <li><a href="index.html" class="nav-link" data-fr="Accueil" data-en="Home">Accueil</a></li>
+          <li><a href="New_Campagne.html#participation" id="campaignToggle" class="nav-link" data-fr="Campagne pour ceux qu'on aime" data-en="Campaign for those we love">Campagne pour ceux qu'on aime</a></li>
           <li><a href="About.html" class="nav-link" data-fr="Qui sommes-nous" data-en="Who are we">Qui sommes-nous</a></li>
           <li><a href="About.html#communaute" class="nav-link" data-fr="Communautés" data-en="Communities">Communautés</a></li>
           <li><a href="Don.html" class="nav-link" data-fr="Faire un don" data-en="Make a donation">Faire un don</a></li>
@@ -71,12 +73,27 @@
       </div>
     </div>
 
+    <!-- Header 2 -->
+<div class="sub-header" id="subHeader" aria-hidden="true" aria-label="Sous header campagne">
+  <div class="sub-inner">
+    <nav class="sub-nav" role="navigation" aria-label="Sous-menu Campagne - Pour ceux qu'on aime">
+      <ul class="sub-menu">
+        <li><a href="New_Campagne.html#projet" class="sub-link" data-fr="Présentation du projet" data-en="Project overview">Présentation du projet</a></li>
+        <li><a href="Campagne_2.html" class="sub-link" data-fr="Participer à la campagne" data-en="Participate in the campaign">Participer à la campagne</a></li>
+        <li><a href="New_Campagne.html#Timing" class="sub-link" data-fr="Timing de la campagne" data-en="Campaign timing">Timing de la campagne</a></li>
+        <li><a href="New_Campagne.html#partenaires" class="sub-link" data-fr="Partenaires" data-en="Partners">Partenaires</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
     <!-- Mobile slide-in menu -->
     <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
       <div class="mobile-menu-inner">
         <button class="mobile-close" id="mobileClose" aria-label="Fermer le menu">X</button>
         <ul class="mobile-list">
-          <li><a href="index.html" class="nav-link" data-fr="Accueil" data-en="^Home">Accueil</a></li>
+          <li><a href="index.html" class="nav-link" data-fr="Accueil" data-en="Home">Accueil</a></li>
+          <li><a href="New_Campagne.html#participation"  class="nav-link" data-fr="Campagne pour ceux qu'on aime" data-en="Campaign for those we love">Campagne pour ceux qu'on aime</a></li>
           <li><a href="About.html" class="nav-link" data-fr="Qui sommes-nous" data-en="Who are we">Qui sommes-nous</a></li>
           <li><a href="About.html#communaute" class="nav-link" data-fr="Communautés" data-en="Communities">Communautés</a></li>
           <li><a href="Don.html" class="nav-link" data-fr="Faire un don" data-en="Make a donation">Faire un don</a></li>
@@ -210,98 +227,124 @@
             </form>
           </article>
 
-          <!-- Step 2 : Invitation des proches (3 invites) -->
-          <article class="step-card" data-step="2" id="step-2" aria-labelledby="step2Title" role="region" hidden>
-            <header class="card-head">
-              <h3 id="step2Title" class="card-title" data-fr="Étape 2 — Invitation des proches" data-en="Step 2 — Invite Loved Ones">Étape 2 — Invitation des proches</h3>
-              <p class="card-lead" data-fr="Invitez trois personnes à participer." data-en="Invite three people to participate.">Invitez trois personnes à participer.</p>
-            </header>
+        <!-- Step 2 : Invitation des proches (3 à 5 invites) -->
+<article class="step-card" data-step="2" id="step-2" aria-labelledby="step2Title" role="region" hidden>
+  <header class="card-head">
+    <h3 id="step2Title" class="card-title" data-fr="Étape 2 — Invitation des proches" data-en="Step 2 — Invite Loved Ones">Étape 2 — Invitation des proches</h3>
+    <p class="card-lead" data-fr="Invitez à partir de 3 à 5 personnes." data-en="Invite 3 to 5 people.">Invitez à partir de 3 à 5 personnes.</p>
+  </header>
 
-            <form class="card-form" id="form-step-2" novalidate>
-              <div class="invite-grid">
-                <!-- Generate 3 invite blocks -->
-                <div class="invite" data-invite="1">
-                  <h4 class="invite-title">Invité 1</h4>
-                  <label class="field">
-                    <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span>
-                    <input type="text" name="i1-last" placeholder="Nom" required/>
-                  </label>
-                  <label class="field">
-                    <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span>
-                    <input type="text" name="i1-first" placeholder="Prénom" required/>
-                  </label>
+  <form class="card-form" id="form-step-2" novalidate>
+    <div class="invite-grid">
+      <!-- Generate 5 invite blocks (les 3 originaux + 2 nouveaux identiques) -->
 
-                  <!-- PHONE INVITE 1
-                  <label class="field">
-                    <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92V21a1 1 0 0 1-1.09 1"/><path d="M2 3.09A19 19 0 0 1 12 2"/></svg></span>
-                    <input type="tel" name="i1-phone" placeholder="Téléphone" required/>
-                  </label>  -->
+      <div class="invite" data-invite="1">
+        <h4 class="invite-title">Invité 1</h4>
+        <label class="field">
+          <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+          <input type="text" name="i1-last" placeholder="Nom" required/>
+        </label>
+        <label class="field">
+          <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+          <input type="text" name="i1-first" placeholder="Prénom" required/>
+        </label>
 
-                  <label class="field select-field">
-                    <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg></span>
-                    <select name="i1-social">
-                      <option value="">Choisir réseau</option>
-                      <option value="facebook">Facebook</option>
-                      <option value="instagram">Instagram</option>
-                      <option value="twitter">Twitter/X</option>
-                      <option value="tiktok">TikTok</option>
-                    </select>
-                  </label>
-                  <label class="field profile-wrap" style="display:none;">
-                    <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4z"/><path d="M4 12h16v8H4z"/></svg></span>
-                    <input type="text" name="i1-profile" placeholder="Nom de profil"/>
-                  </label>
-                </div>
+        <label class="field select-field">
+          <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg></span>
+          <select name="i1-social">
+            <option value="">Choisir réseau</option>
+            <option value="facebook">Facebook</option>
+            <option value="instagram">Instagram</option>
+            <option value="twitter">Twitter/X</option>
+            <option value="tiktok">TikTok</option>
+          </select>
+        </label>
+        <label class="field profile-wrap" style="display:none;">
+          <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4z"/><path d="M4 12h16v8H4z"/></svg></span>
+          <input type="text" name="i1-profile" placeholder="Nom de profil"/>
+        </label>
+      </div>
 
-                <div class="invite" data-invite="2">
-                  <h4 class="invite-title">Invité 2</h4>
-                  <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i2-last" placeholder="Nom" required/></label>
-                  <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i2-first" placeholder="Prénom" required/></label>
+      <div class="invite" data-invite="2">
+        <h4 class="invite-title">Invité 2</h4>
+        <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i2-last" placeholder="Nom" required/></label>
+        <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i2-first" placeholder="Prénom" required/></label>
 
-                  <!-- PHONE INVITE 2
-                  <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92V21a1 1 0 0 1-1.09 1"/><path d="M2 3.09A19 19 0 0 1 12 2"/></svg></span><input type="tel" name="i2-phone" placeholder="Téléphone" required/></label> -->
+        <label class="field select-field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg></span>
+          <select name="i2-social">
+            <option value="">Choisir réseau</option>
+            <option value="facebook">Facebook</option>
+            <option value="instagram">Instagram</option>
+            <option value="twitter">Twitter/X</option>
+            <option value="tiktok">TikTok</option>
+          </select>
+        </label>
+        <label class="field profile-wrap" style="display:none;"><span class="field-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4z"/><path d="M4 12h16v8H4z"/></svg></span><input type="text" name="i2-profile" placeholder="Nom de profil"/></label>
+      </div>
 
-                  <label class="field select-field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg></span>
-                    <select name="i2-social">
-                      <option value="">Choisir réseau</option>
-                      <option value="facebook">Facebook</option>
-                      <option value="instagram">Instagram</option>
-                      <option value="twitter">Twitter/X</option>
-                      <option value="tiktok">TikTok</option>
-                    </select>
-                  </label>
-                  <label class="field profile-wrap" style="display:none;"><span class="field-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4z"/><path d="M4 12h16v8H4z"/></svg></span><input type="text" name="i2-profile" placeholder="Nom de profil"/></label>
-                </div>
+      <div class="invite" data-invite="3">
+        <h4 class="invite-title">Invité 3</h4>
+        <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i3-last" placeholder="Nom" required/></label>
+        <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i3-first" placeholder="Prénom" required/></label>
 
-                <div class="invite" data-invite="3">
-                  <h4 class="invite-title">Invité 3</h4>
-                  <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i3-last" placeholder="Nom" required/></label>
-                  <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i3-first" placeholder="Prénom" required/></label>
+        <label class="field select-field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg></span>
+          <select name="i3-social">
+            <option value="">Choisir réseau</option>
+            <option value="facebook">Facebook</option>
+            <option value="instagram">Instagram</option>
+            <option value="twitter">Twitter/X</option>
+            <option value="tiktok">TikTok</option>
+          </select>
+        </label>
+        <label class="field profile-wrap" style="display:none;"><span class="field-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4z"/><path d="M4 12h16v8H4z"/></svg></span><input type="text" name="i3-profile" placeholder="Nom de profil"/></label>
+      </div>
 
-                   <!-- phone INVITE 3 
-                  <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92V21a1 1 0 0 1-1.09 1"/><path d="M2 3.09A19 19 0 0 1 12 2"/></svg></span><input type="tel" name="i3-phone" placeholder="Téléphone" required/></label> -->
+      <!-- NEW: Invité 4 -->
+      <div class="invite" data-invite="4">
+        <h4 class="invite-title">Invité 4</h4>
+        <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i4-last" placeholder="Nom" required/></label>
+        <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i4-first" placeholder="Prénom" required/></label>
 
-                  <label class="field select-field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg></span>
-                    <select name="i3-social">
-                      <option value="">Choisir réseau</option>
-                      <option value="facebook">Facebook</option>
-                      <option value="instagram">Instagram</option>
-                      <option value="twitter">Twitter/X</option>
-                      <option value="tiktok">TikTok</option>
-                    </select>
-                  </label>
-                  <label class="field profile-wrap" style="display:none;"><span class="field-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4z"/><path d="M4 12h16v8H4z"/></svg></span><input type="text" name="i3-profile" placeholder="Nom de profil"/></label>
-                </div>
-              </div>
+        <label class="field select-field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg></span>
+          <select name="i4-social">
+            <option value="">Choisir réseau</option>
+            <option value="facebook">Facebook</option>
+            <option value="instagram">Instagram</option>
+            <option value="twitter">Twitter/X</option>
+            <option value="tiktok">TikTok</option>
+          </select>
+        </label>
+        <label class="field profile-wrap" style="display:none;"><span class="field-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4z"/><path d="M4 12h16v8H4z"/></svg></span><input type="text" name="i4-profile" placeholder="Nom de profil"/></label>
+      </div>
 
-              <div class="form-hint" id="s2-hint" aria-live="polite"></div>
+      <!-- NEW: Invité 5 -->
+      <div class="invite" data-invite="5">
+        <h4 class="invite-title">Invité 5</h4>
+        <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i5-last" placeholder="Nom" required/></label>
+        <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i5-first" placeholder="Prénom" required/></label>
 
-              <div class="card-actions">
-                <button type="button" class="btn btn-secondary" id="prevBtn2">Précédent</button>
-                <button type="button" class="btn btn-primary" id="nextBtn2" disabled>Étape suivante</button>
-              </div>
-            </form>
-          </article>
+        <label class="field select-field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg></span>
+          <select name="i5-social">
+            <option value="">Choisir réseau</option>
+            <option value="facebook">Facebook</option>
+            <option value="instagram">Instagram</option>
+            <option value="twitter">Twitter/X</option>
+            <option value="tiktok">TikTok</option>
+          </select>
+        </label>
+        <label class="field profile-wrap" style="display:none;"><span class="field-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4z"/><path d="M4 12h16v8H4z"/></svg></span><input type="text" name="i5-profile" placeholder="Nom de profil"/></label>
+      </div>
+
+    </div>
+
+    <div class="form-hint" id="s2-hint" aria-live="polite"></div>
+
+    <div class="card-actions">
+      <button type="button" class="btn btn-secondary" id="prevBtn2">Précédent</button>
+      <button type="button" class="btn btn-primary" id="nextBtn2" disabled>Étape suivante</button>
+    </div>
+  </form>
+</article>
 
           <!-- Step 3 : Vote des influenceurs -->
           <article class="step-card" data-step="3" id="step-3" aria-labelledby="step3Title" role="region" hidden>
@@ -323,6 +366,140 @@
                 <div class="influencer-meta"><strong>Fally Ipupa</strong></div>
                 <div class="influencer-flag" aria-hidden="true">✅</div>
               </div>
+              
+              <div class="influencer" data-name="Gim's" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('GIMS.webp')"></div>
+                <div class="influencer-meta"><strong>Gim's</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              <div class="influencer" data-name="Koffi olomide" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('KOFFI_OLOMIDE.webp')"></div>
+                <div class="influencer-meta"><strong>Koffi Olomide</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              <div class="influencer" data-name="Ferre Gola" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('FERRE\ GOLA.webp')"></div>
+                <div class="influencer-meta"><strong>Ferre Gola</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              <div class="influencer" data-name="JB Mpiana" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('JB_MPIANA.webp')"></div>
+                <div class="influencer-meta"><strong>JB Mpiana</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              <div class="influencer" data-name="Lokua Kanza" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('LOKUA_KANZA.webp')"></div>
+                <div class="influencer-meta"><strong>Lokua Kanza</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              
+              <div class="influencer" data-name="Innoss'B" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('INNOSSB.webp')"></div>
+                <div class="influencer-meta"><strong>Innoss'B</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              
+              <div class="influencer" data-name="Gaz Mawete" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('GAZ\ MAWETE.webp')"></div>
+                <div class="influencer-meta"><strong>Gaz Mawete</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+                 <div class="influencer" data-name="Pson role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('Pson.webp')"></div>
+                <div class="influencer-meta"><strong>Pson</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+                 <div class="influencer" data-name="Gally Garvey" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('Gally.webp')"></div>
+                <div class="influencer-meta"><strong>Gally Garvey</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              <div class="influencer" data-name="Rj Kaniera" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('Rj\ kaniera.webp')"></div>
+                <div class="influencer-meta"><strong>Rj Kaniera</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              <div class="influencer" data-name="Majoos" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('Majoos.webp')"></div>
+                <div class="influencer-meta"><strong>Majoos</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              <div class="influencer" data-name="Dj Samarino" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('Samarino.webp')"></div>
+                <div class="influencer-meta"><strong>Dj Samarino</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+                 <div class="influencer" data-name="Suintement" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('Suintement.webp')"></div>
+                <div class="influencer-meta"><strong>Suintement</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              <div class="influencer" data-name="Gim's" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('MBILIA\ BELLE.webp')"></div>
+                <div class="influencer-meta"><strong>Mbilia Belle</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+              
+              <div class="influencer" data-name="Barbara Kanam" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('BARBARA.webp')"></div>
+                <div class="influencer-meta"><strong>Barbara Kanam</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+              
+              <div class="influencer" data-name="Céline Banza" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('CELINE\ BANZA.webp')"></div>
+                <div class="influencer-meta"><strong>Céline Banza</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+                <div class="influencer" data-name="Rebo Tchulo" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('Rebo.webp')"></div>
+                <div class="influencer-meta"><strong>Rebo Tchulo</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+                <div class="influencer" data-name="Anita Mwarabu" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('Anita.webp')"></div>
+                <div class="influencer-meta"><strong>Anita Mwarabu</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+                 <div class="influencer" data-name="Sarah Lula" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('Sarah\ lula.webp')"></div>
+                <div class="influencer-meta"><strong>Sarah Lula</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              <div class="influencer" data-name="Aya Nakamura" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('Aya.jpeg')"></div>
+                <div class="influencer-meta"><strong>Aya Nakamura</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              <div class="influencer" data-name="Damso" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('DAMSO.webp')"></div>
+                <div  class="influencer-meta"><strong>Damso</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+    
+              <div class="influencer" data-name="Youssoupha" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('YOUSSOUPHA.webp')"></div>
+                <div class="influencer-meta"><strong>Youssoupha</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
 
               <div class="influencer" data-name="Ed Sheeran" role="listitem" tabindex="0">
                 <div class="influencer-pic" style="background-image:url('EdSheran.png')"></div>
@@ -333,6 +510,24 @@
               <div class="influencer" data-name="Dadju" role="listitem" tabindex="0">
                 <div class="influencer-pic" style="background-image:url('Dadju.jpeg')"></div>
                 <div class="influencer-meta"><strong>Dadju</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              <div class="influencer" data-name="Tayc" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('Tayc.jpeg')"></div>
+                <div class="influencer-meta"><strong>Tayc</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              <div class="influencer" data-name="Gazo" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('Gazo.jpeg')"></div>
+                <div class="influencer-meta"><strong>Gazo</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              <div class="influencer" data-name="WizKid" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('Wizkid.png')"></div>
+                <div class="influencer-meta"><strong>WizKid</strong></div>
                 <div class="influencer-flag" aria-hidden="true">✅</div>
               </div>
 
@@ -347,7 +542,127 @@
                 <div class="influencer-meta"><strong>Drake</strong></div>
                 <div class="influencer-flag" aria-hidden="true">✅</div>
               </div>
+              
+              <div class="influencer" data-name="Bakole" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('BAKOLE.webp')"></div>
+                <div class="influencer-meta"><strong>Martin Bakole</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              
+              <div class="influencer" data-name="Fiston Sai Sai" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('SAI\ SAI.webp')"></div>
+                <div class="influencer-meta"><strong>Fiston Sai Sai</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+                 <div class="influencer" data-name="Lady Esobe" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('Esobe.webp')"></div>
+                <div class="influencer-meta"><strong>Lady Esobe</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              
+              <div class="influencer" data-name="Ronsia Kukiel" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('RONSIA.webp')"></div>
+                <div class="influencer-meta"><strong>Ronsia Kukiel</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
+
+              <div class="influencer" data-name="Herman Amisi" role="listitem" tabindex="0">
+                <div class="influencer-pic" style="background-image:url('HERMAN\ AMISI.webp')"></div>
+                <div class="influencer-meta"><strong>Herman Amisi</strong></div>
+                <div class="influencer-flag" aria-hidden="true">✅</div>
+              </div>
             </div>
+
+            
+  <!-- ANALYTICS POPUP (static, hidden) -->
+<div id="analyticsModal" class="analytics-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="analyticsTitle" hidden>
+  <div id="analyticsOverlay" class="analytics-overlay" data-fr="Fermer le panneau analytique" data-en="Close analytics panel"></div>
+
+  <div class="analytics-core" role="document" aria-labelledby="analyticsTitle">
+    <header class="analytics-header">
+      <h2 id="analyticsTitle" class="analytics-title" data-fr="Détails de l'influenceur" data-en="Influencer details">Détails de l'influenceur</h2>
+      <button id="analyticsClose" class="analytics-close" aria-label="Close" data-fr="Fermer" data-en="Close">&times;</button>
+    </header>
+
+    <main class="analytics-body">
+      <!-- PERSONAL INFO -->
+      <section class="analytics-personal" aria-labelledby="personalTitle">
+        <h3 id="personalTitle" class="section-title" data-fr="Informations personnelles" data-en="Personal information">Informations personnelles</h3>
+
+        <div class="personal-grid">
+          <div class="personal-photo-wrap">
+            <div id="analyticsPhoto" class="analytics-photo" aria-hidden="true" style="background-image: none;"></div>
+          </div>
+
+          <div class="personal-meta">
+            <div class="meta-row">
+              <strong class="meta-label" data-fr="Nom complet" data-en="Full name">Nom complet</strong>
+              <div id="analyticsName" class="meta-value" data-fr="—" data-en="—">—</div>
+            </div>
+
+            <div class="meta-row">
+              <strong class="meta-label" data-fr="Secteur" data-en="Sector">Secteur</strong>
+              <div id="analyticsSector" class="meta-value" data-fr="Musique" data-en="Music">Musique</div>
+            </div>
+
+            <div class="meta-row">
+              <strong class="meta-label" data-fr="Statut" data-en="Status">Statut</strong>
+              <div id="analyticsStatus" class="meta-value" data-fr="Actif" data-en="Active">Actif</div>
+            </div>
+
+            <div class="meta-actions">
+              <button id="analyticsVoteBtn" class="btn btn-primary" data-fr="Voter" data-en="Vote">Voter</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS INFO -->
+      <section class="analytics-stats" aria-labelledby="statsTitle">
+        <h3 id="statsTitle" class="section-title" data-fr="Informations analytiques" data-en="Analytics">Informations analytiques</h3>
+
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-label" data-fr="Votes" data-en="Votes">Votes</div>
+            <div id="analyticsVotes" class="stat-value">0</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-label" data-fr="% Votes" data-en="% Votes">% Votes</div>
+            <div id="analyticsPercent" class="stat-value">0%</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-label" data-fr="Classement" data-en="Ranking">Classement</div>
+            <div id="analyticsRank" class="stat-value">—</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-label" data-fr="Tendances" data-en="Trends">Tendances</div>
+            <div id="analyticsTrends" class="stat-value">↗</div>
+          </div>
+        </div>
+
+        <!-- Three.js canvases -->
+        <div class="analytics-charts" id="analyticsCharts" aria-hidden="false">
+          <div class="chart-wrap">
+            <div class="chart-title" data-fr="Bar-chart 3D" data-en="3D Bar Chart">Bar-chart 3D</div>
+            <canvas id="analyticsBar3D" class="analytics-canvas" width="600" height="240" aria-label="3D bar chart"></canvas>
+          </div>
+
+          <div class="chart-wrap">
+            <div class="chart-title" data-fr="Line-chart 3D" data-en="3D Line Chart">Line-chart 3D</div>
+            <canvas id="analyticsLine3D" class="analytics-canvas" width="600" height="240" aria-label="3D line chart"></canvas>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+       
 
             <div class="form-hint" id="s3-hint" aria-live="polite"></div>
 
@@ -358,7 +673,6 @@
           </article>
 
           <!-- Step 4 : Faire un don -->
-          <!-- Step 4 : Faire un don (modifié — contenu fixe, plus d'interactions sur images) -->
 <article class="step-card" data-step="4" id="step-4" aria-labelledby="step4Title" role="region" hidden>
   <header class="card-head">
     <h3 id="step4Title" class="card-title" data-fr="Étape 4 — Faire un don" data-en="Step 4 — Make a donation">Étape 4 — Faire un don</h3>
@@ -371,20 +685,20 @@
     <button class="donor-logo" data-method="donorbox" aria-label="Donorbox" tabindex="-1" disabled>
       <img src="donorbox-logo-2023.jpg" alt="DonorBox logo" />
       <div class="donor-label">DonorBox</div>
-      <p>Numéro de compte : 455 XXX XXX<br/>Titulaire : Fondation Delon Tena Tena</p>
-      <p><a href="https://donorbox.org" target="_blank" rel="noopener">Faire un don via DonorBox</a></p>
+      <p class="color_texte_step_4">Numéro de compte : 455 XXX XXX<br/>Titulaire : Fondation Delon Tena Tena</p>
+      <p class="color_texte_step_4"><a href="https://donorbox.org" target="_blank" rel="noopener">Faire un don via DonorBox</a></p>
     </button>
 
     <button class="donor-logo" data-method="mpesa" aria-label="M-Pesa" tabindex="-1" disabled>
       <img src="M-Pesa-charges-for-sending-money-abroad.jpg" alt="M-Pesa logo" />
       <div class="donor-label">M-Pesa</div>
-      <p>Numéro :+243 81 456 34 56<br/>Titulaire : Fondation Delon Tena Tena</p>
+      <p class="color_texte_step_4">Numéro :+243 81 456 34 56<br/>Titulaire : Fondation Delon Tena Tena</p>
     </button>
 
     <button class="donor-logo" data-method="orange" aria-label="Orange Money" tabindex="-1" disabled>
       <img src="Orange-money.webp" alt="Orange Money logo" />
       <div class="donor-label">Orange Money</div>
-      <p>Numéro :+243 85 123 45 67<br/>Titulaire : Fondation Delon Tena Tena</p>
+      <p class="color_texte_step_4">Numéro :+243 85 123 45 67<br/>Titulaire : Fondation Delon Tena Tena</p>
     </button>
   </div>
 
@@ -434,7 +748,7 @@
     </section>
   </main>
 
-  
+
   <!-- Footer -->
    <section id="contact">
 <footer class="fdn-footer" role="contentinfo" aria-label="Pied de page Fondation Espoir & Nature">
@@ -527,9 +841,7 @@
     </div>
   </div>
 </footer>
-
   <!-- JS will be below -->
-  <script src="Campagne_2.js">
-  </script>
+  <script src="Campagne_2.js"> </script>
 </body>
 </html>
