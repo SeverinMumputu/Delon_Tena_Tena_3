@@ -156,7 +156,7 @@
   margin-top: 130px;
   display:flex;align-items:center;justify-content:flex-start;
   min-height:420px;
-  background:#ddd url('DevenirAmabassadeurIllustration.jpg') center/cover no-repeat;
+  background:#ddd url('Us.jpg') center/cover no-repeat;
   box-shadow:0 8px 40px rgba(12,20,30,0.08);
 }
 .hero::after{
