@@ -304,6 +304,18 @@ body{
 .local-lang{display:flex;gap:8px}
 .lang-btn.local{border:1px solid rgba(0,0,0,0.06);padding:8px 12px;border-radius:8px;background:transparent;cursor:pointer}
 
+/* Vidéo */
+.intro{
+display: flex;
+justify-content: center;
+}
+.intro video {
+    width: 50%;
+    max-width: 400px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
 /* Container */
 .stepper-section{max-width:var(--max-width);margin:22px auto;padding:20px}
 .section-title{font-size:1.1rem;margin-bottom:12px;color:var(--deep-green)}
@@ -733,6 +745,9 @@ a{
    .hero{
     margin-top: 15px;
   }
+  .intro video {
+    width: 90%;
+    max-width: 800px;}
 }
 
 @media (max-width: 480px) {

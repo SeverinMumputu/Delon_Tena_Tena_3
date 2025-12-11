@@ -442,6 +442,14 @@ section{margin:36px 0;background:transparent}
 .intro .meta{color:var(--muted)}
 .muted{color:var(--muted);font-size:14px}
 
+/* Vidéo */
+.intro video {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
 /* Participer section */
 .participer{display:flex;flex-direction:column;gap:18px}
 
