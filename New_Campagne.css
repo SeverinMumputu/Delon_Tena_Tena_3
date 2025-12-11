@@ -1046,6 +1046,9 @@ label{display:flex;font-size:13px;margin-bottom:6px}
    .hero{
     margin-top: 80px;
   }
+    .intro video {
+    width: 90%;
+    max-width: 800px;}
 }
 
 @media (max-width: 480px) {
