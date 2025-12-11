@@ -1022,6 +1022,9 @@ a{
   .partners-grid{grid-template-columns:repeat(2,1fr)}
   .ambassador{flex-direction:column}
   .amb-action{width:100%}
+    .intro video {
+    width: 90%;
+    max-width: 800px;}
 }
 @media (max-width:480px){
 .amb-form.open{max-height:1600px;padding:18px 0 0;opacity:1}
