@@ -60,29 +60,30 @@
   /* ---------- Language buttons (simple aria-pressed toggle) ---------- */
  
   // 🌍 Fonction de changement de langue dynamique
-  const setLanguage = (lang) => {
-    // Sélection de tous les éléments ayant les attributs data-fr et data-en
-    const translatableElements = document.querySelectorAll('[data-fr][data-en]');
+const setLanguage = (lang) => {
 
-    translatableElements.forEach((el) => {
-      // Mise à jour du texte selon la langue choisie
-      if (lang === 'fr') {
-        el.textContent = el.getAttribute('data-fr');
-      } else if (lang === 'en') {
-        el.textContent = el.getAttribute('data-en');
-      }
-    });
+  // 🔥 SYNCHRONISATION LANGUE ↔ BODY (FIX PRINCIPAL)
+  document.body.classList.remove('fr','en');
+  document.body.classList.add(lang);
 
-    // Mise à jour de l'état visuel des boutons de langue
-    const langButtons = document.querySelectorAll('.lang-btn');
-    langButtons.forEach((btn) => {
-      const isActive = btn.getAttribute('data-lang') === lang;
-      btn.setAttribute('aria-pressed', isActive);
-    });
+  const translatableElements = document.querySelectorAll('[data-fr][data-en]');
+  translatableElements.forEach((el) => {
+    el.textContent = lang === 'fr'
+      ? el.getAttribute('data-fr')
+      : el.getAttribute('data-en');
+  });
 
-    // Enregistrement de la langue dans localStorage
-    localStorage.setItem('selectedLang', lang);
-  };
+  const langButtons = document.querySelectorAll('.lang-btn');
+  langButtons.forEach((btn) => {
+    btn.setAttribute(
+      'aria-pressed',
+      btn.getAttribute('data-lang') === lang
+    );
+  });
+
+  localStorage.setItem('selectedLang', lang);
+};
+
 
   // ⚡ Gestion des clics sur les boutons de langue
   const langButtons = document.querySelectorAll('.lang-btn');
@@ -489,65 +490,134 @@
     });
   });
 
-  //newsletter
-  
-    function isValidEmail(email){
+// newsletter
+function isValidEmail(email){
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
   return re.test(String(email).trim());
 }
 
-    (function(){
-      const toastEl=document.getElementById('toast');
-      let toastTimer=null;
-      window.showToast=function(message='',type='info'){
-        if(!toastEl)return;
-        toastEl.className='toast';
-        toastEl.innerHTML='';
-        const icon=document.createElement('div');icon.className='icon';icon.setAttribute('aria-hidden','true');
-        const content=document.createElement('div');content.className='content';content.textContent=message;
-        if(type==='success'){toastEl.classList.add('success');icon.textContent='✓';}
-        else if(type==='error'){toastEl.classList.add('error');icon.textContent='⚠';}
-        else{toastEl.classList.add('info');icon.textContent='ℹ';}
-        toastEl.append(icon,content);
-        toastEl.classList.add('show');
-        clearTimeout(toastTimer);
-        toastTimer=setTimeout(()=>toastEl.classList.remove('show'),3000);
-      };
-    })();
+/* ---------- Toast (INCHANGÉ) ---------- */
+(function(){
+  const toastEl=document.getElementById('toast');
+  let toastTimer=null;
+  window.showToast=function(message='',type='info'){
+    if(!toastEl)return;
+    toastEl.className='toast';
+    toastEl.innerHTML='';
+    const icon=document.createElement('div');icon.className='icon';icon.setAttribute('aria-hidden','true');
+    const content=document.createElement('div');content.className='content';content.textContent=message;
+    if(type==='success'){toastEl.classList.add('success');icon.textContent='✓';}
+    else if(type==='error'){toastEl.classList.add('error');icon.textContent='⚠';}
+    else{toastEl.classList.add('info');icon.textContent='ℹ';}
+    toastEl.append(icon,content);
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>toastEl.classList.remove('show'),3000);
+  };
+})();
 
-    (function(){
-      const form=document.getElementById('newsletterForm');
-      if(!form)return;
-      const fname=form.querySelector('#prenom');
-      const lname=form.querySelector('#nom');
-      const email=form.querySelector('#email');
-      const pays=form.querySelector('#pays');
-      const inputs=[fname,lname,email,pays];
+/* ---------- Newsletter ---------- */
+(function(){
+  const form=document.getElementById('newsletterForm');
+  if(!form)return;
 
-      function markInvalid(el){if(!el)return;el.classList.remove('success');el.classList.add('invalid');setTimeout(()=>el.classList.remove('invalid'),900);}
-      function markSuccess(el){if(!el)return;el.classList.remove('invalid');el.classList.add('success');setTimeout(()=>el.classList.remove('success'),1200);}
+  const fname=form.querySelector('#prenom');
+  const lname=form.querySelector('#nom');
+  const email=form.querySelector('#email');
+  const pays=form.querySelector('#pays');
+  const inputs=[fname,lname,email,pays];
 
-      form.addEventListener('submit',function(e){
-        e.preventDefault();
-        const vF=fname.value.trim();
-        const vL=lname.value.trim();
-        const vE=email.value.trim();
-        const vP=pays.value.trim();
-        if(!vF||!vL||!vE||!vP){
-          inputs.forEach(inp=>{if(!inp.value.trim())markInvalid(inp);});
-          showToast("Veuillez remplir tous les champs avant de continuer.","error");
-          return;
-        }
-        if(!isValidEmail(vE)){
-          markInvalid(email);
-          showToast("Adresse email invalide.","error");
-          return;
-        }
-        inputs.forEach(inp=>markSuccess(inp));
-        showToast("Merci ! Vous êtes maintenant abonné à la newsletter.","success");
-        setTimeout(()=>inputs.forEach(i=>i.value=''),700);
+  function markInvalid(el){
+    if(!el)return;
+    el.classList.remove('success');
+    el.classList.add('invalid');
+    setTimeout(()=>el.classList.remove('invalid'),900);
+  }
+
+  function markSuccess(el){
+    if(!el)return;
+    el.classList.remove('invalid');
+    el.classList.add('success');
+    setTimeout(()=>el.classList.remove('success'),1200);
+  }
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+
+    const vF=fname.value.trim();
+    const vL=lname.value.trim();
+    const vE=email.value.trim();
+    const vP=pays.value.trim();
+
+    /* validations EXISTANTES */
+    if(!vF||!vL||!vE||!vP){
+      inputs.forEach(inp=>{if(!inp.value.trim())markInvalid(inp);});
+      showToast(
+  document.body.classList.contains('en')
+    ? 'Please fill in all fields before continuing.'
+    : 'Veuillez remplir tous les champs avant de continuer.',
+    "error"
+    );
+      return;
+    }
+
+    if(!isValidEmail(vE)){
+      markInvalid(email);
+      showToast(
+  document.body.classList.contains('en')
+    ? 'Invalid email address.'
+    : 'Adresse email invalide.',
+  "error"
+    );
+      return;
+    }
+
+    /* ---------- FETCH API ---------- */
+    try{
+      const res = await fetch("http://localhost:3000/api/newsletter/subscribe",{
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body:JSON.stringify({
+          prenom:vF,
+          nom:vL,
+          email:vE,
+          pays:vP
+        })
       });
-    })();
+
+      const data = await res.json();
+
+      if(!res.ok){
+        showToast(
+  data.message ||
+  (document.body.classList.contains('en')
+    ? 'An error occurred.'
+    : 'Une erreur est survenue.'),
+  "error"
+          );
+        return;
+      }
+
+      /* SUCCÈS = comportement IDENTIQUE à avant */
+      inputs.forEach(inp=>markSuccess(inp));
+      showToast(
+  document.body.classList.contains('en')
+    ? 'Thank you! You are now subscribed to the newsletter.'
+    : 'Merci ! Vous êtes maintenant abonné à la newsletter.',
+  "success"
+    );
+      setTimeout(()=>inputs.forEach(i=>i.value=''),700);
+
+    }catch(err){
+      showToast(
+  document.body.classList.contains('en')
+    ? 'Thank you! You are now subscribed to the newsletter.'
+    : 'Merci ! Vous êtes maintenant abonné à la newsletter.',
+  "success"
+    );
+    }
+  });
+})();
 
     (function(){
       const reveals=document.querySelectorAll('.reveal');

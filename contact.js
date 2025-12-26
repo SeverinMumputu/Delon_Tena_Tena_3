@@ -67,6 +67,10 @@ function setLanguage(lang){
     if(!fr || !en) return;
     el.textContent = (lang === 'en') ? en : fr;
   });
+  if (window.dttUpdateCarouselCaptions) {
+  window.dttUpdateCarouselCaptions();
+}
+
 }
 
 /* Attach language button handlers */
@@ -127,24 +131,29 @@ mobileMenu.addEventListener('click', (e)=>{
 
     /* ========== 1) CAROUSEL ========== */
     (function dttCarousel(){
-      const slidesData = [
-        {
-          image: 'fond_fondation.jpg',
-          caption: 'Engagement pour le bien-être social.'
-        },
-        {
-          image: 'ecole.jpg',
-          caption: "Promotion de l'éducation et de la formation."
-        },
-        {
-          image: 'Clinique.jpg',
-          caption: "Soutien aux initiatives de santé communautaire."
-        },
-        {
-          image: 'femmes.jpg',
-          caption: "Autonomisation des femmes et des jeunes."
-        }
-      ];
+     const slidesData = [
+  {
+    image: 'fond_fondation.jpg',
+    captionFr: 'Engagement pour le bien-être social.',
+    captionEn: 'Commitment to social well-being.'
+  },
+  {
+    image: 'ecole.jpg',
+    captionFr: "Promotion de l'éducation et de la formation.",
+    captionEn: 'Promotion of education and training.'
+  },
+  {
+    image: 'Clinique.jpg',
+    captionFr: 'Soutien aux initiatives de santé communautaire.',
+    captionEn: 'Support for community health initiatives.'
+  },
+  {
+    image: 'femmes.jpg',
+    captionFr: 'Autonomisation des femmes et des jeunes.',
+    captionEn: 'Empowerment of women and youth.'
+  }
+];
+
 
       const track = document.getElementById('dtt-track');
       const bulletsEl = document.getElementById('dtt-bullets');
@@ -164,9 +173,14 @@ mobileMenu.addEventListener('click', (e)=>{
         slide.style.backgroundImage = `url('${data.image}' )`;
         slide.innerHTML = `
   <div class="dtt-caption" id="dtt-caption-${i}">
-    ${escapeHtml(data.caption)}
+    ${escapeHtml(
+      document.body.classList.contains('en')
+        ? data.captionEn
+        : data.captionFr
+    )}
   </div>
 `;
+
         if(i===0) slide.classList.add('dtt-active');
         track.appendChild(slide);
 
@@ -203,6 +217,17 @@ mobileMenu.addEventListener('click', (e)=>{
         });
       }
 
+      function updateCaptions(){
+  slidesData.forEach((data, i) => {
+    const el = document.getElementById('dtt-caption-' + i);
+    if(!el) return;
+    el.textContent = document.body.classList.contains('en')
+      ? data.captionEn
+      : data.captionFr;
+  });
+}
+
+
       function goTo(index, userInitiated){
         activeIndex = (index + slidesData.length) % slidesData.length;
         updateSlides();
@@ -234,6 +259,7 @@ mobileMenu.addEventListener('click', (e)=>{
 
       // expose for debugging (optional)
       window.dttCarousel = { goTo, next, prev };
+      window.dttUpdateCarouselCaptions = updateCaptions;
       // Helper: escape HTML
       function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];}); }
     })();
@@ -288,10 +314,37 @@ mobileMenu.addEventListener('click', (e)=>{
 
         const errors = [];
 
-        if(!name || name.length < 2) errors.push({field: nameEl, msg: 'Le nom doit contenir au moins 2 caractères.'});
-        if(!email || !emailRegex.test(email)) errors.push({field: emailEl, msg: 'Veuillez saisir un email valide.'});
-        if(!subject || subject.length < 3) errors.push({field: subjectEl, msg: 'Le sujet doit contenir au moins 3 caractères.'});
-        if(!message || message.length < 10) errors.push({field: messageEl, msg: 'Le message doit contenir au moins 10 caractères.'});
+        if(!name || name.length < 2)
+    errors.push({
+    field: nameEl,
+    msg: document.body.classList.contains('en')
+      ? 'Name must contain at least 2 characters.'
+      : 'Le nom doit contenir au moins 2 caractères.'
+  });
+  if(!email || !emailRegex.test(email))
+  errors.push({
+    field: emailEl,
+    msg: document.body.classList.contains('en')
+      ? 'Please enter a valid email address.'
+      : 'Veuillez saisir un email valide.'
+  });
+
+if(!subject || subject.length < 3)
+  errors.push({
+    field: subjectEl,
+    msg: document.body.classList.contains('en')
+      ? 'Subject must contain at least 3 characters.'
+      : 'Le sujet doit contenir au moins 3 caractères.'
+  });
+
+if(!message || message.length < 10)
+  errors.push({
+    field: messageEl,
+    msg: document.body.classList.contains('en')
+      ? 'Message must contain at least 10 characters.'
+      : 'Le message doit contenir au moins 10 caractères.'
+  });
+
 
         if(errors.length){
           // show first error as toast and highlight fields
@@ -300,26 +353,50 @@ mobileMenu.addEventListener('click', (e)=>{
           return;
         }
 
-        // simulate send
-        submitBtn.disabled = true;
-        spinner.hidden = false;
-        // small visual lift
-        submitBtn.style.transform = 'translateY(0)';
-        setTimeout(()=> {
-          // store to localStorage
-          try {
-            const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-            existing.push({name, email, subject, message, date: new Date().toISOString()});
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
-          } catch (err) {
-            // ignore storage errors
-          }
+        (async () => {
+  try {
+    const res = await fetch('http://localhost:3000/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, subject, message })
+    });
 
-          spinner.hidden = true;
-          submitBtn.disabled = false;
-          form.reset();
-          window.dttShowToast({message: 'Message envoyé — merci pour votre confiance.', type: 'info', ttl: 4500});
-        }, 1100);
+    if (!res.ok) {
+      throw new Error(
+  document.body.classList.contains('en')
+    ? 'Server error'
+    : 'Erreur serveur'
+);
+
+    }
+
+    spinner.hidden = true;
+    submitBtn.disabled = false;
+    form.reset();
+
+    window.dttShowToast({
+    message: document.body.classList.contains('en')
+    ? 'Message sent — thank you for your trust.'
+    : 'Message envoyé — merci pour votre confiance.',
+    type: 'info',
+    ttl: 4500
+});
+
+
+  } catch (err) {
+    spinner.hidden = true;
+    submitBtn.disabled = false;
+
+    window.dttShowToast({
+  message: document.body.classList.contains('en')
+    ? 'An error occurred. Please try again.'
+    : 'Une erreur est survenue. Veuillez réessayer.',
+  type: 'error',
+  ttl: 5000
+});
+
+  }
+})();
       });
 
       function markFieldError(fieldEl, msg){

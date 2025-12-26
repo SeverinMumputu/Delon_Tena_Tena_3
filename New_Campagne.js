@@ -511,8 +511,7 @@ mobileMenu.addEventListener('click', (e)=>{
 /* ===== Participants campagne =====
 */
 (function(){
-  // Config (change target only here if needed)
-  const TARGET_COUNT = 487; // nombre final demandé dans l'exemple
+  const API_BASE = 'http://localhost:3000';
   const DURATION_MS = 1000; // ~1 seconde
 
   /* ---------- Counter animation (smooth, requestAnimationFrame) ---------- */
@@ -543,11 +542,55 @@ mobileMenu.addEventListener('click', (e)=>{
     requestAnimationFrame(step);
   }
 
-  // Start counter on load (can be triggered elsewhere if needed)
-  window.addEventListener('load', () => {
-    // Slight delay so UI feels intentional
-    setTimeout(()=> animateCounter(TARGET_COUNT, DURATION_MS), 120);
-  });
+  function getInitials(first, last) {
+  return `${first?.[0] || ''}${last?.[0] || ''}`.toUpperCase();
+}
+function createParticipantItem(p) {
+  const fullName = `${p.first_name} ${p.last_name}`;
+
+  const item = document.createElement('div');
+  item.className = 'participant-item';
+  item.setAttribute('data-name', fullName);
+
+  item.innerHTML = `
+    <div class="participant-avatar">${getInitials(p.first_name, p.last_name)}</div>
+    <div class="participant-meta">
+      <div class="participant-name">${fullName}</div>
+      <div class="participant-sub">
+        Participant
+      </div>
+    </div>
+  `;
+//  ${p.social_network || 'Participant'}
+  return item;
+}
+
+async function loadParticipants() {
+  try {
+    const res = await fetch(`${API_BASE}/api/stepper/participants`);
+    const participants = await res.json();
+
+    listContainer.innerHTML = '';
+
+    participants.forEach(p => {
+      listContainer.appendChild(createParticipantItem(p));
+    });
+
+    // 🔤 Re-tri alphabétique (ta logique existante)
+    ParticipantsUI.sortAlphabetically();
+
+    // 🔢 Mise à jour compteur
+    ParticipantsUI.animateCounterTo(participants.length);
+
+  } catch (err) {
+    console.error('❌ Chargement participants échoué', err);
+  }
+}
+
+window.addEventListener('load', () => {
+  loadParticipants();
+});
+
 
   /* ---------- Popup open/close logic ---------- */
   const openBtn = document.getElementById('openListBtn');
@@ -646,10 +689,6 @@ mobileMenu.addEventListener('click', (e)=>{
     filterList(q);
   });
 
-  /* ---------- Ensure participants are re-sorted if dynamic items added later
-       This makes the component robust: call sortParticipantsAlpha() after modifications
-  ---------- */
-  // Expose utilities on element for possible external use (non-intrusive)
   window.ParticipantsUI = {
     sortAlphabetically: sortParticipantsAlpha,
     filter: filterList,
@@ -661,8 +700,6 @@ mobileMenu.addEventListener('click', (e)=>{
     }
   };
 
-  /* ---------- Small enhancement: generate avatars from initials (already in markup),
-       but make sure if someone adds items the avatar gets initials automatically. ---------- */
   (function ensureAvatars(){
     getParticipantItems().forEach(it => {
       const avatar = it.querySelector('.participant-avatar');

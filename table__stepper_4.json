@@ -1,0 +1,34 @@
+[
+	{
+		"Field" : "id",
+		"Type" : "int",
+		"Null" : "NO",
+		"Key" : "PRI",
+		"Default" : null,
+		"Extra" : "auto_increment"
+	},
+	{
+		"Field" : "participant_id",
+		"Type" : "int",
+		"Null" : "NO",
+		"Key" : "MUL",
+		"Default" : null,
+		"Extra" : ""
+	},
+	{
+		"Field" : "payment_method",
+		"Type" : "varchar(50)",
+		"Null" : "NO",
+		"Key" : "",
+		"Default" : null,
+		"Extra" : ""
+	},
+	{
+		"Field" : "created_at",
+		"Type" : "timestamp",
+		"Null" : "YES",
+		"Key" : "",
+		"Default" : "CURRENT_TIMESTAMP",
+		"Extra" : "DEFAULT_GENERATED"
+	}
+]

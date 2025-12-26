@@ -1,6 +1,8 @@
 
 
 document.addEventListener('DOMContentLoaded', function () {
+    // 🔗 API BASE (npx serve ou serveur Node)
+  const API_BASE = 'http://localhost:3000';
   // Centralized state
   let currentStep = 1;
   const TOTAL_STEPS = 4;
@@ -59,13 +61,105 @@ document.addEventListener('DOMContentLoaded', function () {
   const donorButtons = Array.from(document.querySelectorAll('.donor-logo'));
   const donationOutput = document.getElementById('donation-output');
 
-  // Local helpers
-  function saveData(partial) {
-    const current = JSON.parse(localStorage.getItem(storageKey) || '{}');
-    const merged = Object.assign({}, current, partial);
-    localStorage.setItem(storageKey, JSON.stringify(merged));
+  // Ecriture des données serveur
+async function saveData(step, payload) {
+  let endpoint = '';
+
+  switch (step) {
+    case 'step1':
+      endpoint = '/api/stepper/step1';
+      break;
+    case 'step2':
+      endpoint = '/api/stepper/step2';
+      break;
+    case 'step3':
+      endpoint = '/api/analytics/vote';
+      break;
+    case 'step4':
+      endpoint = '/api/stepper/step4';
+      break;
+    default:
+      console.warn('Step inconnu :', step);
+      return null;
   }
-  function getData(){ return JSON.parse(localStorage.getItem(storageKey) || '{}'); }
+
+  try {
+    console.log('📤 Envoi vers API:', API_BASE + endpoint, payload);
+
+    const response = await fetch(API_BASE + endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('✅ Réponse API:', data);
+
+    return data;
+  } catch (err) {
+    console.error('❌ saveData error:', err);
+    return null;
+  }
+}
+
+  //Lecture serveur
+  async function getData(type, param = '') {
+  let endpoint = '';
+
+  if (type === 'analytics') {
+    endpoint = `/api/analytics/search?q=${encodeURIComponent(param)}`;
+  }
+
+  if (type === 'participant') {
+    endpoint = `/api/stepper/participant/${param}`;
+  }
+
+  if (!endpoint) return null;
+
+  try {
+    console.log('📥 Lecture API:', endpoint);
+
+    const response = await fetch(API_BASE + endpoint);
+    
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (err) {
+  console.error('❌ getData error:', err);
+  return []; // ⬅️ TOUJOURS un tableau
+}
+}
+
+async function updateParticipant(data) {
+  if (!window.participantId) {
+    console.warn('⛔ participantId absent, update ignoré');
+    return;
+  }
+
+  console.log('✏️ UPDATE participant', data);
+
+  try {
+    const res = await fetch(`/api/stepper/participant/${window.participantId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+  } catch (err) {
+    console.error('❌ updateParticipant error:', err);
+  }
+}
 
   // 🔧 PATCH A INSÉRER ICI
   // Reset helper to clear UI + state related to the stepper (used on "Retour à la page")
@@ -148,7 +242,12 @@ document.addEventListener('DOMContentLoaded', function () {
       // require validations for forward navigation
       const ok = validateStep(currentStep);
       if (!ok) {
-        showToast(getStepHint(currentStep) || 'Veuillez compléter les champs requis.');
+        showToast(
+  getStepHint(currentStep) ||
+  (document.body.classList.contains('en')
+    ? 'Please complete the required fields.'
+    : 'Veuillez compléter les champs requis.')
+);
         return;
       }
     }
@@ -189,10 +288,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Return a human hint for a step (for toast)
   function getStepHint(step){
-    if (step === 1) return 'Complétez tous les champs de l\'enregistrement.';
-    if (step === 2) return 'Invitez 3 à 5 personnes en remplissant leurs informations.';
-    if (step === 3) return 'Sélectionnez exactement 3 influenceurs.';
-    if (step === 4) return 'Sélectionnez une méthode de don.';
+   if (step === 1)
+  return document.body.classList.contains('en')
+    ? 'Please complete all registration fields.'
+    : 'Complétez tous les champs de l\'enregistrement.';
+
+if (step === 2)
+  return document.body.classList.contains('en')
+    ? 'Invite 3 to 5 people by filling in their information.'
+    : 'Invitez 3 à 5 personnes en remplissant leurs informations.';
+
+if (step === 3)
+  return document.body.classList.contains('en')
+    ? 'Select exactly 3 influencers.'
+    : 'Sélectionnez exactement 3 influenceurs.';
+
+if (step === 4)
+  return document.body.classList.contains('en')
+    ? 'Select a donation method.'
+    : 'Sélectionnez une méthode de don.';
+
     return '';
   }
 
@@ -257,6 +372,9 @@ document.addEventListener('DOMContentLoaded', function () {
     else if (step === 3) {
       return selectedInfluencers.length === 3;
     } 
+    else if (step === 4) {
+  return donorButtons.some(btn => btn.classList.contains('selected'));
+}
     return false;
   }
 
@@ -272,7 +390,7 @@ document.addEventListener('DOMContentLoaded', function () {
         s1Fields.profile.value = ''; // 🔧 PATCH D: clear profile when social removed (one-line)
       }
       // save small update
-      saveData({ social: e.target.value });
+      saveData('step1', { social: e.target.value });
       nextBtn1.disabled = !validateStep(1);
     });
 
@@ -281,37 +399,71 @@ document.addEventListener('DOMContentLoaded', function () {
       const el = s1Fields[key];
       if (!el) return;
       el.addEventListener('input', function () {
-        // validate and save
-        const payload = {
-          lastName: s1Fields.last.value,
-          firstName: s1Fields.first.value,
-          email: s1Fields.email.value,
-          phone: s1Fields.phone.value,
-          social: s1Fields.social.value,
-          profile: s1Fields.profile.value
-        };
-        saveData(payload);
-        nextBtn1.disabled = !validateStep(1);
-      });
+    updateParticipant({
+    last_name: s1Fields.last.value,
+    first_name: s1Fields.first.value,
+    email: s1Fields.email.value,
+    phone: s1Fields.phone.value,
+    social_network: s1Fields.social.value,
+    social_profile: s1Fields.profile.value
+  });
+});
     });
 
     // Next button for step1
-    nextBtn1.addEventListener('click', function () {
-      if (!validateStep(1)) {
-        showToast('Veuillez compléter tous les champs d\'enregistrement.');
-        return;
-      }
-      // Save final fields of step1
-      saveData({
-        lastName: s1Fields.last.value.trim(),
-        firstName: s1Fields.first.value.trim(),
-        email: s1Fields.email.value.trim(),
-        phone: s1Fields.phone.value.trim(),
-        social: s1Fields.social.value,
-        profile: s1Fields.profile.value
-      });
-      goToStep(2);
-    });
+    nextBtn1.addEventListener('click', async function () {
+  if (!validateStep(1)) {
+    showToast(
+  document.body.classList.contains('en')
+    ? 'Please complete all fields.'
+    : 'Veuillez compléter tous les champs.'
+);
+    return;
+  }
+
+const res = await saveData('step1', {
+  lastName: s1Fields.last.value.trim(),
+  firstName: s1Fields.first.value.trim(),
+  email: s1Fields.email.value.trim(),
+  phone: s1Fields.phone.value.trim(),
+  social: s1Fields.social.value,
+  profile: s1Fields.profile.value
+});
+
+if (!res) {
+  //showToast('Erreur serveur. Réessayez.');
+  showToast(
+  document.body.classList.contains('en')
+    ? 'This email is already used by another participant.'
+    : '❌ Cet email est déjà utilisé par un autre participant.'
+);
+
+  return;
+}
+
+if (res.error === 'EMAIL_ALREADY_USED') {
+  showToast(
+  document.body.classList.contains('en')
+    ? 'This email is already used by another participant.'
+    : '❌ Cet email est déjà utilisé par un autre participant.'
+);
+
+  return;
+}
+
+if (!res.participantId) {
+  showToast(
+  document.body.classList.contains('en')
+    ? 'Unable to create participant.'
+    : 'Impossible de créer le participant.'
+);
+  return;
+}
+
+window.participantId = res.participantId;
+goToStep(2);
+
+});
   })();
 
   (function step2Init(){
@@ -330,170 +482,291 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
- // any input change triggers validation & partial save
-    s2Form.addEventListener('input', ()=>{
-      // build invites structure for 1..5
-      const v = {};
-      [1,2,3,4,5].forEach(n=>{
-        const last = s2Form.querySelector(`[name=i${n}-last]`)?.value.trim() || '';
-        const first = s2Form.querySelector(`[name=i${n}-first]`)?.value.trim() || '';
-        const social = s2Form.querySelector(`[name=i${n}-social]`)?.value || '';
-        const profile = s2Form.querySelector(`[name=i${n}-profile]`)?.value || '';
-        v[`invite${n}`] = { last, first, social, profile };
-      });
-      saveData({ invites: v });
+ // ✅ UI + validation uniquement (AUCUN appel API)
+s2Form.addEventListener('input', ()=>{
+  let validCount = 0;
 
-      // compute how many invites are currently valid
-      const validCount = Object.values(v).filter(inv=>{
-        const last = inv.last;
-        const first = inv.first;
-        const social = inv.social;
-        let profileOk = true;
-        if (social) {
-          profileOk = (inv.profile || '').trim().length > 0;
-        }
-        return last && first && social && profileOk;
-      }).length;
+  [1,2,3,4,5].forEach(n=>{
+    const last = s2Form.querySelector(`[name=i${n}-last]`)?.value.trim() || '';
+    const first = s2Form.querySelector(`[name=i${n}-first]`)?.value.trim() || '';
+    const social = s2Form.querySelector(`[name=i${n}-social]`)?.value || '';
+    const profile = s2Form.querySelector(`[name=i${n}-profile]`)?.value || '';
 
-      // visual micro-feedback
-      if (validCount >= 3) {
-        s2Hint.textContent = '✔ Les invitations sont complètes.';
-        s2Hint.style.color = 'var(--deep-green)';
-      } else {
-        s2Hint.textContent = '';
-      }
-
-      // enable next when validation passes
-      nextBtn2.disabled = !validateStep(2);
-      if (validateStep(2)) {
-        nextBtn2.removeAttribute('disabled');
-      }
-    });
-
-nextBtn2.addEventListener('click', function () {
-      if (!validateStep(2)) {
-        showToast('Complétez entre 3 et 5 invitations pour continuer.');
-        return;
-      }
-      // final save
-      const stored = getData();
-      stored.invitesValidated = true;
-      localStorage.setItem(storageKey, JSON.stringify(stored));
-      // small validation animation on the dots
-      stepDots[1].classList.add('completed');
-      showToast('Invitations prêtes — étape validée', 1800);
-      setTimeout(()=>goToStep(3), 600);
-    });
-  })();
-
-  (function step3Init(){
-    function updateInfCount(){ infCount.textContent = selectedInfluencers.length + ' / 3'; nextBtn3.disabled = selectedInfluencers.length !== 3; }
-
-    influencerCards.forEach(card=>{
-      const name = card.dataset.name || '';
-      card.addEventListener('click', toggleCard);
-      card.addEventListener('keydown', (e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCard.call(card); }});
-
-      function toggleCard(){
-        const n = card.dataset.name;
-        const idx = selectedInfluencers.indexOf(n);
-        if (idx !== -1) {
-          // unselect
-          selectedInfluencers.splice(idx,1);
-          card.classList.remove('selected');
-        } else {
-          if (selectedInfluencers.length >= 3) {
-            showToast('Vous pouvez sélectionner uniquement 3 influenceurs.');
-            // small shake
-            card.animate([{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:260});
-            return;
-          }
-          selectedInfluencers.push(n);
-          card.classList.add('selected');
-        }
-        updateInfCount();
-        saveData({ selectedInfluencers });
-      }
-    });
-
-    // search filter
-    infSearch.addEventListener('input', function (e) {
-      const q = e.target.value.trim().toLowerCase();
-      influencerCards.forEach(card=>{
-        const name = card.dataset.name.toLowerCase();
-        card.style.display = name.includes(q) ? '' : 'none';
-      });
-    });
-
-    nextBtn3.addEventListener('click', function () {
-      if (selectedInfluencers.length !== 3) {
-        showToast('Sélectionnez exactement 3 influenceurs.');
-        return;
-      }
-      saveData({ selectedInfluencers });
-      showToast('Votes enregistrés — merci.', 1500);
-      setTimeout(()=>goToStep(4), 600);
-    });
-  })();
-
-  (function step4Init(){
-
-    const fixedDonation = {
-      method: 'info',
-      donorbox: { url: 'https://donorbox.org' },
-      orange: { number: '77 123 45 67', name: 'Fondation Delon Tena Tena' },
-      mpesa: { number: '60123456', name: 'Fondation Delon Tena Tena' }
-    };
-
-    // Render the fixed block into donationOutput (keeps the same visual layout)
-    function renderFixedDonation() {
-      if (!donationOutput) return;
-      donationOutput.innerHTML = `
-        <div class="donation-info">
-          <h4>DonorBox</h4>
-          <p><a href="${fixedDonation.donorbox.url}" target="_blank" rel="noopener">Faire un don via DonorBox</a></p>
-
-          <h4>Orange Money</h4>
-          <p>Numéro : ${fixedDonation.orange.number}<br/>Titulaire : ${fixedDonation.orange.name}</p>
-
-          <h4>M-Pesa</h4>
-          <p>Numéro : ${fixedDonation.mpesa.number}<br/>Titulaire : ${fixedDonation.mpesa.name}</p>
-        </div>
-      `;
+    let profileOk = true;
+    if (social) {
+      profileOk = profile.trim().length > 0;
     }
 
-    // Save the fixed donation details into storage so existing validation logic continues to work
-    saveData({ donation: fixedDonation });
-
-    // render immediately (hydrateFromStorage pourra écraser si l'utilisateur a déjà autre chose enregistré)
-    renderFixedDonation();
-
-    if (finishBtn) {
-      // finishBtn.disabled will be managed by goToStep's logic (which checks getData().donation)
-      // but for immediate UX, enable it now
-      finishBtn.disabled = false;
+    if (last && first && social && profileOk) {
+      validCount++;
     }
-    try {
-      donorButtons.forEach(b=>{
-        b.setAttribute('aria-hidden','true');
-        b.setAttribute('tabindex','-1');
-        // keep visual classes intact
-      });
-    } catch(e){ /* ignore if donorButtons not present */ }
-
-    // Note: hydrateFromStorage() (déjà présent) s'exécutera au chargement et remplacera donationOutput
-    // si l'utilisateur a des données en localStorage. C'est voulu — on conserve la persistance.
   });
 
+  // feedback visuel
+  if (validCount >= 3) {
+    s2Hint.textContent = '✔✔✔';
+    s2Hint.style.color = 'var(--deep-green)';
+  } else {
+    s2Hint.textContent = '';
+  }
+
+  nextBtn2.disabled = !(validCount >= 3 && validCount <= 5);
+});
+
+nextBtn2.addEventListener('click', async function () {
+  if (!validateStep(2)) {
+    showToast(
+  document.body.classList.contains('en')
+    ? 'Please complete between 3 and 5 invitations to continue.'
+    : 'Complétez entre 3 et 5 invitations pour continuer.'
+);
+    return;
+  }
+  const invites = [];
+
+  [1,2,3,4,5].forEach(n => {
+    const last = s2Form.querySelector(`[name=i${n}-last]`)?.value.trim();
+    const first = s2Form.querySelector(`[name=i${n}-first]`)?.value.trim();
+    const social = s2Form.querySelector(`[name=i${n}-social]`)?.value.trim();
+    const profile = s2Form.querySelector(`[name=i${n}-profile]`)?.value.trim();
+
+    // 🔒 filtrage STRICT
+    if (last && first && social && profile) {
+      invites.push({ last, first, social, profile });
+    }
+  });
+
+  console.log('📦 Invités envoyés (final):', invites);
+
+const res = await saveData('step2', {
+  participantId: window.participantId,
+  invites
+});
+
+if (!res) {
+    showToast(
+  document.body.classList.contains('en')
+    ? 'Server error during registration.'
+    : 'Erreur serveur lors de l’enregistrement.'
+);
+  return;
+}
+
+if (res.error === 'INVITE_ALREADY_EXISTS') {
+      showToast(
+  document.body.classList.contains('en')
+    ? '⚠️ An identical guest has already been added.'
+    : '⚠️ Un invité identique a déjà été ajouté.'
+);
+  return;
+}
+
+  showToast(
+  document.body.classList.contains('en')
+    ? 'Registered invitations'
+    : 'Invitations enregistrées',1500
+);
+setTimeout(()=>goToStep(3), 600);
+});
+  })();
+
+(function step3Init(){
+
+  async function loadInfluencers() {
+    const data = await fetch(API_BASE + '/api/analytics/influencers')
+      .then(r => r.json())
+      .catch(() => []);
+
+    influencerGrid.innerHTML = '';
+    selectedInfluencers = [];
+    infCount.textContent = '0 / 3';
+    nextBtn3.disabled = true;
+
+    data.forEach(inf => {
+      const card = document.createElement('div');
+      card.className = 'influencer';
+      card.dataset.name = inf.influencer_name;
+      card.dataset.id = inf.id;
+      card.tabIndex = 0;
+
+      card.innerHTML = `
+        <div class="influencer-pic" style="background-image:url('${inf.image_path || ''}')"></div>
+        <div class="influencer-meta">
+          <strong>${inf.influencer_name}</strong>
+          <small>${inf.sector || ''} • ${inf.status || ''}</small>
+        </div>
+        <div class="influencer-flag">✅</div>
+      `;
+
+      card.addEventListener('click', () => toggleInfluencer(card));
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleInfluencer(card);
+        }
+      });
+
+      influencerGrid.appendChild(card);
+    });
+  }
+
+  function toggleInfluencer(card) {
+    const name = card.dataset.name;
+    const idx = selectedInfluencers.indexOf(name);
+
+    if (idx !== -1) {
+      selectedInfluencers.splice(idx, 1);
+      card.classList.remove('selected');
+    } else {
+      if (selectedInfluencers.length >= 3) {
+          showToast(
+  document.body.classList.contains('en')
+    ? 'Maximum 3 influencers'
+    : 'Maximum 3 influenceurs'
+);
+        return;
+      }
+      selectedInfluencers.push(name);
+      card.classList.add('selected');
+    }
+
+    infCount.textContent = selectedInfluencers.length + ' / 3';
+    nextBtn3.disabled = selectedInfluencers.length !== 3;
+  }
+
+  infSearch.addEventListener('input', async e => {
+    const q = e.target.value.trim();
+    const data = await getData('analytics', q);
+
+influencerGrid.innerHTML = '';
+selectedInfluencers = [];
+infCount.textContent = '0 / 3';
+nextBtn3.disabled = true;
+
+if (!Array.isArray(data)) return;
+
+data.forEach(inf => {
+      const card = document.createElement('div');
+      card.className = 'influencer';
+      card.dataset.name = inf.influencer_name;
+
+      card.innerHTML = `
+        <div class="influencer-pic" style="background-image:url('${inf.image_path || ''}')"></div>
+        <div class="influencer-meta">
+          <strong>${inf.influencer_name}</strong>
+          <small>${inf.sector || ''} • ${inf.status || ''}</small>
+        </div>
+        <div class="influencer-flag">✅</div>
+      `;
+
+      card.addEventListener('click', () => toggleInfluencer(card));
+      influencerGrid.appendChild(card);
+    });
+  });
+
+  nextBtn3.addEventListener('click', async () => {
+    if (selectedInfluencers.length !== 3) {
+             showToast(
+  document.body.classList.contains('en')
+    ? 'Select exactly 3 influencers.'
+    : 'Sélectionnez exactement 3 influenceurs.'
+);
+      return;
+    }
+
+    await saveData('step3', {
+      participantId: window.participantId,
+      influencerNames: selectedInfluencers
+    });
+
+                 showToast(
+  document.body.classList.contains('en')
+    ? 'Votes recorded.'
+    : 'Votes enregistrés.',1500
+);
+    setTimeout(() => goToStep(4), 600);
+  });
+
+  loadInfluencers();
+})();
+
+
+(function step4Init(){
+
+  let selectedPayment = null;
+
+  // 🔒 Désactiver le bouton Terminer tant qu'aucun choix
+  finishBtn.disabled = true;
+
+  donorButtons.forEach(btn => {
+    btn.disabled = false; // réactiver (HTML les avait disabled)
+    btn.removeAttribute('aria-hidden');
+    btn.tabIndex = 0;
+
+    btn.addEventListener('click', async () => {
+      // reset visuel
+      donorButtons.forEach(b => b.classList.remove('selected'));
+
+      // sélection visuelle
+      btn.classList.add('selected');
+      selectedPayment = btn.dataset.method;
+
+      // feedback UI
+      if (donationOutput) {
+        donationOutput.innerHTML = `
+          <strong>Méthode choisie :</strong> ${btn.querySelector('.donor-label').textContent}
+        `;
+      }
+
+      // activer le bouton Terminer
+      finishBtn.disabled = false;
+
+      // sauvegarde serveur
+      const res = await saveData('step4', {
+        participantId: window.participantId,
+        paymentMethod: selectedPayment
+      });
+
+      if (!res) {
+                     showToast(
+  document.body.classList.contains('en')
+    ? 'Error during payment registration.'
+    : 'Erreur lors de l’enregistrement du paiement.'
+);
+        finishBtn.disabled = true;
+      }
+    });
+  });
+
+})();
+
   finishBtn.addEventListener('click', function () {
+    
     // ensure previous steps are validated
     if (!validateStep(1) || !validateStep(2) || !validateStep(3)) {
-      showToast('Veuillez d\'abord valider les étapes précédentes.');
+                           showToast(
+  document.body.classList.contains('en')
+    ? 'Please complete the previous steps first.'
+    : 'Veuillez d\'abord valider les étapes précédentes.'
+);
+      return;
+    }
+
+    if (!validateStep(4)) {
+                           showToast(
+  document.body.classList.contains('en')
+    ? 'Please choose a donation method.'
+    : 'Veuillez choisir une méthode de don.'
+);
       return;
     }
 
     // Show final toast and simulate finish
-    showToast('Veuillez envoyer votre reçu par mail à contact@delontenatena.org', 4000);
+                          showToast(
+  document.body.classList.contains('en')
+    ? 'Please send your receipt by email to contact@delontenatena.org'
+    : 'Veuillez envoyer votre reçu par mail à contact@delontenatena.org',4000
+);
 
     // show animated thank you
     setTimeout(()=>{
@@ -634,17 +907,9 @@ nextBtn2.addEventListener('click', function () {
   observer.observe(document.body, { attributes: true, childList: true, subtree: true });
 });
 
-// analytics-popup.js (UPDATED - only changes inside original IIFE; drop-in replacement for the file)
-// Usage: inclure ce script après le DOM (ou bundler). Conserve le même style modulaire et non-invasif.
-// Changements principaux :
-// 1) meilleure extraction du nom "réel" depuis .influencer-meta (cherche <strong> d'abord).
-// 2) le bouton "Voter" appelle maintenant la logique de sélection existante en déclenchant un click
-//    sur la carte .influencer correspondante (donc *n'altère pas* la logique du stepper mais la réutilise).
-//    Il gère aussi les cas : déjà voté / max atteint, et affiche des toasts pertinents.
-// Rappel : ce script n'essaie PAS d'accéder à selectedInfluencers en tant que variable JS (scopée dans le stepper).
-//         Il se base sur l'état DOM (.influencer.selected) et déclenche les évènements natifs pour réutiliser
-//         la logique du stepper (toggleCard) définie ailleurs.
-
+/** CALCULS ANALYTIQUES DE VOTES UNIQUEMENT A PARTIR DE DONNEES REELLES DE PARTICIPANTS. */
+//DIAGRAMME EN BARRE POUR LA COMPARAISON DE VOTES.
+//DIAGRAMME LINEAAIRE POUR L'EVOLUTION DE VOTES.
 (function () {
   'use strict';
 
@@ -716,7 +981,7 @@ nextBtn2.addEventListener('click', function () {
   }
 
   // --- Open modal with data from an influencer card ---
-  function openModalFromCard(cardEl) {
+  async function openModalFromCard(cardEl) {
     if (!cardEl) return;
     currentCard = cardEl; // store for vote button usage
     currentDataName = String(cardEl.dataset.name || '').trim();
@@ -758,13 +1023,32 @@ nextBtn2.addEventListener('click', function () {
       photoEl.style.backgroundImage = `linear-gradient(180deg,var(--green-soft, #cfead6), #fff)`;
     }
 
-    // Simulated analytics payload (since backend non-branché)
-    const simulated = generateSimulatedMetrics(displayName);
+    // APPEL DE LA FONCTION
+    const real = await fetchRealAnalytics(displayName);
 
-    votesEl.textContent = simulated.votes.toString();
-    percentEl.textContent = simulated.percent + '%';
-    rankEl.textContent = simulated.rank.toString();
-    trendsEl.textContent = simulated.trend;
+
+votesEl.textContent   = real.votes;
+percentEl.textContent = real.percent + '%';
+rankEl.textContent    = real.rank;
+trendsEl.textContent  = real.trend;
+
+// Charts
+const barData  = Array.isArray(real.barData)  && real.barData.length > 0 ? real.barData : [5,8,12,7,10];
+const lineData = Array.isArray(real.lineData) && real.lineData.length > 2 ? real.lineData : [10,12,14,13,15,16];
+
+try {
+  initBarChart3D(canvasBar, barData);
+} catch (e) {
+  console.warn('⚠️ BarChart 3D indisponible, fallback 2D');
+  drawFallbackBar(canvasBar, barData);
+}
+
+try {
+  initLineChart3D(canvasLine, lineData);
+} catch (e) {
+  console.warn('⚠️ LineChart 3D indisponible, fallback 2D');
+  drawFallbackLine(canvasLine, lineData);
+}
 
     // ensure sector & status can be set by data attributes optionally on the card (extensible)
     const sector = cardEl.dataset.sector || 'Musique';
@@ -782,16 +1066,6 @@ nextBtn2.addEventListener('click', function () {
 
     // Re-run translation hook to translate inserted strings
     callUpdateLocalLang();
-
-    // Initialize charts (Three.js)
-    try {
-      initBarChart3D(canvasBar, simulated.barData);
-      initLineChart3D(canvasLine, simulated.lineData);
-    } catch (e) {
-      // If Three.js not available or error, degrade silently with simple 2D fallback
-      drawFallbackBar(canvasBar, simulated.barData);
-      drawFallbackLine(canvasLine, simulated.lineData);
-    }
 
     // Focus management
     closeBtn.focus();
@@ -823,19 +1097,17 @@ nextBtn2.addEventListener('click', function () {
     currentDataName = '';
   }
 
-  // --- Simulated metrics generator (unchanged) ---
-  function generateSimulatedMetrics(seed) {
-    let s = 0;
-    for (let i = 0; i < (seed || '').length; i++) s = (s * 31 + seed.charCodeAt(i)) & 0xffffffff;
-    const base = Math.abs(s % 1000) + 120;
-    const votes = base;
-    const percent = Math.min(99, Math.round((votes / 2000) * 100));
-    const rank = Math.max(1, 1 + (s % 10));
-    const trend = (s % 3) === 0 ? '↗' : ((s % 3) === 1 ? '→' : '↘');
-    const barData = Array.from({length:6}, (_,i) => Math.round((Math.abs((s >> (i+2)) % 50) + 10) * (1 + i*0.12)));
-    const lineData = Array.from({length:20}, (_,i) => Math.round((Math.abs((s >> (i+3)) % 60) + 8) * (1 + Math.sin(i/3) * 0.4)));
-    return { votes, percent, rank, trend, barData, lineData };
-  }
+  // --- GENERATION DES DONNEES REELLES DEPUIS BACKEND  ---
+const API_BASE = 'http://localhost:3000';
+
+async function fetchRealAnalytics(influencerName) {
+  const res = await fetch(
+    `${API_BASE}/api/analytics/stats/${encodeURIComponent(influencerName)}`
+  );
+  if (!res.ok) throw new Error('Analytics fetch failed');
+  return res.json();
+}
+
 
   // --- Vote button handling (now calls the stepper selection by simulating a card click) ---
   voteBtn.addEventListener('click', function (ev) {
@@ -968,7 +1240,7 @@ nextBtn2.addEventListener('click', function () {
     obs.observe(grid, { childList: true, subtree: true });
   }
 
-  // --- Three.js initializers and fallbacks (unchanged, kept for completeness) ---
+  // DIAGRAMME EN BARRE POUR LA COMPARAISON
   function initBarChart3D(canvas, data) {
     if (!canvas) return;
     if (typeof window.THREE === 'undefined') throw new Error('THREE not found');
@@ -976,9 +1248,11 @@ nextBtn2.addEventListener('click', function () {
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setPixelRatio(window.devicePixelRatio || 1);
     renderer.setSize(canvas.width, canvas.height, false);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(35, canvas.width / canvas.height, 0.1, 1000);
-    camera.position.set(0, 45, 80);
+    const camera = new THREE.PerspectiveCamera(40, canvas.width / canvas.height, 0.1, 500);
+    camera.position.set(0, 28, 42);
     camera.lookAt(0, 0, 0);
     const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 0.9);
     scene.add(hemi);
@@ -986,25 +1260,32 @@ nextBtn2.addEventListener('click', function () {
     dir.position.set(0, 50, 20);
     scene.add(dir);
     const group = new THREE.Group();
-    const spacing = 6;
+    const spacing = 5;
     data = data || [10, 18, 9, 22, 14, 28];
     data.forEach((v,i) => {
-      const h = Math.max(2, v / 1.5);
-      const geom = new THREE.BoxGeometry(3.6, h, 3.6);
-      const mat = new THREE.MeshStandardMaterial({ color: 0x2e6b48, metalness: 0.2, roughness: 0.6 });
+      const h = Math.max(4, v * 1.4);
+      const geom = new THREE.BoxGeometry(5.2, h, 5.2);
+      const colors = [0x1f8a70, 0x3ea489, 0x6fd3b3];
+      const mat = new THREE.MeshStandardMaterial({
+      color: colors[i % colors.length],
+      metalness: 0.15,
+      roughness: 0.35
+      });
       const mesh = new THREE.Mesh(geom, mat);
       mesh.position.set((i - (data.length-1)/2) * spacing, h/2, 0);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
       group.add(mesh);
     });
     scene.add(group);
-    const gridHelper = new THREE.GridHelper(120, 10, 0x2E6B48, 0xEAEAEA);
+    const gridHelper = new THREE.GridHelper(70, 8, 0x9ddac6, 0xeef7f3);
     gridHelper.position.y = 0;
     gridHelper.rotation.x = Math.PI / 2;
     scene.add(gridHelper);
     let running = true;
     function animate() {
       if (!running) return;
-      group.rotation.y += 0.008;
+      group.rotation.y = Math.sin(Date.now() * 0.0003) * 0.15;
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
     }
@@ -1030,21 +1311,38 @@ nextBtn2.addEventListener('click', function () {
     renderer.setPixelRatio(window.devicePixelRatio || 1);
     renderer.setSize(canvas.width, canvas.height, false);
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(40, canvas.width / canvas.height, 0.1, 1000);
-    camera.position.set(0, 28, 80);
-    camera.lookAt(0, 8, 0);
+    const camera = new THREE.PerspectiveCamera(45, canvas.width / canvas.height, 0.1, 500);
+    camera.position.set(0, 18, 45);
+    camera.lookAt(0, 10, 0);
     const light = new THREE.DirectionalLight(0xffffff, 0.9);
     light.position.set(20, 40, 20);
     scene.add(light);
     scene.add(new THREE.AmbientLight(0xffffff, 0.3));
     data = data || Array.from({length:20}, (_,i)=>10 + Math.sin(i/3) * 6 + Math.abs(i-10)/2);
-    const points = data.map((v,i) => new THREE.Vector3((i - (data.length/2)) * 3.2, v, Math.cos(i/3) * 2));
+    const points = data.map((v,i) =>
+    new THREE.Vector3((i - (data.length/2)) * 4.8, v * 1.3, Math.cos(i/3) * 1.2)
+    );
     const curve = new THREE.CatmullRomCurve3(points);
-    const geometry = new THREE.TubeGeometry(curve, 64, 0.8, 8, false);
-    const material = new THREE.MeshStandardMaterial({ color: 0x3ea489, metalness: 0.2, roughness: 0.4 });
+    const geometry = new THREE.TubeGeometry(curve, 80, 0.45, 12, false);
+    const material = new THREE.MeshStandardMaterial({
+  color: 0x34c3a0,
+  emissive: 0x1b7f68,
+  emissiveIntensity: 0.25,
+  metalness: 0.1,
+  roughness: 0.3
+});
+points.forEach(p => {
+  const dot = new THREE.Mesh(
+    new THREE.SphereGeometry(0.9, 12, 12),
+    new THREE.MeshStandardMaterial({ color: 0xffffff })
+  );
+  dot.position.copy(p);
+  scene.add(dot);
+});
+
     const tube = new THREE.Mesh(geometry, material);
     scene.add(tube);
-    const markerGeom = new THREE.SphereGeometry(1.2, 12, 12);
+    const markerGeom = new THREE.SphereGeometry(1.8, 16, 16);
     const markerMat = new THREE.MeshStandardMaterial({ color: 0xffcc33 });
     const marker = new THREE.Mesh(markerGeom, markerMat);
     scene.add(marker);
@@ -1059,6 +1357,9 @@ nextBtn2.addEventListener('click', function () {
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
     }
+    const grid = new THREE.GridHelper(120, 12, 0xcfead6, 0xf2faf7);
+    grid.position.y = 0;
+    scene.add(grid);
     animate();
     threeContexts.line = {
       scene, camera, renderer, tube, marker,
@@ -1081,14 +1382,17 @@ nextBtn2.addEventListener('click', function () {
     const w = canvas.width;
     const h = canvas.height;
     const pad = 20;
-    const barW = Math.max(8, (w - pad*2) / data.length - 8);
+    const barW = Math.max(18, (w - pad*2) / data.length - 6);
     const max = Math.max(...data, 1);
     data.forEach((v,i) => {
-      const bw = barW;
-      const x = pad + i*(bw + 8);
-      const bh = Math.round((v/max) * (h - pad*2));
-      ctx.fillStyle = '#2e6b48';
-      ctx.fillRect(x, h - pad - bh, bw, bh);
+    const bw = barW;
+    const x = pad + i*(bw + 8);
+    const bh = Math.round((v/max) * (h - pad*2));
+    const grad = ctx.createLinearGradient(0,0,0,h);
+    grad.addColorStop(0,'#6fd3b3');
+    grad.addColorStop(1,'#1f8a70');
+    ctx.fillStyle = grad;
+    ctx.fillRect(x, h - pad - bh, bw, bh);
     });
   }
   function drawFallbackLine(canvas, data) {
@@ -1103,7 +1407,11 @@ nextBtn2.addEventListener('click', function () {
       const y = pad + (1 - (v - min)/(max - min || 1)) * (h - pad*2);
       if (i === 0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
     });
-    ctx.strokeStyle = '#3ea489'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.strokeStyle = '#3ea489';
+    ctx.lineWidth = 4;
+    ctx.shadowColor = 'rgba(0,0,0,0.15)';
+    ctx.shadowBlur = 6;
+    ctx.stroke();
   }
 
   // --- cleanup when page unloads to avoid memory leaks ---

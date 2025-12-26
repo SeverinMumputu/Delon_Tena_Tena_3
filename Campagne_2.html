@@ -227,8 +227,8 @@
               <div class="form-hint" id="s1-hint" aria-live="polite"></div>
 
               <div class="card-actions">
-                <button type="button" class="btn btn-secondary" id="prevBtn" disabled>Précédent</button>
-                <button type="button" class="btn btn-primary" id="nextBtn1" disabled>Suivant</button>
+                <button type="button" class="btn btn-secondary" id="prevBtn" disabled data-fr="Précédent" data-en="Previous">Précédent</button>
+                <button type="button" class="btn btn-primary" id="nextBtn1" disabled data-fr="Suivant" data-en="Next">Suivant</button>
               </div>
             </form>
           </article>
@@ -346,8 +346,8 @@
     <div class="form-hint" id="s2-hint" aria-live="polite"></div>
 
     <div class="card-actions">
-      <button type="button" class="btn btn-secondary" id="prevBtn2">Précédent</button>
-      <button type="button" class="btn btn-primary" id="nextBtn2" disabled>Étape suivante</button>
+      <button type="button" class="btn btn-secondary" id="prevBtn2" data-fr="Précédent" data-en="Previous">Précédent</button>
+      <button type="button" class="btn btn-primary" id="nextBtn2" disabled data-fr="Étape suivante" data-en="Next step">Étape suivante</button>
     </div>
   </form>
 </article>
@@ -363,225 +363,10 @@
               <input type="search" id="influencer-search" placeholder="Rechercher un influenceur..." aria-label="Rechercher un influenceur"/>
               <div class="influencer-count" id="inf-count" aria-live="polite">0 / 3</div>
             </div>
-
+            
             <div class="influencer-grid" id="influencerGrid" role="list">
-              <!-- Example influencers - in a real app these would be loaded remotely -->
-              <!-- Each influencer card is clickable and toggles selection -->
-              <div class="influencer" data-name="Fally Ipupa" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Aigle.jpeg')"></div>
-                <div class="influencer-meta"><strong>Fally Ipupa</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-              
-              <div class="influencer" data-name="Gim's" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('GIMS.webp')"></div>
-                <div class="influencer-meta"><strong>Gim's</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Koffi olomide" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('KOFFI_OLOMIDE.webp')"></div>
-                <div class="influencer-meta"><strong>Koffi Olomide</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Ferre Gola" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('FERRE\ GOLA.webp')"></div>
-                <div class="influencer-meta"><strong>Ferre Gola</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="JB Mpiana" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('JB_MPIANA.webp')"></div>
-                <div class="influencer-meta"><strong>JB Mpiana</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Lokua Kanza" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('LOKUA_KANZA.webp')"></div>
-                <div class="influencer-meta"><strong>Lokua Kanza</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              
-              <div class="influencer" data-name="Innoss'B" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('INNOSSB.webp')"></div>
-                <div class="influencer-meta"><strong>Innoss'B</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              
-              <div class="influencer" data-name="Gaz Mawete" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('GAZ\ MAWETE.webp')"></div>
-                <div class="influencer-meta"><strong>Gaz Mawete</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-                 <div class="influencer" data-name="Pson role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Pson.webp')"></div>
-                <div class="influencer-meta"><strong>Pson</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-                 <div class="influencer" data-name="Gally Garvey" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Gally.webp')"></div>
-                <div class="influencer-meta"><strong>Gally Garvey</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Rj Kaniera" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Rj\ kaniera.webp')"></div>
-                <div class="influencer-meta"><strong>Rj Kaniera</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Majoos" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Majoos.webp')"></div>
-                <div class="influencer-meta"><strong>Majoos</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Dj Samarino" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Samarino.webp')"></div>
-                <div class="influencer-meta"><strong>Dj Samarino</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-                 <div class="influencer" data-name="Suintement" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Suintement.webp')"></div>
-                <div class="influencer-meta"><strong>Suintement</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Gim's" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('MBILIA\ BELLE.webp')"></div>
-                <div class="influencer-meta"><strong>Mbilia Belle</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-              
-              <div class="influencer" data-name="Barbara Kanam" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('BARBARA.webp')"></div>
-                <div class="influencer-meta"><strong>Barbara Kanam</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-              
-              <div class="influencer" data-name="Céline Banza" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('CELINE\ BANZA.webp')"></div>
-                <div class="influencer-meta"><strong>Céline Banza</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-                <div class="influencer" data-name="Rebo Tchulo" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Rebo.webp')"></div>
-                <div class="influencer-meta"><strong>Rebo Tchulo</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-                <div class="influencer" data-name="Anita Mwarabu" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Anita.webp')"></div>
-                <div class="influencer-meta"><strong>Anita Mwarabu</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-                 <div class="influencer" data-name="Sarah Lula" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Sarah\ lula.webp')"></div>
-                <div class="influencer-meta"><strong>Sarah Lula</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Aya Nakamura" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Aya.jpeg')"></div>
-                <div class="influencer-meta"><strong>Aya Nakamura</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Damso" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('DAMSO.webp')"></div>
-                <div  class="influencer-meta"><strong>Damso</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-    
-              <div class="influencer" data-name="Youssoupha" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('YOUSSOUPHA.webp')"></div>
-                <div class="influencer-meta"><strong>Youssoupha</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Ed Sheeran" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('EdSheran.png')"></div>
-                <div class="influencer-meta"><strong>Ed Sheeran</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Dadju" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Dadju.jpeg')"></div>
-                <div class="influencer-meta"><strong>Dadju</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Tayc" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Tayc.jpeg')"></div>
-                <div class="influencer-meta"><strong>Tayc</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Gazo" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Gazo.jpeg')"></div>
-                <div class="influencer-meta"><strong>Gazo</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="WizKid" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Wizkid.png')"></div>
-                <div class="influencer-meta"><strong>WizKid</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Davido" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Davido.jpeg')"></div>
-                <div class="influencer-meta"><strong>Davido</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Drake" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Drake.jpg')"></div>
-                <div class="influencer-meta"><strong>Drake</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-              
-              <div class="influencer" data-name="Bakole" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('BAKOLE.webp')"></div>
-                <div class="influencer-meta"><strong>Martin Bakole</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              
-              <div class="influencer" data-name="Fiston Sai Sai" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('SAI\ SAI.webp')"></div>
-                <div class="influencer-meta"><strong>Fiston Sai Sai</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-                 <div class="influencer" data-name="Lady Esobe" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('Esobe.webp')"></div>
-                <div class="influencer-meta"><strong>Lady Esobe</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              
-              <div class="influencer" data-name="Ronsia Kukiel" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('RONSIA.webp')"></div>
-                <div class="influencer-meta"><strong>Ronsia Kukiel</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-
-              <div class="influencer" data-name="Herman Amisi" role="listitem" tabindex="0">
-                <div class="influencer-pic" style="background-image:url('HERMAN\ AMISI.webp')"></div>
-                <div class="influencer-meta"><strong>Herman Amisi</strong></div>
-                <div class="influencer-flag" aria-hidden="true">✅</div>
-              </div>
-            </div>
-
+          <!-- Injecté dynamiquement depuis la table analytics -->
+          </div>
             
   <!-- ANALYTICS POPUP (static, hidden) -->
 <div id="analyticsModal" class="analytics-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="analyticsTitle" hidden>
@@ -668,13 +453,11 @@
     </main>
   </div>
 </div>
-       
-
             <div class="form-hint" id="s3-hint" aria-live="polite"></div>
 
             <div class="card-actions">
-              <button type="button" class="btn btn-secondary" id="prevBtn3">Précédent</button>
-              <button type="button" class="btn btn-primary" id="nextBtn3" disabled>Suivant</button>
+              <button type="button" class="btn btn-secondary" id="prevBtn3" data-fr="Précédent" data-en="Previous">Précédent</button>
+              <button type="button" class="btn btn-primary" id="nextBtn3" disabled data-fr="Suivant" data-en="Next">Suivant</button>
             </div>
           </article>
 
@@ -685,8 +468,6 @@
     <p class="card-lead" data-fr="Choisissez votre méthode de soutien." data-en="Choose your method of support.">Choisissez votre méthode de soutien.</p>
   </header>
 
-  <!-- On garde la grille visuelle (structure et classes inchangées),
-       mais on retire la logique de clic — les boutons restent pour préserver le markup. -->
   <div class="donation-grid" aria-hidden="true">
     <button class="donor-logo" data-method="donorbox" aria-label="Donorbox" tabindex="-1" disabled>
       <img src="donorbox-logo-2023.jpg" alt="DonorBox logo" />
@@ -708,24 +489,9 @@
     </button>
   </div>
 
-  <!-- Contenu fixe affichant les coordonnées — c'est ici que l'utilisateur voit tout directement 
-  <div id="donation-output" class="donation-output" aria-live="polite"> -->
-    <!-- Ce contenu sera aussi initialisé côté JS (hydrate/init) ; placé ici pour fallback et accessibilité 
-    <div class="donation-info">
-      <h4>DonorBox</h4>
-      <p><a href="https://donorbox.org" target="_blank" rel="noopener">Faire un don via DonorBox</a></p>
-
-      <h4>Orange Money</h4>
-      <p>Numéro : 85 123 45 67<br/>Titulaire : Fondation Delon Tena Tena</p>
-
-      <h4>M-Pesa</h4>
-      <p>Numéro : 81 456 34 56<br/>Titulaire : Fondation Delon Tena Tena</p>
-    </div>
-  </div> -->
-
   <div class="card-actions">
-    <button type="button" class="btn btn-secondary" id="prevBtn4">Précédent</button>
-    <button type="button" class="btn btn-success" id="finishBtn">Terminer</button>
+    <button type="button" class="btn btn-secondary" id="prevBtn4" data-fr="Précédent" data-en="Previous">Précédent</button>
+    <button type="button" class="btn btn-success" id="finishBtn" data-fr="Terminer" data-en="To end">Terminer</button>
   </div>
 </article>
 
@@ -746,7 +512,7 @@
             <p data-fr="Vous avez soutenu la jeunesse, la solidarité et l'innovation." data-en="You have supported youth, solidarity and innovation.">Vous avez soutenu la jeunesse, la solidarité et l'innovation.</p>
             <p class="receipt-note" data-fr="Veuillez envoyer votre reçu par mail à contact@delontenatena.org" data-en="Please send your receipt by email to contact@delontenatena.org">Veuillez envoyer votre reçu par mail à contact@delontenatena.org</p>
 
-            <button class="btn btn-primary" id="closeThanks">Retour à la page</button>
+            <button class="btn btn-primary" id="closeThanks" data-fr="Retour à la page" data-en="Return to page">Retour à la page</button>
           </div>
         </div>
 
@@ -847,7 +613,7 @@
     </div>
   </div>
 </footer>
-  <!-- JS will be below -->
+  <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
   <script src="Campagne_2.js"> </script>
 </body>
 </html>
