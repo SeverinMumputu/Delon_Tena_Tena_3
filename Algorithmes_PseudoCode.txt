@@ -1,0 +1,34 @@
+Créer une page répertoire de données aux comportements administrateurs.
+Le but de cette page est de tenir au courant l'administrateur de toutes les insertions dans différentes zones du site en récupérant
+et en affichant tous les enregistrements , toutes les informations insérées par le user uniquement à partir de zones du site telles que :
+la newsletter, le stepper(Formulaire de participation), le bloc détaillé de participants(Nombre et liste complète de participants) et le formulaire de contact.
+Cette page devra s'appuyer sur le style et socle de design de la fondatiion Delon Tena Tena.
+Pour une meilleure disposition de contenus, la page répertoire contiendra 4 sections(blocs) représentant ainsi les zones du site d'insertions du site.
+Comme énoncé ci-haut, ces 4 sections afficheront les enregistrements de certaines tables entre autres :
+La  section newsletter affichera tous les enregistrements de la table 'newsletter'.
+La section stepper s'occupera de présenter et afficher toutes les informations concernant le participant tirées de la table 'stepper_participants',
+affichera en deuxième lieu les informations concernant les invités du participant tirées de la table 'stepper_invitations' et s'occupera par la suite 
+d'afficher les informations concernant la méthode de paiement choisie par le participant tirées de la table 'stepper_donations' et pour finir affichera une liste
+à l'occurence un classement général des influenceurs par votes et juste à côté le nombre de votes à l'exemple du classement de la Premier league où la liste 
+de classement où on retrouve le premier jusqu'au dernier en montrant à côté le nombre de points. Les informations de ce classement seront tirées dans la table 'analytics'.
+La section bloc détaillé de participant affichera le nombre total de participant et la liste complète des participants. Ces deux informations seront issues de la
+table 'stepper_participants'.
+La section formuliare de contact affichera toutes les informations issues de la table 'contact'.
+Et exclusivement pour la section formulaire, il faudra mettre en place une icône svg à coté de chaque mail de l'expéditeur(celui qui a envoyé le message).
+A chaque clic sur l'icône, un petit formulaire aux comportements feedback apparaîtra permettant à l'administrateur de répondre au message et d'envoyer directement
+sa réponse à l'expéditeur en faisant appel aux API Email.js . Je veu un comportement d'autocompletion complète et automatique qui fixe le mail de l'expéditeur et
+son sujet dans les champs du formulaire sans que l'administrateur ait à remettre ces informations dans l'objectif de gagner du temps. 
+
+En ce qui concerne le style de la page, je veux un style totalement épuré inspiré de l'interface de bureau d'Apple Mac sans aucune description et mention d'Apple.
+La page aura un style Mac mais aux couleurs et socle de la page sans aucune mention Apple. Je veux une disposition de layouts style Apple avec des espaces. Les sections doivennt respirer. 
+Et sans oublier un header profeesionnel avec menu hamburger pour le côté mobile. Ce header permmettra la redirection optimisée  des sections pour éviter de 
+longs scrolls.Pour une bonne classification de données permettant au user une interface facile à manier, je veux aussi un filtrage de données par section et 
+une barre de recherche présente dans chaque section. 
+
+Et pour finir, rajouter une fonctionnalité d'exportations(téléchargement) des sections aux format txt, pdf et autres. Permettant à l'administrateur de télécharger
+des informations de différentes sections. Et il faudra veiller à la bonne mise en forme et page des éléments textes et composants layouts de contenus. 
+Je veux une bonne disposition du  contenu après téléchargement.
+Voici les ressources :
+Couleurs et Socle de design 
+
+Api server.js

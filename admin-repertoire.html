@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Répertoire Administrateur – Fondation Delon Tena Tena</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="admin-repertoire.css" />
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</head>
+
+<body>
+
+<header class="admin-header">
+  <div class="header-inner">
+    <strong>Fondation Delon Tena Tena</strong>
+    <button id="menuBtn">☰</button>
+  </div>
+  <nav id="adminNav">
+    <a href="#newsletter">Newsletter</a>
+    <a href="#Registre">Registre</a>
+    <a href="#Classement">Classement</a>
+    <a href="#participants">Enregistrement</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main class="admin-container">
+
+  <section  class="admin-section">
+    <h2 class="admin-h2">Côté Administrateur</h2>
+    <h3 class="admin-h3">Répertoire de centralisation, surveillance des insertions utilisateurs effectuées sur différentes zones du site de la Fondation Delon Tena Tena 
+       permettant la visualisation de l'évolution de la campagne.</h3>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter" class="admin-section">
+    <h2>Newsletter</h2>
+       <p class="subtitle">
+        Registre officiel des utilisateurs abonnés à la Newsletter.
+      </p>
+    <input type="search" placeholder="Rechercher..." data-search="newsletter">
+    <div class="actions">
+     <!-- <button data-export="newsletter" data-format="csv">CSV</button>
+      <button data-export="newsletter" data-format="txt">TXT</button>
+      <button data-export="newsletter" data-format="pdf">PDF</button>
+    </div>-->
+    <table>
+      <thead>
+        <tr><th>Prénom</th><th>Nom</th><th>Email</th><th>Pays</th><th>Date</th></tr>
+      </thead>
+      <tbody id="newsletterBody"></tbody>
+    </table>
+  </section>
+
+  <!-- REGISTRE/STEPPER -->
+  <section id="Registre" class="admin-section">
+    <h2>Registre participant</h2>
+       <p class="subtitle">
+        Base détaillée des informations de participants à la campagne
+      </p>
+    <input type="search" placeholder="Rechercher participant..." data-search="stepper">
+    <!-- FILTRE ALPHABÉTIQUE -->
+<div id="alphaFilter" class="alpha-filter"></div>
+    <div id="stepperContainer"></div>
+
+  </section>
+
+  <!-- CLASSEMENT DES INFLUENCEURS -->
+  <section id="Classement" class="admin-section">
+    <h2>Classement des influenceurs</h2>
+       <p class="subtitle">
+        Selon les votes de participants à la campagne. 
+      </p>
+    <ol id="rankingList"></ol>
+  </section>
+
+  <!-- PARTICIPANTS DETAIL -->
+<section id="participants" class="admin-section participants-section">
+  <div class="participants-header">
+    <div>
+      <h2>Participants enregistrés</h2>
+      <p class="subtitle">
+        Registre officiel des participants à la campagne
+      </p>
+    </div>
+
+    <div class="participants-stats">
+      <div class="stat-card">
+        <span class="stat-value" id="participantCount">0</span>
+        <span class="stat-label">Participants</span>
+      </div>
+    </div>
+  </div>
+
+  <input
+    type="search"
+    placeholder="Rechercher un participant par nom..."
+    data-search="participants"
+  />
+
+  <div id="participantsGrid" class="participants-grid">
+    <!-- Cartes injectées en JS -->
+  </div>
+</section>
+
+
+  <!-- CONTACT -->
+  <section id="contact" class="admin-section contact-section">
+  <div class="contact-header">
+    <div>
+      <h2>Centre de messages</h2>
+      <p class="subtitle">
+        Messages reçus via le formulaire de contact
+      </p>
+    </div>
+  </div>
+
+  <input
+    type="search"
+    placeholder="Rechercher un message (email, sujet...)"
+    data-search="contact"
+  />
+
+  <div id="contactContainer" class="contact-grid">
+    <!-- Cartes messages injectées en JS -->
+  </div>
+</section>
+
+
+</main>
+
+<!-- MODAL REPONSE -->
+<div id="replyModal" class="modal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>📨 Répondre au message</h3>
+      <button type="button" id="closeModal" class="modal-close">✕</button>
+    </div>
+
+    <form id="replyForm">
+      <label>Email du destinataire</label>
+      <input type="email" name="to_email" readonly>
+
+      <label>Sujet</label>
+      <input type="text" name="subject" readonly>
+
+      <label>Message</label>
+      <textarea name="message" placeholder="Écrivez votre réponse ici…" required></textarea>
+
+      <div class="modal-actions">
+        <button type="submit" class="btn-primary">
+          Envoyer
+        </button>
+        <button type="button" class="btn-secondary" id="closeModalAlt">
+          Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<script src="admin-repertoire.js"></script>
+</body>
+</html>
