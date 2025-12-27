@@ -7,6 +7,17 @@ document.addEventListener('DOMContentLoaded', function () {
   let currentStep = 1;
   const TOTAL_STEPS = 4;
   const storageKey = 'dtt_stepper_data';
+  const honorificState = {
+  step1: null,
+  step2: {} // { inviteIndex: value }
+};
+
+//Conversion bilingue Bouton Toogle
+function updateHonorificLang(lang) {
+  document.querySelectorAll('.honorific-btn').forEach(btn => {
+    btn.textContent = btn.dataset[lang] || btn.textContent;
+  });
+}
 
   // Elements
   const stepCards = Array.from(document.querySelectorAll('.step-card'));
@@ -32,6 +43,34 @@ document.addEventListener('DOMContentLoaded', function () {
   const nextBtn3 = document.getElementById('nextBtn3');
   const prevBtn4 = document.getElementById('prevBtn4');
   const finishBtn = document.getElementById('finishBtn');
+
+  
+//Gestion des clic Boutons Toogle (Titres)
+document.querySelectorAll('.honorific-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const container = btn.closest('.honorific-toggle');
+    container.querySelectorAll('.honorific-btn')
+      .forEach(b => b.classList.remove('active'));
+
+    btn.classList.add('active');
+
+    // Step 1
+    const step1Wrap = btn.closest('[data-step-honorific="1"]');
+    if (step1Wrap) {
+      honorificState.step1 = btn.dataset.value;
+      nextBtn1.disabled = !validateStep(1);
+      return;
+    }
+
+    // Step 2
+    const inviteWrap = btn.closest('[data-invite-honorific]');
+    if (inviteWrap) {
+      const idx = inviteWrap.dataset.inviteHonorific;
+      honorificState.step2[idx] = btn.dataset.value;
+      nextBtn2.disabled = !validateStep(2);
+    }
+  });
+});
 
   // Step 1 fields
   const s1Fields = {
@@ -209,7 +248,37 @@ async function updateParticipant(data) {
     // reset stepper UI to step 1
     goToStep(1);
   }
-  // 🔧 END PATCH A
+
+ //GESTION DE LA VIDEO POPUP 
+const videoPopup = document.getElementById('videoPopup');
+const campaignVideo = document.getElementById('campaignVideo');
+const closeVideoBtn = document.getElementById('closeVideo');
+
+let videoTimer = null;
+let videoShownForStep = {};
+
+function showVideoPopup(step) {
+  if (videoShownForStep[step]) return; // éviter répétition
+  videoShownForStep[step] = true;
+
+  clearTimeout(videoTimer);
+
+  videoTimer = setTimeout(() => {
+    videoPopup.classList.add('show');
+    videoPopup.setAttribute('aria-hidden', 'false');
+
+    campaignVideo.currentTime = 0;
+    campaignVideo.play().catch(() => {});
+  }, 3000); // ⏱️ 3 secondes
+}
+closeVideoBtn.addEventListener('click', () => {
+  videoPopup.classList.remove('show');
+  videoPopup.setAttribute('aria-hidden', 'true');
+
+  campaignVideo.pause();
+});
+
+
 
   // Toast helper
   let toastTimer = null;
@@ -267,6 +336,11 @@ async function updateParticipant(data) {
         setTimeout(()=>{ if (Number(card.dataset.step) !== currentStep) card.hidden = true; }, 320);
       }
     });
+    // 🎥 Popup vidéo sur étape 1 et dernière étape
+if (stepNumber === 1 || stepNumber === TOTAL_STEPS) {
+  showVideoPopup(stepNumber);
+}
+
 
     // Enable/disable prev buttons
     prevBtn.disabled = currentStep === 1;
@@ -413,13 +487,20 @@ if (step === 4)
     // Next button for step1
     nextBtn1.addEventListener('click', async function () {
   if (!validateStep(1)) {
-    showToast(
-  document.body.classList.contains('en')
+    showToast
+(document.body.classList.contains('en')
     ? 'Please complete all fields.'
-    : 'Veuillez compléter tous les champs.'
-);
+    : 'Veuillez compléter tous les champs.');
     return;
   }
+  if (!honorificState.step1){ 
+     showToast
+(document.body.classList.contains('en')
+    ? 'Please select a title.'
+    : 'Veuillez choisir une civilité.');
+  return;
+  }
+   
 
 const res = await saveData('step1', {
   lastName: s1Fields.last.value.trim(),
@@ -434,8 +515,8 @@ if (!res) {
   //showToast('Erreur serveur. Réessayez.');
   showToast(
   document.body.classList.contains('en')
-    ? 'This email is already used by another participant.'
-    : '❌ Cet email est déjà utilisé par un autre participant.'
+    ? 'Server error. Please try again.'
+    : '❌Erreur serveur. Réessayez.'
 );
 
   return;
@@ -483,10 +564,10 @@ goToStep(2);
     });
 
  // ✅ UI + validation uniquement (AUCUN appel API)
-s2Form.addEventListener('input', ()=>{
+s2Form.addEventListener('input', ()=> {
   let validCount = 0;
 
-  [1,2,3,4,5].forEach(n=>{
+  [1,2,3,4,5].forEach(n => {
     const last = s2Form.querySelector(`[name=i${n}-last]`)?.value.trim() || '';
     const first = s2Form.querySelector(`[name=i${n}-first]`)?.value.trim() || '';
     const social = s2Form.querySelector(`[name=i${n}-social]`)?.value || '';
@@ -497,12 +578,13 @@ s2Form.addEventListener('input', ()=>{
       profileOk = profile.trim().length > 0;
     }
 
+    // ❗ volontairement SANS civilité ici (UI only)
     if (last && first && social && profileOk) {
       validCount++;
     }
   });
 
-  // feedback visuel
+  // feedback visuel OK
   if (validCount >= 3) {
     s2Hint.textContent = '✔✔✔';
     s2Hint.style.color = 'var(--deep-green)';
@@ -510,10 +592,14 @@ s2Form.addEventListener('input', ()=>{
     s2Hint.textContent = '';
   }
 
-  nextBtn2.disabled = !(validCount >= 3 && validCount <= 5);
+  // ✅ UNE SEULE SOURCE DE VÉRITÉ
+  nextBtn2.disabled = !validateStep(2);
 });
 
+
 nextBtn2.addEventListener('click', async function () {
+ // 🔍 Vérification civilité d'abord
+  const missingHonorific = [];
   if (!validateStep(2)) {
     showToast(
   document.body.classList.contains('en')
@@ -531,10 +617,21 @@ nextBtn2.addEventListener('click', async function () {
     const profile = s2Form.querySelector(`[name=i${n}-profile]`)?.value.trim();
 
     // 🔒 filtrage STRICT
-    if (last && first && social && profile) {
+    if (last && first && social && profile && !honorificState.step2[n]) {
       invites.push({ last, first, social, profile });
     }
+    //if (last && first && social && !honorificState.step2[n]) {
+      //missingHonorific.push(n);
+    //}
   });
+    //if (missingHonorific.length) {
+    //showToast(
+      //document.body.classList.contains('en')
+        //? `Please select a title for guest(s): ${missingHonorific.join(', ')}`
+        //: `Veuillez choisir une civilité pour le(s) invité(s) : ${missingHonorific.join(', ')}`
+    //);
+    //return;
+  //}
 
   console.log('📦 Invités envoyés (final):', invites);
 

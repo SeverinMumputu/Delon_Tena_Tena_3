@@ -305,15 +305,94 @@ body{
 .lang-btn.local{border:1px solid rgba(0,0,0,0.06);padding:8px 12px;border-radius:8px;background:transparent;cursor:pointer}
 
 /* Vidéo */
-.intro{
-display: flex;
-justify-content: center;
+/* 🎥 Popup vidéo */
+.video-popup {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9997;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px) scale(0.95);
+  transition: opacity .4s ease, transform .45s cubic-bezier(.2,.9,.3,1);
 }
-.intro video {
-    width: 50%;
-    max-width: 400px;
-    border-radius: 10px;
-    margin-top: 20px;
+
+.video-popup.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.video-popup-inner {
+  position: relative;
+  width: 320px;
+  max-width: 90vw;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(180deg,#fff,#f9f6f1);
+  box-shadow: 0 30px 60px rgba(46,70,49,0.18);
+}
+
+.video-popup video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ❌ Bouton fermeture */
+.video-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform .2s, background .2s;
+}
+
+.video-close:hover {
+  background: rgba(0,0,0,0.75);
+  transform: scale(1.1);
+}
+
+/* 🎓 Honorific Toggle */
+.honorific-field {
+  align-items: stretch;
+}
+
+.honorific-toggle {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+}
+
+.honorific-btn {
+  flex: 1;
+  padding: 6px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(46,70,49,0.15);
+  background: linear-gradient(180deg,#fff,#fff);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--deep-green);
+  cursor: pointer;
+  transition: var(--trans);
+}
+
+.honorific-btn:hover {
+  transform: translateY(-1px);
+}
+
+.honorific-btn.active {
+  background: linear-gradient(180deg,var(--green-soft),var(--green-light));
+  color: #fff;
+  border-color: transparent;
 }
 
 /* Container */
@@ -419,6 +498,46 @@ justify-content: center;
   font-family:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,"Helvetica Neue",Arial;
   font-size: 1.1 rem;
 }
+/* Bloc informatif donation (étape 4) */
+.donation-info{
+  margin-top:16px;
+  padding:14px;
+  border-radius:14px;
+  background:linear-gradient(
+    180deg,
+    rgba(46,70,49,0.04),
+    rgba(46,70,49,0.02)
+  );
+  border:1px dashed rgba(46,70,49,0.12);
+  font-family:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,"Helvetica Neue",Arial;
+}
+
+.donation-info-title{
+  margin:0 0 6px 0;
+  font-size:0.95rem;
+  font-weight:800;
+  color:var(--deep-green);
+}
+
+.donation-info-text{
+  margin:0 0 10px 0;
+  font-size:0.85rem;
+  color:rgba(46,70,49,0.7);
+}
+
+.donation-info-box{
+  background:#fff;
+  border-radius:12px;
+  padding:10px 12px;
+  box-shadow:0 6px 16px rgba(46,70,49,0.05);
+}
+
+.donation-info-box p{
+  margin:6px 0;
+  font-size:0.9rem;
+  color:var(--green-deep);
+}
+
 /* actions & buttons */
 .card-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:12px}
 .btn{padding:10px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:800;letter-spacing:.2px}

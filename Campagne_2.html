@@ -130,12 +130,17 @@
         </div>
       </div>
     </section>
-<div class="intro">
-   <video controls>
-            <source src="Video_campagne.mp4" type="video/mp4">
-            Votre navigateur ne supporte pas la vidéo.
-        </video>
+    <div class="video-popup" id="videoPopup" aria-hidden="true">
+  <div class="video-popup-inner">
+    <button class="video-close" id="closeVideo" aria-label="Fermer la vidéo">✕</button>
+
+    <video id="campaignVideo" muted playsinline loop>
+      <source src="Video_campagne.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
+  </div>
 </div>
+
     
     <!-- Stepper Container -->
     <section class="stepper-section" aria-labelledby="stepperTitle">
@@ -170,6 +175,39 @@
             </header>
 
             <form class="card-form" id="form-step-1" novalidate>
+              <!-- 🎓 Civilité -->
+<div class="field honorific-field" data-step-honorific="1">
+  <span class="field-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="7" r="3"/>
+      <path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>
+    </svg>
+  </span>
+
+  <div class="honorific-toggle" role="radiogroup" aria-label="Titre honorifique">
+    <button type="button" class="honorific-btn"
+      data-value="mr"
+      data-fr="Monsieur"
+      data-en="Mr">
+      Monsieur
+    </button>
+
+    <button type="button" class="honorific-btn"
+      data-value="mrs"
+      data-fr="Madame"
+      data-en="Mrs">
+      Madame
+    </button>
+
+    <button type="button" class="honorific-btn"
+      data-value="miss"
+      data-fr="Mademoiselle"
+      data-en="Miss">
+      Mlle
+    </button>
+  </div>
+</div>
+
               <!-- Each input has an SVG icon on the left -->
               <label class="field">
                 <span class="field-icon" aria-hidden="true">
@@ -246,6 +284,21 @@
 
       <div class="invite" data-invite="1">
         <h4 class="invite-title">Invité 1</h4>
+        <div class="field honorific-field" data-invite-honorific="1">
+  <span class="field-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="7" r="3"/>
+      <path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>
+    </svg>
+  </span>
+
+  <div class="honorific-toggle">
+    <button type="button" class="honorific-btn" data-value="mr">Mr</button>
+    <button type="button" class="honorific-btn" data-value="mrs">Mme</button>
+    <button type="button" class="honorific-btn" data-value="miss">Mlle</button>
+  </div>
+</div>
+
         <label class="field">
           <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span>
           <input type="text" name="i1-last" placeholder="Nom" required/>
@@ -273,6 +326,21 @@
 
       <div class="invite" data-invite="2">
         <h4 class="invite-title">Invité 2</h4>
+        <div class="field honorific-field" data-invite-honorific="1">
+  <span class="field-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="7" r="3"/>
+      <path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>
+    </svg>
+  </span>
+
+  <div class="honorific-toggle">
+    <button type="button" class="honorific-btn" data-value="mr">Mr</button>
+    <button type="button" class="honorific-btn" data-value="mrs">Mme</button>
+    <button type="button" class="honorific-btn" data-value="miss">Mlle</button>
+  </div>
+</div>
+
         <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i2-last" placeholder="Nom" required/></label>
         <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i2-first" placeholder="Prénom" required/></label>
 
@@ -290,6 +358,21 @@
 
       <div class="invite" data-invite="3">
         <h4 class="invite-title">Invité 3</h4>
+        <div class="field honorific-field" data-invite-honorific="1">
+  <span class="field-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="7" r="3"/>
+      <path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>
+    </svg>
+  </span>
+
+  <div class="honorific-toggle">
+    <button type="button" class="honorific-btn" data-value="mr">Mr</button>
+    <button type="button" class="honorific-btn" data-value="mrs">Mme</button>
+    <button type="button" class="honorific-btn" data-value="miss">Mlle</button>
+  </div>
+</div>
+
         <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i3-last" placeholder="Nom" required/></label>
         <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i3-first" placeholder="Prénom" required/></label>
 
@@ -308,6 +391,21 @@
       <!-- NEW: Invité 4 -->
       <div class="invite" data-invite="4">
         <h4 class="invite-title">Invité 4</h4>
+        <div class="field honorific-field" data-invite-honorific="1">
+  <span class="field-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="7" r="3"/>
+      <path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>
+    </svg>
+  </span>
+
+  <div class="honorific-toggle">
+    <button type="button" class="honorific-btn" data-value="mr">Mr</button>
+    <button type="button" class="honorific-btn" data-value="mrs">Mme</button>
+    <button type="button" class="honorific-btn" data-value="miss">Mlle</button>
+  </div>
+</div>
+
         <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i4-last" placeholder="Nom" required/></label>
         <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i4-first" placeholder="Prénom" required/></label>
 
@@ -326,6 +424,21 @@
       <!-- NEW: Invité 5 -->
       <div class="invite" data-invite="5">
         <h4 class="invite-title">Invité 5</h4>
+        <div class="field honorific-field" data-invite-honorific="1">
+  <span class="field-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="7" r="3"/>
+      <path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>
+    </svg>
+  </span>
+
+  <div class="honorific-toggle">
+    <button type="button" class="honorific-btn" data-value="mr">Mr</button>
+    <button type="button" class="honorific-btn" data-value="mrs">Mme</button>
+    <button type="button" class="honorific-btn" data-value="miss">Mlle</button>
+  </div>
+</div>
+
         <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i5-last" placeholder="Nom" required/></label>
         <label class="field"><span class="field-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span><input type="text" name="i5-first" placeholder="Prénom" required/></label>
 
@@ -472,7 +585,7 @@
     <button class="donor-logo" data-method="donorbox" aria-label="Donorbox" tabindex="-1" disabled>
       <img src="donorbox-logo-2023.jpg" alt="DonorBox logo" />
       <div class="donor-label">DonorBox</div>
-      <p class="color_texte_step_4">Numéro de compte : 455 XXX XXX<br/>Titulaire : Fondation Delon Tena Tena</p>
+     <!-- <p class="color_texte_step_4">Numéro de compte : 455 XXX XXX<br/>Titulaire : Fondation Delon Tena Tena</p>-->
       <p class="color_texte_step_4"><a href="https://donorbox.org" target="_blank" rel="noopener">Faire un don via DonorBox</a></p>
     </button>
 
@@ -488,6 +601,37 @@
       <p class="color_texte_step_4">Numéro :+243 85 123 45 67<br/>Titulaire : Fondation Delon Tena Tena</p>
     </button>
   </div>
+
+  <!-- Bloc informatif : Coordonnées de la fondation -->
+<section class="donation-info" aria-label="Informations de paiement">
+  <h4 
+    class="donation-info-title"
+    data-fr="Informations du compte de la fondation"
+    data-en="Foundation account information"
+  >
+    Informations du compte de la fondation
+  </h4>
+
+  <p 
+    class="donation-info-text"
+    data-fr="Ce compte est fourni à titre informatif pour les donateurs souhaitant effectuer un soutien direct."
+    data-en="This account is provided for informational purposes for donors wishing to offer direct support."
+  >
+    Ce compte est fourni à titre informatif pour les donateurs souhaitant effectuer un soutien direct.
+  </p>
+
+  <div class="donation-info-box">
+    <p>
+      <strong data-fr="Nom du compte :" data-en="Account name :">Nom du compte :</strong>
+      Fondation Delon Tena Tena
+    </p>
+    <p>
+      <strong data-fr="Numéro de compte :" data-en="Account number :">Numéro de compte :</strong>
+      455 XXX XXX
+    </p>
+  </div>
+</section>
+
 
   <div class="card-actions">
     <button type="button" class="btn btn-secondary" id="prevBtn4" data-fr="Précédent" data-en="Previous">Précédent</button>
