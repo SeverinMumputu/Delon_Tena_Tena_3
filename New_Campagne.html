@@ -149,7 +149,25 @@
 </section>--> 
 
 
-  <!-- Section 3 : Durée de la campagne -->
+<!-- ==== Campaign Insight Wrapper (NOUVEAU BLOC) ==== -->
+<section class="campaign-insight" aria-label="Aperçu global de la campagne">
+
+  <div class="campaign-insight-header">
+    <h2 data-fr="Impact & Mobilisation"
+        data-en="Impact & Mobilization">
+      Impact & Mobilisation
+    </h2>
+    <p data-fr="Durée de la campagne et mobilisation citoyenne en temps réel"
+       data-en="Campaign duration and real-time community mobilization">
+      Durée de la campagne et mobilisation citoyenne en temps réel
+    </p>
+  </div>
+
+  <div class="campaign-insight-grid">
+
+    <!-- 🔹 Bloc Timing (INCHANGÉ) -->
+    <div class="campaign-insight-col timing-col">
+        <!-- Section 3 : Durée de la campagne -->
    <section id="Timing">
       <p class="campaign-description" data-fr="  Campagne Pour ceux qu'on aime — 6 mois pour agir.
       Se rassembler aujourd’hui pour transformer demain.
@@ -167,8 +185,11 @@ Together, we are building local, sustainable, and human-centered solutions for m
             <div class="loading-state" data-fr="Initialisation du Système Temporel..." data-en="Initializing the Time System...">Initialisation du Système Temporel...</div>
         </div>
         </section>
+    </div>
 
-  <!-- ==== Bloc principal: Participants card ==== -->
+    <!-- 🔹 Bloc Participants (INCHANGÉ) -->
+    <div class="campaign-insight-col participants-col">
+       <!-- ==== Bloc principal: Participants card ==== -->
   <article class="participants-card" aria-label="Bloc participants Pour ceux qu'on aime">
     <div class="pc-header">
       <div class="pc-badge" aria-hidden="true">
@@ -200,6 +221,12 @@ Join the community that supports our loved ones and join the movement.">Chaque v
       <div style="font-size:0.86rem; color:rgba(74,74,74,0.7)" data-fr="Total officiel" data-en="Total Official">Total officiel</div>
     </div>
   </article>
+
+    </div>
+
+  </div>
+
+</section>
 
   <!-- ==== Popup overlay & modal (hidden by default) ==== -->
   <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">

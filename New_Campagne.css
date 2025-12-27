@@ -520,6 +520,105 @@ textarea{min-height:100px;resize:vertical}
     margin-left:auto;
     margin-right:auto;
   }
+/* ==== BLOC PARENT DUREE ET NOMBRE CAMPAGNE ==== */
+
+/* Masquer le texte descriptif du Timing */
+#Timing .campaign-description {
+  display: none;
+}
+
+/* ==== Campaign Insight : superposition verticale très compacte ==== */
+.campaign-insight {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2.4rem auto;            /* réduit */
+  padding: 1.2rem 1.4rem 1.5rem;  /* padding vertical resserré */
+  background: linear-gradient(
+    180deg,
+    rgba(246,244,241,0.92),
+    rgba(255,255,255,0.97)
+  );
+  border-radius: 22px;
+  box-shadow: 0 18px 46px rgba(0,0,0,0.07);
+  border: 1px solid rgba(46,107,79,0.06);
+}
+
+/* ==== Empilement vertical très serré ==== */
+.campaign-insight-grid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* 🔥 espace fortement réduit */
+}
+
+/* ==== Timing (au-dessus) ==== */
+.timing-col {
+  position: relative;
+  z-index: 1;
+}
+
+/* Neutralisation stricte des marges du Timing */
+#Timing {
+  margin: 0;
+  padding: 0;
+}
+
+/* ==== Participants (juste en dessous, proche) ==== */
+.participants-col {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  margin-top: -2.8rem; /* 🔥 rapprochement accentué mais propre */
+}
+
+/* Mise en avant légère sans modifier le style interne */
+.participants-card {
+  backdrop-filter: blur(6px);
+}
+/* ==== Compression maximale du texte avant Timing ==== */
+.campaign-insight-header {
+  margin-bottom: 0.3rem; /* 🔥 très réduit */
+}
+
+.campaign-insight-header h2 {
+  margin-bottom: 0.2rem; /* 🔥 */
+  line-height: 1.15;
+}
+
+.campaign-insight-header p {
+  margin-bottom: 0;      /* 🔥 suppression totale */
+  line-height: 1.3;
+}
+.campaign-insight-grid {
+  gap: 0.3rem; /* 🔥 quasi collé */
+}
+
+/* ==== Responsive tablette ==== */
+@media (max-width: 1024px) {
+  .participants-col {
+    margin-top: -2rem;
+  }
+}
+
+/* ==== Responsive mobile ==== */
+@media (max-width: 480px) {
+  .campaign-insight {
+    padding: 1rem 1.1rem 1.2rem;
+    border-radius: 18px;
+  }
+
+  .campaign-insight-grid {
+    gap: 0.4rem;
+  }
+
+  .participants-col {
+    margin-top: -1.4rem;
+  }
+}
+
+
   
   /* === Bloc Durée Campagne === */
    /* Canvas Container for Three.js */
