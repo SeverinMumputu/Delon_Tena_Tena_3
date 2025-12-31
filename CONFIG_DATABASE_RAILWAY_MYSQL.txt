@@ -1,0 +1,9 @@
+URL public MySQL ---->  mysql://root:KvnaHpncVrXdpBpFMtUoYvDXfMazsjGu@gondola.proxy.rlwy.net:46381/railway
+
+| Variable        | Valeur extraite                    |
+| --------------- | ---------------------------------- |
+| DB_USER     | root                             |
+| DB_PASSWORD | KvnaHpncVrXdpBpFMtUoYvDXfMazsjGu |
+| DB_HOST     | gondola.proxy.rlwy.net           |
+| DB_PORT     | 46381                            |
+| DB_NAME     | railway                          |

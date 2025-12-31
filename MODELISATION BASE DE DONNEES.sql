@@ -61,19 +61,6 @@ CREATE TABLE stepper_donations (
     KEY idx_participant_id (participant_id)
 );
 
-CREATE TABLE stepper_donations (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    participant_id INT UNSIGNED NOT NULL,
-    payment_method VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    PRIMARY KEY (id),
-    KEY idx_participant_id (participant_id),
-
-    CONSTRAINT fk_stepper_participant
-        FOREIGN KEY (participant_id) REFERENCES participants(id)
-        ON DELETE CASCADE
-) ENGINE=InnoDB;
 
 CREATE TABLE stepper_invitations (
     id INT NOT NULL AUTO_INCREMENT,
