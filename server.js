@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2/promise");
@@ -8,15 +9,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-/* ---------- MySQL Connection ---------- */
+/* ---------- Désormain une connexion déployable sur héberheur backend ---------- */
 const pool = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "8748Mkrs",
-  database: "fondation_delon",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT || 3306,
   waitForConnections: true,
   connectionLimit: 10
 });
+
 
 /* ---------- Routes ---------- */
 
@@ -487,7 +490,8 @@ app.get("/", (req, res) => {
   res.send("✅ API Fondation Delon opérationnelle");
 });
 /* ---------- Server ---------- */
+console.log("ENV DB HOST =", process.env.DB_HOST);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`✅ Serveur actif sur http://localhost:${PORT}`);
+  console.log(`✅ Serveur fondation delon tena tena actif sur http://localhost:${PORT}`);
 });

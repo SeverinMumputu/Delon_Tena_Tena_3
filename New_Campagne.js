@@ -511,7 +511,8 @@ mobileMenu.addEventListener('click', (e)=>{
 /* ===== Participants campagne =====
 */
 (function(){
-  const API_BASE = 'http://localhost:3000';
+  const API_BASE = CONFIG.API_BASE_URL;
+
   const DURATION_MS = 1000; // ~1 seconde
 
   /* ---------- Counter animation (smooth, requestAnimationFrame) ---------- */

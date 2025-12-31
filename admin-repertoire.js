@@ -1,6 +1,6 @@
 emailjs.init("YOUR_PUBLIC_KEY");
 
-const API = "http://localhost:3000";
+const API = CONFIG.API_BASE_URL;
 
 //MENU HAMBURGER
 document.getElementById("menuBtn").onclick = () => {

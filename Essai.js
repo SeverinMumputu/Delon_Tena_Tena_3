@@ -574,7 +574,8 @@ function isValidEmail(email){
 
     /* ---------- FETCH API ---------- */
     try{
-      const res = await fetch("http://localhost:3000/api/newsletter/subscribe",{
+      const res = await fetch(`${CONFIG.API_BASE_URL}/api/newsletter/subscribe`, {
+
         method:"POST",
         headers:{ "Content-Type":"application/json" },
         body:JSON.stringify({

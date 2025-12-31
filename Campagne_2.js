@@ -1,8 +1,8 @@
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // 🔗 API BASE (npx serve ou serveur Node)
-  const API_BASE = 'http://localhost:3000';
+    // 🔗 API BASE (servie par config.js)
+  const API_BASE = CONFIG.API_BASE_URL;
   // Centralized state
   let currentStep = 1;
   const TOTAL_STEPS = 4;
@@ -186,7 +186,8 @@ async function updateParticipant(data) {
   console.log('✏️ UPDATE participant', data);
 
   try {
-    const res = await fetch(`/api/stepper/participant/${window.participantId}`, {
+    const res = await fetch(`${API_BASE}/api/stepper/participant/${window.participantId}`, {
+
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -670,7 +671,8 @@ setTimeout(()=>goToStep(3), 600);
 (function step3Init(){
 
   async function loadInfluencers() {
-    const data = await fetch(API_BASE + '/api/analytics/influencers')
+    const data = await fetch(`${API_BASE}/api/analytics/influencers`)
+
       .then(r => r.json())
       .catch(() => []);
 
@@ -1195,15 +1197,14 @@ try {
   }
 
   // --- GENERATION DES DONNEES REELLES DEPUIS BACKEND  ---
-const API_BASE = 'http://localhost:3000';
+const API_BASE = CONFIG.API_BASE_URL;
+
 
 async function fetchRealAnalytics(influencerName) {
-  const res = await fetch(
-    `${API_BASE}/api/analytics/stats/${encodeURIComponent(influencerName)}`
-  );
-  if (!res.ok) throw new Error('Analytics fetch failed');
-  return res.json();
+  return fetch(`${API_BASE}/api/analytics/stats/${encodeURIComponent(influencerName)}`)
+    .then(r => r.json());
 }
+
 
 
   // --- Vote button handling (now calls the stepper selection by simulating a card click) ---
