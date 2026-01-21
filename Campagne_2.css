@@ -455,6 +455,26 @@ body{
 .invite-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 .invite{background:linear-gradient(180deg,#fff,#fff);padding:12px;border-radius:12px}
 .invite-title{margin:0 0 8px 0;font-weight:800;color:var(--deep-green)}
+/* Gmail field */
+.gmail-field input {
+  letter-spacing: .2px;
+}
+.gmail-field input:focus {
+  outline: none;
+}
+.gmail-field.error {
+  border-color: rgba(200, 60, 60, 0.35);
+  background: rgba(200, 60, 60, 0.04);
+}
+.gmail-field.error .field-icon {
+  background: rgba(200, 60, 60, 0.08);
+}
+.gmail-field.valid {
+  border-color: rgba(62, 180, 137, 0.45);
+}
+.gmail-field.valid .field-icon svg {
+  fill: var(--deep-green);
+}
 
 /* influencer grid */
 .influencer-controls{display:flex;gap:12px;align-items:center;margin-bottom:12px}
@@ -467,6 +487,55 @@ body{
 .influencer-flag{position:absolute;right:8px;bottom:8px;background:var(--green-soft);color:#fff;padding:6px;border-radius:20px;transform:translateY(8px);opacity:0;transition:all .25s}
 .influencer.selected{transform:translateY(-6px);box-shadow:0 20px 40px rgba(46,70,49,0.08)}
 .influencer.selected .influencer-flag{opacity:1;transform:translateY(0)}
+.influencer-pic {
+  position: relative;
+  z-index: 1;
+}
+
+.certification-badge {
+  z-index: 3;
+  pointer-events: none;
+}
+
+
+/* Badge certification influenceur */
+.certification-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #1DA1F2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.certification-badge svg{
+  width:14px;
+  height:14px;
+  fill:#fff;
+}
+/* Info certification */
+.certification-info{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  background:rgba(29,161,242,0.08);
+  border-left:4px solid #1DA1F2;
+  padding:10px 12px;
+  border-radius:8px;
+  margin:12px 0;
+  font-size:13px;
+  color:var(--deep-green);
+}
+
+.certification-icon{
+  color:#1DA1F2;
+  font-weight:700;
+}
+
 
 /* donation */
 .donation-grid{display:flex;gap:12px;flex-wrap:wrap; font-family:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,"Helvetica Neue",Arial;}

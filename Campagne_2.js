@@ -384,6 +384,12 @@ if (step === 4)
     return '';
   }
 
+// ✅ VALIDATION EMAIL GMAIL (GLOBAL)
+function isValidGmail(email) {
+  return /^[^\s@]+@gmail\.com$/i.test(String(email || '').trim());
+}
+
+
   // Validate step inputs — returns boolean
 function validateStep(step) {
   if (step === 1) {
@@ -415,12 +421,16 @@ function validateStep(step) {
         const last = lastEl ? String(lastEl.value).trim() : '';
         const first = firstEl ? String(firstEl.value).trim() : '';
         const social = socialEl ? String(socialEl.value).trim() : '';
+        const gmailEl = form.querySelector(`[name=i${n}-gmail]`);
+        const gmail = gmailEl ? gmailEl.value.trim() : '';
+        let gmailOk = true;
 
         // Require profile if social provided; if social empty, profile must be hidden or empty
         let profileOk = true;
-        if (social) {
+        if (last && first && social) {
           const profileVal = profileEl ? String(profileEl.value).trim() : '';
           profileOk = profileVal.length > 0;
+          gmailOk = isValidGmail(gmail);
         } else {
           if (profileEl) {
             const wrap = profileEl.closest('.profile-wrap');
@@ -430,7 +440,7 @@ function validateStep(step) {
           }
         }
 
-        return last && first && social && profileOk;
+        return last && first && social && profileOk && gmailOk;
       });
 
       // count valid invites (must be between 3 and 5)
@@ -565,38 +575,42 @@ goToStep(2);
     });
 
  // ✅ UI + validation uniquement (AUCUN appel API)
-s2Form.addEventListener('input', ()=> {
+s2Form.addEventListener('input', () => {
   let validCount = 0;
 
   [1,2,3,4,5].forEach(n => {
-    const last = s2Form.querySelector(`[name=i${n}-last]`)?.value.trim() || '';
-    const first = s2Form.querySelector(`[name=i${n}-first]`)?.value.trim() || '';
-    const social = s2Form.querySelector(`[name=i${n}-social]`)?.value || '';
-    const profile = s2Form.querySelector(`[name=i${n}-profile]`)?.value || '';
+    const last = s2Form.querySelector(`[name=i${n}-last]`)?.value.trim();
+    const first = s2Form.querySelector(`[name=i${n}-first]`)?.value.trim();
+    const social = s2Form.querySelector(`[name=i${n}-social]`)?.value.trim();
+    const profile = s2Form.querySelector(`[name=i${n}-profile]`)?.value.trim();
+    const gmail = s2Form.querySelector(`[name=i${n}-gmail]`)?.value.trim();
 
-    let profileOk = true;
-    if (social) {
-      profileOk = profile.trim().length > 0;
-    }
+    const gmailField = s2Form.querySelector(`[name=i${n}-gmail]`)?.closest('.gmail-field');
+    if (gmailField) gmailField.classList.remove('error','valid');
 
-    // ❗ volontairement SANS civilité ici (UI only)
-    if (last && first && social && profileOk) {
-      validCount++;
+    if (last && first && social) {
+      const profileOk = profile.length > 0;
+      const gmailOk = isValidGmail(gmail);
+
+      if (gmailField) {
+        gmailField.classList.add(gmailOk ? 'valid' : 'error');
+      }
+
+      if (profileOk && gmailOk) validCount++;
     }
   });
 
-  // feedback visuel OK
+  // 🎯 Feedback visuel
   if (validCount >= 3) {
-    s2Hint.textContent = '✔✔✔';
+    s2Hint.textContent = '✔';
     s2Hint.style.color = 'var(--deep-green)';
   } else {
     s2Hint.textContent = '';
   }
 
-  // ✅ UNE SEULE SOURCE DE VÉRITÉ
+  // 🔒 UNE SEULE SOURCE DE VÉRITÉ
   nextBtn2.disabled = !validateStep(2);
 });
-
 
 nextBtn2.addEventListener('click', async function () {
  // 🔍 Vérification civilité d'abord
@@ -668,6 +682,22 @@ setTimeout(()=>goToStep(3), 600);
 });
   })();
 
+  function renderCertificationBadge(isConfirmed) {
+  if (Number(isConfirmed) !== 1) return '';
+
+  return `
+    <span class="certification-badge" 
+          title="Influenceur confirmé"
+          aria-label="Influenceur confirmé">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2.5l2.7 2.2 3.5.3-1.3 3.2.9 3.4-3-1.8-3 1.8.9-3.4-1.3-3.2 3.5-.3L12 2.5z"/>
+        <path d="M10.2 12.9l-1.6-1.6-1.1 1.1 2.7 2.7 5.3-5.3-1.1-1.1z"/>
+      </svg>
+    </span>
+  `;
+}
+
+
 (function step3Init(){
 
   async function loadInfluencers() {
@@ -689,13 +719,19 @@ setTimeout(()=>goToStep(3), 600);
       card.tabIndex = 0;
 
       card.innerHTML = `
-        <div class="influencer-pic" style="background-image:url('${inf.image_path || ''}')"></div>
-        <div class="influencer-meta">
-          <strong>${inf.influencer_name}</strong>
-          <small>${inf.sector || ''} • ${inf.status || ''}</small>
-        </div>
-        <div class="influencer-flag">✅</div>
-      `;
+  <div class="influencer-pic" 
+       style="background-image:url('${inf.image_path || ''}')">
+    ${renderCertificationBadge(inf.is_confirmed)}
+  </div>
+
+  <div class="influencer-meta">
+    <strong>${inf.influencer_name}</strong>
+    <small>${inf.sector || ''} • ${inf.status || ''}</small>
+  </div>
+
+  <div class="influencer-flag">✅</div>
+`;
+
 
       card.addEventListener('click', () => toggleInfluencer(card));
       card.addEventListener('keydown', e => {
@@ -704,6 +740,13 @@ setTimeout(()=>goToStep(3), 600);
           toggleInfluencer(card);
         }
       });
+
+      console.table(data.map(i => ({
+  name: i.influencer_name,
+  is_confirmed: i.is_confirmed,
+  type: typeof i.is_confirmed
+})));
+
 
       influencerGrid.appendChild(card);
     });
@@ -750,13 +793,19 @@ data.forEach(inf => {
       card.dataset.name = inf.influencer_name;
 
       card.innerHTML = `
-        <div class="influencer-pic" style="background-image:url('${inf.image_path || ''}')"></div>
-        <div class="influencer-meta">
-          <strong>${inf.influencer_name}</strong>
-          <small>${inf.sector || ''} • ${inf.status || ''}</small>
-        </div>
-        <div class="influencer-flag">✅</div>
-      `;
+  <div class="influencer-pic" 
+       style="background-image:url('${inf.image_path || ''}')">
+    ${renderCertificationBadge(inf.is_confirmed)}
+  </div>
+
+  <div class="influencer-meta">
+    <strong>${inf.influencer_name}</strong>
+    <small>${inf.sector || ''} • ${inf.status || ''}</small>
+  </div>
+
+  <div class="influencer-flag">✅</div>
+`;
+
 
       card.addEventListener('click', () => toggleInfluencer(card));
       influencerGrid.appendChild(card);
