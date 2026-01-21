@@ -77,7 +77,6 @@ document.querySelectorAll('.honorific-btn').forEach(btn => {
     last: document.getElementById('s1-last'),
     first: document.getElementById('s1-first'),
     email: document.getElementById('s1-email'),
-    phone: document.getElementById('s1-phone'),
     social: document.getElementById('s1-social'),
     profileWrap: document.getElementById('s1-profile-wrap'),
     profile: document.getElementById('s1-profile'),
@@ -214,7 +213,6 @@ async function updateParticipant(data) {
     if (s1Fields.last) s1Fields.last.value = '';
     if (s1Fields.first) s1Fields.first.value = '';
     if (s1Fields.email) s1Fields.email.value = '';
-    if (s1Fields.phone) s1Fields.phone.value = '';
     if (s1Fields.social) s1Fields.social.value = '';
     if (s1Fields.profile) s1Fields.profile.value = '';
     if (s1Fields.profileWrap) s1Fields.profileWrap.style.display = 'none';
@@ -387,29 +385,24 @@ if (step === 4)
   }
 
   // Validate step inputs — returns boolean
-  function validateStep(step) {
-    if (step === 1) {
-      const last = s1Fields.last.value.trim();
-      const first = s1Fields.first.value.trim();
-      const email = s1Fields.email.value.trim();
-      const phone = s1Fields.phone.value.trim();
-      // simple email and phone checks
-      const emailOk = /\S+@\S+\.\S+/.test(email);
-      const phoneOk = phone.length >= 7;
+function validateStep(step) {
+  if (step === 1) {
+    const last = s1Fields.last.value.trim();
+    const first = s1Fields.first.value.trim();
+    const email = s1Fields.email.value.trim();
+    const emailOk = /\S+@\S+\.\S+/.test(email);
 
-      // 🔧 PATCH B INSÉRER ICI
-      // Include profile validation when a social network is selected
-      const socialVal = s1Fields.social ? String(s1Fields.social.value).trim() : '';
-      let profileOk = true;
-      if (socialVal) {
-        const profileVal = s1Fields.profile ? String(s1Fields.profile.value).trim() : '';
-        profileOk = profileVal.length > 0;
-      }
-      // 🔧 END PATCH B
+    const socialVal = s1Fields.social.value.trim();
 
-      const ok = last && first && emailOk && phoneOk && profileOk;
-      return Boolean(ok);
-    } 
+    let profileOk = true;
+    if (socialVal) {
+      const isVisible = getComputedStyle(s1Fields.profileWrap).display !== 'none';
+      const profileVal = s1Fields.profile.value.trim();
+      profileOk = !isVisible || profileVal.length > 0;
+    }
+
+    return Boolean(last && first && emailOk && profileOk);
+  }
    else if (step === 2) {
       const form = s2Form;
       // build array of boolean for each invite (1..5)
@@ -455,35 +448,43 @@ if (step === 4)
 
   (function step1Init(){
     // handle social selector
-    s1Fields.social.addEventListener('change', function (e) {
-      if (e.target.value) {
-        s1Fields.profileWrap.style.display = 'flex';
-        s1Fields.profile.setAttribute('required','true');
-      } else {
-        s1Fields.profileWrap.style.display = 'none';
-        s1Fields.profile.removeAttribute('required');
-        s1Fields.profile.value = ''; // 🔧 PATCH D: clear profile when social removed (one-line)
-      }
-      // save small update
-      saveData('step1', { social: e.target.value });
-      nextBtn1.disabled = !validateStep(1);
-    });
+   s1Fields.social.addEventListener('change', function (e) {
+  if (e.target.value) {
+    s1Fields.profileWrap.style.display = 'flex';
+    s1Fields.profile.setAttribute('required','true');
+
+    // 🎯 UX
+    setTimeout(() => s1Fields.profile.focus(), 50);
+  } else {
+    s1Fields.profileWrap.style.display = 'none';
+    s1Fields.profile.removeAttribute('required');
+    s1Fields.profile.value = '';
+  }
+
+  nextBtn1.disabled = !validateStep(1);
+});
+
 
     // on input validation
-    ['last','first','email','phone','profile'].forEach(key=>{
-      const el = s1Fields[key];
-      if (!el) return;
-      el.addEventListener('input', function () {
+    ['last','first','email','profile'].forEach(key => {
+  const el = s1Fields[key];
+  if (!el) return;
+
+  el.addEventListener('input', function () {
+
     updateParticipant({
-    last_name: s1Fields.last.value,
-    first_name: s1Fields.first.value,
-    email: s1Fields.email.value,
-    phone: s1Fields.phone.value,
-    social_network: s1Fields.social.value,
-    social_profile: s1Fields.profile.value
+      last_name: s1Fields.last.value,
+      first_name: s1Fields.first.value,
+      email: s1Fields.email.value,
+      social_network: s1Fields.social.value,
+      social_profile: s1Fields.profile.value
+    });
+
+    // ✅ PATCH CRITIQUE
+    nextBtn1.disabled = !validateStep(1);
   });
 });
-    });
+
 
     // Next button for step1
     nextBtn1.addEventListener('click', async function () {
@@ -507,7 +508,6 @@ const res = await saveData('step1', {
   lastName: s1Fields.last.value.trim(),
   firstName: s1Fields.first.value.trim(),
   email: s1Fields.email.value.trim(),
-  phone: s1Fields.phone.value.trim(),
   social: s1Fields.social.value,
   profile: s1Fields.profile.value
 });

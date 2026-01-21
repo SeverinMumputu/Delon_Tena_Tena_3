@@ -98,9 +98,9 @@ app.post('/api/stepper/step1', async (req, res) => {
     // ✅ Insertion
     const [result] = await pool.execute(
       `INSERT INTO stepper_participants 
-       (last_name, first_name, email, phone, social_network, social_profile)
-       VALUES (?, ?, ?, ?, ?, ?)`,
-      [lastName, firstName, email, phone, social || null, profile || null]
+       (last_name, first_name, email, social_network, social_profile)
+       VALUES (?, ?, ?, ?, ?)`,
+      [lastName, firstName, email, social || null, profile || null]
     );
 
     console.log('✅ Participant créé ID =', result.insertId);

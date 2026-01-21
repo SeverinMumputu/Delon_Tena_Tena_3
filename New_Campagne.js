@@ -254,258 +254,60 @@ mobileMenu.addEventListener('click', (e)=>{
     }
   })();
 
+ 
+/* ==== TIMER CAMPAGNE – 6 MOIS ==== */
+(function(){
 
-   // --- CONFIGURATION DE LA DURÉE ---
-        // Définition simple de la durée de campagne (6 mois)
-        const DUREE_MOIS = 6; 
-        
-        // Calcul de la date de fin
-        const now = new Date();
-        const endDate = new Date(now);
-        endDate.setMonth(now.getMonth() + DUREE_MOIS);
-        
-        // --- THREE.JS SETUP ---
-        const container = document.getElementById('scoreboard-container');
-        
-        // Scène
-        const scene = new THREE.Scene();
-        // Pas de couleur de fond pour la transparence (blending avec le CSS body)
-        
-        // Caméra
-        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-        
-        // Fonction pour ajuster la position Z de la caméra en fonction de la largeur (responsive)
-        function updateCameraZ(width) {
-            if (width <= 480) {
-                // Pour très petits écrans, reculer un peu plus
-                camera.position.z = 25;
-            } else if (width <= 768) {
-                // Pour tablettes/petits PC
-                camera.position.z = 22;
-            } else {
-                // Desktop
-                camera.position.z = 18;
-            }
-            camera.position.y = 0;
-            camera.updateProjectionMatrix();
-        }
+  const startDate = new Date(); // lancement au chargement
+  const endDate   = new Date(startDate);
+  endDate.setMonth(endDate.getMonth() + 6);
 
-        // Initialisation de la position Z de la caméra
-        updateCameraZ(container.clientWidth);
+  const els = {
+    months: document.querySelector('[data-unit="months"]'),
+    days: document.querySelector('[data-unit="days"]'),
+    hours: document.querySelector('[data-unit="hours"]'),
+    minutes: document.querySelector('[data-unit="minutes"]'),
+    seconds: document.querySelector('[data-unit="seconds"]'),
+    milliseconds: document.querySelector('[data-unit="milliseconds"]')
+  };
 
+  function updateTimer(){
+    const now = new Date();
+    let diff = endDate - now;
 
-        // Renderer
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.shadowMap.enabled = true;
-        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        container.innerHTML = ''; // Clear loading text
-        container.appendChild(renderer.domElement);
+    if(diff <= 0){
+      Object.values(els).forEach(el => el.textContent = "0");
+      return;
+    }
 
-        // --- ÉCLAIRAGE (Atmosphère Premium) ---
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8); 
-        scene.add(ambientLight);
+    const ms = diff % 1000;
+    diff = Math.floor(diff / 1000);
 
-        const spotLight = new THREE.SpotLight(0xffffff, 1.2);
-        spotLight.position.set(10, 20, 20);
-        spotLight.angle = 0.3;
-        spotLight.penumbra = 0.5;
-        spotLight.castShadow = true;
-        scene.add(spotLight);
+    const s = diff % 60;
+    diff = Math.floor(diff / 60);
 
-        // Lumière d'accentuation interne pour simuler un contre-jour
-        const backLight = new THREE.PointLight(0x3EB489, 0.5, 50); 
-        backLight.position.set(0, 5, -5);
-        scene.add(backLight);
+    const m = diff % 60;
+    diff = Math.floor(diff / 60);
 
-        // --- CRÉATION DU SCOREBOARD (Structure 3D) ---
-        
-        // Dimensions du board, rendues variables pour l'ajustement
-        let boardWidth = 26;
-        let boardHeight = 8;
-        
-        // 1. Le cadre principal (Board Architecture)
-        const boardGeometry = new THREE.BoxGeometry(boardWidth, boardHeight, 1);
-        const boardMaterial = new THREE.MeshPhysicalMaterial({
-            color: 0x2E6B4F, // --deep-green
-            roughness: 0.3,
-            metalness: 0.1,
-            clearcoat: 0.2
-        });
-        const board = new THREE.Mesh(boardGeometry, boardMaterial);
-        board.castShadow = true;
-        board.receiveShadow = true;
-        
-        // 2. L'écran (Canvas dynamique)
-        const canvas = document.createElement('canvas');
-        canvas.width = 2048; // Haute résolution
-        canvas.height = 600;
-        const ctx = canvas.getContext('2d');
+    const h = diff % 24;
+    diff = Math.floor(diff / 24);
 
-        const screenTexture = new THREE.CanvasTexture(canvas);
-        screenTexture.minFilter = THREE.LinearFilter;
-        screenTexture.magFilter = THREE.LinearFilter;
-        
-        // Dimensions de l'écran basées sur le board
-        let screenWidth = boardWidth - 2; // 24
-        let screenHeight = boardHeight - 1.5; // 6.5
+    const totalDays = diff;
+    const months = Math.floor(totalDays / 30);
+    const days = totalDays % 30;
 
-        const screenGeometry = new THREE.PlaneGeometry(screenWidth, screenHeight);
-        
-        // Couleur d'émission subtile (vert très clair)
-        const lightGreenColor = new THREE.Color(0x9FE8C4); 
+    els.months.textContent = months;
+    els.days.textContent = days;
+    els.hours.textContent = String(h).padStart(2,'0');
+    els.minutes.textContent = String(m).padStart(2,'0');
+    els.seconds.textContent = String(s).padStart(2,'0');
+    els.milliseconds.textContent = String(ms).padStart(3,'0');
+  }
 
-        const screenMaterial = new THREE.MeshStandardMaterial({
-            map: screenTexture,
-            emissive: lightGreenColor, // Couleur d'émission (Vert-Blanc)
-            emissiveMap: screenTexture,
-            emissiveIntensity: 0.4, // Intensité réduite 
-            roughness: 0.2,
-            metalness: 0.1
-        });
-        
-        const screenMesh = new THREE.Mesh(screenGeometry, screenMaterial);
-        screenMesh.position.z = 0.51; // Juste devant le board
-        board.add(screenMesh);
-        
-        scene.add(board);
+  setInterval(updateTimer, 50);
+  updateTimer();
 
-        // --- LOGIQUE DE DESSIN DU CANVAS (UI du Scoreboard) ---
-        
-        function drawScoreboard(d, h, m, s, t) {
-            // Fond de l'écran - Gradient subtil vert profond
-            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            gradient.addColorStop(0, '#2E6B4F'); // Deep green
-            gradient.addColorStop(1, '#1e4d38'); // Slightly darker
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Effet grille LED (plus subtil et clair)
-            ctx.fillStyle = 'rgba(255,255,255,0.05)';
-            for(let i=0; i<canvas.width; i+=12) {
-                ctx.fillRect(i, 0, 2, canvas.height);
-            }
-            
-            // Configuration Texte
-            ctx.textBaseline = 'middle';
-            ctx.textAlign = 'center';
-            
-            // Positions X pour les 5 unités
-            const positions = [
-                { x: 300, label: 'JOURS', val: d },
-                { x: 700, label: 'HEURES', val: h },
-                { x: 1100, label: 'MINUTES', val: m },
-                { x: 1500, label: 'SECONDES', val: s },
-                { x: 1850, label: 'TIERCES', val: t } 
-            ];
-
-            positions.forEach((pos, index) => {
-                // Boite de fond pour chaque chiffre (Style Card plus lumineuse)
-                const boxW = index === 4 ? 200 : 300; 
-                const boxH = 350;
-                const boxX = pos.x - boxW/2;
-                const boxY = 100;
-
-                // Fond des cases beaucoup plus clair et transparent pour l'effet "verre éclairé"
-                ctx.fillStyle = 'rgba(62, 180, 137, 0.15)'; // --green-soft très transparent
-                ctx.fillRect(boxX, boxY, boxW, boxH);
-                
-                // Bordure plus vive
-                ctx.strokeStyle = '#5A9E78'; // --green-deep
-                ctx.lineWidth = 6;
-                ctx.strokeRect(boxX, boxY, boxW, boxH);
-
-                // Valeur (Digits) - Blanc pur avec glow modéré
-                ctx.font = index === 4 ? 'bold 180px "Chakra Petch"' : 'bold 220px "Chakra Petch"';
-                ctx.fillStyle = '#FFFFFF'; 
-                
-                if (index === 4) ctx.fillStyle = '#E6D8B9'; // Tierces en beige doré
-                
-                let valStr = pos.val.toString().padStart(2, '0');
-                if (index === 0 && pos.val > 99) valStr = pos.val.toString();
-
-                // Effet Glow Texte (Modéré)
-                ctx.shadowColor = "rgba(62, 180, 137, 0.4)"; 
-                ctx.shadowBlur = 20; 
-                ctx.fillText(valStr, pos.x, boxY + boxH/2 + 20);
-                ctx.shadowBlur = 0; // Reset
-
-                // Label (Plus contrasté)
-                ctx.font = '700 45px "Manrope"';
-                ctx.fillStyle = '#3EB489'; // --green-soft vif
-                ctx.fillText(pos.label, pos.x, 530);
-            });
-            
-            // Trigger texture update
-            screenTexture.needsUpdate = true;
-        }
-
-        // --- BOUCLE D'ANIMATION ET TEMPS ---
-
-        function updateTime() {
-            const current = new Date();
-            const distance = endDate - current;
-
-            if (distance < 0) {
-                drawScoreboard(0, 0, 0, 0, 0);
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            const tierces = Math.floor((distance % 1000) / 10); 
-
-            drawScoreboard(days, hours, minutes, seconds, tierces);
-        }
-
-        // Interaction Souris (Parallax subtil)
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetRotationX = 0;
-        let targetRotationY = 0;
-
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-        });
-
-        function animate() {
-            requestAnimationFrame(animate);
-
-            updateTime();
-
-            // Animation douce du board
-            targetRotationY = mouseX * 0.1;
-            targetRotationX = mouseY * 0.1;
-
-            board.rotation.y += (targetRotationY - board.rotation.y) * 0.05;
-            board.rotation.x += (targetRotationX - board.rotation.x) * 0.05;
-            
-            // Respiration subtile
-            const time = Date.now() * 0.001;
-            board.position.y = Math.sin(time) * 0.2;
-
-            renderer.render(scene, camera);
-        }
-
-        // Gestion du redimensionnement
-        window.addEventListener('resize', () => {
-            const width = container.clientWidth;
-            const height = container.clientHeight;
-            
-            renderer.setSize(width, height);
-            camera.aspect = width / height;
-            
-            // Mise à jour de la caméra responsive
-            updateCameraZ(width); 
-        });
-
-        // Lancement
-        animate();
-
+})();
 
 
 /* ===== Participants campagne =====
