@@ -682,20 +682,24 @@ setTimeout(()=>goToStep(3), 600);
 });
   })();
 
+
   function renderCertificationBadge(isConfirmed) {
   if (Number(isConfirmed) !== 1) return '';
 
   return `
-    <span class="certification-badge" 
+    <span class="certification-badge"
           title="Influenceur confirmé"
           aria-label="Influenceur confirmé">
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 2.5l2.7 2.2 3.5.3-1.3 3.2.9 3.4-3-1.8-3 1.8.9-3.4-1.3-3.2 3.5-.3L12 2.5z"/>
-        <path d="M10.2 12.9l-1.6-1.6-1.1 1.1 2.7 2.7 5.3-5.3-1.1-1.1z"/>
-      </svg>
+      <img 
+        src="check.png"
+        alt="Influenceur confirmé"
+        loading="lazy"
+        decoding="async"
+      />
     </span>
   `;
 }
+
 
 
 (function step3Init(){
