@@ -44,27 +44,71 @@ function updateHonorificLang(lang) {
   const nextBtn3 = document.getElementById('nextBtn3');
   const prevBtn4 = document.getElementById('prevBtn4');
   const finishBtn = document.getElementById('finishBtn');
+  const nextBtn4 = document.getElementById('nextBtn4');
 
-async function loadBooks(){
-  const res = await fetch(`${API_BASE}/api/stepper/books`);
-  const books = await res.json();
+async function loadBooks() {
+  console.group('📚 STEP 4 — loadBooks()');
 
-  const container = document.getElementById('booksScroll');
-  container.innerHTML = '';
+  try {
+    console.log('➡️ Fetch URL:', `${API_BASE}/api/stepper/books`);
 
-  books.forEach(book => {
-    const card = document.createElement('div');
-    card.className = 'book-card';
+    const res = await fetch(`${API_BASE}/api/stepper/books`);
 
-    card.innerHTML = `
-      <img src="/covers/${book.cover_image}" alt="${book.title}">
-      <div class="book-title">${book.title}</div>
-    `;
+    console.log('📥 HTTP status:', res.status);
 
-    card.addEventListener('click', () => openBookModal(book));
-    container.appendChild(card);
-  });
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+
+    const books = await res.json();
+
+    console.log('📦 Books received:', books);
+    console.log('📦 Type:', Array.isArray(books), 'Length:', books?.length);
+
+    const container = document.getElementById('booksScroll');
+
+    if (!container) {
+      console.error('❌ booksScroll introuvable dans le DOM');
+      return;
+    }
+
+    container.innerHTML = '';
+
+    if (!Array.isArray(books) || books.length === 0) {
+      container.innerHTML = '<p style="opacity:.6">Aucun livre disponible</p>';
+      return;
+    }
+
+    books.forEach((book, i) => {
+      console.log(`📘 Book ${i + 1}`, book);
+
+      const card = document.createElement('div');
+      card.className = 'book-card';
+
+     card.innerHTML = `
+  <img 
+    src="${book.cover_image}"
+    alt="${book.title}"
+    loading="lazy"
+  >
+  <div class="book-title">${book.title}</div>
+`;
+
+
+
+      card.addEventListener('click', () => openBookModal(book));
+      container.appendChild(card);
+    });
+
+    console.log('✅ Books rendered');
+
+  } catch (err) {
+    console.error('❌ loadBooks error:', err);
+  } finally {
+    console.groupEnd();
+  }
 }
+
 
 function openBookModal(book){
   const modal = document.getElementById('bookModal');
@@ -370,9 +414,15 @@ closeVideoBtn.addEventListener('click', () => {
     currentStep = stepNumber;
     // 📚 Charger les livres UNIQUEMENT quand l'étape 4 devient active
 if (currentStep === 4 && !booksLoaded) {
+  console.log('🚀 STEP 4 ACTIVATED — loading books');
   loadBooks();
   booksLoaded = true;
 }
+// Step 4 — toujours autoriser la suite (téléchargement facultatif)
+if (currentStep === 4 && nextBtn4) {
+  nextBtn4.disabled = false;
+}
+
 
     // Show/hide step cards
     stepCards.forEach(card=>{
@@ -503,6 +553,10 @@ function validateStep(step) {
       return selectedInfluencers.length === 3;
     } 
     else if (step === 4) {
+  return true; // ⬅️ étape facultative
+}
+
+    else if (step === 5) {
   return donorButtons.some(btn => btn.classList.contains('selected'));
 }
     return false;
@@ -893,6 +947,11 @@ data.forEach(inf => {
 
   loadInfluencers();
 })();
+
+//Etape 4 Livres
+nextBtn4.addEventListener('click', () => {
+  goToStep(5);
+});
 
 
 (function step4Init(){
