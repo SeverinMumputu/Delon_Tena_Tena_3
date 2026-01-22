@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const API_BASE = CONFIG.API_BASE_URL;
   // Centralized state
   let currentStep = 1;
-  const TOTAL_STEPS = 4;
+  const TOTAL_STEPS = 5;
+  let booksLoaded = false;
   const storageKey = 'dtt_stepper_data';
   const honorificState = {
   step1: null,
@@ -43,6 +44,52 @@ function updateHonorificLang(lang) {
   const nextBtn3 = document.getElementById('nextBtn3');
   const prevBtn4 = document.getElementById('prevBtn4');
   const finishBtn = document.getElementById('finishBtn');
+
+async function loadBooks(){
+  const res = await fetch(`${API_BASE}/api/stepper/books`);
+  const books = await res.json();
+
+  const container = document.getElementById('booksScroll');
+  container.innerHTML = '';
+
+  books.forEach(book => {
+    const card = document.createElement('div');
+    card.className = 'book-card';
+
+    card.innerHTML = `
+      <img src="/covers/${book.cover_image}" alt="${book.title}">
+      <div class="book-title">${book.title}</div>
+    `;
+
+    card.addEventListener('click', () => openBookModal(book));
+    container.appendChild(card);
+  });
+}
+
+function openBookModal(book){
+  const modal = document.getElementById('bookModal');
+  const body = document.getElementById('bookModalBody');
+
+  body.innerHTML = `
+    <h3>${book.title}</h3>
+    <p><strong>Auteur :</strong> ${book.author}</p>
+    <p><strong>Éditeur :</strong> ${book.publisher}</p>
+    <p>${book.description}</p>
+
+    <a class="btn btn-primary"
+       href="${API_BASE}/api/stepper/book/download/${book.id}">
+       Télécharger le PDF
+    </a>
+  `;
+
+  modal.classList.add('show');
+}
+
+document.getElementById('closeBookModal')
+  .addEventListener('click', () =>
+    document.getElementById('bookModal').classList.remove('show')
+  );
+
 
   
 //Gestion des clic Boutons Toogle (Titres)
@@ -321,6 +368,11 @@ closeVideoBtn.addEventListener('click', () => {
     }
     // update current
     currentStep = stepNumber;
+    // 📚 Charger les livres UNIQUEMENT quand l'étape 4 devient active
+if (currentStep === 4 && !booksLoaded) {
+  loadBooks();
+  booksLoaded = true;
+}
 
     // Show/hide step cards
     stepCards.forEach(card=>{

@@ -243,13 +243,14 @@ app.get('/api/analytics/influencers', async (req, res) => {
   try {
     const [rows] = await pool.execute(`
       SELECT 
-        id,
-        influencer_name,
-        image_path,
-        sector,
-        status
-      FROM analytics
-      ORDER BY influencer_name ASC
+  id,
+  influencer_name,
+  image_path,
+  sector,
+  status,
+  is_confirmed
+FROM analytics
+ORDER BY influencer_name ASC
     `);
 
     console.log(`✅ ${rows.length} influenceurs chargés`);
@@ -261,9 +262,9 @@ app.get('/api/analytics/influencers', async (req, res) => {
   }
 });
 //Barre de recherche Etape 3
+// 🔍 Recherche influenceurs (STEP 3)
 app.get('/api/analytics/search', async (req, res) => {
-  const q = `%${req.query.q || ''}%`;
-  console.log('🔍 SEARCH analytics:', q);
+  const q = req.query.q || '';
 
   try {
     const [rows] = await pool.execute(`
@@ -272,20 +273,21 @@ app.get('/api/analytics/search', async (req, res) => {
         influencer_name,
         image_path,
         sector,
-        status
+        status,
+        is_confirmed
       FROM analytics
       WHERE influencer_name LIKE ?
       ORDER BY influencer_name ASC
-    `, [q]);
+    `, [`%${q}%`]);
 
-    console.log(`✅ ${rows.length} résultat(s) search`);
     res.json(rows);
 
   } catch (err) {
-    console.error('❌ Erreur search analytics', err);
-    res.status(500).json({ error: 'Erreur search analytics' });
+    console.error('❌ Erreur analytics search', err);
+    res.status(500).json([]);
   }
 });
+
 // 📊Calculs Analytiques réels pour un influenceur
 app.get('/api/analytics/stats/:name', async (req, res) => {
   const influencerName = req.params.name;
@@ -358,7 +360,36 @@ app.get('/api/stepper/participant/:id', async (req, res) => {
 
   res.json(rows[0] || null);
 });
-// Stepper Étape 4 — Donation
+//Stepper Etape 4 - Téléchargement des livres (Récupération des livres)
+app.get('/api/stepper/books', async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT id, title, author, publisher, publication_date, description, cover_image, format FROM stepper_book'
+    );
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: 'BOOK_FETCH_ERROR' });
+  }
+});
+//Téléchargement des livres Stepper 4
+app.get('/api/stepper/book/download/:id', async (req, res) => {
+  const { id } = req.params;
+
+  const [rows] = await pool.query(
+    'SELECT pdf_file FROM stepper_book WHERE id = ?',
+    [id]
+  );
+
+  if (!rows.length) {
+    return res.status(404).json({ error: 'BOOK_NOT_FOUND' });
+  }
+
+  const filePath = `${__dirname}/uploads/books/${rows[0].pdf_file}`;
+  res.download(filePath);
+});
+
+
+// Stepper Étape 5 — Donation
 app.post('/api/stepper/step4', async (req, res) => {
   console.log('➡️ POST /api/stepper/step4', req.body);
 

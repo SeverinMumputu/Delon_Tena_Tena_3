@@ -157,6 +157,7 @@
             <button class="step-dot" data-step="2" aria-label="Étape 2"><span class="dot-num">2</span><svg class="dot-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             <button class="step-dot" data-step="3" aria-label="Étape 3"><span class="dot-num">3</span><svg class="dot-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             <button class="step-dot" data-step="4" aria-label="Étape 4"><span class="dot-num">4</span><svg class="dot-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="step-dot" data-step="5" aria-label="Étape 5"><span class="dot-num">5</span><svg class="dot-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5" fill="none" stroke="white" stroke-width="2"/></svg></button>
           </div>
 
           <div class="progress-bar-outer" aria-hidden="true">
@@ -605,10 +606,43 @@
             </div>
           </article>
 
-          <!-- Step 4 : Faire un don -->
-<article class="step-card" data-step="4" id="step-4" aria-labelledby="step4Title" role="region" hidden>
+          <!-- Step 4 : Téléchargement du livre -->
+<article class="step-card" data-step="4" id="step-4-book" role="region" hidden>
+ <!-- Étape 4 — Bibliothèque -->
+<div class="step4-books">
+  <p class="step4-desc">
+    Découvrez notre sélection de livres classiques.  
+    Le téléchargement est facultatif.
+  </p>
+
+  <div class="books-scroll" id="booksScroll">
+    <!-- Injecté dynamiquement -->
+  </div>
+</div>
+
+<!-- Popup Livre -->
+<div class="book-modal" id="bookModal" aria-hidden="true">
+  <div class="book-modal-content">
+    <button class="modal-close" id="closeBookModal">✕</button>
+    <div id="bookModalBody"></div>
+  </div>
+</div>
+
+  <div class="card-actions">
+    <button type="button" class="btn btn-secondary" id="prevBtn4">
+      Précédent
+    </button>
+    <button type="button" class="btn btn-primary" id="nextBtn4" disabled>
+      Étape suivante
+    </button>
+  </div>
+</article>
+
+
+          <!-- Step 5 : Faire un don -->
+<article class="step-card" data-step="5" id="step-5" aria-labelledby="step4Title" role="region" hidden>
   <header class="card-head">
-    <h3 id="step4Title" class="card-title" data-fr="Étape 4 — Faire un don" data-en="Step 4 — Make a donation">Étape 4 — Faire un don</h3>
+    <h3 id="step5Title" class="card-title" data-fr="Étape 5 — Faire un don" data-en="Step 5 — Make a donation">Étape 5 — Faire un don</h3>
     <p class="card-lead" data-fr="Choisissez votre méthode de soutien." data-en="Choose your method of support.">Choisissez votre méthode de soutien.</p>
   </header>
 
@@ -616,7 +650,7 @@
     <button class="donor-logo" data-method="donorbox" aria-label="Donorbox" tabindex="-1" disabled>
       <img src="donorbox-logo-2023.jpg" alt="DonorBox logo" />
       <div class="donor-label">DonorBox</div>
-     <!-- <p class="color_texte_step_4">Numéro de compte : 455 XXX XXX<br/>Titulaire : Fondation Delon Tena Tena</p>-->
+      <p class="color_texte_step_4">Numéro de compte : 455 XXX XXX <br/>Titulaire : Fondation Delon Tena Tena</p>
       <p class="color_texte_step_4"><a href="https://donorbox.org" target="_blank" rel="noopener">Faire un don via DonorBox</a></p>
     </button>
 
@@ -632,37 +666,6 @@
       <p class="color_texte_step_4">Numéro :+243 85 123 45 67<br/>Titulaire : Fondation Delon Tena Tena</p>
     </button>
   </div>
-
-  <!-- Bloc informatif : Coordonnées de la fondation -->
-<section class="donation-info" aria-label="Informations de paiement">
-  <h4 
-    class="donation-info-title"
-    data-fr="Informations du compte de la fondation"
-    data-en="Foundation account information"
-  >
-    Informations du compte de la fondation
-  </h4>
-
-  <p 
-    class="donation-info-text"
-    data-fr="Ce compte est fourni à titre informatif pour les donateurs souhaitant effectuer un soutien direct."
-    data-en="This account is provided for informational purposes for donors wishing to offer direct support."
-  >
-    Ce compte est fourni à titre informatif pour les donateurs souhaitant effectuer un soutien direct.
-  </p>
-
-  <div class="donation-info-box">
-    <p>
-      <strong data-fr="Nom du compte :" data-en="Account name :">Nom du compte :</strong>
-      Fondation Delon Tena Tena
-    </p>
-    <p>
-      <strong data-fr="Numéro de compte :" data-en="Account number :">Numéro de compte :</strong>
-      455 XXX XXX
-    </p>
-  </div>
-</section>
-
 
   <div class="card-actions">
     <button type="button" class="btn btn-secondary" id="prevBtn4" data-fr="Précédent" data-en="Previous">Précédent</button>

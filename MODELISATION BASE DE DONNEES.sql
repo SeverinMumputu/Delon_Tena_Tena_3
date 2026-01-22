@@ -88,3 +88,45 @@ CREATE TABLE stepper_participants (
     UNIQUE KEY uniq_email (email)
 );
 
+CREATE TABLE stepper_book (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  author VARCHAR(255),
+  publisher VARCHAR(255),
+  publication_date DATE,
+  description TEXT,
+  cover_image VARCHAR(255),
+  pdf_file VARCHAR(255),
+  format VARCHAR(50) DEFAULT 'PDF',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+INSERT INTO stepper_book
+(title, author, publisher, publication_date, description, cover_image, pdf_file)
+VALUES
+(
+  'Roméo et Juliette',
+  'William Shakespeare',
+  'Thomas Creede',
+  '1597-01-01',
+  'Tragédie emblématique racontant l’amour impossible entre deux jeunes gens issus de familles rivales.',
+  'romeo-juliette.jpg',
+  'romeo-et-juliette.pdf'
+),
+(
+  'Les Trois Mousquetaires',
+  'Alexandre Dumas',
+  'Baudry',
+  '1844-03-14',
+  'Roman d’aventure suivant d’Artagnan et ses compagnons dans la France du XVIIe siècle.',
+  'trois-mousquetaires.jpg',
+  'les-trois-mousquetaires.pdf'
+),
+(
+  'L’Art d’être heureux',
+  'Arthur Schopenhauer',
+  'Cotta',
+  '1851-01-01',
+  'Essai philosophique proposant des réflexions pragmatiques pour mener une vie plus sereine.',
+  'art-etre-heureux.jpg',
+  'lart-detre-heureux.pdf'
+);

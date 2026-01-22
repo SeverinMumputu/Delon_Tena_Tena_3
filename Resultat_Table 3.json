@@ -1,0 +1,352 @@
+[
+	{
+		"id" : 1,
+		"influencer_name" : "Fally Ipupa",
+		"image_path" : "Aigle.jpeg",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 4,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 2,
+		"influencer_name" : "Gims",
+		"image_path" : "GIMS.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 5,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 3,
+		"influencer_name" : "Koffi Olomide",
+		"image_path" : "KOFFI_OLOMIDE.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 0,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 4,
+		"influencer_name" : "Ferre Gola",
+		"image_path" : "FERRE GOLA.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 4,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 5,
+		"influencer_name" : "JB Mpiana",
+		"image_path" : "JB_MPIANA.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 2,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 6,
+		"influencer_name" : "Lokua Kanza",
+		"image_path" : "LOKUA_KANZA.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 5,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 7,
+		"influencer_name" : "Innoss'B",
+		"image_path" : "INNOSSB.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 1,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 8,
+		"influencer_name" : "Gaz Mawete",
+		"image_path" : "GAZ MAWETE.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 2,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 9,
+		"influencer_name" : "Pson",
+		"image_path" : "Pson.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 1,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 10,
+		"influencer_name" : "Gally Garvey",
+		"image_path" : "Gally.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 1,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 11,
+		"influencer_name" : "Rj Kaniera",
+		"image_path" : "Rj kaniera.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 2,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 12,
+		"influencer_name" : "Majoos",
+		"image_path" : "Majoos.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 3,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 13,
+		"influencer_name" : "Dj Samarino",
+		"image_path" : "Samarino.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 5,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 14,
+		"influencer_name" : "Suintement",
+		"image_path" : "Suintement.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 3,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 15,
+		"influencer_name" : "Mbilia Belle",
+		"image_path" : "MBILIA BELLE.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 1,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 16,
+		"influencer_name" : "Barbara Kanam",
+		"image_path" : "BARBARA.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 6,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 17,
+		"influencer_name" : "Céline Banza",
+		"image_path" : "CELINE BANZA.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 6,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 18,
+		"influencer_name" : "Rebo Tchulo",
+		"image_path" : "Rebo.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 2,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 19,
+		"influencer_name" : "Anita Mwarabu",
+		"image_path" : "Anita.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 6,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 20,
+		"influencer_name" : "Sarah Lula",
+		"image_path" : "Sarah lula.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 2,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 21,
+		"influencer_name" : "Aya Nakamura",
+		"image_path" : "Aya.jpeg",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 8,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 22,
+		"influencer_name" : "Damso",
+		"image_path" : "DAMSO.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 5,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 23,
+		"influencer_name" : "Youssoupha",
+		"image_path" : "YOUSSOUPHA.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 3,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 24,
+		"influencer_name" : "Ed Sheeran",
+		"image_path" : "EdSheran.png",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 3,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 25,
+		"influencer_name" : "Dadju",
+		"image_path" : "Dadju.jpeg",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 3,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 26,
+		"influencer_name" : "Tayc",
+		"image_path" : "Tayc.jpeg",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 2,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 27,
+		"influencer_name" : "Gazo",
+		"image_path" : "Gazo.jpeg",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 5,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 28,
+		"influencer_name" : "Wizkid",
+		"image_path" : "Wizkid.png",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 2,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 29,
+		"influencer_name" : "Davido",
+		"image_path" : "Davido.jpeg",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 1,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 30,
+		"influencer_name" : "Drake",
+		"image_path" : "Drake.jpg",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 3,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 1
+	},
+	{
+		"id" : 31,
+		"influencer_name" : "Martin Bakole",
+		"image_path" : "BAKOLE.webp",
+		"sector" : "Sport",
+		"status" : "Actif",
+		"total_votes" : 1,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 32,
+		"influencer_name" : "Fiston Sai Sai",
+		"image_path" : "SAI SAI.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 2,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 33,
+		"influencer_name" : "Lady Esobe",
+		"image_path" : "Esobe.webp",
+		"sector" : "Musique",
+		"status" : "Actif",
+		"total_votes" : 4,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 34,
+		"influencer_name" : "Ronsia Kukiel",
+		"image_path" : "RONSIA.webp",
+		"sector" : "Comédie",
+		"status" : "Actif",
+		"total_votes" : 4,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	},
+	{
+		"id" : 35,
+		"influencer_name" : "Herman Amisi",
+		"image_path" : "HERMAN AMISI.webp",
+		"sector" : "Comédie",
+		"status" : "Actif",
+		"total_votes" : 9,
+		"created_at" : "2025-12-19 13:15:59",
+		"is_confirmed" : 0
+	}
+]

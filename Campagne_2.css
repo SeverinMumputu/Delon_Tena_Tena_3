@@ -540,6 +540,70 @@ body{
   font-weight:700;
 }
 
+.books-scroll{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  padding:10px 4px;
+  scroll-snap-type:x mandatory;
+}
+
+.book-card{
+  min-width:160px;
+  cursor:pointer;
+  scroll-snap-align:start;
+  text-align:center;
+}
+
+.book-card img{
+  width:100%;
+  border-radius:14px;
+  box-shadow:0 12px 30px rgba(0,0,0,.15);
+  transition:transform .25s ease;
+}
+
+.book-card:hover img{
+  transform:translateY(-4px) scale(1.02);
+}
+
+.book-title{
+  margin-top:8px;
+  font-size:.9rem;
+  font-weight:600;
+}
+
+/* Modal */
+.book-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
+
+.book-modal.show{ display:flex; }
+
+.book-modal-content{
+  background:#fff;
+  border-radius:18px;
+  max-width:520px;
+  width:92%;
+  padding:22px;
+  position:relative;
+}
+
+.modal-close{
+  position:absolute;
+  top:12px;
+  right:14px;
+  background:none;
+  border:none;
+  font-size:1.4rem;
+  cursor:pointer;
+}
+
 
 /* donation */
 .donation-grid{display:flex;gap:12px;flex-wrap:wrap; font-family:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,"Helvetica Neue",Arial;}
@@ -566,7 +630,7 @@ body{
       display: flex;
     }
 .color_texte_step_4{
-  color: var(--green-deep);
+  color: black;
   font-weight: bold;
   font-family:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,"Helvetica Neue",Arial;
   font-size: 1.1 rem;
