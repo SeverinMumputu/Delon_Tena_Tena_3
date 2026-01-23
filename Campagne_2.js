@@ -86,11 +86,12 @@ async function loadBooks() {
       card.className = 'book-card';
 
      card.innerHTML = `
- <img 
-  src="${API_BASE}${book.cover_image}"
+<img 
+  src="${API_BASE}/${book.cover_image}"
   alt="${book.title}"
   loading="lazy"
 />
+
 
   <div class="book-title">${book.title}</div>
 `;
