@@ -87,21 +87,30 @@ CREATE TABLE stepper_participants (
     PRIMARY KEY (id),
     UNIQUE KEY uniq_email (email)
 );
-
 CREATE TABLE stepper_book (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   author VARCHAR(255),
   publisher VARCHAR(255),
   publication_date DATE,
-  description TEXT,
+  book_description TEXT,
   cover_image VARCHAR(255),
   pdf_file VARCHAR(255),
-  format VARCHAR(50) DEFAULT 'PDF',
+  book_format VARCHAR(20),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 INSERT INTO stepper_book
-(title, author, publisher, publication_date, description, cover_image, pdf_file)
+(
+  title,
+  author,
+  publisher,
+  publication_date,
+  book_description,
+  cover_image,
+  pdf_file,
+  book_format
+)
 VALUES
 (
   'Roméo et Juliette',
@@ -109,8 +118,9 @@ VALUES
   'Thomas Creede',
   '1597-01-01',
   'Tragédie emblématique racontant l’amour impossible entre deux jeunes gens issus de familles rivales.',
-  'romeo-juliette.jpg',
-  'romeo-et-juliette.pdf'
+  'romeo-juliette.webp',
+  'romeo-et-juliette.pdf',
+  'PDF'
 ),
 (
   'Les Trois Mousquetaires',
@@ -118,8 +128,9 @@ VALUES
   'Baudry',
   '1844-03-14',
   'Roman d’aventure suivant d’Artagnan et ses compagnons dans la France du XVIIe siècle.',
-  'trois-mousquetaires.jpg',
-  'les-trois-mousquetaires.pdf'
+  'trois-mousquetaires.webp',
+  'les-trois-mousquetaires.pdf',
+  'PDF'
 ),
 (
   'L’Art d’être heureux',
@@ -127,6 +138,7 @@ VALUES
   'Cotta',
   '1851-01-01',
   'Essai philosophique proposant des réflexions pragmatiques pour mener une vie plus sereine.',
-  'art-etre-heureux.jpg',
-  'lart-detre-heureux.pdf'
+  'art-etre-heureux.webp',
+  'lart-detre-heureux.pdf',
+  'PDF'
 );
