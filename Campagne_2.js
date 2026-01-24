@@ -46,8 +46,6 @@ function updateHonorificLang(lang) {
   const finishBtn = document.getElementById('finishBtn');
   const nextBtn4 = document.getElementById('nextBtn4');
 
-const closeBookModal = document.getElementById('closeBookModal');
-const bookModal = document.getElementById('bookModal');
 
 document.querySelectorAll('.book-card').forEach(card => {
   card.addEventListener('click', () => {
@@ -72,13 +70,16 @@ document.querySelectorAll('.book-card').forEach(card => {
   });
 });
 
+const closeBookModal = document.getElementById('closeBookModal');
+const bookModal = document.getElementById('bookModal');
+
 if (closeBookModal && bookModal) {
   closeBookModal.addEventListener('click', () => {
     bookModal.classList.remove('show');
   });
 }
 
-
+  
 //Gestion des clic Boutons Toogle (Titres)
 document.querySelectorAll('.honorific-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -358,7 +359,7 @@ closeVideoBtn.addEventListener('click', () => {
     // 📚 Charger les livres UNIQUEMENT quand l'étape 4 devient active
 if (currentStep === 4 && !booksLoaded) {
   console.log('🚀 STEP 4 ACTIVATED — loading books');
-  loadBooks();
+  //loadBooks();
   booksLoaded = true;
 }
 // Step 4 — toujours autoriser la suite (téléchargement facultatif)
@@ -888,12 +889,13 @@ data.forEach(inf => {
     setTimeout(() => goToStep(4), 600);
   });
 
+  loadInfluencers();
 })();
 
 //Etape 4 Livres
-//nextBtn4.addEventListener('click', () => {
-  //goToStep(5);
-//});
+nextBtn4.addEventListener('click', () => {
+  goToStep(5);
+});
 
 
 (function step4Init(){
