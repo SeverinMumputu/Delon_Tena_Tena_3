@@ -46,98 +46,39 @@ function updateHonorificLang(lang) {
   const finishBtn = document.getElementById('finishBtn');
   const nextBtn4 = document.getElementById('nextBtn4');
 
-async function loadBooks() {
-  console.group('📚 STEP 4 — loadBooks()');
+const closeBookModal = document.getElementById('closeBookModal');
+const bookModal = document.getElementById('bookModal');
 
-  try {
-    console.log('➡️ Fetch URL:', `${API_BASE}/api/stepper/books`);
+document.querySelectorAll('.book-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const modal = document.getElementById('bookModal');
+    const body = document.getElementById('bookModalBody');
 
-    const res = await fetch(`${API_BASE}/api/stepper/books`);
+    body.innerHTML = `
+      <img src="${card.dataset.cover}" style="width:140px;border-radius:14px;margin-bottom:12px">
+      <h3>${card.dataset.title}</h3>
+      <p><strong>Auteur :</strong> ${card.dataset.author}</p>
+      <p><strong>Parution :</strong> ${card.dataset.year}</p>
+      <p>${card.dataset.desc}</p>
 
-    console.log('📥 HTTP status:', res.status);
+      <a class="btn btn-primary"
+         href="${card.dataset.pdf}"
+         download>
+         Télécharger le PDF
+      </a>
+    `;
 
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status}`);
-    }
+    modal.classList.add('show');
+  });
+});
 
-    const books = await res.json();
-
-    console.log('📦 Books received:', books);
-    console.log('📦 Type:', Array.isArray(books), 'Length:', books?.length);
-
-    const container = document.getElementById('booksScroll');
-
-    if (!container) {
-      console.error('❌ booksScroll introuvable dans le DOM');
-      return;
-    }
-
-    container.innerHTML = '';
-
-    if (!Array.isArray(books) || books.length === 0) {
-      container.innerHTML = '<p style="opacity:.6">Aucun livre disponible</p>';
-      return;
-    }
-
-    books.forEach((book, i) => {
-      console.log(`📘 Book ${i + 1}`, book);
-
-      const card = document.createElement('div');
-      card.className = 'book-card';
-
-     card.innerHTML = `
-<img 
-  src="${API_BASE}/${book.cover_image}"
-  alt="${book.title}"
-  loading="lazy"
-/>
-
-
-  <div class="book-title">${book.title}</div>
-`;
-
-
-
-      card.addEventListener('click', () => openBookModal(book));
-      container.appendChild(card);
-    });
-
-    console.log('✅ Books rendered');
-
-  } catch (err) {
-    console.error('❌ loadBooks error:', err);
-  } finally {
-    console.groupEnd();
-  }
+if (closeBookModal && bookModal) {
+  closeBookModal.addEventListener('click', () => {
+    bookModal.classList.remove('show');
+  });
 }
 
 
-function openBookModal(book){
-  const modal = document.getElementById('bookModal');
-  const body = document.getElementById('bookModalBody');
-
-  body.innerHTML = `
-    <h3>${book.title}</h3>
-    <p><strong>Auteur :</strong> ${book.author}</p>
-    <p><strong>Éditeur :</strong> ${book.publisher}</p>
-    <p>${book.description}</p>
-
-    <a class="btn btn-primary"
-       href="${API_BASE}/api/stepper/book/download/${book.id}">
-       Télécharger le PDF
-    </a>
-  `;
-
-  modal.classList.add('show');
-}
-
-document.getElementById('closeBookModal')
-  .addEventListener('click', () =>
-    document.getElementById('bookModal').classList.remove('show')
-  );
-
-
-  
 //Gestion des clic Boutons Toogle (Titres)
 document.querySelectorAll('.honorific-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -947,13 +888,12 @@ data.forEach(inf => {
     setTimeout(() => goToStep(4), 600);
   });
 
-  loadInfluencers();
 })();
 
 //Etape 4 Livres
-nextBtn4.addEventListener('click', () => {
-  goToStep(5);
-});
+//nextBtn4.addEventListener('click', () => {
+  //goToStep(5);
+//});
 
 
 (function step4Init(){

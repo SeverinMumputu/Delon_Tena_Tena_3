@@ -540,30 +540,36 @@ body{
   font-weight:700;
 }
 
-.books-scroll{
-  display:flex;
-  gap:16px;
-  overflow-x:auto;
-  padding:10px 4px;
-  scroll-snap-type:x mandatory;
+.books-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:20px;
+  padding:10px;
 }
 
 .book-card{
-  min-width:160px;
   cursor:pointer;
-  scroll-snap-align:start;
   text-align:center;
+  transition:transform .25s ease;
 }
 
 .book-card img{
   width:100%;
-  border-radius:14px;
-  box-shadow:0 12px 30px rgba(0,0,0,.15);
-  transition:transform .25s ease;
+  border-radius:16px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
 }
 
-.book-card:hover img{
-  transform:translateY(-4px) scale(1.02);
+.book-card:hover{
+  transform:translateY(-6px);
+}
+
+.book-card h4{
+  margin:10px 0 2px;
+  font-size:.95rem;
+}
+
+.book-card small{
+  opacity:.65;
 }
 
 .book-title{

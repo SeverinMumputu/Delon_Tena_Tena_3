@@ -609,33 +609,45 @@
           <!-- Step 4 : Téléchargement du livre -->
 <article class="step-card" data-step="4" id="step-4-book" role="region" hidden>
  <!-- Étape 4 — Bibliothèque -->
-<div class="step4-books">
-  <p class="step4-desc">
-    Découvrez notre sélection de livres classiques.  
-    Le téléchargement est facultatif.
-  </p>
+  <div class="books-grid">
 
-  <div class="books-scroll" id="booksScroll">
-    <!-- Injecté dynamiquement -->
-  </div>
+  <article class="book-card"
+    data-title="Roméo et Juliette"
+    data-author="William Shakespeare"
+    data-year="1597"
+    data-desc="Une tragédie romantique emblématique de la littérature mondiale."
+    data-pdf="/pdf/romeo-et-juliette.pdf"
+    data-cover="/uploads/books/romeo.webp">
+    <img src="/uploads/books/romeo.webp" alt="Roméo et Juliette">
+    <h4>Roméo et Juliette</h4>
+    <small>William Shakespeare</small>
+  </article>
+
+  <article class="book-card"
+    data-title="Les Trois Mousquetaires"
+    data-author="Alexandre Dumas"
+    data-year="1844"
+    data-desc="Aventures, honneur et amitié dans la France du XVIIᵉ siècle."
+    data-pdf="/pdf/les-trois-mousquetaires.pdf"
+    data-cover="/uploads/books/mousquetaires.webp">
+    <img src="/uploads/books/mousquetaires.webp" alt="Les Trois Mousquetaires">
+    <h4>Les Trois Mousquetaires</h4>
+    <small>Alexandre Dumas</small>
+  </article>
+
+  <article class="book-card"
+    data-title="L’Art d’être heureux"
+    data-author="Arthur Schopenhauer"
+    data-year="1851"
+    data-desc="Réflexions philosophiques sur le bonheur et la sagesse."
+    data-pdf="/pdf/lart-detre-heureux.pdf"
+    data-cover="/uploads/books/heureux.webp">
+    <img src="/uploads/books/heureux.webp" alt="L’Art d’être heureux">
+    <h4>L’Art d’être heureux</h4>
+    <small>Arthur Schopenhauer</small>
+  </article>
+
 </div>
-
-<!-- Popup Livre -->
-<div class="book-modal" id="bookModal" aria-hidden="true">
-  <div class="book-modal-content">
-    <button class="modal-close" id="closeBookModal">✕</button>
-    <div id="bookModalBody"></div>
-  </div>
-</div>
-
-  <div class="card-actions">
-    <button type="button" class="btn btn-secondary" id="prevBtn4">
-      Précédent
-    </button>
-    <button type="button" class="btn btn-primary" id="nextBtn4" disabled>
-      Étape suivante
-    </button>
-  </div>
 </article>
 
 
@@ -794,5 +806,8 @@
   <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
   <script src="config.js"></script>
   <script src="Campagne_2.js"> </script>
+  <script>
+    
+  </script>
 </body>
 </html>
