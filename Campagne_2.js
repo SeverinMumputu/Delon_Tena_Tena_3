@@ -576,8 +576,8 @@ if (!res) {
   //showToast('Erreur serveur. Réessayez.');
   showToast(
   document.body.classList.contains('en')
-    ? 'Server error. Please try again.'
-    : '❌Erreur serveur. Réessayez.'
+    ? 'This email is already used by another participant.'
+    : '❌ Cet email est déjà utilisé par un autre participant.'
 );
 
   return;
