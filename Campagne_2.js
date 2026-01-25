@@ -211,6 +211,31 @@ async function saveData(step, payload) {
 }
 }
 
+//Fonction d'envoi Email
+async function sendValidationEmail(participant) {
+  if (!participant || !participant.email) {
+    console.warn('📭 Email participant manquant');
+    return;
+  }
+
+  try {
+    const res = await emailjs.send(
+      'service_ah4lp4d',
+      'template_j9kw90h',
+      {
+        first_name: participant.first_name,
+        last_name: participant.last_name,
+        email: participant.email
+      }
+    );
+
+    console.log('📧 Email envoyé:', res.status);
+  } catch (err) {
+    console.error('❌ EmailJS error:', err);
+  }
+}
+
+
 async function updateParticipant(data) {
   if (!window.participantId) {
     console.warn('⛔ participantId absent, update ignoré');
@@ -946,6 +971,26 @@ nextBtn4.addEventListener('click', () => {
   });
 
 })();
+
+//Déclenchement Email
+finishBtn.addEventListener('click', async function () {
+
+  // validations déjà présentes (ON NE TOUCHE PAS)
+
+  // 🔎 Récupération email depuis l'étape 1 (déjà stocké serveur)
+  const participant = await getData('participant', window.participantId);
+
+  if (participant && participant.email) {
+    await sendValidationEmail({
+      first_name: participant.first_name,
+      last_name: participant.last_name,
+      email: participant.email
+    });
+  }
+
+  // suite normale (toast + thanksPanel)
+});
+
 
   finishBtn.addEventListener('click', function () {
     
