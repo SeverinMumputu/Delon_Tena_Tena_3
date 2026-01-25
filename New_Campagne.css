@@ -449,6 +449,72 @@ section{margin:36px 0;background:transparent}
     border-radius: 10px;
     margin-top: 20px;
 }
+/* ===== Floating Video Popup (Non-blocking) ===== */
+.video-popup {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1200;
+  pointer-events: none; /* laisse le site utilisable */
+}
+
+.video-popup-content {
+  position: relative;
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 12px;
+  border-radius: 16px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.35),
+    inset 0 0 0 1px rgba(255,255,255,0.08);
+  animation: slideIn 0.6s cubic-bezier(.22,.61,.36,1);
+  pointer-events: auto; /* interaction autorisée sur le popup */
+}
+
+.video-popup-content video {
+  width: 280px;
+  max-width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Close button */
+.video-close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  color: #000;
+  font-size: 18px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Hover premium effect */
+.video-popup-content:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 18px 45px rgba(0,0,0,0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+
+/* Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 
 
 /* Partners grid */

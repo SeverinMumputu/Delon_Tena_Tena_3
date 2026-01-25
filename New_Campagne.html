@@ -136,6 +136,13 @@
     </div>
   </div>
 </section>
+<!-- Video Popup Overlay -->
+<div class="video-popup" id="videoPopup">
+  <div class="video-popup-content">
+    <button class="video-close" aria-label="Fermer la vidéo">&times;</button>
+  </div>
+</div>
+
 
 <!-- 🔹 Bloc Participants -->
   <div class="campaign-insight-grid">
@@ -488,5 +495,39 @@ window.addEventListener("load", () => {
   </script>
   <script src="config.js"></script>
    <script src="New_Campagne.js"></script>
+   //Script Popup
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const popup = document.getElementById("videoPopup");
+  const popupContent = popup.querySelector(".video-popup-content");
+  const closeBtn = popup.querySelector(".video-close");
+  const video = document.querySelector(".intro video");
+
+  // Forcer l'autoplay autorisé par les navigateurs
+  video.muted = true;
+  video.playsInline = true; // iOS friendly
+  video.autoplay = true;
+
+  // Injecter la vidéo dans le popup
+  popupContent.appendChild(video);
+
+  // Lancer la vidéo automatiquement
+  const playPromise = video.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(() => {
+      // fallback silencieux si le navigateur bloque
+      console.warn("Autoplay bloqué par le navigateur");
+    });
+  }
+
+  // Fermeture
+  closeBtn.addEventListener("click", () => {
+    popup.style.display = "none";
+    video.pause();
+  });
+});
+</script>
+
+
   </body>
 </html>
