@@ -89,7 +89,7 @@
       <ul class="sub-menu">
         <li><a href="New_Campagne.html#projet" class="sub-link" data-fr="Présentation du projet" data-en="Project overview">Présentation du projet</a></li>
         <li><a href="Campagne_2.html" class="sub-link" data-fr="Participer à la campagne" data-en="Participate in the campaign">Participer à la campagne</a></li>
-        <li><a href="New_Campagne.html#Timing" class="sub-link" data-fr="Timing de la campagne" data-en="Campaign timing">Timing de la campagne</a></li>
+        <li><a href="Campagne_2.html" class="sub-link" data-fr="Timing de la campagne" data-en="Campaign timing">Timing de la campagne</a></li>
         <li><a href="New_Campagne.html#partenaires" class="sub-link" data-fr="Partenaires" data-en="Partners">Partenaires</a></li>
       </ul>
     </nav>
@@ -139,6 +139,8 @@
         </div>
       </div>
     </section>
+
+      <!-- Vidéo Popup -->
     <div class="video-popup" id="videoPopup" aria-hidden="true">
   <div class="video-popup-inner">
     <button class="video-close" id="closeVideo" aria-label="Fermer la vidéo">✕</button>
@@ -150,6 +152,119 @@
   </div>
 </div>
 
+<!-- Bloc tutoriel Carrousel avec pagination -->
+<section class="tutorial-overlay" id="tutorialOverlay">
+
+  <!-- Vidéo Popup -->
+    <div class="video-popup" id="videoPopup" aria-hidden="true">
+  <div class="video-popup-inner">
+    <button class="video-close" id="closeVideo" aria-label="Fermer la vidéo">✕</button>
+
+    <video id="campaignVideo" muted playsinline loop>
+      <source src="Video_campagne.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
+  </div>
+</div>
+
+  <div class="tutorial-container">
+
+    <!-- Slides -->
+    <div class="tutorial-carousel" id="tutorialCarousel">
+
+      <!-- 🔹 SECTION 1 : COMPTEUR -->
+      <div class="tutorial-slide active" data-step="1">
+        <h2>Participants</h2>
+        <div id="counter" class="pc-counter">0</div>
+        <p>Chaque voix compte. Rejoignez la communauté.</p>
+      </div>
+
+      <!-- 🔹 SECTION 2 : TIMER -->
+      <div class="tutorial-slide" data-step="2">
+        <h2>Temps restant</h2>
+
+        <div class="pc-timer" id="campaignTimer">
+          <span data-unit="months">0M</span>
+          <span data-unit="days">0J</span>
+          <span data-unit="hours">00H</span>
+          <span data-unit="minutes">00M</span>
+          <span data-unit="seconds">00S</span>
+          <span data-unit="milliseconds">00T</span>
+        </div>
+
+      </div>
+
+      <!-- 🔹 SECTION 3 : LISTE -->
+      <div class="tutorial-slide" data-step="3">
+        <h2>Participants</h2>
+        <button id="openListBtn" class="pc-cta">Voir la liste</button>  
+        <!-- ===============================
+🔷 POPUP PARTICIPANTS MODERNE
+================================ -->
+<div id="overlay" class="overlay" aria-hidden="true">
+
+  <div class="modal" id="participantsModal">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3 id="modalTitle">Liste des participants</h3>
+      <button id="closeModal" class="modal-close">✕</button>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body">
+
+      <!-- 🔍 Search -->
+      <div class="search-row">
+        <input 
+          id="searchInput"
+          type="search"
+          placeholder="Rechercher (Nom Prénom...)"
+        />
+      </div>
+
+      <!-- 📋 List -->
+      <div id="listContainer" class="participants-list"></div>
+
+      <!-- ❌ Aucun résultat -->
+      <div id="emptyNote" class="empty-note">
+        Aucun participant trouvé
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+      </div>
+
+      <!-- 🔹 SECTION 4 : CTA -->
+      <div class="tutorial-slide" data-step="4">
+        <h2>Participer</h2>
+        <button id="goToFormBtn" class="pc-timer-cta">
+          J’accepte de participer
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Pagination -->
+    <div class="tutorial-pagination">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <!-- Navigation -->
+    <div class="tutorial-nav">
+      <button id="prevSlide">←</button>
+      <button id="nextSlide">→</button>
+    </div>
+
+  </div>
+
+</section>
     
     <!-- Stepper Container -->
     <section class="stepper-section" aria-labelledby="stepperTitle">
@@ -863,6 +978,122 @@ Downloading is optional.">  Découvrez notre sélection de livres classiques.
     </div>
   </div>
 </footer>
+
+<script>
+  // Bloc Carrousel
+const slides = document.querySelectorAll(".tutorial-slide");
+const dots = document.querySelectorAll(".dot");
+
+let current = 0;
+
+function showSlide(index){
+  slides.forEach(s => s.classList.remove("active"));
+  dots.forEach(d => d.classList.remove("active"));
+
+  slides[index].classList.add("active");
+  dots[index].classList.add("active");
+}
+
+document.getElementById("nextSlide").onclick = () => {
+  current = (current + 1) % slides.length;
+  showSlide(current);
+};
+
+document.getElementById("prevSlide").onclick = () => {
+  current = (current - 1 + slides.length) % slides.length;
+  showSlide(current);
+};
+
+/* CTA → aller au formulaire */
+document.getElementById("goToFormBtn").onclick = () => {
+  document.getElementById("tutorialOverlay").style.display = "none";
+  document.querySelector(".stepper-section").scrollIntoView({
+    behavior: "smooth"
+  });
+};
+</script>
+<script>
+  //Compte à rebours
+  const campaignDuration = 6 * 30 * 24 * 60 * 60 * 1000; // ~6 mois
+const startDate = new Date().getTime();
+const endDate = startDate + campaignDuration;
+
+function updateTimer(){
+  const now = new Date().getTime();
+  let diff = endDate - now;
+
+  if(diff < 0) diff = 0;
+
+  const months = Math.floor(diff / (30*24*60*60*1000));
+  const days = Math.floor((diff % (30*24*60*60*1000)) / (24*60*60*1000));
+  const hours = Math.floor((diff % (24*60*60*1000)) / (60*60*1000));
+  const minutes = Math.floor((diff % (60*60*1000)) / (60*1000));
+  const seconds = Math.floor((diff % (60*1000)) / 1000);
+  const milliseconds = Math.floor((diff % 1000) / 10); // 🔥 2 chiffres
+
+  document.querySelector('[data-unit="months"]').textContent = months;
+  document.querySelector('[data-unit="days"]').textContent = days;
+  document.querySelector('[data-unit="hours"]').textContent = String(hours).padStart(2,'0');
+  document.querySelector('[data-unit="minutes"]').textContent = String(minutes).padStart(2,'0');
+  document.querySelector('[data-unit="seconds"]').textContent = String(seconds).padStart(2,'0');
+  document.querySelector('[data-unit="milliseconds"]').textContent = String(milliseconds).padStart(2,'0');
+}
+
+setInterval(updateTimer, 50);
+</script>
+<script>
+  //Popur Liste participants
+const openBtn = document.getElementById("openListBtn");
+const overlay = document.getElementById("overlay");
+const closeBtn = document.getElementById("closeModal");
+const searchInput = document.getElementById("searchInput");
+const listContainer = document.getElementById("listContainer");
+const emptyNote = document.getElementById("emptyNote");
+
+/* ===============================
+📂 OPEN MODAL
+================================ */
+openBtn.addEventListener("click", () => {
+  overlay.classList.add("active");
+});
+
+/* ===============================
+❌ CLOSE MODAL
+================================ */
+closeBtn.addEventListener("click", () => {
+  overlay.classList.remove("active");
+});
+
+/* Fermer en cliquant dehors */
+overlay.addEventListener("click", (e) => {
+  if(e.target === overlay){
+    overlay.classList.remove("active");
+  }
+});
+
+/* ===============================
+🔍 SEARCH LOGIC
+================================ */
+searchInput.addEventListener("input", () => {
+  const value = searchInput.value.toLowerCase();
+  const items = document.querySelectorAll(".participant-item");
+
+  let visible = 0;
+
+  items.forEach(item => {
+    const text = item.textContent.toLowerCase();
+
+    if(text.includes(value)){
+      item.style.display = "block";
+      visible++;
+    } else {
+      item.style.display = "none";
+    }
+  });
+
+  emptyNote.style.display = visible === 0 ? "block" : "none";
+});
+</script>
   <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
   <script src="config.js"></script>
   <script src="Campagne_2.js"> </script>

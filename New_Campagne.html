@@ -57,7 +57,7 @@
       <ul class="sub-menu">
         <li><a href="New_Campagne.html#projet" class="sub-link" data-fr="Présentation du projet" data-en="Project overview">Présentation du projet</a></li>
         <li><a href="Campagne_2.html" class="sub-link" data-fr="Participer à la campagne" data-en="Participate in the campaign">Participer à la campagne</a></li>
-        <li><a href="New_Campagne.html#Timing" class="sub-link" data-fr="Timing de la campagne" data-en="Campaign timing">Timing de la campagne</a></li>
+        <li><a href="Campagne_2.html" class="sub-link" data-fr="Timing de la campagne" data-en="Campaign timing">Timing de la campagne</a></li>
         <li><a href="New_Campagne.html#partenaires" class="sub-link" data-fr="Partenaires" data-en="Partners">Partenaires</a></li>
       </ul>
     </nav>
@@ -109,12 +109,14 @@
       <p data-fr="Notre campagne vise à venir en aide aux familles en situation de précarité, à soutenir l'éducation des enfants et à mener des actions de protection de l'environnement dans les quartiers oubliés. Face à des besoins grandissants, il est urgent d'agir : votre engagement permet de financer des programmes de nutrition, d'accès à l'eau potable, de soutien scolaire et de projets écologiques communautaires." data-en="Our campaign aims to help families in precarious situations, support children's education, and carry out environmental protection actions in neglected neighborhoods. Faced with growing needs, urgent action is needed: your commitment helps fund programs for nutrition, access to drinking water, educational support, and community ecological projects.">Notre campagne vise à venir en aide aux familles en situation de précarité, à soutenir l'éducation des enfants et à mener des actions de protection de l'environnement dans les quartiers oubliés. Face à des besoins grandissants, il est urgent d'agir : votre engagement permet de financer des programmes de nutrition, d'accès à l'eau potable, de soutien scolaire et de projets écologiques communautaires.</p>
       <p data-fr="Nous plaçons l'humain au cœur de chaque projet. Chaque action, aussi petite soit-elle, aide à bâtir une communauté plus forte et plus résiliente — pour ceux qu'on aime." data-en="We put people at the heart of every project. Every action, no matter how small, helps build a stronger, more resilient community—for those we love.">Nous plaçons l'humain au cœur de chaque projet. Chaque action, aussi petite soit-elle, aide à bâtir une communauté plus forte et plus résiliente — pour ceux qu'on aime.</p>
     </div>
+
     <div>
-     <video controls>
+     <video controls loop>
             <source src="Video_campagne.mp4" type="video/mp4">
             Votre navigateur ne supporte pas la vidéo.
         </video>
     </div>
+
   </div>
 </section>
 <!-- Video Popup Overlay -->
@@ -125,11 +127,11 @@
 </div>
 
 
-<!-- 🔹 Bloc Participants -->
+<!-- 🔹 Bloc Participants 
   <div class="campaign-insight-grid">
     
     <div class="campaign-insight-col participants-col">
-       <!-- ==== Bloc principal: Participants card ==== -->
+       <!-- ==== Bloc principal: Participants card ==== 
   <article class="participants-card" aria-label="Bloc participants Pour ceux qu'on aime">
     <div class="pc-header">
       <div class="pc-badge" aria-hidden="true">
@@ -142,15 +144,15 @@
     </div>
 
     <div class="pc-counter-wrap">
-      <!-- Counter element -->
+      <!-- Counter element 
       <div id="counter" class="pc-counter" aria-live="polite" aria-atomic="true">0</div>
-      <!-- Short paragraph accrocheur -->
+      <!-- Short paragraph accrocheur 
       <p class="pc-caption" data-fr="Chaque voix compte.
          Retrouvez la communauté qui soutient nos proches et participez au mouvement."
           data-en="Every voice counts.
 Join the community that supports our loved ones and join the movement.">Chaque voix compte.
          Retrouvez la communauté qui soutient nos proches et participez au mouvement.</p>
-         <!-- ==== Durée de la campagne (Timer) ==== -->
+         <!-- ==== Durée de la campagne (Timer) ==== 
 <div class="pc-timer-wrap" aria-label="Durée restante de la campagne">
   
   <p class="pc-timer-intro">
@@ -194,11 +196,11 @@ Join the community that supports our loved ones and join the movement.">Chaque v
     </div>
 
     <div class="pc-footer">
-      <!-- CTA ouvre la popup -->
+      <!-- CTA ouvre la popup 
       <button id="openListBtn" class="pc-cta" type="button" aria-haspopup="dialog" aria-controls="participantsModal" data-fr="Voir liste" 
       data-en="See list">Voir liste</button>
 
-      <!-- Petite info statique (peut être dynamique si besoin) -->
+      <!-- Petite info statique (peut être dynamique si besoin) 
       <div style="font-size:0.86rem; color:rgba(74,74,74,0.7)" data-fr="Total officiel" data-en="Total Official">Total officiel</div>
     </div>
   </article>
@@ -206,7 +208,7 @@ Join the community that supports our loved ones and join the movement.">Chaque v
   </div>
 
 
-  <!-- ==== Popup overlay & modal (hidden by default) ==== -->
+  <!-- ==== Popup overlay & modal (hidden by default) ==== 
   <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
     <div class="modal" role="document" id="participantsModal">
       <div class="modal-header">
@@ -215,21 +217,21 @@ Join the community that supports our loved ones and join the movement.">Chaque v
       </div>
 
       <div class="modal-body">
-        <!-- Search bar -->
+        <!-- Search bar 
         <div class="search-row">
           <input id="searchInput" class="search-input" type="search" placeholder="Rechercher par nom (ex: Nom Prénom)" aria-label="Rechercher un participant" />
           <div style="min-width:86px; text-align:right; font-weight:700; color:var(--deep-green);" data-fr="Tri: A → Z" data-en="Sort: A → Z">Tri: A → Z</div>
         </div>
 
       <div id="listContainer" class="participants-list" aria-live="polite">
-  <!-- Les participants seront injectés ici par JS -->
+  <!-- Les participants seront injectés ici par JS 
     </div>
 
-        <!-- Empty note shown when no matches -->
+        <!-- Empty note shown when no matches 
         <div id="emptyNote" class="empty-note" style="display:none" data-fr="Aucun participant trouvé." data-en="No participants found.">Aucun participant trouvé.</div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 <!-- Section 7: Partenaires -->
 <section id="partenaires"  class="card reveal">
@@ -473,31 +475,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = popup.querySelector(".video-close");
   const video = document.querySelector(".intro video");
 
-  // Forcer l'autoplay autorisé par les navigateurs
-  video.muted = true;
-  video.playsInline = true; // iOS friendly
+  // Paramètres vidéo
+  video.muted = true;        // obligatoire pour autoplay
+  video.playsInline = true;  // iOS
   video.autoplay = true;
+  video.loop = true;         // 🔁 boucle activée
 
   // Injecter la vidéo dans le popup
   popupContent.appendChild(video);
 
-  // Lancer la vidéo automatiquement
-  const playPromise = video.play();
-  if (playPromise !== undefined) {
-    playPromise.catch(() => {
-      // fallback silencieux si le navigateur bloque
-      console.warn("Autoplay bloqué par le navigateur");
-    });
-  }
+  // Lancer la vidéo
+  video.play().catch(() => {
+    console.warn("Autoplay bloqué");
+  });
 
-  // Fermeture
+  // 👉 Activer le son au premier clic utilisateur
+  document.addEventListener("click", () => {
+    video.muted = false;
+  }, { once: true });
+
+  // Fermeture popup
   closeBtn.addEventListener("click", () => {
     popup.style.display = "none";
     video.pause();
   });
 });
 </script>
-
-
   </body>
 </html>

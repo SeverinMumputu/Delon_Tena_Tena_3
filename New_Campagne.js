@@ -255,7 +255,7 @@ mobileMenu.addEventListener('click', (e)=>{
   })();
 
  
-/* ==== TIMER CAMPAGNE – 6 MOIS ==== */
+/* ==== TIMER CAMPAGNE – 6 MOIS ==== 
 (function(){
 
   const startDate = new Date(); // lancement au chargement
@@ -308,16 +308,16 @@ mobileMenu.addEventListener('click', (e)=>{
   updateTimer();
 
 })();
-
+*/
 
 /* ===== Participants campagne =====
-*/
+
 (function(){
   const API_BASE = CONFIG.API_BASE_URL;
 
   const DURATION_MS = 1000; // ~1 seconde
 
-  /* ---------- Counter animation (smooth, requestAnimationFrame) ---------- */
+  /* ---------- Counter animation (smooth, requestAnimationFrame) ---------- 
   const counterEl = document.getElementById('counter');
 
   // animate number from 0 to TARGET_COUNT over DURATION_MS
@@ -395,7 +395,7 @@ window.addEventListener('load', () => {
 });
 
 
-  /* ---------- Popup open/close logic ---------- */
+  /* ---------- Popup open/close logic ---------- 
   const openBtn = document.getElementById('openListBtn');
   const overlay = document.getElementById('overlay');
   const closeBtn = document.getElementById('closeModal');
@@ -440,7 +440,7 @@ window.addEventListener('load', () => {
     if (e.key === 'Escape' && overlay.classList.contains('show')) closeModal();
   });
 
-  /* ---------- Utility: gather participant items, sort alphabetically by data-name ---------- */
+  /* ---------- Utility: gather participant items, sort alphabetically by data-name ---------- 
   function getParticipantItems(){
     return Array.from(listContainer.querySelectorAll('.participant-item'));
   }
@@ -460,7 +460,7 @@ window.addEventListener('load', () => {
   // Initial sort on script load
   sortParticipantsAlpha();
 
-  /* ---------- Search / Filter logic (instant, case-insensitive) ---------- */
+  /* ---------- Search / Filter logic (instant, case-insensitive) ---------- 
   function filterList(query){
     const q = (query || '').trim().toLowerCase();
     const items = getParticipantItems();
@@ -515,5 +515,4 @@ window.addEventListener('load', () => {
   })();
 
 })();
-
-   
+*/

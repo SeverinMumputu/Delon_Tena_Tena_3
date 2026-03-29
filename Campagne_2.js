@@ -313,30 +313,56 @@ const videoPopup = document.getElementById('videoPopup');
 const campaignVideo = document.getElementById('campaignVideo');
 const closeVideoBtn = document.getElementById('closeVideo');
 
-let videoTimer = null;
-let videoShownForStep = {};
+/* ===============================
+🔥 1. RENDRE LA VIDEO INDÉPENDANTE
+================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  // On sort la vidéo du carousel (IMPORTANT)
+  document.body.appendChild(videoPopup);
+});
 
-function showVideoPopup(step) {
-  if (videoShownForStep[step]) return; // éviter répétition
-  videoShownForStep[step] = true;
+/* ===============================
+🎬 2. LANCEMENT GLOBAL UNIQUE
+================================ */
+function initPersistentVideo() {
 
-  clearTimeout(videoTimer);
+  // Affichage
+  videoPopup.classList.add('show');
+  videoPopup.setAttribute('aria-hidden', 'false');
 
-  videoTimer = setTimeout(() => {
-    videoPopup.classList.add('show');
-    videoPopup.setAttribute('aria-hidden', 'false');
+  // 🔊 Activer le son
+  campaignVideo.muted = false;
+  campaignVideo.volume = 1;
 
-    campaignVideo.currentTime = 0;
-    campaignVideo.play().catch(() => {});
-  }, 3000); // ⏱️ 3 secondes
+  // 🔁 Boucle forcée
+  campaignVideo.loop = true;
+
+  // ▶️ Lecture sécurisée (navigateurs)
+  campaignVideo.play().then(() => {
+    // succès avec son
+  }).catch(() => {
+    // fallback obligatoire navigateur
+    campaignVideo.muted = true;
+    campaignVideo.play();
+  });
+
 }
+
+/* ===============================
+🚀 3. LANCEMENT AU CHARGEMENT
+================================ */
+window.addEventListener("load", () => {
+  setTimeout(initPersistentVideo, 1200);
+});
+
+/* ===============================
+❌ 4. FERMETURE MANUELLE
+================================ */
 closeVideoBtn.addEventListener('click', () => {
   videoPopup.classList.remove('show');
   videoPopup.setAttribute('aria-hidden', 'true');
-
   campaignVideo.pause();
 });
-
 
 
   // Toast helper
@@ -1694,38 +1720,7 @@ const mobileClose = document.getElementById('mobileClose');
 const mobileLangBtns = Array.from(document.querySelectorAll('.mobile-lang .lang-btn'));
 const allTextNodes = Array.from(document.querySelectorAll('[data-fr]'));
 
-/* ========== Utilities ========== 
-function pad(n){return String(n).padStart(2,'0')} */
 
-/* Countdown logic 
-function updateCountdown(){
-  const now = new Date();
-  const diff = TARGET_DATE - now;
-  if(diff <= 0){
-    cdDays.textContent = '00';
-    cdHours.textContent = '00';
-    cdMins.textContent = '00';
-    cdSecs.textContent = '00';
-    return;
-  }
-  const s = Math.floor(diff / 1000);
-  const days = Math.floor(s / (3600*24));
-  const hours = Math.floor((s % (3600*24)) / 3600);
-  const mins = Math.floor((s % 3600) / 60);
-  const secs = s % 60;
-
-  cdDays.textContent = pad(days);
-  cdHours.textContent = pad(hours);
-  cdMins.textContent = pad(mins);
-  cdSecs.textContent = pad(secs);
-}
-updateCountdown();
-setInterval(updateCountdown, 1000); */
-
-/* Set current year */
-//yearEl.textContent = new Date().getFullYear();
-
-/* Language toggle (simple content swap) */
 function setLanguage(lang){
   // set body class for RTL or styles if needed
   bodyEl.classList.remove('fr','en');
